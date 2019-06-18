@@ -74,9 +74,7 @@ namespace StrategyGame.Api
                 options.UseSqlServer(
                     Configuration.GetConnectionString("StrategyGameContextConnection")));
 
-            services.AddDefaultIdentity<StrategyGameUser>()
-                .AddEntityFrameworkStores<StrategyGameContext>()
-                .AddDefaultTokenProviders();
+
 
             services.AddIdentity<StrategyGameUser, StrategyGameRole>(options =>
             {
