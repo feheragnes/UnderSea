@@ -66,6 +66,7 @@ namespace StrategyGame.Api.Controllers
             {
                 UserName = model.Email,
                 Email = model.Email
+                
             };
             var result = await _userManager.CreateAsync(user, model.Password);
 
@@ -77,14 +78,16 @@ namespace StrategyGame.Api.Controllers
 
             throw new ApplicationException("UNKNOWN_ERROR");
         }
+
         [Authorize]
         [HttpGet]
         public async Task<object> AutTest()
         {
             RecurringJob.AddOrUpdate(
     () => HFTest(),
-    Cron.Minutely); ;
-            return "aad";
+    Cron.Minutely); 
+
+            return "Hang Fired";
         }
 
 
@@ -128,7 +131,6 @@ namespace StrategyGame.Api.Controllers
             public string Email { get; set; }
 
             [Required]
-            [StringLength(100, ErrorMessage = "PASSWORD_MIN_LENGTH", MinimumLength = 6)]
             public string Password { get; set; }
         }
     }
