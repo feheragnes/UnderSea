@@ -5,7 +5,7 @@ using System.Text;
 
 namespace StrategyGame.Model.Entities.Identity
 {
-        public class StrategyGameUser : IdentityUser<Guid>
-        {
-        }
+    public class StrategyGameRole: IdentityRole<Guid>
+    {
+    }
 }

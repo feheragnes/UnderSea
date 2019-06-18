@@ -78,6 +78,16 @@ namespace StrategyGame.Api
                 .AddEntityFrameworkStores<StrategyGameContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddIdentity<StrategyGameUser, StrategyGameRole>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 0;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+            })
+                .AddEntityFrameworkStores<StrategyGameContext>()
+                .AddDefaultTokenProviders();
+
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
             services.AddAuthentication(options =>
             {
@@ -114,7 +124,7 @@ namespace StrategyGame.Api
 
             app.UseAuthentication();
             app.UseMvc();
-            ctx.Database.EnsureCreated();
+            //ctx.Database.EnsureCreated();
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace StrategyGame.Dal.Context
 {
-    public class StrategyGameContext : IdentityDbContext<StrategyGameUser>
+    public class StrategyGameContext : IdentityDbContext<StrategyGameUser,StrategyGameRole,Guid>
     {
         public StrategyGameContext(DbContextOptions<StrategyGameContext> options)
             : base(options)
