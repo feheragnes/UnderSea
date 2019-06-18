@@ -21,7 +21,7 @@ namespace StrategyGame.Api
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
 
-    .ConfigureAppConfiguration(builder =>
+        .ConfigureAppConfiguration(builder =>
     {
         builder.AddJsonFile("connstring.json", optional: true);
     });

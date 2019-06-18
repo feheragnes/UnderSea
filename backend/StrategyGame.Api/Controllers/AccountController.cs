@@ -18,7 +18,7 @@ using StrategyGame.Model.Entities.Identity;
 namespace StrategyGame.Api.Controllers
 {
 
-   
+
 
     [Route("[controller]/[action]")]
     [ApiController]
@@ -66,7 +66,7 @@ namespace StrategyGame.Api.Controllers
             {
                 UserName = model.Email,
                 Email = model.Email
-                
+
             };
             var result = await _userManager.CreateAsync(user, model.Password);
 
@@ -84,8 +84,8 @@ namespace StrategyGame.Api.Controllers
         public async Task<object> AutTest()
         {
             RecurringJob.AddOrUpdate(
-    () => HFTest(),
-    Cron.Minutely); 
+                     () => HFTest(),
+                     Cron.Minutely);
 
             return "Hang Fired";
         }
@@ -132,6 +132,12 @@ namespace StrategyGame.Api.Controllers
 
             [Required]
             public string Password { get; set; }
+
+            [Required]
+            public string ConfirmPassword { get; set; }
+
+            [Required]
+            public string CountryName { get; set; }
         }
     }
 }
