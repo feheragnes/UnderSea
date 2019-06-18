@@ -17,6 +17,8 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using StrategyGame.Dal.Context;
 using StrategyGame.Model.Entities.Identity;
+using Hangfire;
+using Hangfire.SqlServer;
 
 namespace StrategyGame.Api
 {
@@ -32,6 +34,20 @@ namespace StrategyGame.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHangfire(configuration => configuration
+       .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+       .UseSimpleAssemblyNameTypeSerializer()
+       .UseRecommendedSerializerSettings()
+       .UseSqlServerStorage(Configuration.GetConnectionString("StrategyGameContextConnection"), new SqlServerStorageOptions
+       {
+           CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+           SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+           QueuePollInterval = TimeSpan.Zero,
+           UseRecommendedIsolationLevel = true,
+           UsePageLocksOnDequeue = true,
+           DisableGlobalLocks = true
+       }));
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddDbContext<StrategyGameContext>(options =>
                 options.UseSqlServer(
@@ -60,6 +76,8 @@ namespace StrategyGame.Api
                     ClockSkew = TimeSpan.Zero
                 };
             });
+
+            services.AddHangfireServer();
             services.AddMvc();
         }
 

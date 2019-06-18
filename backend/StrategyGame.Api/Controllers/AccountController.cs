@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Hangfire;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -16,10 +17,19 @@ using StrategyGame.Model.Entities.Identity;
 
 namespace StrategyGame.Api.Controllers
 {
+
+   
+
     [Route("[controller]/[action]")]
     [ApiController]
     public class AccountController : Controller
     {
+
+        public void HFTest()
+        {
+            Console.WriteLine("asdads");
+        }
+
         private readonly SignInManager<StrategyGameUser> _signInManager;
         private readonly UserManager<StrategyGameUser> _userManager;
         private readonly IConfiguration _configuration;
@@ -71,6 +81,9 @@ namespace StrategyGame.Api.Controllers
         [HttpGet]
         public async Task<object> AutTest()
         {
+            RecurringJob.AddOrUpdate(
+    () => HFTest(),
+    Cron.Minutely); ;
             return "aad";
         }
 
