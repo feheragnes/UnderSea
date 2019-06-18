@@ -5,15 +5,9 @@
   </mat-card-header>
       <form (ngSubmit)="sendLoginRequest()">
           <mat-card-content>
-              <mat-form-field appearance="outline">
-                  <input matInput placeholder="Felhasználónév" required/>
-                  <!-- <input matInput required [formControl]="username"/> -->
-              </mat-form-field>
+                <input type="text" class="form-control form-rounded" placeholder="Felhasználónév" required> 
 
-              <mat-form-field appearance="outline">
-                  <input matInput placeholder="Jelszó" [type]="hide ? 'password' : 'text'" required/>
-                  <!-- <input matInput [type]="hide ? 'password' : 'text'" required [formControl]="password"/> -->
-              </mat-form-field>
+                 <input type="password" class="form-control form-rounded" placeholder="Jelszó" required> 
 
           </mat-card-content>
           <button class="login" mat-raised-button color="primary">Belépés</button>

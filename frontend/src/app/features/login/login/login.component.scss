@@ -1,48 +1,63 @@
 .card {
-    background-color: rgba(255, 255, 255, 0.3);
-    color: #1C3E76;
-    width: 461px;
-    height: 394px;
-    // position: absolute;
-    // top: 50%;
-    // left: 50%;
-    // -ms-transform: translate(-50%, -50%);
-    // transform: translate(-50%, -50%);
-    margin-left: auto;
-    margin-right: auto;
-    justify-content: center;
+  background-color: rgba(255, 255, 255, 0.25);
+  color: #1C3E76;
+  width: 461px;
+  height: 394px;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  border-radius: 2rem;
+}
+
+  mat-card-header {
+      justify-content: center;
+      color: #1C3E76;
   }
+  mat-card-content{
 
-  mat-form-field {
-    padding: 0px;
-    width: 366px;
-    margin-left: 47px;  }
-
-    mat-card-header {
-        justify-content: center;
-        color: #1C3E76;
-    }
+    text-align: center;    
+  }
 
 .register {
-      color: #9FFFF0;
-      font-size: 18px;
-      display: block;
-  }
-
-  .login{
-    color: #1C3E76;
-    background: #9FFFF0;
+    color: #9FFFF0;
     font-size: 18px;
-    width: 192px;
-    height: 50px;
-    margin-left: 135px;
+    display: block;
+}
+.form-rounded {
+  border-radius: 2rem;
+  width: 366px;
+  height: 40px;
+  margin-bottom: 19px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(255, 255, 255, 0.39);
+  border:rgba(255, 255, 255, 0.39);
+  color: #1C3E76;
+  padding: 2px;
+  padding-left: 20px;
+  font-size: 16px;
   }
+  .form-rounded::placeholder {
+     color: #1C3E76;
+    }
+  
+.login{
+  color: #001234;
+  background: #9FFFF0;
+  font-size: 18px;
+  width: 192px;
+  height: 50px;
+  margin-left: 135px;
+  margin-top: 46px;
+  margin-bottom: 15px;
+  border-radius: 2rem;
+}
 
- p{
-    font-size: 32px;
-  }
-  h1{
-      font-size: 93px;
-      color: #9FFFF0;
-      text-align: center;
-  }
+p{
+  font-size: 32px;
+}
+h1{
+    font-size: 93px;
+    color: #9FFFF0;
+    text-align: center;
+}
