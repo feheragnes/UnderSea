@@ -1,22 +1,29 @@
 <h1>UNDERSEA</h1>
 <mat-card class="card">
   <mat-card-header>
-      <p>Belépés</p>
+    <p>Belépés</p>
   </mat-card-header>
-      <form (ngSubmit)="sendLoginRequest()">
-          <mat-card-content>
-                <input type="text" class="form-control form-rounded" placeholder="Felhasználónév" required> 
+  <form (ngSubmit)="sendLoginRequest()">
+    <mat-card-content>
+      <input
+        type="text"
+        class="form-control form-rounded"
+        placeholder="Felhasználónév"
+        required
+      />
 
-                 <input type="password" class="form-control form-rounded" placeholder="Jelszó" required> 
-
-          </mat-card-content>
-          <button class="login" mat-raised-button color="primary">Belépés</button>
-          <mat-card-actions>
-              
-              <a class="register" mat-button color="primary" routerLink="/register">
-                  Regisztráció
-              </a>
-          </mat-card-actions>
-      </form>
-
+      <input
+        type="password"
+        class="form-control form-rounded"
+        placeholder="Jelszó"
+        required
+      />
+    </mat-card-content>
+    <button class="login" mat-raised-button>Belépés</button>
+    <mat-card-actions>
+      <a class="register" mat-button routerLink="/register">
+        Regisztráció
+      </a>
+    </mat-card-actions>
+  </form>
 </mat-card>

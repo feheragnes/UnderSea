@@ -8,7 +8,10 @@
 $undersea-app-primary: mat-palette($mat-indigo, 900);
 $undersea-app-accent: mat-palette($mat-indigo, 400);
 
-$undersea-app-theme: mat-light-theme($undersea-app-primary, $undersea-app-accent);
+$undersea-app-theme: mat-light-theme(
+  $undersea-app-primary,
+  $undersea-app-accent
+);
 
 @include angular-material-theme($undersea-app-theme);
 
@@ -16,8 +19,8 @@ body {
   margin: 0;
 }
 
-*{
-    font-family: baloo;
+* {
+  font-family: baloo;
 }
 
 html {
@@ -26,6 +29,6 @@ html {
 }
 
 @font-face {
-    font-family: baloo;
-    src: url(src\assets\font\Baloo-Regular.ttf) format("opentype");
-  }
+  font-family: baloo;
+  src: url(src\assets\font\Baloo-Regular.ttf) format("opentype");
+}

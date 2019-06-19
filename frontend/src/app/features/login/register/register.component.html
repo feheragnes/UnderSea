@@ -1,27 +1,43 @@
 <h1>UNDERSEA</h1>
 <mat-card class="card">
   <mat-card-header>
-      <p>Regisztráció</p>
+    <p>Regisztráció</p>
   </mat-card-header>
-      <form (ngSubmit)="sendRegisterRequest()">
-          <mat-card-content>
+  <form (ngSubmit)="sendRegisterRequest()">
+    <mat-card-content>
+      <input
+        type="text"
+        class="form-control form-rounded"
+        placeholder="Felhasználónév"
+        required
+      />
 
-                  <input type="text" class="form-control form-rounded" placeholder="Felhasználónév" required> 
+      <input
+        type="password"
+        class="form-control form-rounded"
+        placeholder="Jelszó"
+        required
+      />
 
-                 <input type="password" class="form-control form-rounded" placeholder="Jelszó" required> 
-                 
-                  <input type="password" class="form-control form-rounded" placeholder="Jelszó"  required> 
+      <input
+        type="password"
+        class="form-control form-rounded"
+        placeholder="Jelszó"
+        required
+      />
 
-                    <input type="text" class="form-control form-rounded" placeholder="Az országod neve" required>
-
-          </mat-card-content>
-          <button class="register" mat-raised-button color="primary">Regisztráció</button>
-          <mat-card-actions>
-              
-              <a class="login" mat-button color="primary" routerLink="/login">
-                  Belépés
-              </a>
-          </mat-card-actions>
-      </form>
-
+      <input
+        type="text"
+        class="form-control form-rounded"
+        placeholder="Az országod neve"
+        required
+      />
+    </mat-card-content>
+    <button class="register" mat-raised-button>Regisztráció</button>
+    <mat-card-actions>
+      <a class="login" mat-button routerLink="/login">
+        Belépés
+      </a>
+    </mat-card-actions>
+  </form>
 </mat-card>
