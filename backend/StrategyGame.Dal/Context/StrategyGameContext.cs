@@ -43,34 +43,9 @@ namespace StrategyGame.Dal.Context
             builder.Entity<CsataCsiko>().HasBaseType<Egyseg>();
             builder.Entity<LezerCapa>().HasBaseType<Egyseg>();
 
-            /*builder.Entity<OrszagUser>()
-                .HasKey(ou => new { ou.OrszagId, ou.UserId });
-            builder.Entity<OrszagUser>()
-                .HasOne(ou => ou.Orszag)
-                .WithMany(o => o.Users)
-                .HasForeignKey(ou => ou.OrszagId);
-            builder.Entity<OrszagUser>()
-                .HasOne(ou => ou.User)
-                .WithMany(u => u.Orszags)
-                .HasForeignKey(ou => ou.UserId);*/
-
             builder.ApplyConfiguration(new OrszagUserConfiguration());
             builder.ApplyConfiguration(new CsapatConfiguration());
 
-            /*builder.Entity<Csapat>()
-                .HasOne(c => c.Celpont)
-                .WithMany(o=>o.TamadoCsapats);
-
-            builder.Entity<Csapat>()
-                .HasOne(c => c.Tulajdonos)
-                .WithMany(o => o.OtthoniCsapats);*/
-                
-               
-
-
-            // Customize the ASP.NET Identity model and override the defaults if needed.
-            // For example, you can rename the ASP.NET Identity table names and more.
-            // Add your customizations after calling base.OnModelCreating(builder);
         }
     }
 }

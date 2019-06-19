@@ -19,6 +19,7 @@ using StrategyGame.Dal.Context;
 using StrategyGame.Model.Entities.Identity;
 using Hangfire;
 using Hangfire.SqlServer;
+using AutoMapper;
 
 namespace StrategyGame.Api
 {
@@ -105,7 +106,7 @@ namespace StrategyGame.Api
                     ClockSkew = TimeSpan.Zero
                 };
             });
-
+            services.AddAutoMapper();
             services.AddHangfireServer();
             services.AddMvc();
         }
