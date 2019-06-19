@@ -5,7 +5,7 @@ using System.Text;
 
 namespace StrategyGame.Model.Entities.Models
 {
-    public class Egyseg
+    public abstract class Egyseg
     {
         [Key]
         public int EgysegId { get; set; }
