@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StrategyGame.Model.Entities.Models.Egysegek;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;

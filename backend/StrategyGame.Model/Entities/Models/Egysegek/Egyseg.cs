@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace StrategyGame.Model.Entities.Models
+namespace StrategyGame.Model.Entities.Models.Egysegek
 {
     public abstract class Egyseg
     {
