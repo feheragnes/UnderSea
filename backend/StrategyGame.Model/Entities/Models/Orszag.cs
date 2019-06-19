@@ -1,4 +1,6 @@
 ﻿using StrategyGame.Model.Entities.Identity;
+using StrategyGame.Model.Entities.Models.Epuletek;
+using StrategyGame.Model.Entities.Models.Fejlesztesek;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

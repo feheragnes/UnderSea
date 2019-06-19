@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace StrategyGame.Model.Entities.Models.Epületek
+namespace StrategyGame.Model.Entities.Models.Epuletek
 {
     public class AramlasIranyito : Epulet
     {
