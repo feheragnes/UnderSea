@@ -7,8 +7,8 @@ namespace StrategyGame.Model.Entities.Models
 {
     public class Jatek
     {
-        [Key]
-        public int JatekId { get; set; }
-        public int Korok { get; set; }
+     
+        public Guid Id { get; set; }
+        public long Korok { get; set; }
     }
 }

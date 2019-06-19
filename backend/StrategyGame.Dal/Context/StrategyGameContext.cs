@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using StrategyGame.Model.Entities.Identity;
 using StrategyGame.Model.Entities.Models;
+using StrategyGame.Model.Entities.Models.Egysegek;
+using StrategyGame.Model.Entities.Models.Epületek;
 using System;
 using System.Collections.Generic;
 using System.Text;

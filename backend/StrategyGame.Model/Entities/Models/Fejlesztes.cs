@@ -7,9 +7,9 @@ namespace StrategyGame.Model.Entities.Models
 {
     public abstract class Fejlesztes
     {
-        [Key]
-        public int FejlesztesId { get; set; }
-        public int Korok { get; set; }
+        
+        public Guid Id { get; set; }
+        public long Korok { get; set; }
 
     }
 

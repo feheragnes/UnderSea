@@ -5,12 +5,15 @@ using System.Text;
 
 namespace StrategyGame.Model.Entities.Models
 {
-    public class Csapat
+    public abstract class Epulet
     {
-        
+       
         public Guid Id { get; set; }
-        public Orszag Celpont { get; set; }
-        public int AllapotId { get; set; }
-        public IList<Egyseg> Egysegs { get; set; } = new List<Egyseg>();
+
+        public long Ar { get; set; }
+             
+        public long Korok { get; set; }
+   
     }
-}
+   
+ }

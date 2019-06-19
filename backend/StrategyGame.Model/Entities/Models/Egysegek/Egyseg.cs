@@ -7,8 +7,8 @@ namespace StrategyGame.Model.Entities.Models
 {
     public abstract class Egyseg
     {
-        [Key]
-        public int EgysegId { get; set; }
+        
+        public Guid Id { get; set; }
         public int Tamadas { get; set; }
         public int Vedekezes { get; set; }
         public int Ar { get; set; }
@@ -16,18 +16,5 @@ namespace StrategyGame.Model.Entities.Models
         public int Ellatas { get; set; }
     }
 
-    public class RohamFoka : Egyseg
-    {
-
-    }
-
-    public class CsataCsiko : Egyseg
-    {
-
-    }
-
-    public class LezerCapa : Egyseg
-    {
-
-    }
+ 
 }

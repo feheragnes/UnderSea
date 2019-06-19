@@ -8,12 +8,12 @@ namespace StrategyGame.Model.Entities.Models
 {
     public class Orszag
     {
-        [Key]
-        public int OrszagId { get; set; }
+      
+        public Guid Id { get; set; }
 
-        public int Gyongy { get; set; }
+        public long Gyongy { get; set; }
 
-        public int Korall { get; set; }
+        public long Korall { get; set; }
 
         public IList<OrszagUser> Users { get; set; } = new List<OrszagUser>();
 
