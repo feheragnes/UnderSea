@@ -7,6 +7,6 @@ namespace StrategyGame.Bll.DTOInterfaces
 {
     public interface IFejlesztes
     {
-        Task Raise();
+        Task Increase();
     }
 }

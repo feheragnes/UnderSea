@@ -4,13 +4,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StrategyGame.Bll.DTOs
+namespace StrategyGame.Bll.DTOs.Fejlesztesek
 {
-    public class AlkimiaDTO : FejlesztesDTO, IFejlesztes
+    class IszapKombajnDTO : FejlesztesDTO, IFejlesztes
     {
-
-
-        public async Task Raise()
+        public Task Increase()
         {
             throw new NotImplementedException();
         }
