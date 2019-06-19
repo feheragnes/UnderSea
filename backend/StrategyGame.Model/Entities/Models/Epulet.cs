@@ -8,24 +8,24 @@ namespace StrategyGame.Model.Entities.Models
     public abstract class Epulet
     {
         [Key]
-        int EpuletId { get; set; }
+        public int EpuletId { get; set; }
 
-        int Ar { get; set; }
+        public int Ar { get; set; }
              
-        int Korok { get; set; }
+        public int Korok { get; set; }
    
     }
 
 
-    public class Aramlasiranyito : Epulet
+    public class AramlasIranyito : Epulet
     {
-        int Nepesseg { get; set; }
+        public int Nepesseg { get; set; }
 
-        int Korall { get; set; }
+        public int Korall { get; set; }
     }
         
-    public class Zatonyvar : Epulet
+    public class ZatonyVar : Epulet
     {
-        int Szallas { get; set; }
+        public int Szallas { get; set; }
     }
  }

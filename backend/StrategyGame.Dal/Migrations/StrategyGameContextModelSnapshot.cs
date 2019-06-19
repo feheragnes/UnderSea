@@ -177,6 +177,212 @@ namespace StrategyGame.Dal.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Csapat", b =>
+                {
+                    b.Property<int>("CsapatId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AllapotId");
+
+                    b.Property<int>("CelpontId");
+
+                    b.HasKey("CsapatId");
+
+                    b.ToTable("Csapats");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Egyseg", b =>
+                {
+                    b.Property<int>("EgysegId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Ar");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
+                    b.Property<int>("Ellatas");
+
+                    b.Property<int>("Tamadas");
+
+                    b.Property<int>("Vedekezes");
+
+                    b.Property<int>("Zsold");
+
+                    b.HasKey("EgysegId");
+
+                    b.ToTable("Egysegs");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Egyseg");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Epulet", b =>
+                {
+                    b.Property<int>("EpuletId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Ar");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
+                    b.Property<int>("Korok");
+
+                    b.HasKey("EpuletId");
+
+                    b.ToTable("Epulets");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Epulet");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Fejlesztes", b =>
+                {
+                    b.Property<int>("FejlesztesId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
+                    b.Property<int>("Korok");
+
+                    b.HasKey("FejlesztesId");
+
+                    b.ToTable("Fejleszteses");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Fejlesztes");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Jatek", b =>
+                {
+                    b.Property<int>("JatekId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Korok");
+
+                    b.HasKey("JatekId");
+
+                    b.ToTable("Jateks");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Orszag", b =>
+                {
+                    b.Property<int>("OrszagId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Gyongy");
+
+                    b.Property<int>("Korall");
+
+                    b.HasKey("OrszagId");
+
+                    b.ToTable("Orszags");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.CsataCsiko", b =>
+                {
+                    b.HasBaseType("StrategyGame.Model.Entities.Models.Egyseg");
+
+                    b.HasDiscriminator().HasValue("CsataCsiko");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.LezerCapa", b =>
+                {
+                    b.HasBaseType("StrategyGame.Model.Entities.Models.Egyseg");
+
+                    b.HasDiscriminator().HasValue("LezerCapa");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.RohamFoka", b =>
+                {
+                    b.HasBaseType("StrategyGame.Model.Entities.Models.Egyseg");
+
+                    b.HasDiscriminator().HasValue("RohamFoka");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.AramlasIranyito", b =>
+                {
+                    b.HasBaseType("StrategyGame.Model.Entities.Models.Epulet");
+
+                    b.Property<int>("Korall");
+
+                    b.Property<int>("Nepesseg");
+
+                    b.HasDiscriminator().HasValue("AramlasIranyito");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.ZatonyVar", b =>
+                {
+                    b.HasBaseType("StrategyGame.Model.Entities.Models.Epulet");
+
+                    b.Property<int>("Szallas");
+
+                    b.HasDiscriminator().HasValue("ZatonyVar");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Alkimia", b =>
+                {
+                    b.HasBaseType("StrategyGame.Model.Entities.Models.Fejlesztes");
+
+                    b.Property<int>("Ado");
+
+                    b.HasDiscriminator().HasValue("Alkimia");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.IszapKombajn", b =>
+                {
+                    b.HasBaseType("StrategyGame.Model.Entities.Models.Fejlesztes");
+
+                    b.Property<int>("Korall");
+
+                    b.HasDiscriminator().HasValue("IszapKombajn");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.IszapTraktor", b =>
+                {
+                    b.HasBaseType("StrategyGame.Model.Entities.Models.Fejlesztes");
+
+                    b.Property<int>("Korall")
+                        .HasColumnName("IszapTraktor_Korall");
+
+                    b.HasDiscriminator().HasValue("IszapTraktor");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.KorallFal", b =>
+                {
+                    b.HasBaseType("StrategyGame.Model.Entities.Models.Fejlesztes");
+
+                    b.Property<int>("Vedelem");
+
+                    b.HasDiscriminator().HasValue("KorallFal");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.SzonarAgyu", b =>
+                {
+                    b.HasBaseType("StrategyGame.Model.Entities.Models.Fejlesztes");
+
+                    b.Property<int>("Tamadas");
+
+                    b.HasDiscriminator().HasValue("SzonarAgyu");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.VizalattiHarcmuveszet", b =>
+                {
+                    b.HasBaseType("StrategyGame.Model.Entities.Models.Fejlesztes");
+
+                    b.Property<int>("Tamadas")
+                        .HasColumnName("VizalattiHarcmuveszet_Tamadas");
+
+                    b.Property<int>("Vedekezes");
+
+                    b.HasDiscriminator().HasValue("VizalattiHarcmuveszet");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.HasOne("StrategyGame.Model.Entities.Identity.StrategyGameRole")
