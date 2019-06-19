@@ -27,11 +27,6 @@ namespace StrategyGame.Api.Controllers
     public class AccountController : Controller
     {
 
-        public void HFTest()
-        {
-            Console.WriteLine("asdads");
-        }
-
         private readonly IRegistrationService _registrationService;
         private readonly ILoginService _loginService;
 
@@ -56,16 +51,6 @@ namespace StrategyGame.Api.Controllers
             return await _registrationService.Register(model);
         }
 
-        [Authorize]
-        [HttpGet]
-        public async Task<object> AutTest()
-        {
-            RecurringJob.AddOrUpdate(
-                     () => HFTest(),
-                     Cron.Minutely);
-
-            return "Hang Fired";
-        }
         }
 
     }
