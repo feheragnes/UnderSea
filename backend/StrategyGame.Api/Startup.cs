@@ -20,6 +20,8 @@ using StrategyGame.Model.Entities.Identity;
 using Hangfire;
 using Hangfire.SqlServer;
 using AutoMapper;
+using StrategyGame.Bll.ServiceInterfaces.AAAServiceInterfaces;
+using StrategyGame.Bll.Services.AAAServices;
 
 namespace StrategyGame.Api
 {
@@ -106,6 +108,9 @@ namespace StrategyGame.Api
                     ClockSkew = TimeSpan.Zero
                 };
             });
+            services.AddScoped<IJWTService, JWTService>();
+            services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<IRegistrationService, RegistrationService>();
             services.AddAutoMapper();
             services.AddHangfireServer();
             services.AddMvc();
