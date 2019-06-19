@@ -9,7 +9,7 @@ namespace StrategyGame.Model.Entities.Identity
         public class StrategyGameUser : IdentityUser<Guid>
         {
 
-        public IList<Orszag> Orszags = new List<Orszag>();
+        public IList<OrszagUser> Orszags { get; set; } = new List<OrszagUser>();
 
     }
 }

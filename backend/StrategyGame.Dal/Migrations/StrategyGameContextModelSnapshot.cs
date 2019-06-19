@@ -187,7 +187,11 @@ namespace StrategyGame.Dal.Migrations
 
                     b.Property<int>("CelpontId");
 
+                    b.Property<int?>("OrszagId");
+
                     b.HasKey("CsapatId");
+
+                    b.HasIndex("OrszagId");
 
                     b.ToTable("Csapats");
                 });
@@ -199,6 +203,8 @@ namespace StrategyGame.Dal.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("Ar");
+
+                    b.Property<int?>("CsapatId");
 
                     b.Property<string>("Discriminator")
                         .IsRequired();
@@ -212,6 +218,8 @@ namespace StrategyGame.Dal.Migrations
                     b.Property<int>("Zsold");
 
                     b.HasKey("EgysegId");
+
+                    b.HasIndex("CsapatId");
 
                     b.ToTable("Egysegs");
 
@@ -231,7 +239,11 @@ namespace StrategyGame.Dal.Migrations
 
                     b.Property<int>("Korok");
 
+                    b.Property<int?>("OrszagId");
+
                     b.HasKey("EpuletId");
+
+                    b.HasIndex("OrszagId");
 
                     b.ToTable("Epulets");
 
@@ -249,7 +261,11 @@ namespace StrategyGame.Dal.Migrations
 
                     b.Property<int>("Korok");
 
+                    b.Property<int?>("OrszagId");
+
                     b.HasKey("FejlesztesId");
+
+                    b.HasIndex("OrszagId");
 
                     b.ToTable("Fejleszteses");
 
@@ -282,6 +298,19 @@ namespace StrategyGame.Dal.Migrations
                     b.HasKey("OrszagId");
 
                     b.ToTable("Orszags");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.OrszagUser", b =>
+                {
+                    b.Property<int>("OrszagId");
+
+                    b.Property<Guid>("UserId");
+
+                    b.HasKey("OrszagId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("OrszagUser");
                 });
 
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.CsataCsiko", b =>
@@ -424,6 +453,47 @@ namespace StrategyGame.Dal.Migrations
                 {
                     b.HasOne("StrategyGame.Model.Entities.Identity.StrategyGameUser")
                         .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Csapat", b =>
+                {
+                    b.HasOne("StrategyGame.Model.Entities.Models.Orszag")
+                        .WithMany("Csapats")
+                        .HasForeignKey("OrszagId");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Egyseg", b =>
+                {
+                    b.HasOne("StrategyGame.Model.Entities.Models.Csapat")
+                        .WithMany("Egysegs")
+                        .HasForeignKey("CsapatId");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Epulet", b =>
+                {
+                    b.HasOne("StrategyGame.Model.Entities.Models.Orszag")
+                        .WithMany("Epulets")
+                        .HasForeignKey("OrszagId");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Fejlesztes", b =>
+                {
+                    b.HasOne("StrategyGame.Model.Entities.Models.Orszag")
+                        .WithMany("Fejleszteses")
+                        .HasForeignKey("OrszagId");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.OrszagUser", b =>
+                {
+                    b.HasOne("StrategyGame.Model.Entities.Models.Orszag", "Orszag")
+                        .WithMany("Users")
+                        .HasForeignKey("OrszagId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("StrategyGame.Model.Entities.Identity.StrategyGameUser", "User")
+                        .WithMany("Orszags")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

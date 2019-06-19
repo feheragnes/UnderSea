@@ -11,6 +11,6 @@ namespace StrategyGame.Model.Entities.Models
         public int CsapatId { get; set; }
         public int CelpontId { get; set; }
         public int AllapotId { get; set; }
-        public IList<Egyseg> Egysegs = new List<Egyseg>();
+        public IList<Egyseg> Egysegs { get; set; } = new List<Egyseg>();
     }
 }
