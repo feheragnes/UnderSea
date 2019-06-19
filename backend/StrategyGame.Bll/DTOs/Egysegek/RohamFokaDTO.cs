@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace StrategyGame.Bll.DTOs.EgysegekDTO
+namespace StrategyGame.Bll.DTOs.Egysegek
 {
-    class LezerCapaDTO : EgysegDTO, IEgyseg
+    class RohamFokaDTO : EgysegDTO, IEgyseg
     {
     }
 }

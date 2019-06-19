@@ -9,7 +9,10 @@ namespace StrategyGame.Bll.DTOs.Fejlesztesek
     public abstract class FejlesztesDTO
     {
         public Guid Id { get; set; }
-        public long Noveles { get; set; }
-        public long Korok { get; set; }
+
+        public int Noveles { get; set; }
+        public long SzuksegesKrok { get; set; }
+        public long AktualisKor { get; set; }
+        public bool Kifejlesztve { get; set; }
     }
 }

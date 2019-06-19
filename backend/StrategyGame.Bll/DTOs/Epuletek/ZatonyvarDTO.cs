@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StrategyGame.Bll.DTOs.EpuletDTO
+namespace StrategyGame.Bll.DTOs.Epuletek
 {
-    class AramlasIranyitoDTO : EpuletDTO, IEpulet
+    class ZatonyvarDTO : EpuletDTO, IEpulet
     {
         public Task NextTurn()
         {

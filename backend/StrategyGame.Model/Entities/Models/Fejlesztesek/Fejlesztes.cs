@@ -11,7 +11,9 @@ namespace StrategyGame.Model.Entities.Models
         public Guid Id { get; set; }
 
         public int Noveles { get; set; }
-        public long Korok { get; set; }
+        public long SzuksegesKrok { get; set; }
+        public long AktualisKor { get; set; }
+        public bool Kifejlesztve { get; set; }
 
     }
 }
