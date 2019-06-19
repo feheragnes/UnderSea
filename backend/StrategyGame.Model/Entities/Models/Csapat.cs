@@ -10,6 +10,7 @@ namespace StrategyGame.Model.Entities.Models
         
         public Guid Id { get; set; }
         public Orszag Celpont { get; set; }
+        public Orszag Tulajdonos { get; set; }
         public Allapot Allapot { get; set; }
         public IList<Egyseg> Egysegs { get; set; } = new List<Egyseg>();
     }

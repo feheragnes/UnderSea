@@ -19,7 +19,8 @@ namespace StrategyGame.Model.Entities.Models
 
         public IList<Epulet> Epulets { get; set; } = new List<Epulet>();
 
-        public IList<Csapat> Csapats { get; set; } = new List<Csapat>();
+        public IList<Csapat> OtthoniCsapats { get; set; } = new List<Csapat>();
+        public IList<Csapat> TamadoCsapats { get; set; } = new List<Csapat>();
 
         public IList<Fejlesztes> Fejleszteses { get; set; } = new List<Fejlesztes>();
 

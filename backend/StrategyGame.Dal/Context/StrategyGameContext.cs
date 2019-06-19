@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
 using StrategyGame.Model.Entities.Identity;
 using StrategyGame.Model.Entities.Models;
 using StrategyGame.Model.Entities.Models.Egysegek;
@@ -51,6 +52,18 @@ namespace StrategyGame.Dal.Context
                 .HasOne(ou => ou.User)
                 .WithMany(u => u.Orszags)
                 .HasForeignKey(ou => ou.UserId);
+
+            builder.Entity<Csapat>()
+                .HasOne(c => c.Celpont)
+                .WithMany(o=>o.TamadoCsapats);
+
+            builder.Entity<Csapat>()
+                .HasOne(c => c.Tulajdonos)
+                .WithMany(o => o.OtthoniCsapats);
+                
+               
+
+
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
