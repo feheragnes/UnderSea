@@ -11,21 +11,7 @@ namespace StrategyGame.Bll.Mappers
     {
         public EgysegProfile()
         {
-            CreateMap<Egyseg, EgysegDTO>()
-                .ForMember(e => e.Ar, opt => opt.MapFrom(e => e.Ar))
-                .ForMember(e => e.Ellatas, opt => opt.MapFrom(e => e.Ellatas))
-                .ForMember(e => e.Tamadas, opt => opt.MapFrom(e => e.Tamadas))
-                .ForMember(e => e.Vedekezes, opt => opt.MapFrom(e => e.Vedekezes))
-                .ForMember(e => e.Zsold, opt => opt.MapFrom(e => e.Zsold));
-
-            CreateMap<CsataCsiko, CsataCsikoDTO>()
-                .IncludeBase<Egyseg, EgysegDTO>();
-
-            CreateMap<LezerCapa, LezerCapaDTO>()
-                .IncludeBase<Egyseg, EgysegDTO>();
-
-            CreateMap<RohamFoka, RohamFokaDTO>()
-                .IncludeBase<Egyseg, EgysegDTO>();
+         
 
             CreateMap<Egyseg, EgysegDTO>()
                 .ForMember(e => e.Ar, opt => opt.MapFrom(e => e.Ar))
