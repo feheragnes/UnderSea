@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
+using StrategyGame.Dal.EntityTypeConfigurations;
 using StrategyGame.Model.Entities.Identity;
 using StrategyGame.Model.Entities.Models;
 using StrategyGame.Model.Entities.Models.Egysegek;
@@ -42,7 +43,7 @@ namespace StrategyGame.Dal.Context
             builder.Entity<CsataCsiko>().HasBaseType<Egyseg>();
             builder.Entity<LezerCapa>().HasBaseType<Egyseg>();
 
-            builder.Entity<OrszagUser>()
+            /*builder.Entity<OrszagUser>()
                 .HasKey(ou => new { ou.OrszagId, ou.UserId });
             builder.Entity<OrszagUser>()
                 .HasOne(ou => ou.Orszag)
@@ -51,15 +52,18 @@ namespace StrategyGame.Dal.Context
             builder.Entity<OrszagUser>()
                 .HasOne(ou => ou.User)
                 .WithMany(u => u.Orszags)
-                .HasForeignKey(ou => ou.UserId);
+                .HasForeignKey(ou => ou.UserId);*/
 
-            builder.Entity<Csapat>()
+            builder.ApplyConfiguration(new OrszagUserConfiguration());
+            builder.ApplyConfiguration(new CsapatConfiguration());
+
+            /*builder.Entity<Csapat>()
                 .HasOne(c => c.Celpont)
                 .WithMany(o=>o.TamadoCsapats);
 
             builder.Entity<Csapat>()
                 .HasOne(c => c.Tulajdonos)
-                .WithMany(o => o.OtthoniCsapats);
+                .WithMany(o => o.OtthoniCsapats);*/
                 
                
 
