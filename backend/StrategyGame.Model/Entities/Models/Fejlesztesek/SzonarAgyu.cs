@@ -4,11 +4,8 @@ using System.Text;
 
 namespace StrategyGame.Model.Entities.Models.Fejlesztesek
 {
-    public class SzonarAgyu : Fejlesztes, IFejlesztes
+    public class SzonarAgyu : Fejlesztes
     {
-        public void Increase()
-        {
-            //TODO
-        }
+       
     }
 }

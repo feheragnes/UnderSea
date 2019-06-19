@@ -12,5 +12,10 @@ namespace StrategyGame.Bll.DTOs.Fejlesztesek
         {
             throw new NotImplementedException();
         }
+
+        public Task NextTurn()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

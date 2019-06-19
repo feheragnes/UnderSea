@@ -4,11 +4,8 @@ using System.Text;
 
 namespace StrategyGame.Model.Entities.Models.Fejlesztesek
 {
-    public class Alkimia : Fejlesztes, IFejlesztes
+    public class Alkimia : Fejlesztes
     {
-        public void Increase()
-        {
-            //TODO
-        }
+      
     }
 }

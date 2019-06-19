@@ -4,11 +4,8 @@ using System.Text;
 
 namespace StrategyGame.Model.Entities.Models.Fejlesztesek
 {
-    public class IszapTraktor : Fejlesztes, IFejlesztes
+    public class IszapTraktor : Fejlesztes
     {
-        public void Increase()
-        {
-            //TODO
-        }
+        
     }
 }

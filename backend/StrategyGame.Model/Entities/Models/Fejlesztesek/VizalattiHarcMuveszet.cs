@@ -4,11 +4,8 @@ using System.Text;
 
 namespace StrategyGame.Model.Entities.Models.Fejlesztesek
 {
-    public class VizalattiHarcmuveszet : Fejlesztes, IFejlesztes
+    public class VizalattiHarcmuveszet : Fejlesztes
     {
-        public void Increase()
-        {
-            //TODO
-        }
+      
     }
 }

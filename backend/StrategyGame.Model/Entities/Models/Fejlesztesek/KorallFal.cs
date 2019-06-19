@@ -4,11 +4,8 @@ using System.Text;
 
 namespace StrategyGame.Model.Entities.Models.Fejlesztesek
 {
-    public class KorallFal : Fejlesztes, IFejlesztes
+    public class KorallFal : Fejlesztes
     {
-        public void Increase()
-        {
-            //TODO
-        }
+      
     }
 }
