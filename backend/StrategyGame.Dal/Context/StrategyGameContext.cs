@@ -23,6 +23,7 @@ namespace StrategyGame.Dal.Context
         public DbSet<Epulet> Epulets { get; set; }
         public DbSet<Fejlesztes> Fejleszteses { get; set; }
         public DbSet<Orszag> Orszags { get; set; }
+        public DbSet<Allapot> Allapots { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

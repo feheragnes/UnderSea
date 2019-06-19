@@ -9,11 +9,11 @@ namespace StrategyGame.Model.Entities.Models
     {
         
         public Guid Id { get; set; }
-        public int Tamadas { get; set; }
-        public int Vedekezes { get; set; }
-        public int Ar { get; set; }
-        public int Zsold { get; set; }
-        public int Ellatas { get; set; }
+        public long Tamadas { get; set; }
+        public long Vedekezes { get; set; }
+        public long Ar { get; set; }
+        public long Zsold { get; set; }
+        public long Ellatas { get; set; }
     }
 
  
