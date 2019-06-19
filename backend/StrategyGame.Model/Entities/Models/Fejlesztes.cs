@@ -5,7 +5,7 @@ using System.Text;
 
 namespace StrategyGame.Model.Entities.Models
 {
-    public class Fejlesztes
+    public abstract class Fejlesztes
     {
         [Key]
         public int FejlesztesId { get; set; }

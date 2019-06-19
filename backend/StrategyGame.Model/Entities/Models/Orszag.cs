@@ -15,10 +15,13 @@ namespace StrategyGame.Model.Entities.Models
 
         public int Korall { get; set; }
 
-        public IList<StrategyGameUser> Users { get; set; }
-        public IList<Epulet> Epulets { get; set; }
-        public IList<Csapat> Csapats { get; set; }
-        public IList<Fejlesztes> Fejleszteses { get; set; }
+        public IList<StrategyGameUser> Users = new List<StrategyGameUser>();
+
+        public IList<Epulet> Epulets = new List<Epulet>();
+
+        public IList<Csapat> Csapats = new List<Csapat>();
+
+        public IList<Fejlesztes> Fejleszteses = new List<Fejlesztes>();
 
 
     }
