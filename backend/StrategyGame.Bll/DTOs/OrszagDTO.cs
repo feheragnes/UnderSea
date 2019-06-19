@@ -15,7 +15,6 @@ namespace StrategyGame.Bll.DTOs
 
         public long Korall { get; set; }
 
-
         public IList<EpuletDTO> Epulets { get; set; } = new List<EpuletDTO>();
 
         public IList<CsapatDTO> OtthoniCsapats { get; set; } = new List<CsapatDTO>();
