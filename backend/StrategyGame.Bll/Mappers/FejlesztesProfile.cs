@@ -26,7 +26,7 @@ namespace StrategyGame.Bll.Mappers
                .IncludeBase<Fejlesztes, FejlesztesDTO>()
                .ReverseMap();
 
-            CreateMap<IszapTraktor, IszapTraktor>()
+            CreateMap<IszapTraktor, IszapTraktorDTO>()
                .IncludeBase<Fejlesztes, FejlesztesDTO>()
                .ReverseMap();
 
