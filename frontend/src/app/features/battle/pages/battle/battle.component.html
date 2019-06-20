@@ -66,16 +66,16 @@
     <mat-sidenav mode="side" opened>
       <button mat-raised-button routerLink="buildings">Épületek</button>
       <button mat-raised-button routerLink="attack">Támadás</button>
-      <button mat-raised-button>Fejlesztések</button>
-      <button mat-raised-button>Harc</button>
-      <button mat-raised-button>Ranglista</button>
-      <button mat-raised-button>Sereg</button>
+      <button mat-raised-button routerLink="powerups">Fejlesztések</button>
+      <button mat-raised-button routerLink="fight">Harc</button>
+      <button mat-raised-button routerLink="rankings">Ranglista</button>
+      <button mat-raised-button routerLink="army">Sereg</button>
       <mat-card class="card">
         <mat-card class="malecard">
           <img src="assets\images\002-male.svg" />
         </mat-card>
         <p>jatekosneve</p>
-        <a class="profile" mat-button routerLink="/profile">
+        <a class="profile" mat-button routerLink="profile">
           Profil
         </a>
         <a class="logout" mat-button (click)="logout()">
