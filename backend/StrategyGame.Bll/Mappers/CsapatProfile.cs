@@ -7,7 +7,7 @@ using System.Text;
 
 namespace StrategyGame.Bll.Mappers
 {
-    class CsapatProfile : Profile
+    public class CsapatProfile : Profile
     {
         public CsapatProfile()
         {

@@ -23,6 +23,7 @@ using AutoMapper;
 using StrategyGame.Bll.ServiceInterfaces.AAAServiceInterfaces;
 using StrategyGame.Bll.Services.AAAServices;
 using Swashbuckle.AspNetCore.Swagger;
+using StrategyGame.Bll.Mappers;
 
 namespace StrategyGame.Api
 {
@@ -112,13 +113,14 @@ namespace StrategyGame.Api
             services.AddScoped<IJWTService, JWTService>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IRegistrationService, RegistrationService>();
-            services.AddAutoMapper();
+            services.AddAutoMapper(typeof(Startup));
             services.AddHangfireServer();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v0.1", new Info { Title = "UnderSeaApi", Version = "v0.1" });
             });
             services.AddMvc();
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -138,6 +140,10 @@ namespace StrategyGame.Api
             });
             app.UseAuthentication();
             app.UseMvc();
+            app.UseCors(
+                 options => options.WithOrigins("localhost").AllowAnyMethod()
+            );
+
             //ctx.Database.EnsureCreated();
         }
     }
