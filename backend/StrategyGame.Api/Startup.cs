@@ -17,13 +17,21 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using StrategyGame.Dal.Context;
 using StrategyGame.Model.Entities.Identity;
+using Hangfire;
+using Hangfire.SqlServer;
+using AutoMapper;
+using StrategyGame.Bll.ServiceInterfaces.AAAServiceInterfaces;
+using StrategyGame.Bll.Services.AAAServices;
 
 namespace StrategyGame.Api
 {
     public class Startup
     {
+
+
         public Startup(IConfiguration configuration)
         {
+
             Configuration = configuration;
         }
 
@@ -32,12 +40,52 @@ namespace StrategyGame.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+  
+            services.AddHangfire(configuration => configuration
+       .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+       .UseSimpleAssemblyNameTypeSerializer()
+       .UseRecommendedSerializerSettings()
+       .UseSqlServerStorage(Configuration.GetConnectionString("StrategyGameContextConnection"), new SqlServerStorageOptions
+       {
+           CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+           SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+           QueuePollInterval = TimeSpan.Zero,
+           UseRecommendedIsolationLevel = true,
+           UsePageLocksOnDequeue = true,
+           DisableGlobalLocks = true
+       }));
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings.
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 0;
+
+                // User settings.
+                options.User.AllowedUserNameCharacters =
+                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@";
+                options.User.RequireUniqueEmail = true;
+            });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddDbContext<StrategyGameContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("StrategyGameContextConnection")));
 
-            services.AddDefaultIdentity<StrategyGameUser>()
+
+
+            services.AddIdentity<StrategyGameUser, StrategyGameRole>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 0;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+            })
                 .AddEntityFrameworkStores<StrategyGameContext>()
                 .AddDefaultTokenProviders();
 
@@ -60,12 +108,19 @@ namespace StrategyGame.Api
                     ClockSkew = TimeSpan.Zero
                 };
             });
+            services.AddScoped<IJWTService, JWTService>();
+            services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<IRegistrationService, RegistrationService>();
+            services.AddAutoMapper();
+            services.AddHangfireServer();
             services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, StrategyGameContext ctx)
         {
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -73,7 +128,7 @@ namespace StrategyGame.Api
 
             app.UseAuthentication();
             app.UseMvc();
-            ctx.Database.EnsureCreated();
+            //ctx.Database.EnsureCreated();
         }
     }
 }

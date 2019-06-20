@@ -19,9 +19,92 @@ namespace StrategyGame.Dal.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClaimType");
+
+                    b.Property<string>("ClaimValue");
+
+                    b.Property<Guid>("RoleId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClaimType");
+
+                    b.Property<string>("ClaimValue");
+
+                    b.Property<Guid>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
+                {
+                    b.Property<string>("LoginProvider");
+
+                    b.Property<string>("ProviderKey");
+
+                    b.Property<string>("ProviderDisplayName");
+
+                    b.Property<Guid>("UserId");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
+                {
+                    b.Property<Guid>("UserId");
+
+                    b.Property<Guid>("RoleId");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
+                {
+                    b.Property<Guid>("UserId");
+
+                    b.Property<string>("LoginProvider");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Identity.StrategyGameRole", b =>
+                {
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("ConcurrencyStamp")
@@ -43,99 +126,9 @@ namespace StrategyGame.Dal.Migrations
                     b.ToTable("AspNetRoles");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ClaimType");
-
-                    b.Property<string>("ClaimValue");
-
-                    b.Property<string>("RoleId")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetRoleClaims");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ClaimType");
-
-                    b.Property<string>("ClaimValue");
-
-                    b.Property<string>("UserId")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserClaims");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-                {
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128);
-
-                    b.Property<string>("ProviderKey")
-                        .HasMaxLength(128);
-
-                    b.Property<string>("ProviderDisplayName");
-
-                    b.Property<string>("UserId")
-                        .IsRequired();
-
-                    b.HasKey("LoginProvider", "ProviderKey");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserLogins");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.Property<string>("UserId");
-
-                    b.Property<string>("RoleId");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.Property<string>("UserId");
-
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128);
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(128);
-
-                    b.Property<string>("Value");
-
-                    b.HasKey("UserId", "LoginProvider", "Name");
-
-                    b.ToTable("AspNetUserTokens");
-                });
-
             modelBuilder.Entity("StrategyGame.Model.Entities.Identity.StrategyGameUser", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("AccessFailedCount");
@@ -184,15 +177,254 @@ namespace StrategyGame.Dal.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Allapot", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Kimenetel");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Allapots");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Csapat", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("AllapotId");
+
+                    b.Property<Guid?>("CelpontId");
+
+                    b.Property<Guid?>("TulajdonosId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AllapotId");
+
+                    b.HasIndex("CelpontId");
+
+                    b.HasIndex("TulajdonosId");
+
+                    b.ToTable("Csapats");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Egysegek.Egyseg", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long>("Ar");
+
+                    b.Property<Guid?>("CsapatId");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
+                    b.Property<long>("Ellatas");
+
+                    b.Property<long>("Tamadas");
+
+                    b.Property<long>("Vedekezes");
+
+                    b.Property<long>("Zsold");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CsapatId");
+
+                    b.ToTable("Egysegs");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Egyseg");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Epuletek.Epulet", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long>("AktualisKor");
+
+                    b.Property<long>("Ar");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
+                    b.Property<bool>("Felepult");
+
+                    b.Property<Guid?>("OrszagId");
+
+                    b.Property<long>("SzuksegesKorok");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrszagId");
+
+                    b.ToTable("Epulets");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Epulet");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Fejlesztesek.Fejlesztes", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long>("AktualisKor");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
+                    b.Property<bool>("Kifejlesztve");
+
+                    b.Property<int>("Noveles");
+
+                    b.Property<Guid?>("OrszagId");
+
+                    b.Property<long>("SzuksegesKorok");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrszagId");
+
+                    b.ToTable("Fejleszteses");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Fejlesztes");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Jatek", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long>("Korok");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Jateks");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Orszag", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long>("Gyongy");
+
+                    b.Property<long>("Korall");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Orszags");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.OrszagUser", b =>
+                {
+                    b.Property<Guid>("OrszagId");
+
+                    b.Property<Guid>("UserId");
+
+                    b.HasKey("OrszagId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("OrszagUser");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Egysegek.CsataCsiko", b =>
+                {
+                    b.HasBaseType("StrategyGame.Model.Entities.Models.Egysegek.Egyseg");
+
+                    b.HasDiscriminator().HasValue("CsataCsiko");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Egysegek.LezerCapa", b =>
+                {
+                    b.HasBaseType("StrategyGame.Model.Entities.Models.Egysegek.Egyseg");
+
+                    b.HasDiscriminator().HasValue("LezerCapa");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Egysegek.RohamFoka", b =>
+                {
+                    b.HasBaseType("StrategyGame.Model.Entities.Models.Egysegek.Egyseg");
+
+                    b.HasDiscriminator().HasValue("RohamFoka");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Epuletek.AramlasIranyito", b =>
+                {
+                    b.HasBaseType("StrategyGame.Model.Entities.Models.Epuletek.Epulet");
+
+                    b.Property<int>("Korall");
+
+                    b.Property<int>("Nepesseg");
+
+                    b.HasDiscriminator().HasValue("AramlasIranyito");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Epuletek.ZatonyVar", b =>
+                {
+                    b.HasBaseType("StrategyGame.Model.Entities.Models.Epuletek.Epulet");
+
+                    b.Property<int>("Szallas");
+
+                    b.HasDiscriminator().HasValue("ZatonyVar");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Fejlesztesek.Alkimia", b =>
+                {
+                    b.HasBaseType("StrategyGame.Model.Entities.Models.Fejlesztesek.Fejlesztes");
+
+                    b.HasDiscriminator().HasValue("Alkimia");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Fejlesztesek.IszapKombajn", b =>
+                {
+                    b.HasBaseType("StrategyGame.Model.Entities.Models.Fejlesztesek.Fejlesztes");
+
+                    b.HasDiscriminator().HasValue("IszapKombajn");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Fejlesztesek.IszapTraktor", b =>
+                {
+                    b.HasBaseType("StrategyGame.Model.Entities.Models.Fejlesztesek.Fejlesztes");
+
+                    b.HasDiscriminator().HasValue("IszapTraktor");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Fejlesztesek.KorallFal", b =>
+                {
+                    b.HasBaseType("StrategyGame.Model.Entities.Models.Fejlesztesek.Fejlesztes");
+
+                    b.HasDiscriminator().HasValue("KorallFal");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Fejlesztesek.SzonarAgyu", b =>
+                {
+                    b.HasBaseType("StrategyGame.Model.Entities.Models.Fejlesztesek.Fejlesztes");
+
+                    b.HasDiscriminator().HasValue("SzonarAgyu");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Fejlesztesek.VizalattiHarcmuveszet", b =>
+                {
+                    b.HasBaseType("StrategyGame.Model.Entities.Models.Fejlesztesek.Fejlesztes");
+
+                    b.HasDiscriminator().HasValue("VizalattiHarcmuveszet");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
+                {
+                    b.HasOne("StrategyGame.Model.Entities.Identity.StrategyGameRole")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
                     b.HasOne("StrategyGame.Model.Entities.Identity.StrategyGameUser")
                         .WithMany()
@@ -200,7 +432,7 @@ namespace StrategyGame.Dal.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.HasOne("StrategyGame.Model.Entities.Identity.StrategyGameUser")
                         .WithMany()
@@ -208,9 +440,9 @@ namespace StrategyGame.Dal.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
+                    b.HasOne("StrategyGame.Model.Entities.Identity.StrategyGameRole")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -221,10 +453,59 @@ namespace StrategyGame.Dal.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
                     b.HasOne("StrategyGame.Model.Entities.Identity.StrategyGameUser")
                         .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Csapat", b =>
+                {
+                    b.HasOne("StrategyGame.Model.Entities.Models.Allapot", "Allapot")
+                        .WithMany()
+                        .HasForeignKey("AllapotId");
+
+                    b.HasOne("StrategyGame.Model.Entities.Models.Orszag", "Celpont")
+                        .WithMany("TamadoCsapats")
+                        .HasForeignKey("CelpontId");
+
+                    b.HasOne("StrategyGame.Model.Entities.Models.Orszag", "Tulajdonos")
+                        .WithMany("OtthoniCsapats")
+                        .HasForeignKey("TulajdonosId");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Egysegek.Egyseg", b =>
+                {
+                    b.HasOne("StrategyGame.Model.Entities.Models.Csapat")
+                        .WithMany("Egysegs")
+                        .HasForeignKey("CsapatId");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Epuletek.Epulet", b =>
+                {
+                    b.HasOne("StrategyGame.Model.Entities.Models.Orszag")
+                        .WithMany("Epulets")
+                        .HasForeignKey("OrszagId");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Fejlesztesek.Fejlesztes", b =>
+                {
+                    b.HasOne("StrategyGame.Model.Entities.Models.Orszag")
+                        .WithMany("Fejleszteses")
+                        .HasForeignKey("OrszagId");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.OrszagUser", b =>
+                {
+                    b.HasOne("StrategyGame.Model.Entities.Models.Orszag", "Orszag")
+                        .WithMany("Users")
+                        .HasForeignKey("OrszagId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("StrategyGame.Model.Entities.Identity.StrategyGameUser", "User")
+                        .WithMany("Orszags")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
