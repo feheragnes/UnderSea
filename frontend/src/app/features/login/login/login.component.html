@@ -3,24 +3,32 @@
   <mat-card-header>
     <p>Belépés</p>
   </mat-card-header>
-  <form (ngSubmit)="sendLoginRequest()">
-    <mat-card-content>
-      <input
-        type="text"
-        class="form-control form-rounded"
-        placeholder="Felhasználónév"
-        required
-      />
 
-      <input
-        type="password"
-        class="form-control form-rounded"
-        placeholder="Jelszó"
-        required
-      />
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <mat-card-content>
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control form-rounded"
+          placeholder="Email"
+          formControlName="email"
+        />
+      </div>
+
+      <div class="form-group">
+        <input
+          type="password"
+          class="form-control form-rounded"
+          placeholder="Jelszó"
+          required
+          formControlName="password"
+        />
+      </div>
     </mat-card-content>
-    <button class="login" mat-raised-button>Belépés</button>
     <mat-card-actions>
+      <div class="form-group">
+        <button class="login" type="submit" mat-raised-button>Belépés</button>
+      </div>
       <a class="register" mat-button routerLink="/register">
         Regisztráció
       </a>

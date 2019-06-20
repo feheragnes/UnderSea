@@ -3,38 +3,51 @@
   <mat-card-header>
     <p>Regisztráció</p>
   </mat-card-header>
-  <form (ngSubmit)="sendRegisterRequest()">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <mat-card-content>
-      <input
-        type="text"
-        class="form-control form-rounded"
-        placeholder="Felhasználónév"
-        required
-      />
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control form-rounded"
+          placeholder="Email"
+          required
+          formControlName="email"
+        />
+      </div>
 
-      <input
-        type="password"
-        class="form-control form-rounded"
-        placeholder="Jelszó"
-        required
-      />
-
-      <input
-        type="password"
-        class="form-control form-rounded"
-        placeholder="Jelszó"
-        required
-      />
-
-      <input
-        type="text"
-        class="form-control form-rounded"
-        placeholder="Az országod neve"
-        required
-      />
+      <div class="form-group">
+        <input
+          type="password"
+          class="form-control form-rounded"
+          placeholder="Jelszó"
+          required
+          formControlName="password"
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="password"
+          class="form-control form-rounded"
+          placeholder="Jelszó mégegyszer"
+          required
+          formControlName="passwordagain"
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control form-rounded"
+          placeholder="Az országod neve"
+          required
+          formControlName="countryname"
+        />
+      </div>
     </mat-card-content>
-    <button class="register" mat-raised-button>Regisztráció</button>
+
     <mat-card-actions>
+      <div class="form-group">
+        <button class="register" mat-raised-button>Regisztráció</button>
+      </div>
       <a class="login" mat-button routerLink="/login">
         Belépés
       </a>
