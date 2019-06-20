@@ -26,7 +26,7 @@ namespace StrategyGame.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostBuyEgysegs([FromBody] SeregInfoDTO egysegs)
+        public async Task<IActionResult> BuyEgysegs([FromBody] SeregInfoDTO egysegs)
         {
             return Ok("Not implemented");
         }

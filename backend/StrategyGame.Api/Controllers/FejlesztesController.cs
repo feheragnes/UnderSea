@@ -24,7 +24,7 @@ namespace StrategyGame.Api.Controllers
             return Ok("Not implemented");
         }
 
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> BuyFejlesztes([FromBody] FejlesztesDTO epulet)
         {
             return Ok("Not implemented");
