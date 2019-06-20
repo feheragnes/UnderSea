@@ -8,6 +8,6 @@ namespace StrategyGame.Bll.ServiceInterfaces.AAAServiceInterfaces
 {
     public interface ILoginService
     {
-        Task<object> Login(LoginDTO model);
+        Task<string> Login(LoginDTO model);
     }
 }

@@ -31,7 +31,7 @@ namespace StrategyGame.Bll.Services.AAAServices
             _jwtService = jwtService;
         }
 
-        public async Task<object> Register(RegistrationDTO model)
+        public async Task<string> Register(RegistrationDTO model)
         {
             var user = new StrategyGameUser
             {

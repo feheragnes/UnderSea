@@ -26,7 +26,7 @@ namespace StrategyGame.Bll.Services.AAAServices
             _signInManager = signInManager;
             _jwtService = jwtService;
         }
-        public async Task<object> Login(LoginDTO model)
+        public async Task<string> Login(LoginDTO model)
         {
             var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
 

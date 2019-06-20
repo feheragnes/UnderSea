@@ -22,6 +22,7 @@ using Hangfire.SqlServer;
 using AutoMapper;
 using StrategyGame.Bll.ServiceInterfaces.AAAServiceInterfaces;
 using StrategyGame.Bll.Services.AAAServices;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace StrategyGame.Api
 {
@@ -113,6 +114,10 @@ namespace StrategyGame.Api
             services.AddScoped<IRegistrationService, RegistrationService>();
             services.AddAutoMapper();
             services.AddHangfireServer();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v0.1", new Info { Title = "UnderSeaApi", Version = "v0.1" });
+            });
             services.AddMvc();
         }
 
@@ -125,7 +130,12 @@ namespace StrategyGame.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("./swagger/v0.1/swagger.json", "UnderSea API v0.1");
+                c.RoutePrefix = string.Empty;
+            });
             app.UseAuthentication();
             app.UseMvc();
             //ctx.Database.EnsureCreated();

@@ -40,15 +40,15 @@ namespace StrategyGame.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<object> Login([FromBody] LoginDTO model)
+        public async Task<IActionResult> Login([FromBody] LoginDTO model)
         {
-            return await _loginService.Login(model);
+            return Ok(await _loginService.Login(model));
         }
 
         [HttpPost]
-        public async Task<object> Register([FromBody] RegistrationDTO model)
+        public async Task<IActionResult> Register([FromBody] RegistrationDTO model)
         {
-            return await _registrationService.Register(model);
+            return Ok(await _registrationService.Register(model));
         }
 
         }
