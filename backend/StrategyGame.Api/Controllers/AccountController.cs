@@ -42,13 +42,13 @@ namespace StrategyGame.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginDTO model)
         {
-            return Ok(await _loginService.Login(model));
+            return Json(new { Token = await _loginService.Login(model) });
         }
 
         [HttpPost]
         public async Task<IActionResult> Register([FromBody] RegistrationDTO model)
         {
-            return Ok(await _registrationService.Register(model));
+            return Json(new { Token = await _registrationService.Register(model) });
         }
 
         }

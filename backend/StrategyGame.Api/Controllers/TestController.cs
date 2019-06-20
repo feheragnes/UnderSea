@@ -80,7 +80,7 @@ namespace StrategyGame.Api.Controllers
 
         // POST: api/Test
         [HttpPost]
-        public async Task<ActionResult<Fejlesztes>> PostFejlesztes(AlkimiaDTO fejlesztes)
+        public async Task<ActionResult<Fejlesztes>> PostFejlesztes([FromBody] AlkimiaDTO fejlesztes)
         {
             var alkimia = _mapper.Map<Alkimia>(fejlesztes);
             _context.Fejleszteses.Add(alkimia);

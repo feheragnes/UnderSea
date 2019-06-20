@@ -9,11 +9,11 @@ namespace StrategyGame.Bll.Mappers
 {
     public class UserProfile : Profile
     {
-        public UserProfile()
+        /*public UserProfile()
         {
             CreateMap<StrategyGameUser, StrategyGameUserDTO>()
                  .ForMember(e => e.OrszagNev, opt => opt.MapFrom(e => e.GetActiveOrszag()))
                  .ReverseMap();
-        }
+        }*/
     }
 }
