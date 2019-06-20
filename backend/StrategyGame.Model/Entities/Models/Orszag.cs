@@ -26,6 +26,10 @@ namespace StrategyGame.Model.Entities.Models
 
         public IList<Fejlesztes> Fejleszteses { get; set; } = new List<Fejlesztes>();
 
+        public void BuildNewEpulet(Epulet e)
+        {
+            Epulets.Add(e);
+        }
 
     }
 }

@@ -30,25 +30,48 @@ namespace StrategyGame.Bll.Services
         {
             var currentUser = await _userManager.GetUserAsync(user);
 
-            var currentOrszag = _context.Orszags.Include(x => x.Epulets).SingleOrDefaultAsync().Result.Epulets;
+            var currentOrszag = await _context.Orszags.Include(x => x.Epulets).SingleOrDefaultAsync();
+
+            currentOrszag.BuildNewEpulet(e);
+        }
+
+        public async Task<Epulet> GetEpuletByIdAsync(Guid id, ClaimsPrincipal user)
+        {
+            var currentUser = await _userManager.GetUserAsync(user);
+
+            var currentOrszag = await _context.Orszags.Include(x => x.Epulets).SingleOrDefaultAsync();
+            List<Epulet> currentEpulets = new List<Epulet>(currentOrszag.Epulets);
+
+            return currentEpulets.Find(x => x.Id == id);
+        }
+
+        public async Task<List<Epulet>> GetEpuletsAsync(ClaimsPrincipal user)
+        {
+
+            var currentUser = await _userManager.GetUserAsync(user);
+
+            var currentOrszag = await _context.Orszags.Include(x => x.Epulets).SingleOrDefaultAsync();  //.Result.Epulets;
+
+            var epulets = currentOrszag.Epulets;
 
 
             throw new NotImplementedException();
         }
 
-        public Task<Epulet> GetEpuletByIdAsync(Guid id)
+        public async Task SaveChangesAsync()
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<Epulet>> GetEpuletsAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task SaveChangesAsync()
-        {
-            throw new NotImplementedException();
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException e)
+            {
+                throw new Exception("Concurrency error");
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
         }
     }
 }
