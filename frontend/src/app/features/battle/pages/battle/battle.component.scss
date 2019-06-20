@@ -1,0 +1,138 @@
+mat-toolbar {
+  border-radius: 1rem;
+  background-color: rgba(255, 255, 255, 0.25);
+  color: #1c3e76;
+  font-size: 32px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  height: 84px;
+}
+
+.border {
+  margin-left: 21px;
+  margin-right: 21px;
+  margin-top: 25px;
+}
+
+mat-sidenav {
+  width: 195px;
+  background: transparent;
+  border-color: transparent;
+}
+
+mat-sidenav-container {
+  background: transparent;
+  height: 917px;
+  margin-top: 45px;
+}
+
+button {
+  color: #001234;
+  font-size: 29px;
+  width: 192px;
+  height: 50px;
+  margin-bottom: 22px;
+  border-radius: 2rem;
+  background: linear-gradient(to right, #0fcfde 0%, #9ffff0 100%);
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.25);
+  color: white;
+  width: 192px;
+  height: 269px;
+  padding: 0px;
+  border-radius: 2rem;
+  margin-bottom: 92px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.card .malecard {
+  background-color: #9ffff0;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #428dff;
+  width: 94px;
+  height: 96px;
+  display: flex;
+  justify-content: center;
+  padding: 0px;
+  border-radius: 1.5rem;
+}
+
+.icons {
+  align-self: flex-end;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon {
+  background-color: #9ffff0;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #428dff;
+  width: 59px;
+  height: 59px;
+  padding: 0px;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+img {
+  align-self: center;
+}
+.card * {
+  font-size: 21px;
+  margin-bottom: 0px;
+}
+
+h1 {
+  font-size: 38px;
+  color: #9ffff0;
+  text-align: center;
+}
+
+.column1 {
+  width: 20%;
+  align-self: flex-start;
+}
+.column2 {
+  width: 70%;
+  align-self: flex-end;
+}
+
+.data {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 30px;
+}
+
+.icontext {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.doubletext {
+  display: flex;
+  flex-direction: column;
+}
+h5 {
+  font-family: baloo;
+  font-size: 20px;
+}

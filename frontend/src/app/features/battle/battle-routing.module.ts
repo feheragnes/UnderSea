@@ -1,14 +1,23 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
 
-import { ExamplePageComponent } from './pages/example/example.page.component';
+import { BattleComponent } from "./pages/battle/battle.component";
+import { BuildingsComponent } from "./components/buildings/buildings.component";
+import { AttackComponent } from "./components/attack/attack.component";
 
 const routes: Routes = [
-    { path: '', component: ExamplePageComponent },
+  {
+    path: "",
+    component: BattleComponent,
+    children: [
+      { path: "buildings", component: BuildingsComponent },
+      { path: "attack", component: AttackComponent }
+    ]
+  }
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
 })
-export class BattleRoutingModule { }
+export class BattleRoutingModule {}
