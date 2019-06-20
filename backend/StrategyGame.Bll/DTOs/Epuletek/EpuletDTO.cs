@@ -4,7 +4,7 @@ using System.Text;
 
 namespace StrategyGame.Bll.DTOs.Epuletek
 {
-    class EpuletDTO
+    public class EpuletDTO
     {
         public Guid Id { get; set; }
 

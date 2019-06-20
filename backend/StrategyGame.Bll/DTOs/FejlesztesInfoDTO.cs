@@ -4,7 +4,7 @@ using System.Text;
 
 namespace StrategyGame.Bll.DTOs
 {
-    class FejlesztesInfoDTO
+    public class FejlesztesInfoDTO
     {
         public string Tipus { get; set; }
 

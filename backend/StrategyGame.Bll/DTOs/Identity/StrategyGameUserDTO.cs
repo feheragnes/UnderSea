@@ -4,7 +4,7 @@ using System.Text;
 
 namespace StrategyGame.Bll.DTOs.Identity
 {
-    class StrategyGameUserDTO
+    public class StrategyGameUserDTO
     {
        public string Email { get; set; }
 

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace StrategyGame.Bll.DTOs
 {
-    class OrszagDTO
+    public class OrszagDTO
     {
 
         public Guid Id { get; set; }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace StrategyGame.Bll.DTOs
 {
-    class CsapatDTO
+    public class CsapatDTO
     {
 
         public Guid Id { get; set; }

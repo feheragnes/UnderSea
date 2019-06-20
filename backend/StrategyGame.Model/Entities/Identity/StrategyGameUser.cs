@@ -11,5 +11,10 @@ namespace StrategyGame.Model.Entities.Identity
 
         public IList<OrszagUser> Orszags { get; set; } = new List<OrszagUser>();
 
+        public Orszag GetActiveOrszag()
+        {
+            return Orszags[0].Orszag;
+        }
+
     }
 }
