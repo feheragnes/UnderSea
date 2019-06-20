@@ -17,7 +17,6 @@ namespace StrategyGame.Model.Entities.Models.Epuletek
         public long AktualisKor { get; set; }
 
         public bool Felepult { get; set; }
-
    
     }
    
