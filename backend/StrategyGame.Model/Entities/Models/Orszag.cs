@@ -10,7 +10,6 @@ namespace StrategyGame.Model.Entities.Models
 {
     public class Orszag
     {
-
         public Guid Id { get; set; }
 
         public long Gyongy { get; set; }

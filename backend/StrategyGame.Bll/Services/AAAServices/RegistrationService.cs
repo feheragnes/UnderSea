@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using StrategyGame.Bll.Services.AAAServices;
 using StrategyGame.Bll.ServiceInterfaces.AAAServiceInterfaces;
 using Microsoft.Extensions.Configuration;
+using StrategyGame.Model.Entities.Models;
 
 namespace StrategyGame.Bll.Services.AAAServices
 {
