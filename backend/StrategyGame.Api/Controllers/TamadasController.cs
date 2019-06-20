@@ -31,8 +31,13 @@ namespace StrategyGame.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> PostTamadas([FromBody]JObject data)
         {
-            return Ok(data["asd"]["a"]);
+            return Ok("Not implemented");
+        }
 
+        [HttpGet]
+        public async Task<IActionResult> GetHarcStatusz()
+        {
+            return Ok("Not implemented");
         }
 
     }

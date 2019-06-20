@@ -11,6 +11,8 @@ namespace StrategyGame.Bll.DTOs
 
         public Guid Id { get; set; }
 
+        public string Nev { get; set; }
+
         public long Gyongy { get; set; }
 
         public long Korall { get; set; }
