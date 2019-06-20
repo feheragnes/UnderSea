@@ -23,6 +23,7 @@ using AutoMapper;
 using StrategyGame.Bll.ServiceInterfaces.AAAServiceInterfaces;
 using StrategyGame.Bll.Services.AAAServices;
 using Swashbuckle.AspNetCore.Swagger;
+using StrategyGame.Bll.Mappers;
 
 namespace StrategyGame.Api
 {
@@ -37,6 +38,7 @@ namespace StrategyGame.Api
         }
 
         public IConfiguration Configuration { get; }
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -112,13 +114,34 @@ namespace StrategyGame.Api
             services.AddScoped<IJWTService, JWTService>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IRegistrationService, RegistrationService>();
-            services.AddAutoMapper();
+            //services.AddAutoMapper(typeof(Startup));
             services.AddHangfireServer();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v0.1", new Info { Title = "UnderSeaApi", Version = "v0.1" });
             });
             services.AddMvc();
+            services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowSpecificOrigins,
+                builder =>
+                {
+                    builder.WithOrigins("localhost:4200").AllowAnyMethod();
+                });
+            });
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new FejlesztesProfile());
+                mc.AddProfile(new AllapotProfile());
+                mc.AddProfile(new CsapatProfile());
+                mc.AddProfile(new EgysegProfile());
+                mc.AddProfile(new EpuletProfile());
+                mc.AddProfile(new JatekProfile());
+                mc.AddProfile(new OrszagProfile());
+                mc.AddProfile(new UserProfile());
+            });
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -130,6 +153,7 @@ namespace StrategyGame.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors(MyAllowSpecificOrigins);
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -138,6 +162,8 @@ namespace StrategyGame.Api
             });
             app.UseAuthentication();
             app.UseMvc();
+
+
             //ctx.Database.EnsureCreated();
         }
     }

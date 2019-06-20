@@ -7,7 +7,7 @@ using System.Text;
 
 namespace StrategyGame.Bll.Mappers
 {
-    class FejlesztesProfile : Profile
+    public class FejlesztesProfile : Profile
     {
         public FejlesztesProfile()
         {
@@ -26,7 +26,7 @@ namespace StrategyGame.Bll.Mappers
                .IncludeBase<Fejlesztes, FejlesztesDTO>()
                .ReverseMap();
 
-            CreateMap<IszapTraktor, IszapTraktor>()
+            CreateMap<IszapTraktor, IszapTraktorDTO>()
                .IncludeBase<Fejlesztes, FejlesztesDTO>()
                .ReverseMap();
 

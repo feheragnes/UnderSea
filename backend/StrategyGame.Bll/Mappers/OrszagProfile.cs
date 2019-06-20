@@ -7,7 +7,7 @@ using System.Text;
 
 namespace StrategyGame.Bll.Mappers
 {
-    class OrszagProfile : Profile
+    public class OrszagProfile : Profile
     {
         public OrszagProfile()
         {

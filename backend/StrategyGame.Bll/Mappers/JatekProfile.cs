@@ -7,7 +7,7 @@ using System.Text;
 
 namespace StrategyGame.Bll.Mappers
 {
-    class JatekProfile : Profile
+    public class JatekProfile : Profile
     {
 
         public JatekProfile()
