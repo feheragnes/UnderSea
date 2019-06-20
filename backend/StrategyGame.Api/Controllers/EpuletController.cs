@@ -25,7 +25,7 @@ namespace StrategyGame.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetEpuletInfos()
         {
-            return Ok("Not implemented")
+            return Ok("Not implemented");
         }
     }
 }
