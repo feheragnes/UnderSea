@@ -16,5 +16,11 @@ namespace StrategyGame.Api.Controllers
         {
             return Ok("Not implemented");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> PostKorVege()
+        {
+            return Ok("Not implemented");
+        }
     }
 }
