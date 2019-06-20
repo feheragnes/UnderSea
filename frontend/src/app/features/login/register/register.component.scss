@@ -5,6 +5,8 @@
   height: 526px;
   margin-left: auto;
   margin-right: auto;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   border-radius: 2rem;
 }
@@ -13,22 +15,27 @@ mat-card-header {
   justify-content: center;
   color: #1c3e76;
 }
+
 mat-card-content {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+mat-card-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .login {
   color: #9ffff0;
   font-size: 18px;
-  display: block;
 }
 .form-rounded {
   border-radius: 2rem;
   width: 366px;
   height: 40px;
   margin-bottom: 19px;
-  margin-left: auto;
-  margin-right: auto;
   background-color: rgba(255, 255, 255, 0.39);
   border: rgba(255, 255, 255, 0.39);
   color: #1c3e76;
@@ -46,9 +53,6 @@ mat-card-content {
   font-size: 18px;
   width: 192px;
   height: 50px;
-  margin-left: 135px;
-  margin-top: 46px;
-  margin-bottom: 15px;
   border-radius: 2rem;
 }
 
