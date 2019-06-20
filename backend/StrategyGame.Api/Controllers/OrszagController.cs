@@ -16,6 +16,15 @@ namespace StrategyGame.Api.Controllers
         {
             return Ok("Not implemented");
         }
-
+        [HttpGet]
+        public async Task<IActionResult> GetUserInfos()
+        {
+            return Ok("Not implemented");
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetRanglista()
+        {
+            return Ok("Not implemented");
+        }
     }
 }
