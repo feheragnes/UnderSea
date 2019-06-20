@@ -13,14 +13,14 @@ namespace StrategyGame.Bll.Mappers
         {
 
 
-            CreateMap<Orszag, OrszagDTO>()
+            /*CreateMap<Orszag, OrszagDTO>()
                   .ForMember(e => e.Gyongy, opt => opt.MapFrom(e => e.Gyongy))
                   .ForMember(e => e.Korall, opt => opt.MapFrom(e => e.Korall))
                   .ForMember(e => e.Epulets, opt => opt.MapFrom(e => e.Epulets))
                   .ForMember(e => e.OtthoniCsapats, opt => opt.MapFrom(e => e.OtthoniCsapats))
                   .ForMember(e => e.TamadoCsapats, opt => opt.MapFrom(e => e.TamadoCsapats))
                   .ForMember(e => e.Fejleszteses, opt => opt.MapFrom(e => e.Fejleszteses))
-                  .ReverseMap();
+                  .ReverseMap();*/
         }
 
     }
