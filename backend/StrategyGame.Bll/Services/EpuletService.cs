@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using StrategyGame.Bll.DTOs;
 using StrategyGame.Bll.ServiceInterfaces;
 using StrategyGame.Dal.Context;
 using StrategyGame.Model.Entities.Identity;
@@ -22,17 +23,34 @@ namespace StrategyGame.Bll.Services
 
         public EpuletService(StrategyGameContext context, UserManager<StrategyGameUser> userManager)
         {
-     
             _context = context;
             _userManager = userManager;
         }
 
-        public async Task AddEpuletAsync(Epulet e, Orszag currentOrszag)
+        public async Task AddEpuletAsync(List<EpuletInfoDTO> epulets, Orszag currentOrszag)
         {
+            List<Epulet> epuletek = new List<Epulet>(currentOrszag.Epulets);
 
-            currentOrszag.Epulets.Add(e);
+            long osszKoltseg = 0;
+            foreach (var item in epulets)
+            {
+                osszKoltseg += (item.Ar * item.Mennyiseg);
+            }
 
-            SaveChangesAsync();
+            if (osszKoltseg > currentOrszag.Gyongy)
+                throw new ArgumentException("You don't have enough Gyöngy");
+
+            for (int i = 0; i < epulets[0].Mennyiseg; i++)
+            {
+                epuletek.Add(new AramlasIranyito(1000,5,50,200));
+            }
+
+            for (int i = 0; i < epulets[1].Mennyiseg; i++)
+            {
+                epuletek.Add(new ZatonyVar(1000,5,200));
+            }
+
+            await SaveChangesAsync();
         }
 
 

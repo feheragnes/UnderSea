@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using StrategyGame.Bll.DTOs;
 using StrategyGame.Bll.ServiceInterfaces;
 using StrategyGame.Dal.Context;
 using StrategyGame.Model.Entities.Identity;
@@ -24,17 +25,86 @@ namespace StrategyGame.Bll.Services
             _context = context;
             _userManager = userManager;
         }
-        public async Task AddEgysegAsync(Egyseg e, Orszag currentOrszag)
+        public async Task AddEgysegAsync(List<SeregInfoDTO> egysegek, Orszag currentOrszag)
         {
-
             List<Csapat> otthoniCsapatok = new List<Csapat>(currentOrszag.OtthoniCsapats);
 
-            otthoniCsapatok.Find(T => T.Celpont == null).Egysegs.Add(e);
+            long osszKoltseg = 0;
+            foreach (var item in egysegek)
+            {
+                osszKoltseg += (item.Ar * item.Mennyiseg);
+            }
+
+            if(osszKoltseg > currentOrszag.Gyongy)
+               throw new ArgumentException("You don't have enough Gyöngy");
+
+            for(int i=0; i< egysegek[0].Mennyiseg; i++)
+            {
+                otthoniCsapatok.Find(T => T.Celpont == null).Egysegs.Add(new RohamFoka(6,2,50,1,1));
+            }
+
+            for (int i = 0; i < egysegek[1].Mennyiseg; i++)
+            {
+                otthoniCsapatok.Find(T => T.Celpont == null).Egysegs.Add(new CsataCsiko(2, 6, 50, 1, 1));
+            }
+
+            for (int i = 0; i < egysegek[2].Mennyiseg; i++)
+            {
+                otthoniCsapatok.Find(T => T.Celpont == null).Egysegs.Add(new LezerCapa(5, 5, 100, 3, 2));
+            }
+
+            await SaveChangesAsync();
+
         }
 
         public Task<List<Egyseg>> GetEgysegsAsync(Orszag currentOrszag)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<List<SeregInfoDTO>> GetOtthoniEgysegekAsync(Orszag currentOrszag)
+        {
+
+            List<Csapat> otthoniCsapatok = new List<Csapat>(currentOrszag.OtthoniCsapats);
+
+            long rohamFokaMennyiseg = 0;
+            long csataCsikoMennyiseg = 0;
+            long lezerCapaMennyiseg = 0;
+
+            var otthonMaradtCsapat = otthoniCsapatok.Find(T => T.Celpont == null);
+
+            foreach (var item in otthonMaradtCsapat.Egysegs)
+            {
+                if (item.GetType() == typeof(RohamFoka))
+                    rohamFokaMennyiseg++;
+                if (item.GetType() == typeof(CsataCsiko))
+                    csataCsikoMennyiseg++;
+                if (item.GetType() == typeof(LezerCapa))
+                    lezerCapaMennyiseg++;
+            }
+
+            List<SeregInfoDTO> seregInfo = new List<SeregInfoDTO>();
+            seregInfo.Add(new SeregInfoDTO(rohamFokaMennyiseg, 50, "RohamFoka"));
+            seregInfo.Add(new SeregInfoDTO(csataCsikoMennyiseg, 50, "CsataCsiko"));
+            seregInfo.Add(new SeregInfoDTO(lezerCapaMennyiseg, 100, "LezerCapa"));
+
+            return seregInfo;
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException e)
+            {
+                throw new Exception("Concurrency error");
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
         }
     }
 }

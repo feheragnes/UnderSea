@@ -1,4 +1,5 @@
-﻿using StrategyGame.Model.Entities.Models;
+﻿using StrategyGame.Bll.DTOs;
+using StrategyGame.Model.Entities.Models;
 using StrategyGame.Model.Entities.Models.Epuletek;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace StrategyGame.Bll.ServiceInterfaces
     {
         Task<List<Epulet>> GetEpuletsAsync(Orszag currentOrszag);
         Task<Epulet> GetEpuletByIdAsync(Guid id, Orszag currentOrszag);
-        Task AddEpuletAsync(Epulet e, Orszag currentOrszag);
+        Task AddEpuletAsync(List<EpuletInfoDTO> epulets, Orszag currentOrszag);
         Task SaveChangesAsync();
        
     }

@@ -6,7 +6,15 @@ namespace StrategyGame.Bll.DTOs
 {
     public class SeregInfoDTO
     {
-        public long Szam { get; set; }
+
+        public SeregInfoDTO(long m, int ar, string t)
+        {
+            Mennyiseg = m;
+            Ar = ar;
+            Tipus = t;
+        }
+        public long Mennyiseg { get; set; }
+        public int Ar { get; set; }
         public string Tipus { get; set; }
     }
 }
