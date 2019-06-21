@@ -279,7 +279,7 @@ namespace StrategyGame.Dal.Migrations
 
                     b.Property<bool>("Kifejlesztve");
 
-                    b.Property<int>("Noveles");
+                    b.Property<long>("Noveles");
 
                     b.Property<Guid?>("OrszagId");
 
@@ -314,6 +314,8 @@ namespace StrategyGame.Dal.Migrations
                     b.Property<long>("Gyongy");
 
                     b.Property<long>("Korall");
+
+                    b.Property<string>("Nev");
 
                     b.HasKey("Id");
 
@@ -358,9 +360,9 @@ namespace StrategyGame.Dal.Migrations
                 {
                     b.HasBaseType("StrategyGame.Model.Entities.Models.Epuletek.Epulet");
 
-                    b.Property<int>("Korall");
+                    b.Property<long>("Korall");
 
-                    b.Property<int>("Nepesseg");
+                    b.Property<long>("Nepesseg");
 
                     b.HasDiscriminator().HasValue("AramlasIranyito");
                 });
@@ -369,7 +371,7 @@ namespace StrategyGame.Dal.Migrations
                 {
                     b.HasBaseType("StrategyGame.Model.Entities.Models.Epuletek.Epulet");
 
-                    b.Property<int>("Szallas");
+                    b.Property<long>("Szallas");
 
                     b.HasDiscriminator().HasValue("ZatonyVar");
                 });

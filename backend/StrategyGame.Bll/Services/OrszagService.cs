@@ -40,7 +40,7 @@ namespace StrategyGame.Bll.Services
         public  async Task<Orszag> InitOrszag(string orszagnev)
         {
             var orszag = new Orszag { Nev = orszagnev, Korall = 0, Gyongy = 0 };
-            if (_context.Orszags.FirstOrDefault(x => x.Nev.ToUpper() == orszagnev.ToUpper()) != null)
+            if (_context.Orszags.FirstOrDefault(x => x.Nev.ToUpper() == orszagnev.ToUpper()) == null)
             {
                 await _context.Orszags.AddAsync(orszag);
                 await _context.SaveChangesAsync();
@@ -62,7 +62,7 @@ namespace StrategyGame.Bll.Services
             };
             return orszagdto;
         }
-        public async Task<long> GetHelyezes(Orszag orszag)
+        private async Task<long> GetHelyezes(Orszag orszag)
         {
             return 0;
         }

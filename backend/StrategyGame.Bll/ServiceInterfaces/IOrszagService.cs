@@ -1,4 +1,5 @@
-﻿using StrategyGame.Model.Entities.Identity;
+﻿using StrategyGame.Bll.DTOs;
+using StrategyGame.Model.Entities.Identity;
 using StrategyGame.Model.Entities.Models;
 using System;
 using System.Collections.Generic;
@@ -11,5 +12,6 @@ namespace StrategyGame.Bll.ServiceInterfaces
     {
         Task<OrszagUser> MakeOrszagUserConnection(StrategyGameUser user, string orszagnev);
         Task<Orszag> InitOrszag(string orszagnev);
+        Task<OrszagDTO> Map(Orszag orszag);
     }
 }
