@@ -42,17 +42,17 @@ namespace StrategyGame.Bll.Services
 
             for(int i=0; i< egysegek[0].Mennyiseg; i++)
             {
-                otthoniCsapatok.Find(T => T.Celpont == null).Egysegs.Add(new RohamFoka(6,2,50,1,1));
+                otthoniCsapatok.Find(T => T.Celpont == null).Egysegs.Add(new RohamFoka { Tamadas = 6, Vedekezes = 2, Ar = 50, Ellatas= 1, Zsold=1 });  ;
             }
 
             for (int i = 0; i < egysegek[1].Mennyiseg; i++)
             {
-                otthoniCsapatok.Find(T => T.Celpont == null).Egysegs.Add(new CsataCsiko(2, 6, 50, 1, 1));
+                otthoniCsapatok.Find(T => T.Celpont == null).Egysegs.Add(new CsataCsiko { Tamadas = 6, Vedekezes = 2, Ar = 50, Ellatas = 1, Zsold = 1 });
             }
 
             for (int i = 0; i < egysegek[2].Mennyiseg; i++)
             {
-                otthoniCsapatok.Find(T => T.Celpont == null).Egysegs.Add(new LezerCapa(5, 5, 100, 3, 2));
+                otthoniCsapatok.Find(T => T.Celpont == null).Egysegs.Add(new LezerCapa { Tamadas = 5, Vedekezes = 5, Ar = 100, Ellatas = 2, Zsold = 3 });
             }
 
             await SaveChangesAsync();

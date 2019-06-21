@@ -7,11 +7,7 @@ namespace StrategyGame.Model.Entities.Models.Epuletek
 {
     public abstract class Epulet
     {
-        public Epulet(long ar, long szuksKorok)
-        {
-            Ar = ar;
-            SzuksegesKorok = szuksKorok;
-        }
+       
         public Guid Id { get; set; }
 
         public long Ar { get; set; }

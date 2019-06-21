@@ -8,14 +8,7 @@ namespace StrategyGame.Model.Entities.Models.Egysegek
     public abstract class Egyseg
     {
 
-        public Egyseg(long t, long v, long ar, long zsold, long ellatas)
-        {
-            Tamadas = t;
-            Vedekezes = v;
-            Ar = ar;
-            Zsold = zsold;
-            Ellatas = ellatas;
-        }
+     
         public Guid Id { get; set; }
         public long Tamadas { get; set; }
         public long Vedekezes { get; set; }

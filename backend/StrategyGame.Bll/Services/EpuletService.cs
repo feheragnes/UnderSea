@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using StrategyGame.Bll.DTOs;
 using StrategyGame.Bll.ServiceInterfaces;
@@ -20,11 +21,13 @@ namespace StrategyGame.Bll.Services
 
         private readonly StrategyGameContext _context;
         private readonly UserManager<StrategyGameUser> _userManager;
+        private readonly IMapper _mapper;
 
-        public EpuletService(StrategyGameContext context, UserManager<StrategyGameUser> userManager)
+        public EpuletService(StrategyGameContext context, UserManager<StrategyGameUser> userManager, IMapper mapper)
         {
             _context = context;
             _userManager = userManager;
+            _mapper = mapper;
         }
 
         public async Task AddEpuletAsync(List<EpuletInfoDTO> epulets, Orszag currentOrszag)
@@ -42,12 +45,12 @@ namespace StrategyGame.Bll.Services
 
             for (int i = 0; i < epulets[0].Mennyiseg; i++)
             {
-                epuletek.Add(new AramlasIranyito(1000,5,50,200));
+                epuletek.Add(new AramlasIranyito {Ar = 1000, SzuksegesKorok =5 , Nepesseg= 50, Korall=200  });
             }
 
             for (int i = 0; i < epulets[1].Mennyiseg; i++)
             {
-                epuletek.Add(new ZatonyVar(1000,5,200));
+                epuletek.Add(new ZatonyVar { Ar = 1000, SzuksegesKorok = 5, Szallas = 200 });
             }
 
             await SaveChangesAsync();
@@ -73,7 +76,20 @@ namespace StrategyGame.Bll.Services
             return currentEpulets;
         }
 
+        public async Task<List<EpuletInfoDTO>> GetFelepultEpuletsAsync(Orszag currentOrszag)
+        {
+            List<Epulet> epulets = new List<Epulet>(currentOrszag.Epulets);
+            List<Epulet> felepultEpulets  = new List<Epulet>();
+            foreach (var epulet in epulets)
+            {
+                if (epulet.Felepult)
+                    felepultEpulets.Add(epulet);
+            }
 
+            var felepultDtoList = _mapper.Map<List<Epulet>, List<EpuletInfoDTO>>(felepultEpulets);
+
+            return felepultDtoList;
+        }
 
         public async Task SaveChangesAsync()
         {
