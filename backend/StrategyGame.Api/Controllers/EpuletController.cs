@@ -32,7 +32,7 @@ namespace StrategyGame.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetUserEpulets()
         {
-
+            
             return Ok(_epuletService.GetEpuletsAsync(User));
         }
 
