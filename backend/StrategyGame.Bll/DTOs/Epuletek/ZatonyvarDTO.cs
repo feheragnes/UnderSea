@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StrategyGame.Bll.DTOs.Epuletek
 {
-    class ZatonyvarDTO : EpuletDTO, IEpulet
+    public class ZatonyvarDTO : EpuletDTO, IEpulet
     {
         public long Szallas { get; set; }
 

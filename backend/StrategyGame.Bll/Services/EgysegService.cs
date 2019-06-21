@@ -10,6 +10,7 @@ using StrategyGame.Model.Entities.Models;
 using StrategyGame.Model.Entities.Models.Egysegek;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -85,16 +86,19 @@ namespace StrategyGame.Bll.Services
             long csataCsikoMennyiseg = 0;
             long lezerCapaMennyiseg = 0;
 
-            var otthonMaradtCsapat = otthoniCsapatok.Find(T => T.Celpont == null);
+            var otthonMaradtCsapat = otthoniCsapatok.FirstOrDefault(T => T.Celpont == null);
 
-            foreach (var item in otthonMaradtCsapat.Egysegs)
+            if (otthonMaradtCsapat != null)
             {
-                if (item.GetType() == typeof(RohamFoka))
-                    rohamFokaMennyiseg++;
-                if (item.GetType() == typeof(CsataCsiko))
-                    csataCsikoMennyiseg++;
-                if (item.GetType() == typeof(LezerCapa))
-                    lezerCapaMennyiseg++;
+                foreach (var item in otthonMaradtCsapat.Egysegs)
+                {
+                    if (item.GetType() == typeof(RohamFoka))
+                        rohamFokaMennyiseg++;
+                    if (item.GetType() == typeof(CsataCsiko))
+                        csataCsikoMennyiseg++;
+                    if (item.GetType() == typeof(LezerCapa))
+                        lezerCapaMennyiseg++;
+                }
             }
 
             List<SeregInfoDTO> seregInfo = new List<SeregInfoDTO>();

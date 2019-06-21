@@ -26,12 +26,20 @@ namespace StrategyGame.Bll.Services
         private readonly StrategyGameContext _context;
         private readonly UserManager<StrategyGameUser> _userManager;
         private readonly IMapper _mapper;
+        private readonly IEgysegService _egysegService;
+        private readonly IEpuletService _epuletService;
 
-        public OrszagService(StrategyGameContext context,UserManager<StrategyGameUser> userManager, IMapper mapper)
+        public OrszagService(StrategyGameContext context,
+                             UserManager<StrategyGameUser> userManager, 
+                             IMapper mapper, 
+                             IEgysegService egysegService, 
+                             IEpuletService epuletService)
         {
             _context = context;
             _mapper = mapper;
             _userManager = userManager;
+            _egysegService = egysegService;
+            _epuletService = epuletService;
         }
 
         public async Task<OrszagUser> MakeOrszagUserConnection(StrategyGameUser user, string orszagNev)
@@ -140,11 +148,11 @@ namespace StrategyGame.Bll.Services
         }
         private async Task<IList<SeregInfoDTO>> GetSeregInfoDTOs(Orszag orszag)
         {
-            return null;
+            return await _egysegService.GetOtthoniEgysegsAsync(orszag);
         }
         private async Task<IList<EpuletInfoDTO>> GetEpuletInfoDTOs(Orszag orszag)
         {
-            return null;
+            return await _epuletService.GetFelepultEpuletsAsync(orszag);
         }
     }
 }

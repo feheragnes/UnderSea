@@ -6,9 +6,11 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using StrategyGame.Bll.DTOs.Epuletek;
 using StrategyGame.Bll.DTOs.Fejlesztesek;
 using StrategyGame.Bll.Mappers;
 using StrategyGame.Dal.Context;
+using StrategyGame.Model.Entities.Models.Epuletek;
 using StrategyGame.Model.Entities.Models.Fejlesztesek;
 
 namespace StrategyGame.Api.Controllers
@@ -103,6 +105,20 @@ namespace StrategyGame.Api.Controllers
             await _context.SaveChangesAsync();
 
             return fejlesztes;
+        }
+        [HttpPost]
+        public async Task<IActionResult> PostAramlasIranyito([FromBody] AramlasIranyitoDTO aramlasIranyitoDTO)
+        {
+            _context.Orszags.Include(x => x.Epulets).FirstOrDefault(x => x.Id == new Guid("f2072921-3345-45f1-6592-08d6f62eb2b0")).
+                Epulets.Add(_mapper.Map<AramlasIranyito>(aramlasIranyitoDTO));
+            _context.SaveChanges();
+            return Ok();
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetEpulets()
+        {
+           var asd = _context.Orszags.Include(x => x.Epulets).FirstOrDefault(x => x.Id == new Guid("f2072921-3345-45f1-6592-08d6f62eb2b0")).Epulets;
+            return  Ok(_mapper.Map<IList<EpuletDTO>>(asd));
         }
 
         private bool FejlesztesExists(Guid id)

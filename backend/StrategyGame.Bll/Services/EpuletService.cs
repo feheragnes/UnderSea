@@ -76,7 +76,7 @@ namespace StrategyGame.Bll.Services
             return currentEpulets;
         }
 
-        public async Task<List<EpuletInfoDTO>> GetFelepultEpuletsAsync(Orszag currentOrszag)
+        public async Task<IList<EpuletInfoDTO>> GetFelepultEpuletsAsync(Orszag currentOrszag)
         {
             List<Epulet> epulets = new List<Epulet>(currentOrszag.Epulets);
             List<Epulet> felepultEpulets  = new List<Epulet>();
@@ -86,7 +86,7 @@ namespace StrategyGame.Bll.Services
                     felepultEpulets.Add(epulet);
             }
 
-            var felepultDtoList = _mapper.Map<List<Epulet>, List<EpuletInfoDTO>>(felepultEpulets);
+            var felepultDtoList = _mapper.Map<IList<EpuletInfoDTO>>(felepultEpulets);
 
             return felepultDtoList;
         }

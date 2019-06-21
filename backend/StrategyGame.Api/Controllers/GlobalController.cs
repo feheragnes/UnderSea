@@ -25,7 +25,7 @@ namespace StrategyGame.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetHelyezes()
         {
-            return Json(new { Helyezes = _globalService.GetUserScore(User});
+            return Json(new { Helyezes = _globalService.GetUserScore(User)});
         }
         [HttpGet]
         public async Task<ActionResult<List<KeyValuePair<string, long>>>> GetRanglista()
