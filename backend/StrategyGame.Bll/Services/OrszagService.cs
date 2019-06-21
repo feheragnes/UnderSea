@@ -34,17 +34,17 @@ namespace StrategyGame.Bll.Services
             _userManager = userManager;
         }
 
-        public async Task<OrszagUser> MakeOrszagUserConnection(StrategyGameUser user, string orszagnev)
+        public async Task<OrszagUser> MakeOrszagUserConnection(StrategyGameUser user, string orszagNev)
         {
-            var orszaguser = new OrszagUser { User = user, Orszag = InitOrszag(orszagnev).Result };
+            var orszaguser = new OrszagUser { User = user, Orszag = InitOrszag(orszagNev).Result };
             user.Orszags.Add(orszaguser);
             await _context.SaveChangesAsync();
             return orszaguser;
         }
-        public  async Task<Orszag> InitOrszag(string orszagnev)
+        public  async Task<Orszag> InitOrszag(string orszagNev)
         {
-            var orszag = new Orszag { Nev = orszagnev, Korall = 0, Gyongy = 0 };
-            if (_context.Orszags.FirstOrDefault(x => x.Nev.ToUpper() == orszagnev.ToUpper()) == null)
+            var orszag = new Orszag { Nev = orszagNev, Korall = 0, Gyongy = 0 };
+            if (_context.Orszags.FirstOrDefault(x => x.Nev.ToUpper() == orszagNev.ToUpper()) == null)
             {
                 await _context.Orszags.AddAsync(orszag);
                 await _context.SaveChangesAsync();
@@ -52,10 +52,30 @@ namespace StrategyGame.Bll.Services
             }
             throw new ArgumentException("Country already exists");
         }
-
-        public async Task<OrszagDTO> GetUserOrszagInfos(ClaimsPrincipal userclaim)
+        public async Task<Orszag> GetUserOrszag(ClaimsPrincipal userClaim)
         {
-            var user = await _userManager.GetUserAsync(userclaim);
+            var user = await _userManager.GetUserAsync(userClaim);
+            return _context.Users
+                .Include(x => x.Orszags)
+                .ThenInclude(x => x.Orszag)
+                .ThenInclude(x => x.Fejleszteses)
+                .Include(x => x.Orszags)
+                .ThenInclude(x => x.Orszag)
+                .ThenInclude(x => x.Epulets)
+                .Include(x => x.Orszags)
+                .ThenInclude(x => x.Orszag)
+                .ThenInclude(x => x.OtthoniCsapats)
+                .Include(x => x.Orszags)
+                .ThenInclude(x => x.Orszag)
+                .ThenInclude(x => x.TamadoCsapats)
+                .FirstOrDefault(x => x.Id == user.Id)
+                .Orszags
+                .FirstOrDefault().Orszag;
+        }
+
+        public async Task<OrszagDTO> GetUserOrszagInfos(ClaimsPrincipal userClaim)
+        {
+            var user = await _userManager.GetUserAsync(userClaim);
             user = await _context.Users.Include(x => x.Orszags).ThenInclude(x => x.Orszag).FirstOrDefaultAsync(x=>x.Id == user.Id);
             return await Map(user.Orszags.FirstOrDefault().Orszag);
         }
@@ -70,7 +90,8 @@ namespace StrategyGame.Bll.Services
                 Helyezes = await GetHelyezes(orszag),
                 GyongyTermeles = GetTermeles(orszag).Result.GyongyTermeles,
                 KorallTermeles = GetTermeles(orszag).Result.KorallTermeles,
-                SeregInfoDTOs = await GetSeregInfoDTOs(orszag)
+                SeregInfoDTOs = await GetSeregInfoDTOs(orszag),
+                EpuletInfoDTOs = await GetEpuletInfoDTOs(orszag)
             };
             return orszagdto;
         }
@@ -81,21 +102,25 @@ namespace StrategyGame.Bll.Services
         private async Task<OrszagDTO> GetTermeles(Orszag orszag)
         {
             orszag = _context.Orszags.Include(x => x.Epulets).Include(x => x.Fejleszteses).FirstOrDefault(x => x.Id == orszag.Id);
-            var orszagdto = new OrszagDTO();
+            var orszagDTO = new OrszagDTO();
             var epuletdtolist = _mapper.Map<IList<Epulet>, IList<EpuletDTO>>(orszag.Epulets);
             foreach (var item in epuletdtolist)
             {
-                orszagdto = await item.SetTermeles(orszagdto);
+                orszagDTO = await item.SetTermeles(orszagDTO);
             }
-            var fejlesztesdtolist = _mapper.Map<IList<Fejlesztes>, IList<FejlesztesDTO>>(orszag.Fejleszteses);
-            foreach (var item in fejlesztesdtolist)
+            var fejlesztesDTOList = _mapper.Map<IList<Fejlesztes>, IList<FejlesztesDTO>>(orszag.Fejleszteses);
+            foreach (var item in fejlesztesDTOList)
             {
-                orszagdto = await item.SetTermeles(orszagdto);
+                orszagDTO = await item.SetTermeles(orszagDTO);
             }
 
-            return orszagdto;
+            return orszagDTO;
         }
         private async Task<IList<SeregInfoDTO>> GetSeregInfoDTOs(Orszag orszag)
+        {
+            return null;
+        }
+        private async Task<IList<EpuletInfoDTO>> GetEpuletInfoDTOs(Orszag orszag)
         {
             return null;
         }
