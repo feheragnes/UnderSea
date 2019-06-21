@@ -31,7 +31,7 @@ namespace StrategyGame.Api.Controllers
         public async Task<IActionResult> GetUserEpulets()
         {
 
-            return Ok("Not implemented");
+            return Ok(_epuletService.GetEpuletsAsync(User));
         }
 
         [HttpPost]

@@ -14,6 +14,7 @@ namespace StrategyGame.Bll.ServiceInterfaces
         Task AddEpuletAsync(Epulet e, ClaimsPrincipal user);
         Task SaveChangesAsync();
 
+
    
     }
 }
