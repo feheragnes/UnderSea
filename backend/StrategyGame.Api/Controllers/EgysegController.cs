@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using StrategyGame.Bll.DTOs;
 using StrategyGame.Bll.DTOs.Egysegek;
+using StrategyGame.Bll.ServiceInterfaces;
+using StrategyGame.Model.Entities.Models;
+using StrategyGame.Model.Entities.Models.Egysegek;
 
 namespace StrategyGame.Api.Controllers
 {
@@ -14,9 +17,20 @@ namespace StrategyGame.Api.Controllers
     [ApiController]
     public class EgysegController : ControllerBase
     {
+
+        private readonly IOrszagService _orszagService;
+        private readonly IEgysegService _egysegService;
+
+        public EgysegController(IEgysegService egysegService, IOrszagService orszagService)
+        {
+            _egysegService = egysegService;
+            _orszagService = orszagService;
+
+        }
         [HttpGet]
         public async Task<IActionResult> GetUserEgysegs()
         {
+            Orszag userOrszag = await _orszagService.GetUserOrszag(User);
             return Ok("Not implemented");
         }
 
@@ -29,9 +43,14 @@ namespace StrategyGame.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> BuyEgysegs([FromBody] JObject egysegs)
         {
-            SeregInfoDTO csataCsikos = egysegs["csatacsiko"].ToObject<SeregInfoDTO>();        
-            SeregInfoDTO lezerCapas = egysegs["lezercapa"].ToObject<SeregInfoDTO>();
-            SeregInfoDTO rohamFokas = egysegs["rohamfoka"].ToObject<SeregInfoDTO>();
+            List<SeregInfoDTO> egysegList = new List<SeregInfoDTO>();
+            egysegList.Add(egysegs["rohamfoka"].ToObject<SeregInfoDTO>());
+            egysegList.Add(egysegs["csatacsiko"].ToObject<SeregInfoDTO>());
+            egysegList.Add(egysegs["lezercapa"].ToObject<SeregInfoDTO>());
+
+            Orszag userOrszag = await _orszagService.GetUserOrszag(User);
+
+            await _egysegService.AddEgysegAsync(egysegList, userOrszag);
 
             return Ok("Not implemented");
         }

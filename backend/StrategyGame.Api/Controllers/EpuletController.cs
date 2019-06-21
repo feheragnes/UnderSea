@@ -9,6 +9,7 @@ using StrategyGame.Bll.ServiceInterfaces;
 using StrategyGame.Model.Entities.Identity;
 using Newtonsoft.Json.Linq;
 using StrategyGame.Model.Entities.Models.Epuletek;
+using StrategyGame.Model.Entities.Models;
 
 namespace StrategyGame.Api.Controllers
 {
@@ -17,43 +18,48 @@ namespace StrategyGame.Api.Controllers
     public class EpuletController : Controller
     {
 
-
-        //var user = await _userManager.GetUserAsync(User);
         private readonly IEpuletService _epuletService;
         private readonly IOrszagService _orszagService;
 
-        private readonly SignInManager<StrategyGameUser> _signInManager;
-        private readonly UserManager<StrategyGameUser> _userManager;
 
-        public EpuletController(IEpuletService epuletService)
+
+
+        public EpuletController(IEpuletService epuletService, IOrszagService orszagService)
         {
             _epuletService = epuletService;
+            _orszagService = orszagService;
+          
         }
 
         [HttpGet]
         public async Task<IActionResult> GetUserEpulets()
         {
-            _orszagService.
-            return Ok(_epuletService.GetEpuletsAsync(User));
+            Orszag userOrszag = await _orszagService.GetUserOrszag(User);
+            return Ok(_epuletService.GetEpuletsAsync(userOrszag));
         }
 
         [HttpPost]
         public async Task<IActionResult> BuyEpulets([FromBody] JObject epulets)
         {
-            EpuletInfoDTO aramlasIranyito = epulets["aramlasiranyito"].ToObject<EpuletInfoDTO>();
-            EpuletInfoDTO zatonyVar = epulets["zatonyvar"].ToObject<EpuletInfoDTO>();
 
-            for (int i = 0; i < aramlasIranyito.Mennyiseg; i++)
-                await _epuletService.AddEpuletAsync(new AramlasIranyito(1000,5,50,200), User);
+         
+            Orszag userOrszag = await _orszagService.GetUserOrszag(User);
 
-            for(int i=0; i< zatonyVar.Mennyiseg; i++)
-                await _epuletService.AddEpuletAsync(new ZatonyVar(1000, 5, 200), User);
+            List<EpuletInfoDTO> epuletList = new List<EpuletInfoDTO>();
+            epuletList.Add(epulets["aramlasiranyito"].ToObject<EpuletInfoDTO>());
+            epuletList.Add(epulets["zatonyvar"].ToObject<EpuletInfoDTO>());
+
+            await _epuletService.AddEpuletAsync(epuletList, userOrszag);
 
             return Ok("Not implemented");
         }
+
+
+
         [HttpGet]
         public async Task<IActionResult> GetEpuletInfos()
         {
+            Orszag userOrszag = await _orszagService.GetUserOrszag(User);
             return Ok("Not implemented");
         }
     }
