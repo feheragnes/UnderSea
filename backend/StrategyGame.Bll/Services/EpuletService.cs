@@ -30,6 +30,7 @@ namespace StrategyGame.Bll.Services
         public async Task AddEpuletAsync(Epulet e, Orszag currentOrszag)
         {
 
+           
             currentOrszag.Epulets.Add(e);
 
             SaveChangesAsync();

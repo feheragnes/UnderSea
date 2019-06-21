@@ -20,6 +20,7 @@ namespace StrategyGame.Api.Controllers
 
         //var user = await _userManager.GetUserAsync(User);
         private readonly IEpuletService _epuletService;
+        private readonly IOrszagService _orszagService;
 
         private readonly SignInManager<StrategyGameUser> _signInManager;
         private readonly UserManager<StrategyGameUser> _userManager;
@@ -32,7 +33,7 @@ namespace StrategyGame.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetUserEpulets()
         {
-            
+            _orszagService.
             return Ok(_epuletService.GetEpuletsAsync(User));
         }
 
