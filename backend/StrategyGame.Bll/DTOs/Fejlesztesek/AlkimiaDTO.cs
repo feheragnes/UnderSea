@@ -13,9 +13,17 @@ namespace StrategyGame.Bll.DTOs.Fejlesztesek
             throw new NotImplementedException();
         }
 
-        public Task NextTurn()
+        public override Task NextTurn()
         {
             throw new NotImplementedException();
+        }
+
+        public async override Task<OrszagDTO> SetTermeles(OrszagDTO orszag)
+        {
+            var tmp = (double)orszag.GyongyTermeles;
+            tmp *= Noveles / 100;
+            orszag.GyongyTermeles = Convert.ToInt64(Math.Round(tmp));
+            return orszag;
         }
     }
 }

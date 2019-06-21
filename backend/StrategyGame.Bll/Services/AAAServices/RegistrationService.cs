@@ -9,6 +9,8 @@ using StrategyGame.Bll.Services.AAAServices;
 using StrategyGame.Bll.ServiceInterfaces.AAAServiceInterfaces;
 using Microsoft.Extensions.Configuration;
 using StrategyGame.Model.Entities.Models;
+using StrategyGame.Dal.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace StrategyGame.Bll.Services.AAAServices
 {
@@ -16,19 +18,20 @@ namespace StrategyGame.Bll.Services.AAAServices
     {
         private readonly SignInManager<StrategyGameUser> _signInManager;
         private readonly UserManager<StrategyGameUser> _userManager;
-        private readonly IConfiguration _configuration;
+        private readonly StrategyGameContext _context;
         private readonly IJWTService _jwtService;
+
 
         public RegistrationService(
             UserManager<StrategyGameUser> userManager,
             SignInManager<StrategyGameUser> signInManager,
-            IConfiguration configuration,
+            StrategyGameContext context,
             IJWTService jwtService
             )
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _configuration = configuration;
+            _context = context;
             _jwtService = jwtService;
         }
 

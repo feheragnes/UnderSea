@@ -1,10 +1,12 @@
-﻿using System;
+﻿using StrategyGame.Bll.DTOInterfaces;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace StrategyGame.Bll.DTOs.Epuletek
 {
-    public class EpuletDTO
+    public abstract class EpuletDTO : IEpulet
     {
         public Guid Id { get; set; }
 
@@ -15,5 +17,12 @@ namespace StrategyGame.Bll.DTOs.Epuletek
         public long AktualisKor { get; set; }
 
         public bool Felepult { get; set; }
+
+        public Task NextTurn()
+        {
+            throw new NotImplementedException();
+        }
+
+        public abstract Task<OrszagDTO> SetTermeles(OrszagDTO orszag);
     }
 }

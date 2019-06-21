@@ -13,7 +13,7 @@ using System.Text;
 
 namespace StrategyGame.Dal.Context
 {
-    public class StrategyGameContext : IdentityDbContext<StrategyGameUser,StrategyGameRole,Guid>
+    public class StrategyGameContext : IdentityDbContext<StrategyGameUser,StrategyGameRole,Guid>, IStrategyGameContext
     {
         public StrategyGameContext(DbContextOptions<StrategyGameContext> options)
             : base(options)

@@ -6,8 +6,8 @@ namespace StrategyGame.Model.Entities.Models.Epuletek
 {
     public class AramlasIranyito : Epulet
     {
-        public int Nepesseg { get; set; }
+        public long Nepesseg { get; set; }
 
-        public int Korall { get; set; }
+        public long Korall { get; set; }
     }
 }
