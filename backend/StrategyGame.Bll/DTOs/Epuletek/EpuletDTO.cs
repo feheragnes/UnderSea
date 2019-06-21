@@ -24,5 +24,6 @@ namespace StrategyGame.Bll.DTOs.Epuletek
         }
 
         public abstract Task<OrszagDTO> SetTermeles(OrszagDTO orszag);
+        public abstract Task<long> GetNepesseg();
     }
 }

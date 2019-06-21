@@ -10,5 +10,6 @@ namespace StrategyGame.Bll.DTOInterfaces
     {
         Task NextTurn();
         Task<OrszagDTO> SetTermeles(OrszagDTO orszag);
+        Task<long> GetNepesseg();
     }
 }

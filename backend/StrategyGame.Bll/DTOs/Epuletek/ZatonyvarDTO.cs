@@ -9,6 +9,12 @@ namespace StrategyGame.Bll.DTOs.Epuletek
     class ZatonyvarDTO : EpuletDTO, IEpulet
     {
         public long Szallas { get; set; }
+
+        public async override Task<long> GetNepesseg()
+        {
+            return 0;
+        }
+
         public Task NextTurn()
         {
             throw new NotImplementedException();

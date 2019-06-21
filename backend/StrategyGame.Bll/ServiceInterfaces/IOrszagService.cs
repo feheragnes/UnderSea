@@ -16,5 +16,6 @@ namespace StrategyGame.Bll.ServiceInterfaces
         Task<OrszagDTO> Map(Orszag orszag);
         Task<OrszagDTO> GetUserOrszagInfos(ClaimsPrincipal user);
         Task<Orszag> GetUserOrszag(ClaimsPrincipal userClaim);
+        Task<Orszag> GetUserOrszag(StrategyGameUser user);
     }
 }

@@ -10,6 +10,12 @@ namespace StrategyGame.Bll.DTOs.Epuletek
     {
         public long Nepesseg { get; set; }
         public long Korall { get; set; }
+
+        public async override Task<long> GetNepesseg()
+        {
+            return Nepesseg;
+        }
+
         public Task NextTurn()
         {
             throw new NotImplementedException();
@@ -17,8 +23,11 @@ namespace StrategyGame.Bll.DTOs.Epuletek
 
         public async override Task<OrszagDTO> SetTermeles(OrszagDTO orszag)
         {
-            orszag.KorallTermeles += Korall;
-            orszag.GyongyTermeles += Nepesseg * 50;
+            if (Felepult == true)
+            {
+                orszag.KorallTermeles += Korall;
+                orszag.GyongyTermeles += Nepesseg * 50;
+            }
             return orszag;
         }
     }
