@@ -9,6 +9,9 @@ namespace StrategyGame.Bll.ServiceInterfaces
 {
     public interface IEgysegService
     {
-        Task<List<Egyseg>> GetEpuletsAsync(ClaimsPrincipal user);
+        Task<List<Egyseg>> GetEgysegsAsync(ClaimsPrincipal user);
+        Task AddEgysegAsync(Egyseg e, ClaimsPrincipal user);
+
+        
     }
 }

@@ -13,8 +13,6 @@ namespace StrategyGame.Bll.ServiceInterfaces
         Task<Epulet> GetEpuletByIdAsync(Guid id, ClaimsPrincipal user);
         Task AddEpuletAsync(Epulet e, ClaimsPrincipal user);
         Task SaveChangesAsync();
-
-
-   
+       
     }
 }

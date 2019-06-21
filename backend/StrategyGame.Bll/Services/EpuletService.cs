@@ -34,6 +34,7 @@ namespace StrategyGame.Bll.Services
             var currentOrszag = await _context.Orszags.Include(x => x.Epulets).SingleOrDefaultAsync();
 
             currentOrszag.Epulets.Add(e);
+
             SaveChangesAsync();
         }
 

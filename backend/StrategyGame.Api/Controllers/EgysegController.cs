@@ -29,9 +29,10 @@ namespace StrategyGame.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> BuyEgysegs([FromBody] JObject egysegs)
         {
-            SeregInfoDTO csataCsikos = data["customerData"].ToObject<Customer>();
-            SeregInfoDTO product = data["productData"].ToObject<Product>();
-            SeregInfoDTO employee = data["employeeData"].ToObject<Employee>();
+            SeregInfoDTO csataCsikos = egysegs["csatacsiko"].ToObject<SeregInfoDTO>();        
+            SeregInfoDTO lezerCapas = egysegs["lezercapa"].ToObject<SeregInfoDTO>();
+            SeregInfoDTO rohamFokas = egysegs["rohamfoka"].ToObject<SeregInfoDTO>();
+
             return Ok("Not implemented");
         }
     }

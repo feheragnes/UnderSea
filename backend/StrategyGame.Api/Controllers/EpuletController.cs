@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using StrategyGame.Bll.DTOs;
 using StrategyGame.Bll.ServiceInterfaces;
 using StrategyGame.Model.Entities.Identity;
+using Newtonsoft.Json.Linq;
+using StrategyGame.Model.Entities.Models.Epuletek;
 
 namespace StrategyGame.Api.Controllers
 {
@@ -35,8 +37,17 @@ namespace StrategyGame.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> BuyEpulets([FromBody] EpuletInfoDTO epulet)
+        public async Task<IActionResult> BuyEpulets([FromBody] JObject epulets)
         {
+            EpuletInfoDTO aramlasIranyito = epulets["aramlasiranyito"].ToObject<EpuletInfoDTO>();
+            EpuletInfoDTO zatonyVar = epulets["zatonyvar"].ToObject<EpuletInfoDTO>();
+
+            for (int i = 0; i < aramlasIranyito.Mennyiseg; i++)
+                await _epuletService.AddEpuletAsync(new AramlasIranyito(1000,5,50,200), User);
+
+            for(int i=0; i< zatonyVar.Mennyiseg; i++)
+                await _epuletService.AddEpuletAsync(new ZatonyVar(1000, 5, 200), User);
+
             return Ok("Not implemented");
         }
         [HttpGet]
