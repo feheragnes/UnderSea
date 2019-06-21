@@ -27,11 +27,8 @@ namespace StrategyGame.Bll.Services
             _userManager = userManager;
         }
 
-        public async Task AddEpuletAsync(Epulet e, ClaimsPrincipal user)
+        public async Task AddEpuletAsync(Epulet e, Orszag currentOrszag)
         {
-            var currentUser = await _userManager.GetUserAsync(user);
-            
-            var currentOrszag = await _context.Orszags.Include(x => x.Epulets).SingleOrDefaultAsync();
 
             currentOrszag.Epulets.Add(e);
 
@@ -40,30 +37,18 @@ namespace StrategyGame.Bll.Services
 
 
 
-        public async Task<Epulet> GetEpuletByIdAsync(Guid id, ClaimsPrincipal user)
+        public async Task<Epulet> GetEpuletByIdAsync(Guid id, Orszag currentOrszag)
         {
-            var currentUser = await _userManager.GetUserAsync(user);
-
-
-           // var currentOrszag = currentUser.Orszags[0].Orszag;
-           // var currentEpulets = new List<Epulet>(currentOrszag.Epulets);     test majd
-
-
-            var currentOrszag = await _context.Orszags.Include(x => x.Epulets).SingleOrDefaultAsync();
+            
             List<Epulet> currentEpulets = new List<Epulet>(currentOrszag.Epulets);
 
             return currentEpulets.Find(x => x.Id == id);
         }
 
-        public async Task<List<Epulet>> GetEpuletsAsync(ClaimsPrincipal user)
+        public async Task<List<Epulet>> GetEpuletsAsync(Orszag currentOrszag)
         {
 
-            var currentUser = await _userManager.GetUserAsync(user);
-
-            var currentOrszag = await _context.Orszags.Include(x => x.Epulets).SingleOrDefaultAsync();  //.Result.Epulets;
-
             var epulets = currentOrszag.Epulets;
-
 
             List<Epulet> currentEpulets = new List<Epulet>(currentOrszag.Epulets);
 

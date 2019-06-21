@@ -1,4 +1,5 @@
-﻿using StrategyGame.Model.Entities.Models.Egysegek;
+﻿using StrategyGame.Model.Entities.Models;
+using StrategyGame.Model.Entities.Models.Egysegek;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
@@ -9,8 +10,8 @@ namespace StrategyGame.Bll.ServiceInterfaces
 {
     public interface IEgysegService
     {
-        Task<List<Egyseg>> GetEgysegsAsync(ClaimsPrincipal user);
-        Task AddEgysegAsync(Egyseg e, ClaimsPrincipal user);
+        Task<List<Egyseg>> GetEgysegsAsync(Orszag currentOrszag);
+        Task AddEgysegAsync(Egyseg e, Orszag currentOrszag);
 
         
     }

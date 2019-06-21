@@ -1,4 +1,5 @@
-﻿using StrategyGame.Model.Entities.Models.Epuletek;
+﻿using StrategyGame.Model.Entities.Models;
+using StrategyGame.Model.Entities.Models.Epuletek;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
@@ -9,9 +10,9 @@ namespace StrategyGame.Bll.ServiceInterfaces
 {
     public interface IEpuletService
     {
-        Task<List<Epulet>> GetEpuletsAsync(ClaimsPrincipal user);
-        Task<Epulet> GetEpuletByIdAsync(Guid id, ClaimsPrincipal user);
-        Task AddEpuletAsync(Epulet e, ClaimsPrincipal user);
+        Task<List<Epulet>> GetEpuletsAsync(Orszag currentOrszag);
+        Task<Epulet> GetEpuletByIdAsync(Guid id, Orszag currentOrszag);
+        Task AddEpuletAsync(Epulet e, Orszag currentOrszag);
         Task SaveChangesAsync();
        
     }

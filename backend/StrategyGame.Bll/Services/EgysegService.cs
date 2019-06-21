@@ -24,18 +24,15 @@ namespace StrategyGame.Bll.Services
             _context = context;
             _userManager = userManager;
         }
-        public async Task AddEgysegAsync(Egyseg e, ClaimsPrincipal user)
+        public async Task AddEgysegAsync(Egyseg e, Orszag currentOrszag)
         {
-            var currentUser = await _userManager.GetUserAsync(user);
-
-            var currentOrszag = await _context.Orszags.Include(x => x.OtthoniCsapats).SingleOrDefaultAsync();
 
             List<Csapat> otthoniCsapatok = new List<Csapat>(currentOrszag.OtthoniCsapats);
 
             otthoniCsapatok.Find(T => T.Celpont == null).Egysegs.Add(e);
         }
 
-        public Task<List<Egyseg>> GetEgysegsAsync(ClaimsPrincipal user)
+        public Task<List<Egyseg>> GetEgysegsAsync(Orszag currentOrszag)
         {
             throw new NotImplementedException();
         }
