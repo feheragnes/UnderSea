@@ -48,7 +48,15 @@ namespace StrategyGame.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Register([FromBody] RegistrationDTO model)
         {
-            return Json(new { Token = await _registrationService.Register(model) });
+            string token;
+            try
+            {
+            token = await _registrationService.Register(model);
+            }catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+            return Json(new { Token = token });
         }
 
         }
