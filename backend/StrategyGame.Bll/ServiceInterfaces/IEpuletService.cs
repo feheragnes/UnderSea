@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 
 namespace StrategyGame.Bll.ServiceInterfaces
 {
-    interface IEpuletService
+    public interface IEpuletService
     {
         Task<List<Epulet>> GetEpuletsAsync(ClaimsPrincipal user);
         Task<Epulet> GetEpuletByIdAsync(Guid id, ClaimsPrincipal user);
         Task AddEpuletAsync(Epulet e, ClaimsPrincipal user);
         Task SaveChangesAsync();
+
+   
     }
 }

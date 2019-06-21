@@ -9,5 +9,7 @@ namespace StrategyGame.Model.Entities.Models.Epuletek
         public int Nepesseg { get; set; }
 
         public int Korall { get; set; }
+
+
     }
 }

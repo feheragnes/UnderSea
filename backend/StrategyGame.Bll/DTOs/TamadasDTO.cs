@@ -9,6 +9,6 @@ namespace StrategyGame.Bll.DTOs
     {
         public IList<String> EllensegesOrszagok { get; set; }
 
-       // public IList<SeregInfoDTO> OtthoniEgysegek { get; set; }
+        public IList<SeregInfoDTO> OtthoniEgysegek { get; set; }
     }
 }

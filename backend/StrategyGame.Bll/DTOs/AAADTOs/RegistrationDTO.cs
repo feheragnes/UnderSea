@@ -14,6 +14,7 @@ namespace StrategyGame.Bll.DTOs.AAADTOs
         public string Password { get; set; }
 
         [Required]
+        [Compare("Password")]
         public string ConfirmPassword { get; set; }
 
         [Required]
