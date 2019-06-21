@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using StrategyGame.Bll.DTOs;
+using StrategyGame.Bll.DTOs.Egysegek;
 using StrategyGame.Bll.ServiceInterfaces;
 using StrategyGame.Dal.Context;
 using StrategyGame.Model.Entities.Identity;
@@ -17,13 +19,13 @@ namespace StrategyGame.Bll.Services
     public class EgysegService : IEgysegService
     {
         private readonly StrategyGameContext _context;
-        private readonly UserManager<StrategyGameUser> _userManager;
+        private readonly IMapper _mapper;
 
-        public EgysegService(StrategyGameContext context, UserManager<StrategyGameUser> userManager)
+        public EgysegService(StrategyGameContext context, IMapper mapper)
         {
 
             _context = context;
-            _userManager = userManager;
+            _mapper = mapper;
         }
         public async Task AddEgysegAsync(List<SeregInfoDTO> egysegek, Orszag currentOrszag)
         {
@@ -57,9 +59,21 @@ namespace StrategyGame.Bll.Services
 
         }
 
-        public Task<List<Egyseg>> GetEgysegsAsync(Orszag currentOrszag)
+        public async Task<List<EgysegDTO>> GetEgysegsAsync(Orszag currentOrszag)
         {
-            throw new NotImplementedException();
+            List<Csapat> otthoniCsapats = new List<Csapat>(currentOrszag.OtthoniCsapats);
+            List<Egyseg> egysegList = new List<Egyseg>();
+            foreach (var csapat in otthoniCsapats)
+            {
+                foreach (var egyseg in csapat.Egysegs)
+                {
+                    egysegList.Add(egyseg);
+                }
+            }
+
+            var egysegDtoList = _mapper.Map<List<Egyseg>, List<EgysegDTO>>(egysegList);
+
+             return egysegDtoList;
         }
 
         public async Task<List<SeregInfoDTO>> GetOtthoniEgysegekAsync(Orszag currentOrszag)
