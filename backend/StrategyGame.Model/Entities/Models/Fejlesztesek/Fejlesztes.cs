@@ -7,7 +7,6 @@ namespace StrategyGame.Model.Entities.Models.Fejlesztesek
 {
     public abstract class Fejlesztes
     {
-
         public Guid Id { get; set; }
 
         public long Noveles { get; set; }

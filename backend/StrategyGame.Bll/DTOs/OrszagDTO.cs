@@ -20,7 +20,7 @@ namespace StrategyGame.Bll.DTOs
         public long KorallTermeles { get; set; }
         public long GyongyTermeles { get; set; }
         public IList<SeregInfoDTO> SeregInfoDTOs { get; set; }
-        //public IList<EpuletInfoDTO> EpuletInfoDTOs { get; set; }
+        public IList<EpuletInfoDTO> EpuletInfoDTOs { get; set; }
 
         
     }

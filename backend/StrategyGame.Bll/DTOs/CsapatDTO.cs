@@ -13,5 +13,7 @@ namespace StrategyGame.Bll.DTOs
         public OrszagDTO Tulajdonos { get; set; }
         public AllapotDTO Allapot { get; set; }
         public IList<EgysegDTO> Egysegs { get; set; } = new List<EgysegDTO>();
+        public IList<SeregInfoDTO> TamadoEgysegs { get; set; } = new List<SeregInfoDTO>();
+        public IList<SeregInfoDTO> VedekezoEgysegs { get; set; } = new List<SeregInfoDTO>();
     }
 }

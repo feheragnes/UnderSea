@@ -6,6 +6,8 @@ namespace StrategyGame.Model.Entities.Models.Epuletek
 {
     public class ZatonyVar : Epulet
     {
+
         public long Szallas { get; set; }
+
     }
 }
