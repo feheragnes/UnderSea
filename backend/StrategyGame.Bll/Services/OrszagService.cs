@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using StrategyGame.Bll.DTOs;
 using StrategyGame.Bll.DTOs.Egysegek;
@@ -14,6 +15,7 @@ using StrategyGame.Model.Entities.Models.Fejlesztesek;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,12 +24,14 @@ namespace StrategyGame.Bll.Services
     public class OrszagService: IOrszagService
     {
         private readonly StrategyGameContext _context;
+        private readonly UserManager<StrategyGameUser> _userManager;
         private readonly IMapper _mapper;
 
-        public OrszagService(StrategyGameContext context, IMapper mapper)
+        public OrszagService(StrategyGameContext context,UserManager<StrategyGameUser> userManager, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
+            _userManager = userManager;
         }
 
         public async Task<OrszagUser> MakeOrszagUserConnection(StrategyGameUser user, string orszagnev)
@@ -48,10 +52,18 @@ namespace StrategyGame.Bll.Services
             }
             throw new ArgumentException("Country already exists");
         }
+
+        public async Task<OrszagDTO> GetUserOrszagInfos(ClaimsPrincipal userclaim)
+        {
+            var user = await _userManager.GetUserAsync(userclaim);
+            user = await _context.Users.Include(x => x.Orszags).ThenInclude(x => x.Orszag).FirstOrDefaultAsync(x=>x.Id == user.Id);
+            return await Map(user.Orszags.FirstOrDefault().Orszag);
+        }
         public async Task<OrszagDTO> Map(Orszag orszag)
         {
             var orszagdto = new OrszagDTO
             {
+                Id = orszag.Id,
                 Gyongy = orszag.Gyongy,
                 Nev = orszag.Nev,
                 Korall = orszag.Korall,

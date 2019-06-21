@@ -136,6 +136,8 @@ namespace StrategyGame.Dal.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
+                    b.Property<int>("CurrentOrszagIndex");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 

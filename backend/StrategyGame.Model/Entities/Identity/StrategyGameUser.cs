@@ -11,8 +11,5 @@ namespace StrategyGame.Model.Entities.Identity
 
         public int CurrentOrszagIndex { get; set; } = 0;
         public IList<OrszagUser> Orszags { get; set; } = new List<OrszagUser>();
-
-
-
-    }
+        }
 }
