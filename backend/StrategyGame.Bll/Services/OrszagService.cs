@@ -72,6 +72,25 @@ namespace StrategyGame.Bll.Services
                 .Orszags
                 .FirstOrDefault().Orszag;
         }
+        public async Task<Orszag> GetUserOrszag(StrategyGameUser user)
+        {
+            return _context.Users
+                .Include(x => x.Orszags)
+                .ThenInclude(x => x.Orszag)
+                .ThenInclude(x => x.Fejleszteses)
+                .Include(x => x.Orszags)
+                .ThenInclude(x => x.Orszag)
+                .ThenInclude(x => x.Epulets)
+                .Include(x => x.Orszags)
+                .ThenInclude(x => x.Orszag)
+                .ThenInclude(x => x.OtthoniCsapats)
+                .Include(x => x.Orszags)
+                .ThenInclude(x => x.Orszag)
+                .ThenInclude(x => x.TamadoCsapats)
+                .FirstOrDefault(x => x.Id == user.Id)
+                .Orszags
+                .FirstOrDefault().Orszag;
+        }
 
         public async Task<OrszagDTO> GetUserOrszagInfos(ClaimsPrincipal userClaim)
         {
@@ -101,7 +120,10 @@ namespace StrategyGame.Bll.Services
         }
         private async Task<OrszagDTO> GetTermeles(Orszag orszag)
         {
-            orszag = _context.Orszags.Include(x => x.Epulets).Include(x => x.Fejleszteses).FirstOrDefault(x => x.Id == orszag.Id);
+            orszag = _context.Orszags
+                .Include(x => x.Epulets)
+                .Include(x => x.Fejleszteses)
+                .AsNoTracking().FirstOrDefault(x => x.Id == orszag.Id);
             var orszagDTO = new OrszagDTO();
             var epuletdtolist = _mapper.Map<IList<Epulet>, IList<EpuletDTO>>(orszag.Epulets);
             foreach (var item in epuletdtolist)

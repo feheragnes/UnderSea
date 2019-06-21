@@ -114,6 +114,7 @@ namespace StrategyGame.Api
                 };
             });
             services.AddScoped<IOrszagService, OrszagService>();
+            services.AddScoped<IGlobalService, GlobalService>();
             services.AddScoped<IEpuletService, EpuletService>();
             services.AddScoped<IJWTService, JWTService>();
             services.AddScoped<ILoginService, LoginService>();

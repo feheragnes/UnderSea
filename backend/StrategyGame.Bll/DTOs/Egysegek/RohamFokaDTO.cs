@@ -7,5 +7,6 @@ namespace StrategyGame.Bll.DTOs.Egysegek
 {
     class RohamFokaDTO : EgysegDTO, IEgyseg
     {
+        public long Ertek { get; set; } = 5;
     }
 }
