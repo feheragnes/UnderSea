@@ -12,7 +12,7 @@ namespace StrategyGame.Bll.ServiceInterfaces
 {
     public interface IEgysegService
     {
-        Task<List<EgysegDTO>> GetEgysegsAsync(Orszag currentOrszag);
+        Task<List<EgysegDTO>> GetAllEgysegsAsync(Orszag currentOrszag);
         Task AddEgysegAsync(List<SeregInfoDTO> egysegek, Orszag currentOrszag);
         Task<List<SeregInfoDTO>> GetOtthoniEgysegsAsync(Orszag currentOrszag);
         Task SaveChangesAsync();

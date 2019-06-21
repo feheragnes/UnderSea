@@ -66,7 +66,7 @@ namespace StrategyGame.Bll.Services
             return currentEpulets.Find(x => x.Id == id);
         }
 
-        public async Task<List<Epulet>> GetEpuletsAsync(Orszag currentOrszag)
+        public async Task<List<Epulet>> GetAllEpuletsAsync(Orszag currentOrszag)
         {
 
             var epulets = currentOrszag.Epulets;

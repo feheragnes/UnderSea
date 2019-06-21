@@ -11,7 +11,7 @@ namespace StrategyGame.Bll.ServiceInterfaces
 {
     public interface IEpuletService
     {
-        Task<List<Epulet>> GetEpuletsAsync(Orszag currentOrszag);
+        Task<List<Epulet>> GetAllEpuletsAsync(Orszag currentOrszag);
         Task<List<EpuletInfoDTO>> GetFelepultEpuletsAsync(Orszag currentOrszag);
         Task<Epulet> GetEpuletByIdAsync(Guid id, Orszag currentOrszag);
         Task AddEpuletAsync(List<EpuletInfoDTO> epulets, Orszag currentOrszag);

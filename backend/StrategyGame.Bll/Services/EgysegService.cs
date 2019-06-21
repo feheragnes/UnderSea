@@ -59,7 +59,7 @@ namespace StrategyGame.Bll.Services
 
         }
 
-        public async Task<List<EgysegDTO>> GetEgysegsAsync(Orszag currentOrszag)
+        public async Task<List<EgysegDTO>> GetAllEgysegsAsync(Orszag currentOrszag)
         {
             List<Csapat> otthoniCsapats = new List<Csapat>(currentOrszag.OtthoniCsapats);
             List<Egyseg> egysegList = new List<Egyseg>();

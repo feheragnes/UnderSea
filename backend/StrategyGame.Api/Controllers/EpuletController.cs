@@ -35,7 +35,7 @@ namespace StrategyGame.Api.Controllers
         public async Task<IActionResult> GetUserEpulets()
         {
             Orszag userOrszag = await _orszagService.GetUserOrszag(User);
-            return Ok(_epuletService.GetEpuletsAsync(userOrszag));
+            return Ok(_epuletService.GetAllEpuletsAsync(userOrszag));
         }
 
         [HttpPost]
