@@ -9,7 +9,7 @@ namespace StrategyGame.Model.Entities.Models.Fejlesztesek
     {
         public Guid Id { get; set; }
 
-        public int Noveles { get; set; }
+        public long Noveles { get; set; }
         public long SzuksegesKorok { get; set; }
         public long AktualisKor { get; set; }
         public bool Kifejlesztve { get; set; }

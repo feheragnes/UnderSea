@@ -24,6 +24,8 @@ using StrategyGame.Bll.ServiceInterfaces.AAAServiceInterfaces;
 using StrategyGame.Bll.Services.AAAServices;
 using Swashbuckle.AspNetCore.Swagger;
 using StrategyGame.Bll.Mappers;
+using StrategyGame.Bll.Services;
+using StrategyGame.Bll.ServiceInterfaces;
 
 namespace StrategyGame.Api
 {
@@ -111,6 +113,7 @@ namespace StrategyGame.Api
                     ClockSkew = TimeSpan.Zero
                 };
             });
+            services.AddScoped<IOrszagService, OrszagService>();
             services.AddScoped<IJWTService, JWTService>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IRegistrationService, RegistrationService>();
