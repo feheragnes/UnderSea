@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace StrategyGame.Bll.Services
 {
-     class EpuletService : IEpuletService
+     public class EpuletService : IEpuletService
     {
 
         private readonly StrategyGameContext _context;
@@ -34,11 +34,19 @@ namespace StrategyGame.Bll.Services
             var currentOrszag = await _context.Orszags.Include(x => x.Epulets).SingleOrDefaultAsync();
 
             currentOrszag.Epulets.Add(e);
+            SaveChangesAsync();
         }
+
+
 
         public async Task<Epulet> GetEpuletByIdAsync(Guid id, ClaimsPrincipal user)
         {
             var currentUser = await _userManager.GetUserAsync(user);
+
+
+           // var currentOrszag = currentUser.Orszags[0].Orszag;
+           // var currentEpulets = new List<Epulet>(currentOrszag.Epulets);     test majd
+
 
             var currentOrszag = await _context.Orszags.Include(x => x.Epulets).SingleOrDefaultAsync();
             List<Epulet> currentEpulets = new List<Epulet>(currentOrszag.Epulets);
