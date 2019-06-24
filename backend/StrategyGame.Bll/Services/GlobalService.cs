@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using StrategyGame.Bll.DTOs;
 using StrategyGame.Bll.DTOs.Epuletek;
 using StrategyGame.Bll.DTOs.Fejlesztesek;
 using StrategyGame.Bll.ServiceInterfaces;
@@ -58,17 +59,22 @@ namespace StrategyGame.Bll.Services
             }
             return dict;
         }
-        public async Task<List<KeyValuePair<string, long>>> GetRanglista()
+        public async Task<IList<RanglistaDTO>> GetRanglista()
         {
             var dict =await GetOrszagScores();
             List<KeyValuePair<string, long>> sorted = (from kv in dict orderby kv.Value descending select kv).ToList();
-            return sorted;
+            IList<RanglistaDTO> ranglista = new List<RanglistaDTO>();
+            foreach (var orszag in sorted)
+            {
+                ranglista.Add(new RanglistaDTO { Orszag = orszag.Key, Helyezes = orszag.Value });
+            }
+            return ranglista;
         }
         public async Task<long> GetHelyezes(ClaimsPrincipal userClaim)
         {
             var orszag = await _orszagService.GetUserOrszag(userClaim);
             var sorted = await GetRanglista();
-            return (sorted.FindIndex(x => x.Key == orszag.Nev))+1;
+            return (sorted.IndexOf(sorted.FirstOrDefault(x=>x.Orszag == orszag.Nev))) + 1;
 
         }
 

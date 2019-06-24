@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using StrategyGame.Bll.DTOs;
 using StrategyGame.Bll.ServiceInterfaces;
 
 namespace StrategyGame.Api.Controllers
@@ -28,9 +29,9 @@ namespace StrategyGame.Api.Controllers
             return Json(new { Helyezes = await _globalService.GetHelyezes(User)});
         }
         [HttpGet]
-        public async Task<ActionResult<List<KeyValuePair<string, long>>>> GetRanglista()
+        public async Task<IActionResult> GetRanglista()
         {
-            return await _globalService.GetRanglista();
+            return Ok(await _globalService.GetRanglista());
         }
 
         [HttpPost]
