@@ -12,6 +12,5 @@ namespace StrategyGame.Bll.ServiceInterfaces
         Task<long> GetUserScore(Guid UserId);
         Task<long> GetKor();
         Task<IList<RanglistaDTO>> GetRanglista();
-        Task<long> GetHelyezes(Guid userId);
     }
 }
