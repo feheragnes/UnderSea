@@ -28,26 +28,27 @@ namespace StrategyGame.Bll.Services
         private readonly IMapper _mapper;
         private readonly IEgysegService _egysegService;
         private readonly IEpuletService _epuletService;
+        private readonly ICommonService _commonService;
 
         public OrszagService(StrategyGameContext context,
                              UserManager<StrategyGameUser> userManager, 
                              IMapper mapper, 
                              IEgysegService egysegService, 
-                             IEpuletService epuletService)
+                             IEpuletService epuletService,
+                             ICommonService commonService)
         {
             _context = context;
             _mapper = mapper;
             _userManager = userManager;
             _egysegService = egysegService;
             _epuletService = epuletService;
+            _commonService = commonService;
         }
 
-        public async Task<OrszagUser> MakeOrszagUserConnection(StrategyGameUser user, string orszagNev)
+        public async void MakeOrszagUserConnection(StrategyGameUser user, string orszagNev)
         {
-            var orszaguser = new OrszagUser { User = user, Orszag = InitOrszag(orszagNev).Result };
-            user.Orszags.Add(orszaguser);
+            user.Orszag = await InitOrszag(orszagNev);
             await _context.SaveChangesAsync();
-            return orszaguser;
         }
         public  async Task<Orszag> InitOrszag(string orszagNev)
         {
@@ -60,49 +61,10 @@ namespace StrategyGame.Bll.Services
             }
             throw new ArgumentException("Country already exists");
         }
-        public async Task<Orszag> GetUserOrszag(ClaimsPrincipal userClaim)
-        {
-            var user = await _userManager.GetUserAsync(userClaim);
-            return _context.Users
-                .Include(x => x.Orszags)
-                .ThenInclude(x => x.Orszag)
-                .ThenInclude(x => x.Fejleszteses)
-                .Include(x => x.Orszags)
-                .ThenInclude(x => x.Orszag)
-                .ThenInclude(x => x.Epulets)
-                .Include(x => x.Orszags)
-                .ThenInclude(x => x.Orszag)
-                .ThenInclude(x => x.OtthoniCsapats)
-                .Include(x => x.Orszags)
-                .ThenInclude(x => x.Orszag)
-                .ThenInclude(x => x.TamadoCsapats)
-                .FirstOrDefault(x => x.Id == user.Id)
-                .Orszags
-                .FirstOrDefault().Orszag;
-        }
-        public async Task<Orszag> GetUserOrszag(StrategyGameUser user)
-        {
-            return _context.Users
-                .Include(x => x.Orszags)
-                .ThenInclude(x => x.Orszag)
-                .ThenInclude(x => x.Fejleszteses)
-                .Include(x => x.Orszags)
-                .ThenInclude(x => x.Orszag)
-                .ThenInclude(x => x.Epulets)
-                .Include(x => x.Orszags)
-                .ThenInclude(x => x.Orszag)
-                .ThenInclude(x => x.OtthoniCsapats)
-                .Include(x => x.Orszags)
-                .ThenInclude(x => x.Orszag)
-                .ThenInclude(x => x.TamadoCsapats)
-                .FirstOrDefault(x => x.Id == user.Id)
-                .Orszags
-                .FirstOrDefault().Orszag;
-        }
 
-        public async Task<OrszagDTO> GetUserOrszagInfos(ClaimsPrincipal userClaim)
+        public async Task<OrszagDTO> GetUserOrszagInfos(Guid userId)
         {
-            var orszag = await GetUserOrszag(userClaim);
+            var orszag = await _commonService.GetCurrentOrszag(userId);
             return await Map(orszag);
         }
         public async Task<OrszagDTO> Map(Orszag orszag)

@@ -8,5 +8,6 @@ namespace StrategyGame.Bll.DTOInterfaces
     interface IEndTurnService
     {
         Task DoFejleszteses();
+        void SetOrszagScores();
     }
 }

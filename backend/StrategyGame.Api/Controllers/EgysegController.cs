@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +18,6 @@ namespace StrategyGame.Api.Controllers
     [ApiController]
     public class EgysegController : ControllerBase
     {
-
         private readonly IOrszagService _orszagService;
         private readonly IEgysegService _egysegService;
 

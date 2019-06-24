@@ -17,62 +17,31 @@ namespace StrategyGame.Bll.Services
     public class GlobalService : IGlobalService
     {
         private readonly StrategyGameContext _context;
-        private readonly IOrszagService _orszagService;
+        private readonly ICommonService _commonService;
         private readonly IMapper _mapper;
-        public GlobalService(StrategyGameContext context, IOrszagService orszagService, IMapper mapper)
+        public GlobalService(StrategyGameContext context, ICommonService commonService, IMapper mapper)
         {
             _context = context;
-            _orszagService = orszagService;
+            _commonService = commonService;
             _mapper = mapper;
         }
-        public async Task<long> GetUserScore(ClaimsPrincipal userClaim)
+        public async Task<long> GetUserScore(Guid userId)
         {
-            var orszag = await _orszagService.GetUserOrszag(userClaim);
-            var dict = await  GetOrszagScores();
-            return dict.GetValueOrDefault(orszag.Nev);
-        }
-        public async Task<Dictionary<string,long>> GetOrszagScores()
-        {
-            Dictionary<string, long> dict = new Dictionary<string, long>();
-            foreach (var user in _context.Users)
-            {
-                var orszag = await _orszagService.GetUserOrszag(user);
-                long score = 0;
-                foreach (var epulet in orszag.Epulets)
-                {
-                    var epuletDTO = _mapper.Map<EpuletDTO>(epulet);
-                    if (epuletDTO.Felepult == true)
-                    {
-                        score += 50;
-                    }
-                    score += await epuletDTO.GetNepesseg();
-                }
-                foreach (var fejlesztes in orszag.Fejleszteses)
-                {
-                    var fejlesztesDTO = _mapper.Map<FejlesztesDTO>(fejlesztes);
-                    if(fejlesztesDTO.Kifejlesztve == true)
-                    {
-                        score += 100;
-                    }
-                }
-                dict.Add(orszag.Nev, score);
-            }
-            return dict;
+            var orszag = await _commonService.GetCurrentOrszag(userId);
+            return orszag.Pont;
         }
         public async Task<IList<RanglistaDTO>> GetRanglista()
         {
-            var dict =await GetOrszagScores();
-            List<KeyValuePair<string, long>> sorted = (from kv in dict orderby kv.Value descending select kv).ToList();
             IList<RanglistaDTO> ranglista = new List<RanglistaDTO>();
-            foreach (var orszag in sorted)
+            await  _context.Orszags.OrderByDescending(x => x.Pont).ForEachAsync(x =>
             {
-                ranglista.Add(new RanglistaDTO { Orszag = orszag.Key, Helyezes = orszag.Value });
-            }
+               ranglista.Add(new RanglistaDTO { Orszag = x.Nev, Pont = x.Pont });
+            });
             return ranglista;
         }
-        public async Task<long> GetHelyezes(ClaimsPrincipal userClaim)
+        public async Task<long> GetHelyezes(Guid userId)
         {
-            var orszag = await _orszagService.GetUserOrszag(userClaim);
+            var orszag = await _commonService.GetCurrentOrszag(userId);
             var sorted = await GetRanglista();
             return (sorted.IndexOf(sorted.FirstOrDefault(x=>x.Orszag == orszag.Nev))) + 1;
 

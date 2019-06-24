@@ -11,11 +11,9 @@ namespace StrategyGame.Bll.ServiceInterfaces
 {
     public interface IOrszagService
     {
-        Task<OrszagUser> MakeOrszagUserConnection(StrategyGameUser user, string orszagnev);
+        void MakeOrszagUserConnection(StrategyGameUser user, string orszagnev);
         Task<Orszag> InitOrszag(string orszagnev);
         Task<OrszagDTO> Map(Orszag orszag);
-        Task<OrszagDTO> GetUserOrszagInfos(ClaimsPrincipal user);
-        Task<Orszag> GetUserOrszag(ClaimsPrincipal userClaim);
-        Task<Orszag> GetUserOrszag(StrategyGameUser user);
+        Task<OrszagDTO> GetUserOrszagInfos(Guid userId);
     }
 }

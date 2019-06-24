@@ -319,6 +319,8 @@ namespace StrategyGame.Dal.Migrations
 
                     b.Property<string>("Nev");
 
+                    b.Property<long>("Pont");
+
                     b.HasKey("Id");
 
                     b.ToTable("Orszags");
