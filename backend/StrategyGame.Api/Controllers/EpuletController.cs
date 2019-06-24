@@ -45,7 +45,11 @@ namespace StrategyGame.Api.Controllers
             return Ok("Not implemented");
         }
 
-
+        [HttpGet]
+        public async Task<ActionResult<bool>> GetIfActiveDevelopement()
+        {
+            return await _epuletService.GetIfActiveConstruction(UserId);
+        }
 
         [HttpGet]
         public async Task<IActionResult> GetEpuletInfos()

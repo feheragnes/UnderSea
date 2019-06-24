@@ -154,7 +154,7 @@ namespace StrategyGame.Bll.Services.AAAServices
 
         public async Task<bool> GetIfCurrentlyActiveFejlesztes(Orszag currentOrszag)
         {
-            return currentOrszag.Fejleszteses.FirstOrDefault(x => x.Kifejlesztve == false) != null;
+            return  currentOrszag.Fejleszteses.FirstOrDefault(x => x.Kifejlesztve == false) != null;
         }
 
     }

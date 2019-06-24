@@ -144,7 +144,9 @@ namespace StrategyGame.Bll.Services
             Csapat otthoniEgysegek = currentOrszag.OtthoniCsapats.FirstOrDefault(T => T.Celpont == null);
 
             if (otthoniEgysegek == null)
-                return new List<SeregInfoDTO>();
+                return new List<SeregInfoDTO>() {new SeregInfoDTO(0,0,EgysegTipus.CsataCsiko),
+                                                  new SeregInfoDTO(0,0,EgysegTipus.RohamFoka),
+                                                  new SeregInfoDTO(0,0,EgysegTipus.LezerCapa) };
 
             long rohamFokaMennyiseg = 0, csataCsikoMennyiseg = 0, lezerCapaMennyiseg = 0;
 
@@ -169,6 +171,11 @@ namespace StrategyGame.Bll.Services
         public async Task<List<SeregInfoDTO>> GetOtthoniEgysegsAsync(Orszag currentOrszag)
         {
             Csapat otthoniEgysegek = currentOrszag.OtthoniCsapats.FirstOrDefault(T => T.Celpont == null);
+
+            if (otthoniEgysegek == null)
+                return new List<SeregInfoDTO>() {new SeregInfoDTO(0,0,EgysegTipus.CsataCsiko),
+                                                  new SeregInfoDTO(0,0,EgysegTipus.RohamFoka),
+                                                  new SeregInfoDTO(0,0,EgysegTipus.LezerCapa) };
 
             long rohamFokaMennyiseg = 0, csataCsikoMennyiseg = 0, lezerCapaMennyiseg = 0;
 

@@ -31,7 +31,7 @@ namespace StrategyGame.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<List<FejlesztesInfoDTO>>> GetAllFejleszteses()
         {
-           return await _fejlesztesService.GetFinishedFejlesztesesAsync(UserId);
+            return await _fejlesztesService.GetFinishedFejlesztesesAsync(UserId);
         }
 
         [HttpGet]
@@ -40,11 +40,20 @@ namespace StrategyGame.Api.Controllers
             return Ok("Not implemented");
         }
 
+        [HttpGet]
+        public async Task<ActionResult<bool>> GetIsActiveConstruction()
+            {
+            return await _fejlesztesService.GetIfCurrentlyActiveFejlesztes(UserId);
+            }
+
+
         [HttpPost]
         public async Task<IActionResult> BuyFejlesztes([FromBody] FejlesztesInfoDTO fejlesztes)
         {
             return Ok(_fejlesztesService.AddFejlesztesAsync(fejlesztes, UserId));
         }
+
+        
 
     }
 }
