@@ -41,16 +41,13 @@ namespace StrategyGame.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> BuyEgysegs([FromBody] JObject egysegs)
+        public async Task<IActionResult> BuyEgysegs([FromBody] List<SeregInfoDTO> egysegs)
         {
-            List<SeregInfoDTO> egysegList = new List<SeregInfoDTO>();
-            egysegList.Add(egysegs["rohamfoka"].ToObject<SeregInfoDTO>());
-            egysegList.Add(egysegs["csatacsiko"].ToObject<SeregInfoDTO>());
-            egysegList.Add(egysegs["lezercapa"].ToObject<SeregInfoDTO>());
+          
 
             Orszag userOrszag = await _orszagService.GetUserOrszag(User);
 
-            await _egysegService.AddEgysegAsync(egysegList, userOrszag);
+            await _egysegService.AddEgysegAsync(egysegs, userOrszag);
 
             return Ok("Not implemented");
         }

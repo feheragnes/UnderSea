@@ -8,6 +8,11 @@ namespace StrategyGame.Bll.DTOs.Fejlesztesek
 {
     public abstract class FejlesztesDTO : IFejlesztes
     {
+        public FejlesztesDTO()
+        {
+            AktualisKor = 0;
+            Kifejlesztve = false;
+        }
         public Guid Id { get; set; }
 
         public long Noveles { get; set; }
@@ -21,7 +26,6 @@ namespace StrategyGame.Bll.DTOs.Fejlesztesek
         }
 
         public abstract Task NextTurn();
-
 
         public abstract Task<OrszagDTO> SetTermeles(OrszagDTO orszag);
 

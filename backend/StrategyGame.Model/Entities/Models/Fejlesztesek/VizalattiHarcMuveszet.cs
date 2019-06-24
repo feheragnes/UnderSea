@@ -6,6 +6,9 @@ namespace StrategyGame.Model.Entities.Models.Fejlesztesek
 {
     public class VizalattiHarcmuveszet : Fejlesztes
     {
-      
+        public VizalattiHarcmuveszet() : base()
+        {
+            Noveles = 10;
+        }
     }
 }

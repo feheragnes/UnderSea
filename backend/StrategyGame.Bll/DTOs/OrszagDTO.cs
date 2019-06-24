@@ -8,7 +8,6 @@ namespace StrategyGame.Bll.DTOs
 {
     public class OrszagDTO
     {
-
         public Guid Id { get; set; }
 
         public string Nev { get; set; }

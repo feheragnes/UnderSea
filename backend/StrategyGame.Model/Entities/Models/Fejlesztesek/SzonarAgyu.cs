@@ -6,6 +6,9 @@ namespace StrategyGame.Model.Entities.Models.Fejlesztesek
 {
     public class SzonarAgyu : Fejlesztes
     {
-       
+        public SzonarAgyu() : base()
+        {
+            Noveles = 20;
+        }
     }
 }

@@ -7,8 +7,7 @@ using System.Text;
 namespace StrategyGame.Model.Entities.Models
 {
     public class Csapat
-    {
-        
+    {    
         public Guid Id { get; set; }
         public Orszag Celpont { get; set; }
         public Orszag Tulajdonos { get; set; }

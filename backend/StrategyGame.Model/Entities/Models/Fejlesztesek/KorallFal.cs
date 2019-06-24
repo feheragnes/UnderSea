@@ -6,6 +6,9 @@ namespace StrategyGame.Model.Entities.Models.Fejlesztesek
 {
     public class KorallFal : Fejlesztes
     {
-      
+        public KorallFal() : base()
+        {
+            Noveles = 20;
+        }
     }
 }

@@ -6,6 +6,9 @@ namespace StrategyGame.Model.Entities.Models.Fejlesztesek
 {
     public class IszapTraktor : Fejlesztes
     {
-        
+        public IszapTraktor() : base()
+        {
+            Noveles = 10;
+        }
     }
 }
