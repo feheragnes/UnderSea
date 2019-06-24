@@ -29,6 +29,7 @@ import { AlertComponent } from "./alert/alert.component";
 import { JwtInterceptor } from "./jwt.interceptor";
 import { ErrorInterceptor } from "./error.interceptor";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { AuthGuard } from "./core/guards/auth.guard";
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

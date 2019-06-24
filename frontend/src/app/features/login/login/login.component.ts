@@ -53,17 +53,15 @@ export class LoginComponent implements OnInit {
     }
 
     this.loading = true;
-    this.authenticationService
-      .login(this.f.email.value, this.f.password.value)
-      .subscribe(
-        data => {
-          this.router.navigate(["/battle"]);
-        },
-        error => {
-          console.log(error);
-          this.alertService.error(error);
-          this.loading = false;
-        }
-      );
+    this.authenticationService.login(this.loginForm.value).subscribe(
+      data => {
+        this.router.navigate(["/battle"]);
+      },
+      error => {
+        console.log(error);
+        this.alertService.error(error);
+        this.loading = false;
+      }
+    );
   }
 }

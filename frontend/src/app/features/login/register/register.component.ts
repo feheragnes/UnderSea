@@ -31,8 +31,8 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       email: ["", Validators.required],
       password: ["", Validators.required],
-      passwordagain: ["", Validators.required],
-      countryname: ["", Validators.required]
+      confirmPassword: ["", Validators.required],
+      countryName: ["", Validators.required]
     });
   }
 
@@ -42,14 +42,6 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(
-      this.f.email.value,
-      this.f.password.value,
-      this.f.passwordagain.value,
-      this.f.countryname.value
-    );
-    this.submitted = true;
-
     // stop here if form is invalid
     if (this.registerForm.invalid) {
       return;
@@ -57,22 +49,14 @@ export class RegisterComponent implements OnInit {
 
     this.loading = true;
 
-    this.authenticationService
-      .register(
-        this.f.email.value,
-        this.f.password.value,
-        this.f.passwordagain.value,
-        this.f.countryname.value
-      )
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.router.navigate(["/login"]);
-        },
-        error => {
-          this.alertService.error(error);
-          this.loading = false;
-        }
-      );
+    this.authenticationService.register(this.registerForm.value).subscribe(
+      data => {
+        this.router.navigate(["/login"]);
+      },
+      error => {
+        this.alertService.error(error);
+        this.loading = false;
+      }
+    );
   }
 }

@@ -1,12 +1,13 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
+import { environment } from "src/environments/environment";
 
 @Injectable({
   providedIn: "root"
 })
 export class GlobalService {
-  private globalUrl = "http://localhost:51554/Global";
+  private globalUrl = environment.apiUrl + "/Global";
 
   constructor(private http: HttpClient) {}
 

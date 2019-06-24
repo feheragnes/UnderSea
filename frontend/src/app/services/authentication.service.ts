@@ -24,9 +24,11 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
-  login(email: string, password: string) {
+  login(currentUser: User) {
+    const email = currentUser.email;
+    const password = currentUser.password;
     return this.http
-      .post<any>(`http://localhost:51554/Account/Login`, { email, password })
+      .post<any>(environment.apiUrl + `/Account/Login`, { email, password })
       .pipe(
         map(user => {
           // login successful if there's a jwt token in the response
@@ -41,21 +43,16 @@ export class AuthenticationService {
       );
   }
 
-  register(
-    email_: string,
-    password_: string,
-    confirmPassword_: string,
-    countryName_: string
-  ) {
-    var parameter = {
-      email: email_,
-      password: password_,
-      confirmPassword: confirmPassword_,
-      countryName: countryName_
+  register(user: User) {
+    const parameter = {
+      email: user.email,
+      password: user.password,
+      confirmPassword: user.confirmPassword,
+      countryName: user.countryName
     };
     console.log(parameter);
     return this.http.post<any>(
-      `http://localhost:51554/Account/Register`,
+      environment.apiUrl + `/Account/Register`,
       parameter
     );
   }
