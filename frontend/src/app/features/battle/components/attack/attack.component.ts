@@ -1,15 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-attack',
-  templateUrl: './attack.component.html',
-  styleUrls: ['./attack.component.scss']
+  selector: "app-attack",
+  templateUrl: "./attack.component.html",
+  styleUrls: ["./attack.component.scss"]
 })
 export class AttackComponent implements OnInit {
+  private capaNumber = 0;
+  private fokaNumber = 0;
+  private csikoNumber = 0;
+  inputChanged(type: string, value: number) {
+    switch (type) {
+      case "csiko":
+        this.csikoNumber = value;
 
-  constructor() { }
+        break;
+      case "foka":
+        this.fokaNumber = value;
 
-  ngOnInit() {
+        break;
+      case "capa":
+        this.capaNumber = value;
+        break;
+    }
   }
 
+  constructor() {}
+
+  ngOnInit() {}
 }
