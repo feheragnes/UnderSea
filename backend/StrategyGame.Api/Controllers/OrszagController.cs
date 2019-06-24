@@ -24,15 +24,6 @@ namespace StrategyGame.Api.Controllers
         {
             return await _orszagService.GetUserOrszagInfos(User);
         }
-        [HttpGet]
-        public async Task<IActionResult> GetUserInfos()
-        {
-            return Ok("Not implemented");
-        }
-        [HttpGet]
-        public async Task<IActionResult> GetRanglista()
-        {
-            return Ok("Not implemented");
-        }
+
     }
 }

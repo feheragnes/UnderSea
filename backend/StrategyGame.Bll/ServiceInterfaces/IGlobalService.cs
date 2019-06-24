@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StrategyGame.Bll.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Text;
@@ -11,6 +12,7 @@ namespace StrategyGame.Bll.ServiceInterfaces
         Task<long> GetUserScore(ClaimsPrincipal userClaim);
         Task<long> GetKor();
         Task<Dictionary<string, long>> GetOrszagScores();
-        Task<List<KeyValuePair<string, long>>> GetRanglista();
+        Task<IList<RanglistaDTO>> GetRanglista();
+        Task<long> GetHelyezes(ClaimsPrincipal userClaim);
     }
 }
