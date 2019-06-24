@@ -29,9 +29,9 @@ namespace StrategyGame.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllFejleszteses()
+        public async Task<ActionResult<List<FejlesztesInfoDTO>>> GetAllFejleszteses()
         {
-           return Ok(_fejlesztesService.GetFinishedFejlesztesesAsync(UserId));
+           return await _fejlesztesService.GetFinishedFejlesztesesAsync(UserId);
         }
 
         [HttpGet]

@@ -63,7 +63,7 @@ namespace StrategyGame.Bll.Services
 
             currentOrszag.Gyongy -= osszKoltseg;
 
-            await SaveChangesAsync();
+             _context.SaveChanges();
         }
 
         public async Task AddEgysegAsync(List<SeregInfoDTO> egysegek, Orszag currentOrszag)
@@ -98,7 +98,7 @@ namespace StrategyGame.Bll.Services
 
             currentOrszag.Gyongy -= osszKoltseg;
 
-            await SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         public async Task<List<EgysegDTO>> GetAllEgysegsAsync(Guid userId)

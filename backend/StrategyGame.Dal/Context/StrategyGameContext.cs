@@ -45,7 +45,22 @@ namespace StrategyGame.Dal.Context
 
            // builder.ApplyConfiguration(new OrszagUserConfiguration());
             builder.ApplyConfiguration(new CsapatConfiguration());
+        }
 
+        public override int SaveChanges()
+        {
+            try
+            {
+                return base.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException e)
+            {
+                throw new Exception("Concurrency error");
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
         }
     }
 }

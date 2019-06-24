@@ -67,7 +67,7 @@ namespace StrategyGame.Bll.Services
             });
 
             currentOrszag.Gyongy -= osszKoltseg;
-            await SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         public async Task<Epulet> GetEpuletByIdAsync(Guid id, Guid userId)
@@ -112,22 +112,7 @@ namespace StrategyGame.Bll.Services
             Orszag currentOrszag = await _commonService.GetCurrentOrszag(userId);
             return currentOrszag.Epulets.FirstOrDefault(x => x.Felepult == false) != null;
         }
-        public async Task SaveChangesAsync()
-        {
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException e)
-            {
-                throw new Exception("Concurrency error");
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
-        }
-
+       
         public async Task<List<Epulet>> GetAllEpuletsAsync(Orszag currentOrszag)
         {
             return currentOrszag.Epulets.ToList();
@@ -193,7 +178,7 @@ namespace StrategyGame.Bll.Services
             });
 
             currentOrszag.Gyongy -= osszKoltseg;
-            await SaveChangesAsync();
+            _context.SaveChanges();
         }
     }
 }
