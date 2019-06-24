@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using StrategyGame.Bll.DTOInterfaces;
 using StrategyGame.Bll.DTOs;
 using StrategyGame.Bll.DTOs.Egysegek;
 using StrategyGame.Bll.DTOs.Epuletek;
@@ -79,8 +80,8 @@ namespace StrategyGame.Bll.Services
                 Nev = orszag.Nev,
                 Korall = orszag.Korall,
                 Helyezes = await GetHelyezes(orszag),
-                GyongyTermeles = GetTermeles(orszag).Result.GyongyTermeles,
-                KorallTermeles = GetTermeles(orszag).Result.KorallTermeles,
+                GyongyTermeles = (await GetTermeles(orszag)).GyongyTermeles,
+                KorallTermeles = (await GetTermeles(orszag)).KorallTermeles,
                 SeregInfoDTOs = await GetSeregInfoDTOs(orszag),
                 EpuletInfoDTOs = await GetEpuletInfoDTOs(orszag)
             };
@@ -97,13 +98,21 @@ namespace StrategyGame.Bll.Services
             orszag = await _context.Orszags
                 .Include(x => x.Epulets)
                 .Include(x => x.Fejleszteses).FirstOrDefaultAsync(x => x.Id == orszag.Id);
-            await orszag.Epulets.Where(e => e.Felepult == true).AsQueryable().ForEachAsync(async e =>
+            orszag.Epulets.Where(e => e.Felepult == true).ToList().ForEach(async e =>
             {
-                orszagDTO = await _mapper.Map<EpuletDTO>(e).SetTermeles(orszagDTO);
+                var ep =  _mapper.Map<EpuletDTO>(e);
+                if (ep is ITermelo)
+                {
+                    orszagDTO = await (ep as ITermelo).SetTermeles(orszagDTO);
+                }
             });
-            await orszag.Fejleszteses.Where(f => f.Kifejlesztve == true).AsQueryable().ForEachAsync(async f =>
+            orszag.Fejleszteses.Where(f => f.Kifejlesztve == true).ToList().ForEach(async f =>
             {
-                orszagDTO = await _mapper.Map<FejlesztesDTO>(f).SetTermeles(orszagDTO);
+                var fe = _mapper.Map<FejlesztesDTO>(f);
+                if (fe is ITermelo)
+                {
+                    orszagDTO = await (fe as ITermelo).SetTermeles(orszagDTO);
+                }
             });
 
 

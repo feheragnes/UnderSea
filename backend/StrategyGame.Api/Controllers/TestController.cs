@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using StrategyGame.Bll.DTOInterfaces;
 using StrategyGame.Bll.DTOs.Epuletek;
 using StrategyGame.Bll.DTOs.Fejlesztesek;
 using StrategyGame.Bll.Mappers;
@@ -117,7 +118,13 @@ namespace StrategyGame.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetEpulets()
         {
-           var asd = _context.Orszags.Include(x => x.Epulets).FirstOrDefault(x => x.Id == new Guid("f2072921-3345-45f1-6592-08d6f62eb2b0")).Epulets;
+            var asd = _context.Epulets.Add(new AramlasIranyito());
+            _context.SaveChanges();
+            var ep = _mapper.Map<EpuletDTO>(_context.Epulets.FirstOrDefault());
+            if(ep is ITermelo)
+            {
+                return Ok("Termelo vagyok");
+            }
             return  Ok(_mapper.Map<IList<EpuletDTO>>(asd));
         }
 

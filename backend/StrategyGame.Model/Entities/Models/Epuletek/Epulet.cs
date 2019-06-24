@@ -5,7 +5,7 @@ using System.Text;
 
 namespace StrategyGame.Model.Entities.Models.Epuletek
 {
-    public abstract class Epulet
+    public abstract class Epulet 
     {
         public Epulet()
         {

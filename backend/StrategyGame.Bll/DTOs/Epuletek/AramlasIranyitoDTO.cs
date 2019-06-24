@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace StrategyGame.Bll.DTOs.Epuletek
 {
-    public class AramlasIranyitoDTO : EpuletDTO, IEpulet
+    public class AramlasIranyitoDTO : EpuletDTO, ITermelo, INepesseg
     {
         public long Nepesseg { get; set; }
         public long Korall { get; set; }
 
-        public async override Task<long> GetNepesseg()
+        public async Task<long> GetNepesseg()
         {
             return Nepesseg;
         }
@@ -21,13 +21,10 @@ namespace StrategyGame.Bll.DTOs.Epuletek
             throw new NotImplementedException();
         }
 
-        public async override Task<OrszagDTO> SetTermeles(OrszagDTO orszag)
+        public async Task<OrszagDTO> SetTermeles(OrszagDTO orszag)
         {
-            if (Felepult == true)
-            {
                 orszag.KorallTermeles += Korall;
                 orszag.GyongyTermeles += Nepesseg * 50;
-            }
             return orszag;
         }
     }

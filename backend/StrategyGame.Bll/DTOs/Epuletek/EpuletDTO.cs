@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StrategyGame.Bll.DTOs.Epuletek
 {
-    public abstract class EpuletDTO : IEpulet
+    public abstract class EpuletDTO
     {
         public Guid Id { get; set; }
 
@@ -23,7 +23,5 @@ namespace StrategyGame.Bll.DTOs.Epuletek
             throw new NotImplementedException();
         }
 
-        public abstract Task<OrszagDTO> SetTermeles(OrszagDTO orszag);
-        public abstract Task<long> GetNepesseg();
     }
 }
