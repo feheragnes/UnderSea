@@ -126,15 +126,16 @@ namespace StrategyGame.Api
             {
                 c.SwaggerDoc("v0.1", new Info { Title = "UnderSeaApi", Version = "v0.1" });
             });
-            services.AddMvc();
+            
             services.AddCors(options =>
             {
                 options.AddPolicy(MyAllowSpecificOrigins,
                 builder =>
                 {
-                    builder.WithOrigins("localhost:4200").AllowAnyMethod();
+                    builder.WithOrigins("localhost:4200").AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader();
                 });
             });
+            services.AddMvc();
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new FejlesztesProfile());

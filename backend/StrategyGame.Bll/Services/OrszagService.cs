@@ -102,9 +102,8 @@ namespace StrategyGame.Bll.Services
 
         public async Task<OrszagDTO> GetUserOrszagInfos(ClaimsPrincipal userClaim)
         {
-            var user = await _userManager.GetUserAsync(userClaim);
-            user = await _context.Users.Include(x => x.Orszags).ThenInclude(x => x.Orszag).FirstOrDefaultAsync(x=>x.Id == user.Id);
-            return await Map(user.Orszags.FirstOrDefault().Orszag);
+            var orszag = await GetUserOrszag(userClaim);
+            return await Map(orszag);
         }
         public async Task<OrszagDTO> Map(Orszag orszag)
         {
