@@ -54,7 +54,7 @@ namespace StrategyGame.Bll.Services.AAAServices
 
                 try
                 {
-                    await _orszagService.MakeOrszagUserConnection(user, model.CountryName);
+                    _orszagService.MakeOrszagUserConnection(user, model.CountryName);
                 }catch(Exception e)
                 {
                     await _userManager.DeleteAsync(user);

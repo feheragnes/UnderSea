@@ -136,8 +136,6 @@ namespace StrategyGame.Dal.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
-                    b.Property<int>("CurrentOrszagIndex");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
@@ -152,6 +150,8 @@ namespace StrategyGame.Dal.Migrations
 
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256);
+
+                    b.Property<Guid?>("OrszagId");
 
                     b.Property<string>("PasswordHash");
 
@@ -175,6 +175,8 @@ namespace StrategyGame.Dal.Migrations
                         .IsUnique()
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.HasIndex("OrszagId");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -326,19 +328,6 @@ namespace StrategyGame.Dal.Migrations
                     b.ToTable("Orszags");
                 });
 
-            modelBuilder.Entity("StrategyGame.Model.Entities.Models.OrszagUser", b =>
-                {
-                    b.Property<Guid>("OrszagId");
-
-                    b.Property<Guid>("UserId");
-
-                    b.HasKey("OrszagId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("OrszagUser");
-                });
-
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Egysegek.CsataCsiko", b =>
                 {
                     b.HasBaseType("StrategyGame.Model.Entities.Models.Egysegek.Egyseg");
@@ -467,6 +456,13 @@ namespace StrategyGame.Dal.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("StrategyGame.Model.Entities.Identity.StrategyGameUser", b =>
+                {
+                    b.HasOne("StrategyGame.Model.Entities.Models.Orszag", "Orszag")
+                        .WithMany()
+                        .HasForeignKey("OrszagId");
+                });
+
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Csapat", b =>
                 {
                     b.HasOne("StrategyGame.Model.Entities.Models.Allapot", "Allapot")
@@ -501,19 +497,6 @@ namespace StrategyGame.Dal.Migrations
                     b.HasOne("StrategyGame.Model.Entities.Models.Orszag")
                         .WithMany("Fejleszteses")
                         .HasForeignKey("OrszagId");
-                });
-
-            modelBuilder.Entity("StrategyGame.Model.Entities.Models.OrszagUser", b =>
-                {
-                    b.HasOne("StrategyGame.Model.Entities.Models.Orszag", "Orszag")
-                        .WithMany("Users")
-                        .HasForeignKey("OrszagId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("StrategyGame.Model.Entities.Identity.StrategyGameUser", "User")
-                        .WithMany("Orszags")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

@@ -13,7 +13,6 @@ namespace StrategyGame.Bll.Mappers
         {
             CreateMap<StrategyGameUser, StrategyGameUserDTO>()
                 .ForMember(e => e.Email, opt => opt.MapFrom(e => e.Email))
-                 .ForMember(e => e.OrszagNev, opt => opt.MapFrom(e => e.Orszags[e.CurrentOrszagIndex]))
                  .ReverseMap();
         }
     }

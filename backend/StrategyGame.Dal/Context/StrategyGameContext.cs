@@ -43,7 +43,7 @@ namespace StrategyGame.Dal.Context
             builder.Entity<CsataCsiko>().HasBaseType<Egyseg>();
             builder.Entity<LezerCapa>().HasBaseType<Egyseg>();
 
-            builder.ApplyConfiguration(new OrszagUserConfiguration());
+           // builder.ApplyConfiguration(new OrszagUserConfiguration());
             builder.ApplyConfiguration(new CsapatConfiguration());
 
         }

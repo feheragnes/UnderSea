@@ -15,26 +15,24 @@ namespace StrategyGame.Api.Controllers
 {
     [Route("[controller]/[action]")]
     [ApiController]
-    public class EpuletController : Controller
+    public class EpuletController : StrategyController
     {
 
         private readonly IEpuletService _epuletService;
         private readonly IOrszagService _orszagService;
+        private readonly ICommonService _commonService;
 
-
-
-
-        public EpuletController(IEpuletService epuletService, IOrszagService orszagService)
+        public EpuletController(IEpuletService epuletService, IOrszagService orszagService,ICommonService commonService,UserManager<StrategyGameUser> userManager):base(userManager)
         {
             _epuletService = epuletService;
             _orszagService = orszagService;
-          
+            _commonService = commonService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetUserEpulets()
         {
-            Orszag userOrszag = await _orszagService.GetUserOrszag(User);
+            Orszag userOrszag = await _commonService.GetCurrentOrszag(UserId);
             return Ok(_epuletService.GetAllEpuletsAsync(userOrszag));
         }
 
@@ -42,7 +40,7 @@ namespace StrategyGame.Api.Controllers
         public async Task<IActionResult> BuyEpulets([FromBody]  List<EpuletInfoDTO> epulets)
         {
 
-            Orszag userOrszag = await _orszagService.GetUserOrszag(User);
+            Orszag userOrszag = await _commonService.GetCurrentOrszag(UserId);
 
             await _epuletService.AddEpuletAsync(epulets, userOrszag);
 
@@ -54,7 +52,7 @@ namespace StrategyGame.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetEpuletInfos()
         {
-            Orszag userOrszag = await _orszagService.GetUserOrszag(User);
+            Orszag userOrszag = await _commonService.GetCurrentOrszag(UserId);
             return Ok("Not implemented");
         }
     }
