@@ -13,6 +13,7 @@ namespace StrategyGame.Model.Entities.Models
         public Guid Id { get; set; }
 
         public string Nev { get; set; }
+        public long Pont { get; set; }
 
         public long Gyongy { get; set; }
 
