@@ -12,5 +12,6 @@ namespace StrategyGame.Bll.ServiceInterfaces
         Task<long> GetKor();
         Task<Dictionary<string, long>> GetOrszagScores();
         Task<List<KeyValuePair<string, long>>> GetRanglista();
+        Task<long> GetHelyezes(ClaimsPrincipal userClaim);
     }
 }

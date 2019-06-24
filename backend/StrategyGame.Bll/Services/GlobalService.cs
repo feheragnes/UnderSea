@@ -61,14 +61,14 @@ namespace StrategyGame.Bll.Services
         public async Task<List<KeyValuePair<string, long>>> GetRanglista()
         {
             var dict =await GetOrszagScores();
-            List<KeyValuePair<string, long>> sorted = (from kv in dict orderby kv.Value select kv).ToList();
+            List<KeyValuePair<string, long>> sorted = (from kv in dict orderby kv.Value descending select kv).ToList();
             return sorted;
         }
         public async Task<long> GetHelyezes(ClaimsPrincipal userClaim)
         {
             var orszag = await _orszagService.GetUserOrszag(userClaim);
             var sorted = await GetRanglista();
-            return sorted.FindIndex(x => x.Key == orszag.Nev)+1;
+            return (sorted.FindIndex(x => x.Key == orszag.Nev))+1;
 
         }
 
