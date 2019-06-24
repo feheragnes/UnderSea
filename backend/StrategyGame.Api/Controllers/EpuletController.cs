@@ -30,10 +30,10 @@ namespace StrategyGame.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetUserEpulets()
+        public async Task<ActionResult<List<Epulet>>> GetUserEpulets()
         {
            
-            return Ok(_epuletService.GetAllEpuletsAsync(UserId));
+            return  await _epuletService.GetAllEpuletsAsync(UserId);
         }
 
         [HttpPost]

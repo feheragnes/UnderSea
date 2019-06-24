@@ -31,10 +31,10 @@ namespace StrategyGame.Api.Controllers
             _commonService = commonService;
         }
         [HttpGet]
-        public async Task<IActionResult> GetUserEgysegs()
+        public async Task<ActionResult<List<SeregInfoDTO>>> GetUserEgysegs()
         {
          
-            return Ok(_egysegService.GetOtthoniEgysegsAsync(UserId));
+            return await _egysegService.GetOtthoniEgysegsAsync(UserId);
         }
 
         [HttpGet]
