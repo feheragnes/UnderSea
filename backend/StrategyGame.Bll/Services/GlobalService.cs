@@ -39,13 +39,6 @@ namespace StrategyGame.Bll.Services
             });
             return ranglista;
         }
-        public async Task<long> GetHelyezes(Guid userId)
-        {
-            var orszag = await _commonService.GetCurrentOrszag(userId);
-            var sorted = await GetRanglista();
-            return (sorted.IndexOf(sorted.FirstOrDefault(x=>x.Orszag == orszag.Nev))) + 1;
-
-        }
 
         public async Task<long> GetKor()
         {

@@ -21,7 +21,7 @@ using System.Threading.Tasks;
 
 namespace StrategyGame.Bll.Services
 {
-    public class OrszagService: IOrszagService
+    public class OrszagService : IOrszagService
     {
         private readonly StrategyGameContext _context;
         private readonly UserManager<StrategyGameUser> _userManager;
@@ -29,13 +29,15 @@ namespace StrategyGame.Bll.Services
         private readonly IEgysegService _egysegService;
         private readonly IEpuletService _epuletService;
         private readonly ICommonService _commonService;
+        private readonly IGlobalService _globalService;
 
         public OrszagService(StrategyGameContext context,
-                             UserManager<StrategyGameUser> userManager, 
-                             IMapper mapper, 
-                             IEgysegService egysegService, 
+                             UserManager<StrategyGameUser> userManager,
+                             IMapper mapper,
+                             IEgysegService egysegService,
                              IEpuletService epuletService,
-                             ICommonService commonService)
+                             ICommonService commonService,
+                             IGlobalService globalService)
         {
             _context = context;
             _mapper = mapper;
@@ -43,6 +45,7 @@ namespace StrategyGame.Bll.Services
             _egysegService = egysegService;
             _epuletService = epuletService;
             _commonService = commonService;
+            _globalService = globalService;
         }
 
         public async void MakeOrszagUserConnection(StrategyGameUser user, string orszagNev)
@@ -50,7 +53,7 @@ namespace StrategyGame.Bll.Services
             user.Orszag = await InitOrszag(orszagNev);
             await _context.SaveChangesAsync();
         }
-        public  async Task<Orszag> InitOrszag(string orszagNev)
+        public async Task<Orszag> InitOrszag(string orszagNev)
         {
             var orszag = new Orszag { Nev = orszagNev, Korall = 0, Gyongy = 0 };
             if (_context.Orszags.FirstOrDefault(x => x.Nev.ToUpper() == orszagNev.ToUpper()) == null)
@@ -85,25 +88,24 @@ namespace StrategyGame.Bll.Services
         }
         private async Task<long> GetHelyezes(Orszag orszag)
         {
-            return 0;
+            var sorted = await _globalService.GetRanglista();
+            return (sorted.IndexOf(sorted.FirstOrDefault(x => x.Orszag == orszag.Nev))) + 1;
         }
         private async Task<OrszagDTO> GetTermeles(Orszag orszag)
         {
-            orszag = _context.Orszags
-                .Include(x => x.Epulets)
-                .Include(x => x.Fejleszteses)
-                .AsNoTracking().FirstOrDefault(x => x.Id == orszag.Id);
             var orszagDTO = new OrszagDTO();
-            var epuletdtolist = _mapper.Map<IList<Epulet>, IList<EpuletDTO>>(orszag.Epulets);
-            foreach (var item in epuletdtolist)
+            orszag = await _context.Orszags
+                .Include(x => x.Epulets)
+                .Include(x => x.Fejleszteses).FirstOrDefaultAsync(x => x.Id == orszag.Id);
+            await orszag.Epulets.Where(e => e.Felepult == true).AsQueryable().ForEachAsync(async e =>
             {
-                orszagDTO = await item.SetTermeles(orszagDTO);
-            }
-            var fejlesztesDTOList = _mapper.Map<IList<Fejlesztes>, IList<FejlesztesDTO>>(orszag.Fejleszteses);
-            foreach (var item in fejlesztesDTOList)
+                orszagDTO = await _mapper.Map<EpuletDTO>(e).SetTermeles(orszagDTO);
+            });
+            await orszag.Fejleszteses.Where(f => f.Kifejlesztve == true).AsQueryable().ForEachAsync(async f =>
             {
-                orszagDTO = await item.SetTermeles(orszagDTO);
-            }
+                orszagDTO = await _mapper.Map<FejlesztesDTO>(f).SetTermeles(orszagDTO);
+            });
+
 
             return orszagDTO;
         }
