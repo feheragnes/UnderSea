@@ -7,7 +7,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using StrategyGame.Bll.DTOs;
+using StrategyGame.Bll.ServiceInterfaces;
 using StrategyGame.Dal.Context;
+using StrategyGame.Model.Entities.Models;
 
 namespace StrategyGame.Api.Controllers
 {
@@ -15,11 +17,21 @@ namespace StrategyGame.Api.Controllers
     [ApiController]
     public class TamadasController : ControllerBase
     {
+        private readonly IOrszagService _orszagService;
+        private readonly IEgysegService _egysegService;
+
+        public TamadasController(IEgysegService egysegService, IOrszagService orszagService)
+        {
+            _egysegService = egysegService;
+            _orszagService = orszagService;
+
+        }
 
         [HttpGet]
         public async Task<IActionResult> GetUserEgysegs()
         {
-            return Ok("Not implemented");
+            Orszag userOrszag = await _orszagService.GetUserOrszag(User);
+            return Ok(_egysegService.GetOtthoniEgysegsAsync(userOrszag));
         }
 
         [HttpGet]

@@ -19,9 +19,6 @@ using StrategyGame.Model.Entities.Identity;
 
 namespace StrategyGame.Api.Controllers
 {
-
-
-
     [Route("[controller]/[action]")]
     [ApiController]
     public class AccountController : Controller

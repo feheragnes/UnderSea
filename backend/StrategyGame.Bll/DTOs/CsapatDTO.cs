@@ -7,7 +7,6 @@ namespace StrategyGame.Bll.DTOs
 {
     public class CsapatDTO
     {
-
         public Guid Id { get; set; }
         public OrszagDTO Celpont { get; set; }
         public OrszagDTO Tulajdonos { get; set; }

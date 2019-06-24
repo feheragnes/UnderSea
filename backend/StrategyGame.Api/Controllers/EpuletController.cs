@@ -39,17 +39,12 @@ namespace StrategyGame.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> BuyEpulets([FromBody] JObject epulets)
+        public async Task<IActionResult> BuyEpulets([FromBody]  List<EpuletInfoDTO> epulets)
         {
 
-         
             Orszag userOrszag = await _orszagService.GetUserOrszag(User);
 
-            List<EpuletInfoDTO> epuletList = new List<EpuletInfoDTO>();
-            epuletList.Add(epulets["aramlasiranyito"].ToObject<EpuletInfoDTO>());
-            epuletList.Add(epulets["zatonyvar"].ToObject<EpuletInfoDTO>());
-
-            await _epuletService.AddEpuletAsync(epuletList, userOrszag);
+            await _epuletService.AddEpuletAsync(epulets, userOrszag);
 
             return Ok("Not implemented");
         }

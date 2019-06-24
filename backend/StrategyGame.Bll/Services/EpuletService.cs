@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using StrategyGame.Bll.DTOs;
+using StrategyGame.Bll.DTOs.DTOEnums;
 using StrategyGame.Bll.ServiceInterfaces;
 using StrategyGame.Dal.Context;
 using StrategyGame.Model.Entities.Identity;
@@ -9,6 +10,7 @@ using StrategyGame.Model.Entities.Models;
 using StrategyGame.Model.Entities.Models.Epuletek;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Text;
@@ -16,9 +18,8 @@ using System.Threading.Tasks;
 
 namespace StrategyGame.Bll.Services
 {
-     public class EpuletService : IEpuletService
+    public class EpuletService : IEpuletService
     {
-
         private readonly StrategyGameContext _context;
         private readonly UserManager<StrategyGameUser> _userManager;
         private readonly IMapper _mapper;
@@ -32,81 +33,77 @@ namespace StrategyGame.Bll.Services
 
         public async Task AddEpuletAsync(List<EpuletInfoDTO> epulets, Orszag currentOrszag)
         {
-            List<Epulet> epuletek = new List<Epulet>(currentOrszag.Epulets);
+            List<Epulet> currentEpulets = currentOrszag.Epulets.ToList();
+            currentEpulets.ForEach(x =>
+            {
+                if (x.Felepult == false)
+                    throw new InvalidOperationException("Another building is under construction");
+            });
 
             long osszKoltseg = 0;
-            foreach (var item in epulets)
+
+            epulets.ForEach(x =>
             {
-                osszKoltseg += (item.Ar * item.Mennyiseg);
-            }
+                osszKoltseg += (x.Ar * x.Mennyiseg);
+            });
 
             if (osszKoltseg > currentOrszag.Gyongy)
                 throw new ArgumentException("You don't have enough Gyöngy");
 
-            for (int i = 0; i < epulets[0].Mennyiseg; i++)
-            {
-                epuletek.Add(new AramlasIranyito {Ar = 1000, SzuksegesKorok =5 , Nepesseg= 50, Korall=200  });
-            }
+            var aramlasIranyitos = epulets.FindAll(e => e.Tipus == EpuletTipus.AramlasIranyito);
+            var zatonyVars = epulets.FindAll(e => e.Tipus == EpuletTipus.ZatonyVar);
 
-            for (int i = 0; i < epulets[1].Mennyiseg; i++)
+            aramlasIranyitos.ForEach(x =>
             {
-                epuletek.Add(new ZatonyVar { Ar = 1000, SzuksegesKorok = 5, Szallas = 200 });
-            }
+                currentEpulets.Add(new AramlasIranyito());
+            });
+            zatonyVars.ForEach(x =>
+            {
+                currentEpulets.Add(new ZatonyVar());
+            });
 
+            currentOrszag.Gyongy -= osszKoltseg;
             await SaveChangesAsync();
         }
 
-
-
         public async Task<Epulet> GetEpuletByIdAsync(Guid id, Orszag currentOrszag)
         {
-            
-            List<Epulet> currentEpulets = new List<Epulet>(currentOrszag.Epulets);
+            List<Epulet> currentEpulets = currentOrszag.Epulets.ToList();
 
             return currentEpulets.Find(x => x.Id == id);
         }
 
         public async Task<List<Epulet>> GetAllEpuletsAsync(Orszag currentOrszag)
         {
-
-            var epulets = currentOrszag.Epulets;
-
-            List<Epulet> currentEpulets = new List<Epulet>(currentOrszag.Epulets);
-
-            return currentEpulets;
+            return currentOrszag.Epulets.ToList();
         }
 
-        public async Task<IList<EpuletInfoDTO>> GetFelepultEpuletsAsync(Orszag currentOrszag)
+        public async Task<List<EpuletInfoDTO>> GetFelepultEpuletsAsync(Orszag currentOrszag)
         {
-            List<Epulet> epulets = new List<Epulet>(currentOrszag.Epulets);
-            List<Epulet> felepultEpulets  = new List<Epulet>();
-            foreach (var epulet in epulets)
-            {
-                if (epulet.Felepult)
-                    felepultEpulets.Add(epulet);
-            }
+            List<Epulet> felepultEpulets = currentOrszag.Epulets.Where(x => x.Felepult == true).ToList();
 
             long aramlasIranyitoMennyiseg = 0;
             long zatonyvarMennyiseg = 0;
 
-
-            foreach (var item in felepultEpulets)
-                {
-                    if (item.GetType() == typeof(AramlasIranyito))
-                        aramlasIranyitoMennyiseg++;
-                    if (item.GetType() == typeof(ZatonyVar))
-                        zatonyvarMennyiseg++;
-                }
-            
+            felepultEpulets.ForEach(x =>
+            {
+                if (x.GetType() == typeof(AramlasIranyito))
+                    aramlasIranyitoMennyiseg++;
+                if (x.GetType() == typeof(ZatonyVar))
+                    zatonyvarMennyiseg++;
+            });
 
             List<EpuletInfoDTO> felepultDtoList = new List<EpuletInfoDTO>();
-            felepultDtoList.Add(new EpuletInfoDTO("AramlasIranyito", 1000, aramlasIranyitoMennyiseg));
-            felepultDtoList.Add(new EpuletInfoDTO("ZatonyVar", 1000, zatonyvarMennyiseg));
 
-         
+            felepultDtoList.Add(new EpuletInfoDTO(EpuletTipus.AramlasIranyito, 1000, aramlasIranyitoMennyiseg));
+            felepultDtoList.Add(new EpuletInfoDTO(EpuletTipus.ZatonyVar, 1000, zatonyvarMennyiseg));
+
             return felepultDtoList;
         }
-
+        public async Task<bool> GetIfActiveConstruction(Orszag currentOrszag)
+        {
+            return currentOrszag.Epulets.FirstOrDefault(x => x.Felepult == false) != null;
+        }
         public async Task SaveChangesAsync()
         {
             try
@@ -123,6 +120,6 @@ namespace StrategyGame.Bll.Services
             }
         }
 
-       
+
     }
 }

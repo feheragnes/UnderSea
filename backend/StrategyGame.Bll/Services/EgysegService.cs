@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using StrategyGame.Bll.DTOs;
+using StrategyGame.Bll.DTOs.DTOEnums;
 using StrategyGame.Bll.DTOs.Egysegek;
 using StrategyGame.Bll.ServiceInterfaces;
 using StrategyGame.Dal.Context;
@@ -24,87 +25,82 @@ namespace StrategyGame.Bll.Services
 
         public EgysegService(StrategyGameContext context, IMapper mapper)
         {
-
             _context = context;
             _mapper = mapper;
         }
         public async Task AddEgysegAsync(List<SeregInfoDTO> egysegek, Orszag currentOrszag)
         {
-            List<Csapat> otthoniCsapatok = new List<Csapat>(currentOrszag.OtthoniCsapats);
+            Csapat otthoniEgysegek = currentOrszag.OtthoniCsapats.FirstOrDefault(T => T.Celpont == null);
 
             long osszKoltseg = 0;
-            foreach (var item in egysegek)
+            egysegek.ForEach(x =>
             {
-                osszKoltseg += (item.Ar * item.Mennyiseg);
-            }
+                osszKoltseg += (x.Ar * x.Mennyiseg);
+            });
 
-            if(osszKoltseg > currentOrszag.Gyongy)
-               throw new ArgumentException("You don't have enough Gyöngy");
+            if (osszKoltseg > currentOrszag.Gyongy)
+                throw new ArgumentException("You don't have enough Gyöngy");
 
-            for(int i=0; i< egysegek[0].Mennyiseg; i++)
+            var rohamFokas = egysegek.FindAll(e => e.Tipus == EgysegTipus.RohamFoka);
+            var csataCsikos = egysegek.FindAll(e => e.Tipus == EgysegTipus.CsataCsiko);
+            var lezerCapas = egysegek.FindAll(e => e.Tipus == EgysegTipus.LezerCapa);
+
+            rohamFokas.ForEach(x =>
             {
-                otthoniCsapatok.Find(T => T.Celpont == null).Egysegs.Add(new RohamFoka { Tamadas = 6, Vedekezes = 2, Ar = 50, Ellatas= 1, Zsold=1 });  ;
-            }
-
-            for (int i = 0; i < egysegek[1].Mennyiseg; i++)
+                otthoniEgysegek.Egysegs.Add(new RohamFoka());
+            });
+            csataCsikos.ForEach(x =>
             {
-                otthoniCsapatok.Find(T => T.Celpont == null).Egysegs.Add(new CsataCsiko { Tamadas = 6, Vedekezes = 2, Ar = 50, Ellatas = 1, Zsold = 1 });
-            }
-
-            for (int i = 0; i < egysegek[2].Mennyiseg; i++)
+                otthoniEgysegek.Egysegs.Add(new CsataCsiko());
+            });
+            lezerCapas.ForEach(x =>
             {
-                otthoniCsapatok.Find(T => T.Celpont == null).Egysegs.Add(new LezerCapa { Tamadas = 5, Vedekezes = 5, Ar = 100, Ellatas = 2, Zsold = 3 });
-            }
+                otthoniEgysegek.Egysegs.Add(new LezerCapa());
+            });
+
+            currentOrszag.Gyongy -= osszKoltseg;
 
             await SaveChangesAsync();
-
         }
 
         public async Task<List<EgysegDTO>> GetAllEgysegsAsync(Orszag currentOrszag)
         {
             List<Csapat> otthoniCsapats = new List<Csapat>(currentOrszag.OtthoniCsapats);
             List<Egyseg> egysegList = new List<Egyseg>();
-            foreach (var csapat in otthoniCsapats)
+
+            otthoniCsapats.ForEach(x =>
             {
-                foreach (var egyseg in csapat.Egysegs)
+                foreach (var egyseg in x.Egysegs)
                 {
                     egysegList.Add(egyseg);
                 }
-            }
+            });
 
             var egysegDtoList = _mapper.Map<List<Egyseg>, List<EgysegDTO>>(egysegList);
 
-             return egysegDtoList;
+            return egysegDtoList;
         }
 
         public async Task<List<SeregInfoDTO>> GetOtthoniEgysegsAsync(Orszag currentOrszag)
         {
+            Csapat otthoniEgysegek = currentOrszag.OtthoniCsapats.FirstOrDefault(T => T.Celpont == null);
 
-            List<Csapat> otthoniCsapatok = new List<Csapat>(currentOrszag.OtthoniCsapats);
+            long rohamFokaMennyiseg = 0, csataCsikoMennyiseg = 0, lezerCapaMennyiseg = 0;
 
-            long rohamFokaMennyiseg = 0;
-            long csataCsikoMennyiseg = 0;
-            long lezerCapaMennyiseg = 0;
-
-            var otthonMaradtCsapat = otthoniCsapatok.FirstOrDefault(T => T.Celpont == null);
-
-            if (otthonMaradtCsapat != null)
+            otthoniEgysegek.Egysegs.ToList().ForEach(x =>
             {
-                foreach (var item in otthonMaradtCsapat.Egysegs)
-                {
-                    if (item.GetType() == typeof(RohamFoka))
-                        rohamFokaMennyiseg++;
-                    if (item.GetType() == typeof(CsataCsiko))
-                        csataCsikoMennyiseg++;
-                    if (item.GetType() == typeof(LezerCapa))
-                        lezerCapaMennyiseg++;
-                }
-            }
+                if (x.GetType() == typeof(RohamFoka))
+                    rohamFokaMennyiseg++;
+                if (x.GetType() == typeof(CsataCsiko))
+                    csataCsikoMennyiseg++;
+                if (x.GetType() == typeof(LezerCapa))
+                    lezerCapaMennyiseg++;
+            });
 
             List<SeregInfoDTO> seregInfo = new List<SeregInfoDTO>();
-            seregInfo.Add(new SeregInfoDTO(rohamFokaMennyiseg, 50, "RohamFoka"));
-            seregInfo.Add(new SeregInfoDTO(csataCsikoMennyiseg, 50, "CsataCsiko"));
-            seregInfo.Add(new SeregInfoDTO(lezerCapaMennyiseg, 100, "LezerCapa"));
+            seregInfo.Add(new SeregInfoDTO(rohamFokaMennyiseg, 50, EgysegTipus.RohamFoka));
+            seregInfo.Add(new SeregInfoDTO(csataCsikoMennyiseg, 50, EgysegTipus.CsataCsiko));
+            seregInfo.Add(new SeregInfoDTO(lezerCapaMennyiseg, 100, EgysegTipus.LezerCapa));
 
             return seregInfo;
         }
