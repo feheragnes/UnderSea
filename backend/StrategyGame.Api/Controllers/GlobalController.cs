@@ -27,11 +27,6 @@ namespace StrategyGame.Api.Controllers
             return Json(new {Kor = await _globalService.GetKor() });
         }
         [HttpGet]
-        public async Task<IActionResult> GetHelyezes()
-        {
-            return Json(new { Helyezes = await _globalService.GetHelyezes(UserId)});
-        }
-        [HttpGet]
         public async Task<IActionResult> GetRanglista()
         {
             return Ok(await _globalService.GetRanglista());
