@@ -1,0 +1,106 @@
+.maincard {
+  width: 1267px;
+  height: 707px;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  background-color: #03255f;
+  border-radius: 2rem;
+}
+.card {
+  margin-left: 48px;
+  margin-right: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+mat-card-header {
+  font-size: 32px;
+}
+
+hr {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  margin-bottom: 40px;
+  margin-top: 40px;
+  padding: 0px;
+}
+.confirmButton {
+  color: #001234;
+  font-size: 18px;
+  width: 192px;
+  height: 50px;
+  border-radius: 2rem;
+  background: linear-gradient(to right, #0fcfde 0%, #9ffff0 100%);
+  align-self: center;
+}
+.setterButton {
+  width: 30px;
+  height: 30px;
+  background: #9ffff0;
+  color: #03255f;
+  text-align: center;
+  padding-top: 0px;
+}
+::ng-deep .mat-fab .mat-button-wrapper {
+  padding: 0px;
+}
+
+.icon {
+  background-color: #9ffff0;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #428dff;
+  width: 115px;
+  height: 115px;
+  padding: 0px;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.data {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h4 {
+  font-size: 16px;
+  color: white;
+  font-weight: bold;
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.infoColumn2 {
+  text-align: right;
+  padding-left: 25px;
+}
+
+.info p {
+  margin: 0px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+  margin-top: 33px;
+}
