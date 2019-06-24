@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.authenticationService.login(this.loginForm.value).subscribe(
       data => {
-        this.router.navigate(["/battle"]);
+        this.router.navigate([this.returnUrl]);
       },
       error => {
         console.log(error);
