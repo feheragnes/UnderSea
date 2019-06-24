@@ -22,12 +22,50 @@ namespace StrategyGame.Bll.Services
     {
         private readonly StrategyGameContext _context;
         private readonly IMapper _mapper;
+        private readonly ICommonService _commonService;
 
-        public EgysegService(StrategyGameContext context, IMapper mapper)
+        public EgysegService(StrategyGameContext context, IMapper mapper, ICommonService commonService)
         {
             _context = context;
             _mapper = mapper;
+            _commonService = commonService;
         }
+        public async Task AddEgysegAsync(List<SeregInfoDTO> egysegek, Guid userId)
+        {
+            Orszag currentOrszag = await _commonService.GetCurrentOrszag(userId);
+            Csapat otthoniEgysegek = currentOrszag.OtthoniCsapats.FirstOrDefault(T => T.Celpont == null);
+
+            long osszKoltseg = 0;
+            egysegek.ForEach(x =>
+            {
+                osszKoltseg += (x.Ar * x.Mennyiseg);
+            });
+
+            if (osszKoltseg > currentOrszag.Gyongy)
+                throw new ArgumentException("You don't have enough Gyöngy");
+
+            var rohamFokas = egysegek.FindAll(e => e.Tipus == EgysegTipus.RohamFoka);
+            var csataCsikos = egysegek.FindAll(e => e.Tipus == EgysegTipus.CsataCsiko);
+            var lezerCapas = egysegek.FindAll(e => e.Tipus == EgysegTipus.LezerCapa);
+
+            rohamFokas.ForEach(x =>
+            {
+                otthoniEgysegek.Egysegs.Add(new RohamFoka());
+            });
+            csataCsikos.ForEach(x =>
+            {
+                otthoniEgysegek.Egysegs.Add(new CsataCsiko());
+            });
+            lezerCapas.ForEach(x =>
+            {
+                otthoniEgysegek.Egysegs.Add(new LezerCapa());
+            });
+
+            currentOrszag.Gyongy -= osszKoltseg;
+
+            await SaveChangesAsync();
+        }
+
         public async Task AddEgysegAsync(List<SeregInfoDTO> egysegek, Orszag currentOrszag)
         {
             Csapat otthoniEgysegek = currentOrszag.OtthoniCsapats.FirstOrDefault(T => T.Celpont == null);
@@ -63,6 +101,25 @@ namespace StrategyGame.Bll.Services
             await SaveChangesAsync();
         }
 
+        public async Task<List<EgysegDTO>> GetAllEgysegsAsync(Guid userId)
+        {
+            Orszag currentOrszag = await _commonService.GetCurrentOrszag(userId);
+            List<Csapat> otthoniCsapats = new List<Csapat>(currentOrszag.OtthoniCsapats);
+            List<Egyseg> egysegList = new List<Egyseg>();
+
+            otthoniCsapats.ForEach(x =>
+            {
+                foreach (var egyseg in x.Egysegs)
+                {
+                    egysegList.Add(egyseg);
+                }
+            });
+
+            var egysegDtoList = _mapper.Map<List<Egyseg>, List<EgysegDTO>>(egysegList);
+
+            return egysegDtoList;
+        }
+
         public async Task<List<EgysegDTO>> GetAllEgysegsAsync(Orszag currentOrszag)
         {
             List<Csapat> otthoniCsapats = new List<Csapat>(currentOrszag.OtthoniCsapats);
@@ -79,6 +136,34 @@ namespace StrategyGame.Bll.Services
             var egysegDtoList = _mapper.Map<List<Egyseg>, List<EgysegDTO>>(egysegList);
 
             return egysegDtoList;
+        }
+
+        public async Task<List<SeregInfoDTO>> GetOtthoniEgysegsAsync(Guid userId)
+        {
+            Orszag currentOrszag = await _commonService.GetCurrentOrszag(userId);
+            Csapat otthoniEgysegek = currentOrszag.OtthoniCsapats.FirstOrDefault(T => T.Celpont == null);
+
+            if (otthoniEgysegek == null)
+                return new List<SeregInfoDTO>();
+
+            long rohamFokaMennyiseg = 0, csataCsikoMennyiseg = 0, lezerCapaMennyiseg = 0;
+
+            otthoniEgysegek.Egysegs.ToList().ForEach(x =>
+            {
+                if (x.GetType() == typeof(RohamFoka))
+                    rohamFokaMennyiseg++;
+                if (x.GetType() == typeof(CsataCsiko))
+                    csataCsikoMennyiseg++;
+                if (x.GetType() == typeof(LezerCapa))
+                    lezerCapaMennyiseg++;
+            });
+
+            List<SeregInfoDTO> seregInfo = new List<SeregInfoDTO>();
+            seregInfo.Add(new SeregInfoDTO(rohamFokaMennyiseg, 50, EgysegTipus.RohamFoka));
+            seregInfo.Add(new SeregInfoDTO(csataCsikoMennyiseg, 50, EgysegTipus.CsataCsiko));
+            seregInfo.Add(new SeregInfoDTO(lezerCapaMennyiseg, 100, EgysegTipus.LezerCapa));
+
+            return seregInfo;
         }
 
         public async Task<List<SeregInfoDTO>> GetOtthoniEgysegsAsync(Orszag currentOrszag)

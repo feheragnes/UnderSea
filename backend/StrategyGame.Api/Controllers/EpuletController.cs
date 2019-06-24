@@ -32,17 +32,15 @@ namespace StrategyGame.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetUserEpulets()
         {
-            Orszag userOrszag = await _commonService.GetCurrentOrszag(UserId);
-            return Ok(_epuletService.GetAllEpuletsAsync(userOrszag));
+           
+            return Ok(_epuletService.GetAllEpuletsAsync(UserId));
         }
 
         [HttpPost]
         public async Task<IActionResult> BuyEpulets([FromBody]  List<EpuletInfoDTO> epulets)
         {
 
-            Orszag userOrszag = await _commonService.GetCurrentOrszag(UserId);
-
-            await _epuletService.AddEpuletAsync(epulets, userOrszag);
+            await _epuletService.AddEpuletAsync(epulets, UserId);
 
             return Ok("Not implemented");
         }
@@ -52,7 +50,6 @@ namespace StrategyGame.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetEpuletInfos()
         {
-            Orszag userOrszag = await _commonService.GetCurrentOrszag(UserId);
             return Ok("Not implemented");
         }
     }

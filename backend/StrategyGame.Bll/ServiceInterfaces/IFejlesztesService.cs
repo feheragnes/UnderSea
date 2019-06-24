@@ -10,8 +10,11 @@ namespace StrategyGame.Bll.ServiceInterfaces
 {
     public  interface IFejlesztesService
     {
+        Task<List<FejlesztesInfoDTO>> GetFinishedFejlesztesesAsync(Guid userId);
         Task<List<FejlesztesInfoDTO>> GetFinishedFejlesztesesAsync(Orszag currentOrszag);
+        Task<bool> GetIfCurrentlyActiveFejlesztes(Guid userId);
         Task<bool> GetIfCurrentlyActiveFejlesztes(Orszag currentOrszag);
+        Task AddFejlesztesAsync(FejlesztesInfoDTO fejlesztes, Guid userId);
         Task AddFejlesztesAsync(FejlesztesInfoDTO fejlesztes, Orszag currentOrszag);
         Task SaveChangesAsync();
     }
