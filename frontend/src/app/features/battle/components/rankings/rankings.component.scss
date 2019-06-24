@@ -1,6 +1,6 @@
 .maincard {
   width: 869px;
-  height: 645px;
+  height: 748px;
   margin-left: auto;
   margin-right: auto;
   color: white;
@@ -27,11 +27,6 @@ mat-list * {
   color: white;
 }
 
-mat-divider {
-  background-color: white;
-  width: 770px;
-}
-
 .points {
   text-align: right;
   width: 20%;
@@ -39,4 +34,20 @@ mat-divider {
 
 .country {
   width: 80%;
+}
+
+.form-rounded {
+  border-radius: 2rem;
+  height: 40px;
+  width: 100%;
+  margin-bottom: 19px;
+  background-color: rgba(255, 255, 255, 0.39);
+  border: rgba(255, 255, 255, 0.39);
+  color: #1c3e76;
+  padding: 2px;
+  padding-left: 20px;
+  font-size: 16px;
+}
+.form-rounded::placeholder {
+  color: #1c3e76;
 }
