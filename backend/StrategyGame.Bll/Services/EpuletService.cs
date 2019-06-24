@@ -86,8 +86,24 @@ namespace StrategyGame.Bll.Services
                     felepultEpulets.Add(epulet);
             }
 
-            var felepultDtoList = _mapper.Map<IList<EpuletInfoDTO>>(felepultEpulets);
+            long aramlasIranyitoMennyiseg = 0;
+            long zatonyvarMennyiseg = 0;
 
+
+            foreach (var item in felepultEpulets)
+                {
+                    if (item.GetType() == typeof(AramlasIranyito))
+                        aramlasIranyitoMennyiseg++;
+                    if (item.GetType() == typeof(ZatonyVar))
+                        zatonyvarMennyiseg++;
+                }
+            
+
+            List<EpuletInfoDTO> felepultDtoList = new List<EpuletInfoDTO>();
+            felepultDtoList.Add(new EpuletInfoDTO("AramlasIranyito", 1000, aramlasIranyitoMennyiseg));
+            felepultDtoList.Add(new EpuletInfoDTO("ZatonyVar", 1000, zatonyvarMennyiseg));
+
+         
             return felepultDtoList;
         }
 
