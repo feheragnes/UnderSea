@@ -33,24 +33,20 @@ namespace StrategyGame.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetUserEgysegs()
         {
-            Orszag userOrszag = await _commonService.GetCurrentOrszag(UserId);
-            return Ok("Not implemented");
+         
+            return Ok(_egysegService.GetOtthoniEgysegsAsync(UserId));
         }
 
         [HttpGet]
         public async Task<IActionResult> GetEgysegInfos()
         {
-            return Ok("Not implemented");
+            return Ok(_egysegService.GetAllEgysegsAsync(UserId));
         }
 
         [HttpPost]
         public async Task<IActionResult> BuyEgysegs([FromBody] List<SeregInfoDTO> egysegs)
         {
-
-
-            Orszag userOrszag = await _commonService.GetCurrentOrszag(UserId);
-
-            await _egysegService.AddEgysegAsync(egysegs, userOrszag);
+            await _egysegService.AddEgysegAsync(egysegs, UserId);
 
             return Ok("Not implemented");
         }

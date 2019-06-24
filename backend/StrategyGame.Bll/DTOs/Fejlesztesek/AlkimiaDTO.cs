@@ -8,7 +8,7 @@ namespace StrategyGame.Bll.DTOs.Fejlesztesek
 {
     public class AlkimiaDTO : FejlesztesDTO, IFejlesztes
     {
-        public Task Increase()
+        public  Task Increase()
         {
             throw new NotImplementedException();
         }
