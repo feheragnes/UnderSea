@@ -32,11 +32,15 @@ namespace StrategyGame.Bll.Services
             await _context.Orszags.Include(x=>x.Epulets).ForEachAsync(async x => 
             {
                 long score = 0;
-                await x.Epulets.Where(q => q.Felepult == true).AsQueryable().ForEachAsync(async e =>
+                x.Epulets.Where(q => q.Felepult == true).ToList().ForEach(async e =>
                   {
-                      score += await _mapper.Map<EpuletDTO>(e).GetNepesseg() + 1;
+                      var ep = _mapper.Map<EpuletDTO>(e);
+                      if (ep is INepesseg)
+                      {
+                          score += await (ep as INepesseg).GetNepesseg() + 1;
+                      }
                   });
-                await x.Fejleszteses.Where(q => q.Kifejlesztve == true).AsQueryable().ForEachAsync(f =>
+                x.Fejleszteses.Where(q => q.Kifejlesztve == true).ToList().ForEach(f =>
                   {
                       score += 100;
                   });

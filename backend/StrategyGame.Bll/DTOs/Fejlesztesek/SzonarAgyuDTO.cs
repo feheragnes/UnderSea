@@ -6,21 +6,11 @@ using System.Threading.Tasks;
 
 namespace StrategyGame.Bll.DTOs.Fejlesztesek
 {
-    class SzonarAgyuDTO : FejlesztesDTO, IFejlesztes
+    class SzonarAgyuDTO : FejlesztesDTO
     {
         public Task Increase()
         {
             throw new NotImplementedException();
-        }
-
-        public override Task NextTurn()
-        {
-            throw new NotImplementedException();
-        }
-
-        public async override Task<OrszagDTO> SetTermeles(OrszagDTO orszag)
-        {
-            return orszag;
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StrategyGame.Bll.DTOs.Fejlesztesek
 {
-    public abstract class FejlesztesDTO : IFejlesztes
+    public abstract class FejlesztesDTO
     {
         public FejlesztesDTO()
         {
@@ -25,9 +25,6 @@ namespace StrategyGame.Bll.DTOs.Fejlesztesek
             throw new NotImplementedException();
         }
 
-        public abstract Task NextTurn();
-
-        public abstract Task<OrszagDTO> SetTermeles(OrszagDTO orszag);
 
     }
 }
