@@ -16,6 +16,5 @@ namespace StrategyGame.Bll.ServiceInterfaces
         Task<bool> GetIfCurrentlyActiveFejlesztes(Orszag currentOrszag);
         Task AddFejlesztesAsync(FejlesztesInfoDTO fejlesztes, Guid userId);
         Task AddFejlesztesAsync(FejlesztesInfoDTO fejlesztes, Orszag currentOrszag);
-        Task SaveChangesAsync();
     }
 }

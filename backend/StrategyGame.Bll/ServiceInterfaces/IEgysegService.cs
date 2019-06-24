@@ -18,8 +18,5 @@ namespace StrategyGame.Bll.ServiceInterfaces
         Task AddEgysegAsync(List<SeregInfoDTO> egysegek, Orszag currentOrszag);
         Task<List<SeregInfoDTO>> GetOtthoniEgysegsAsync(Guid userId);
         Task<List<SeregInfoDTO>> GetOtthoniEgysegsAsync(Orszag currentOrszag);
-        Task SaveChangesAsync();
-
-
     }
 }

@@ -20,7 +20,5 @@ namespace StrategyGame.Bll.ServiceInterfaces
         Task<bool> GetIfActiveConstruction(Orszag currentOrszag);
         Task AddEpuletAsync(List<EpuletInfoDTO> epulets, Guid userId);
         Task AddEpuletAsync(List<EpuletInfoDTO> epulets, Orszag currentOrszag);
-        Task SaveChangesAsync();
-       
     }
 }

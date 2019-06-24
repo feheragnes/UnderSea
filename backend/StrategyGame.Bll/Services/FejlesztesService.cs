@@ -70,6 +70,8 @@ namespace StrategyGame.Bll.Services.AAAServices
                     throw new ArgumentException("Invalid fejlesztes type");
             }
 
+            _context.SaveChanges();
+
         }
 
         public async Task AddFejlesztesAsync(FejlesztesInfoDTO fejlesztes, Orszag currentOrszag)
@@ -110,6 +112,7 @@ namespace StrategyGame.Bll.Services.AAAServices
                 default:
                     throw new ArgumentException("Invalid fejlesztes type");
             }
+            _context.SaveChanges();
         }
 
         public async Task<List<FejlesztesInfoDTO>> GetFinishedFejlesztesesAsync(Guid userId)
@@ -154,9 +157,5 @@ namespace StrategyGame.Bll.Services.AAAServices
             return currentOrszag.Fejleszteses.FirstOrDefault(x => x.Kifejlesztve == false) != null;
         }
 
-        public Task SaveChangesAsync()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
