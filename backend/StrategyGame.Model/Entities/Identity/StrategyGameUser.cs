@@ -8,8 +8,6 @@ namespace StrategyGame.Model.Entities.Identity
 {
         public class StrategyGameUser : IdentityUser<Guid>
         {
-
-        public int CurrentOrszagIndex { get; set; } = 0;
-        public IList<OrszagUser> Orszags { get; set; } = new List<OrszagUser>();
+        public Orszag Orszag { get; set; } 
         }
 }

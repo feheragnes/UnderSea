@@ -9,10 +9,9 @@ namespace StrategyGame.Bll.ServiceInterfaces
 {
     public interface IGlobalService
     {
-        Task<long> GetUserScore(ClaimsPrincipal userClaim);
+        Task<long> GetUserScore(Guid UserId);
         Task<long> GetKor();
-        Task<Dictionary<string, long>> GetOrszagScores();
         Task<IList<RanglistaDTO>> GetRanglista();
-        Task<long> GetHelyezes(ClaimsPrincipal userClaim);
+        Task<long> GetHelyezes(Guid userId);
     }
 }

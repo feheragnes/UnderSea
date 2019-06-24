@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace StrategyGame.Dal.EntityTypeConfigurations
+/*namespace StrategyGame.Dal.EntityTypeConfigurations
 {
     public class OrszagUserConfiguration : IEntityTypeConfiguration<OrszagUser>
     {
@@ -17,3 +17,4 @@ namespace StrategyGame.Dal.EntityTypeConfigurations
         }
     }
 }
+*/
