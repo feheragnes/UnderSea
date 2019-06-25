@@ -283,8 +283,6 @@ namespace StrategyGame.Dal.Migrations
 
                     b.Property<bool>("Kifejlesztve");
 
-                    b.Property<long>("Noveles");
-
                     b.Property<Guid?>("OrszagId");
 
                     b.Property<long>("SzuksegesKorok");
@@ -310,6 +308,70 @@ namespace StrategyGame.Dal.Migrations
                     b.ToTable("Jateks");
                 });
 
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Novelok.AdoNovelo", b =>
+                {
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Ertek");
+
+                    b.Property<Guid?>("FejlesztesId");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("FejlesztesId");
+
+                    b.ToTable("AdoNovelo");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Novelok.KorallNovelo", b =>
+                {
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Ertek");
+
+                    b.Property<Guid?>("FejlesztesId");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("FejlesztesId");
+
+                    b.ToTable("KorallNovelo");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Novelok.TamadasNovelo", b =>
+                {
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Ertek");
+
+                    b.Property<Guid?>("FejlesztesId");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("FejlesztesId");
+
+                    b.ToTable("TamadasNovelo");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Novelok.VedekezesNovelo", b =>
+                {
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Ertek");
+
+                    b.Property<Guid?>("FejlesztesId");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("FejlesztesId");
+
+                    b.ToTable("VedekezesNovelo");
+                });
+
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Orszag", b =>
                 {
                     b.Property<Guid>("Id")
@@ -326,6 +388,54 @@ namespace StrategyGame.Dal.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Orszags");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Termelok.EgysegTermelo", b =>
+                {
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("EpuletId");
+
+                    b.Property<long>("Ertek");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("EpuletId");
+
+                    b.ToTable("EgysegTermelo");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Termelok.KorallTermelo", b =>
+                {
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("EpuletId");
+
+                    b.Property<long>("Ertek");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("EpuletId");
+
+                    b.ToTable("KorallTermelo");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Termelok.NepessegTermelo", b =>
+                {
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("EpuletId");
+
+                    b.Property<long>("Ertek");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("EpuletId");
+
+                    b.ToTable("NepessegTermelo");
                 });
 
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Egysegek.CsataCsiko", b =>
@@ -353,9 +463,13 @@ namespace StrategyGame.Dal.Migrations
                 {
                     b.HasBaseType("StrategyGame.Model.Entities.Models.Epuletek.Epulet");
 
-                    b.Property<long>("Korall");
+                    b.Property<Guid?>("Korallid");
 
-                    b.Property<long>("Nepesseg");
+                    b.Property<Guid?>("Nepessegid");
+
+                    b.HasIndex("Korallid");
+
+                    b.HasIndex("Nepessegid");
 
                     b.HasDiscriminator().HasValue("AramlasIranyito");
                 });
@@ -364,7 +478,9 @@ namespace StrategyGame.Dal.Migrations
                 {
                     b.HasBaseType("StrategyGame.Model.Entities.Models.Epuletek.Epulet");
 
-                    b.Property<long>("Szallas");
+                    b.Property<Guid?>("Szallasid");
+
+                    b.HasIndex("Szallasid");
 
                     b.HasDiscriminator().HasValue("ZatonyVar");
                 });
@@ -373,12 +489,20 @@ namespace StrategyGame.Dal.Migrations
                 {
                     b.HasBaseType("StrategyGame.Model.Entities.Models.Fejlesztesek.Fejlesztes");
 
+                    b.Property<Guid?>("Gyöngyid");
+
+                    b.HasIndex("Gyöngyid");
+
                     b.HasDiscriminator().HasValue("Alkimia");
                 });
 
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Fejlesztesek.IszapKombajn", b =>
                 {
                     b.HasBaseType("StrategyGame.Model.Entities.Models.Fejlesztesek.Fejlesztes");
+
+                    b.Property<Guid?>("Korallid");
+
+                    b.HasIndex("Korallid");
 
                     b.HasDiscriminator().HasValue("IszapKombajn");
                 });
@@ -387,6 +511,11 @@ namespace StrategyGame.Dal.Migrations
                 {
                     b.HasBaseType("StrategyGame.Model.Entities.Models.Fejlesztesek.Fejlesztes");
 
+                    b.Property<Guid?>("Korallid")
+                        .HasColumnName("IszapTraktor_Korallid");
+
+                    b.HasIndex("Korallid");
+
                     b.HasDiscriminator().HasValue("IszapTraktor");
                 });
 
@@ -394,12 +523,20 @@ namespace StrategyGame.Dal.Migrations
                 {
                     b.HasBaseType("StrategyGame.Model.Entities.Models.Fejlesztesek.Fejlesztes");
 
+                    b.Property<Guid?>("Vedekezesid");
+
+                    b.HasIndex("Vedekezesid");
+
                     b.HasDiscriminator().HasValue("KorallFal");
                 });
 
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Fejlesztesek.SzonarAgyu", b =>
                 {
                     b.HasBaseType("StrategyGame.Model.Entities.Models.Fejlesztesek.Fejlesztes");
+
+                    b.Property<Guid?>("Tamadasid");
+
+                    b.HasIndex("Tamadasid");
 
                     b.HasDiscriminator().HasValue("SzonarAgyu");
                 });
@@ -497,6 +634,108 @@ namespace StrategyGame.Dal.Migrations
                     b.HasOne("StrategyGame.Model.Entities.Models.Orszag")
                         .WithMany("Fejleszteses")
                         .HasForeignKey("OrszagId");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Novelok.AdoNovelo", b =>
+                {
+                    b.HasOne("StrategyGame.Model.Entities.Models.Fejlesztesek.Fejlesztes", "Fejlesztes")
+                        .WithMany()
+                        .HasForeignKey("FejlesztesId");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Novelok.KorallNovelo", b =>
+                {
+                    b.HasOne("StrategyGame.Model.Entities.Models.Fejlesztesek.Fejlesztes", "Fejlesztes")
+                        .WithMany()
+                        .HasForeignKey("FejlesztesId");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Novelok.TamadasNovelo", b =>
+                {
+                    b.HasOne("StrategyGame.Model.Entities.Models.Fejlesztesek.Fejlesztes", "Fejlesztes")
+                        .WithMany()
+                        .HasForeignKey("FejlesztesId");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Novelok.VedekezesNovelo", b =>
+                {
+                    b.HasOne("StrategyGame.Model.Entities.Models.Fejlesztesek.Fejlesztes", "Fejlesztes")
+                        .WithMany()
+                        .HasForeignKey("FejlesztesId");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Termelok.EgysegTermelo", b =>
+                {
+                    b.HasOne("StrategyGame.Model.Entities.Models.Epuletek.Epulet", "Epulet")
+                        .WithMany()
+                        .HasForeignKey("EpuletId");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Termelok.KorallTermelo", b =>
+                {
+                    b.HasOne("StrategyGame.Model.Entities.Models.Epuletek.Epulet", "Epulet")
+                        .WithMany()
+                        .HasForeignKey("EpuletId");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Termelok.NepessegTermelo", b =>
+                {
+                    b.HasOne("StrategyGame.Model.Entities.Models.Epuletek.Epulet", "Epulet")
+                        .WithMany()
+                        .HasForeignKey("EpuletId");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Epuletek.AramlasIranyito", b =>
+                {
+                    b.HasOne("StrategyGame.Model.Entities.Models.Termelok.KorallTermelo", "Korall")
+                        .WithMany()
+                        .HasForeignKey("Korallid");
+
+                    b.HasOne("StrategyGame.Model.Entities.Models.Termelok.NepessegTermelo", "Nepesseg")
+                        .WithMany()
+                        .HasForeignKey("Nepessegid");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Epuletek.ZatonyVar", b =>
+                {
+                    b.HasOne("StrategyGame.Model.Entities.Models.Termelok.EgysegTermelo", "Szallas")
+                        .WithMany()
+                        .HasForeignKey("Szallasid");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Fejlesztesek.Alkimia", b =>
+                {
+                    b.HasOne("StrategyGame.Model.Entities.Models.Novelok.AdoNovelo", "Gyöngy")
+                        .WithMany()
+                        .HasForeignKey("Gyöngyid");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Fejlesztesek.IszapKombajn", b =>
+                {
+                    b.HasOne("StrategyGame.Model.Entities.Models.Novelok.KorallNovelo", "Korall")
+                        .WithMany()
+                        .HasForeignKey("Korallid");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Fejlesztesek.IszapTraktor", b =>
+                {
+                    b.HasOne("StrategyGame.Model.Entities.Models.Novelok.KorallNovelo", "Korall")
+                        .WithMany()
+                        .HasForeignKey("Korallid");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Fejlesztesek.KorallFal", b =>
+                {
+                    b.HasOne("StrategyGame.Model.Entities.Models.Novelok.VedekezesNovelo", "Vedekezes")
+                        .WithMany()
+                        .HasForeignKey("Vedekezesid");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Fejlesztesek.SzonarAgyu", b =>
+                {
+                    b.HasOne("StrategyGame.Model.Entities.Models.Novelok.TamadasNovelo", "Tamadas")
+                        .WithMany()
+                        .HasForeignKey("Tamadasid");
                 });
 #pragma warning restore 612, 618
         }
