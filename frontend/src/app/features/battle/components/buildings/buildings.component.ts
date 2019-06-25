@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { EpuletService } from "../../services/epulet.service";
+import { AuthenticationService } from "src/app/services/authentication.service";
 
 @Component({
   selector: "app-buildings",
@@ -17,6 +19,20 @@ export class BuildingsComponent implements OnInit {
     var x = document.getElementById(id);
     x.style.backgroundColor = "rgba(255, 255, 255, 0.25)";
   }
-  constructor() {}
+
+  buyBuilding() {
+    if (this.activeCard == "card1") {
+      this.authService.buyEpulet("ZatonyVar");
+      console.log("lol1");
+    }
+    if (this.activeCard == "card2") {
+      this.epuletService.buyEpulet("AramlasIranyito");
+      console.log("lol2");
+    }
+  }
+  constructor(
+    private epuletService: EpuletService,
+    private readonly authService: AuthenticationService
+  ) {}
   ngOnInit() {}
 }

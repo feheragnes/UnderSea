@@ -28,6 +28,9 @@ mat-sidenav-container {
   height: 917px;
   margin-top: 45px;
 }
+mat-sidenav-content {
+  height: 917px;
+}
 
 button {
   color: #001234;
@@ -135,4 +138,15 @@ h1 {
 h5 {
   font-family: baloo;
   font-size: 20px;
+}
+
+.country {
+  z-index: 1;
+  position: relative;
+}
+
+.router {
+  z-index: 2;
+  position: relative;
+  top: -700px;
 }

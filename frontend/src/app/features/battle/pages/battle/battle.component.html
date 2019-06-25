@@ -76,7 +76,7 @@
             <img src="assets\images\002-male.svg" />
           </mat-card>
           <p>{{ orszagInfo.nev }}</p>
-          <a class="profile" mat-button routerLink="profile">
+          <a class="profile" mat-button routerLink="">
             Profil
           </a>
           <a class="logout" mat-button (click)="logout()">
@@ -86,7 +86,8 @@
         <h1>UNDERSEA</h1>
       </mat-sidenav>
       <mat-sidenav-content>
-        <router-outlet></router-outlet>
+        <div class="country"><app-country></app-country></div>
+        <div class="router"><router-outlet></router-outlet></div>
       </mat-sidenav-content>
     </mat-sidenav-container>
   </div>

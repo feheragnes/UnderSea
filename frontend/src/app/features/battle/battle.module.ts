@@ -26,6 +26,7 @@ import { PowerupsComponent } from './components/powerups/powerups.component';
 import { FightsComponent } from './components/fights/fights.component';
 import { RankingsComponent } from './components/rankings/rankings.component';
 import { ArmyComponent } from './components/army/army.component';
+import { CountryComponent } from './components/country/country.component';
 
 @NgModule({
   imports: [
@@ -47,6 +48,6 @@ import { ArmyComponent } from './components/army/army.component';
     HttpClientModule
   ],
   providers: [BattleService],
-  declarations: [BattleComponent, BuildingsComponent, AttackComponent, PowerupsComponent, FightsComponent, RankingsComponent, ArmyComponent]
+  declarations: [BattleComponent, BuildingsComponent, AttackComponent, PowerupsComponent, FightsComponent, RankingsComponent, ArmyComponent, CountryComponent]
 })
 export class BattleModule {}
