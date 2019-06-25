@@ -120,11 +120,11 @@ namespace StrategyGame.Bll.Services
         }
         private async Task<IList<SeregInfoDTO>> GetSeregInfoDTOs(Orszag orszag)
         {
-            return await _egysegService.GetOtthoniEgysegsAsync(orszag);
+            return await _egysegService.GetOtthoniEgysegsFromOneUserAsync(orszag);
         }
         private async Task<IList<EpuletInfoDTO>> GetEpuletInfoDTOs(Orszag orszag)
         {
-            return await _epuletService.GetFelepultEpuletsAsync(orszag);
+            return await _epuletService.GetFelepultEpuletsFromOneUserAsync(orszag);
         }
     }
 }

@@ -34,7 +34,7 @@ namespace StrategyGame.Api.Controllers
         public async Task<IActionResult> GetUserEgysegs()
         {
             Orszag userOrszag = await _commonService.GetCurrentOrszag(UserId);
-            return Ok(_egysegService.GetOtthoniEgysegsAsync(userOrszag));
+            return Ok(_egysegService.GetOtthoniEgysegsFromOneUserAsync(userOrszag));
         }
 
         [HttpGet]

@@ -33,28 +33,28 @@ namespace StrategyGame.Api.Controllers
         public async Task<ActionResult<List<Epulet>>> GetUserEpulets()
         {
            
-            return  await _epuletService.GetAllEpuletsAsync(UserId);
+            return  await _epuletService.GetAllEpuletsFromOneUserAsync(UserId);
         }
 
         [HttpPost]
         public async Task<IActionResult> BuyEpulets([FromBody]  List<EpuletInfoDTO> epulets)
         {
-
             await _epuletService.AddEpuletAsync(epulets, UserId);
-
-            return Ok("Not implemented");
+            return Ok();
         }
 
         [HttpGet]
-        public async Task<ActionResult<bool>> GetIfActiveDevelopement()
+        public async Task<ActionResult<long>> GetActiveEpitesNumber()
         {
-            return await _epuletService.GetIfActiveConstruction(UserId);
+            Orszag currentOrszag = await _commonService.GetCurrentOrszag(UserId);
+            return await _epuletService.GetActiveEpitesCount(currentOrszag);
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetEpuletInfos()
+        public async Task<ActionResult<List<Epulet>>> GetEpuletInfos()
         {
-            return Ok("Not implemented");
+
+            return await _epuletService.GetAllEpuletsFromOneUserAsync(UserId);
         }
     }
 }

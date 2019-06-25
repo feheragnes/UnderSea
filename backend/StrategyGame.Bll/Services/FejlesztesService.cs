@@ -74,46 +74,6 @@ namespace StrategyGame.Bll.Services.AAAServices
 
         }
 
-        public async Task AddFejlesztesAsync(FejlesztesInfoDTO fejlesztes, Orszag currentOrszag)
-        {
-            List<Fejlesztes> fejleszteses = currentOrszag.Fejleszteses.ToList();
-
-            string fejlesztesTipus = Enum.GetName(typeof(FejlesztesTipus), fejlesztes.Tipus); ;
-
-            fejleszteses.ForEach(x =>
-            {
-                if (x.Kifejlesztve == false)
-                    throw new InvalidOperationException("Another PowerUp is under development");
-
-                if (x.GetType().ToString() == fejlesztesTipus)
-                    throw new InvalidOperationException("You already have the chosen PowerUp");
-            });
-
-            switch (fejlesztes.Tipus)
-            {
-                case FejlesztesTipus.Alkimia:
-                    currentOrszag.Fejleszteses.Add(new Alkimia());
-                    break;
-                case FejlesztesTipus.IszapKombajn:
-                    currentOrszag.Fejleszteses.Add(new IszapKombajn());
-                    break;
-                case FejlesztesTipus.IszapTraktor:
-                    currentOrszag.Fejleszteses.Add(new IszapTraktor());
-                    break;
-                case FejlesztesTipus.KorallFal:
-                    currentOrszag.Fejleszteses.Add(new KorallFal());
-                    break;
-                case FejlesztesTipus.SzonarAgyu:
-                    currentOrszag.Fejleszteses.Add(new SzonarAgyu());
-                    break;
-                case FejlesztesTipus.VizalattiHarmuveszet:
-                    currentOrszag.Fejleszteses.Add(new VizalattiHarcmuveszet());
-                    break;
-                default:
-                    throw new ArgumentException("Invalid fejlesztes type");
-            }
-            _context.SaveChanges();
-        }
 
         public async Task<List<FejlesztesInfoDTO>> GetFinishedFejlesztesesAsync(Guid userId)
         {
@@ -131,30 +91,10 @@ namespace StrategyGame.Bll.Services.AAAServices
             return keszDTOList;
         }
 
-        public async Task<List<FejlesztesInfoDTO>> GetFinishedFejlesztesesAsync(Orszag currentOrszag)
+
+        public async Task<long> GetActiveFejlesztesCount(Orszag currentOrszag)
         {
-            List<Fejlesztes> keszFejleszteses = currentOrszag.Fejleszteses.Where(x => x.Kifejlesztve == true).ToList();
-            List<FejlesztesInfoDTO> keszDTOList = new List<FejlesztesInfoDTO>();
-
-            var asd = (FejlesztesTipus)Enum.Parse(typeof(FejlesztesTipus), keszFejleszteses[0].GetType().Name);
-
-            keszFejleszteses.ForEach(x =>
-            {
-                keszDTOList.Add(new FejlesztesInfoDTO((FejlesztesTipus)Enum.Parse(typeof(FejlesztesTipus), x.GetType().Name), false));
-            });
-
-            return keszDTOList;
-        }
-
-        public async Task<bool> GetIfCurrentlyActiveFejlesztes(Guid userId)
-        {
-            Orszag currentOrszag = await _commonService.GetCurrentOrszag(userId);
-            return currentOrszag.Fejleszteses.FirstOrDefault(x => x.Kifejlesztve == false) != null;
-        }
-
-        public async Task<bool> GetIfCurrentlyActiveFejlesztes(Orszag currentOrszag)
-        {
-            return  currentOrszag.Fejleszteses.FirstOrDefault(x => x.Kifejlesztve == false) != null;
+            return currentOrszag.Fejleszteses.ToList().FindAll(x => x.Kifejlesztve == false).Count();
         }
 
     }
