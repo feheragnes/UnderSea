@@ -14,8 +14,6 @@ namespace StrategyGame.Bll.DTOs.Fejlesztesek
             Kifejlesztve = false;
         }
         public Guid Id { get; set; }
-
-        public long Noveles { get; set; }
         public long SzuksegesKorok { get; set; }
         public long AktualisKor { get; set; }
         public bool Kifejlesztve { get; set; }

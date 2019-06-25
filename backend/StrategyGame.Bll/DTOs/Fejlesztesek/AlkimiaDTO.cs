@@ -16,7 +16,7 @@ namespace StrategyGame.Bll.DTOs.Fejlesztesek
         public async Task<OrszagDTO> SetTermeles(OrszagDTO orszag)
         {
                 var tmp = (double)orszag.GyongyTermeles;
-                tmp *= Noveles / 100;
+              //  tmp *= Noveles / 100;
                 orszag.GyongyTermeles = Convert.ToInt64(Math.Round(tmp));
             return orszag;
         }

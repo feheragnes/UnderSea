@@ -6,6 +6,8 @@ namespace StrategyGame.Model.Entities.Models.Novelok
 {
     public class KorallNovelo
     {
+        public Guid id { get; set; }
+
         public int Ertek { get; set; }
 
     }
