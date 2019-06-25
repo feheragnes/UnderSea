@@ -395,15 +395,15 @@ namespace StrategyGame.Dal.Migrations
                     b.Property<Guid>("id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long>("Ertek");
+                    b.Property<Guid?>("EpuletId");
 
-                    b.Property<Guid?>("epuletId");
+                    b.Property<long>("Ertek");
 
                     b.HasKey("id");
 
-                    b.HasIndex("epuletId");
+                    b.HasIndex("EpuletId");
 
-                    b.ToTable("EgysegTermelo");
+                    b.ToTable("EgysegTermelos");
                 });
 
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Termelok.KorallTermelo", b =>
@@ -411,13 +411,13 @@ namespace StrategyGame.Dal.Migrations
                     b.Property<Guid>("id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long>("Ertek");
+                    b.Property<Guid?>("EpuletId");
 
-                    b.Property<Guid?>("epuletId");
+                    b.Property<long>("Ertek");
 
                     b.HasKey("id");
 
-                    b.HasIndex("epuletId");
+                    b.HasIndex("EpuletId");
 
                     b.ToTable("KorallTermelos");
                 });
@@ -427,15 +427,15 @@ namespace StrategyGame.Dal.Migrations
                     b.Property<Guid>("id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long>("Ertek");
+                    b.Property<Guid?>("EpuletId");
 
-                    b.Property<Guid?>("epuletId");
+                    b.Property<long>("Ertek");
 
                     b.HasKey("id");
 
-                    b.HasIndex("epuletId");
+                    b.HasIndex("EpuletId");
 
-                    b.ToTable("NepessegTermelo");
+                    b.ToTable("NepessegTermelos");
                 });
 
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Egysegek.CsataCsiko", b =>
@@ -666,23 +666,23 @@ namespace StrategyGame.Dal.Migrations
 
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Termelok.EgysegTermelo", b =>
                 {
-                    b.HasOne("StrategyGame.Model.Entities.Models.Epuletek.Epulet", "epulet")
+                    b.HasOne("StrategyGame.Model.Entities.Models.Epuletek.Epulet", "Epulet")
                         .WithMany()
-                        .HasForeignKey("epuletId");
+                        .HasForeignKey("EpuletId");
                 });
 
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Termelok.KorallTermelo", b =>
                 {
-                    b.HasOne("StrategyGame.Model.Entities.Models.Epuletek.Epulet", "epulet")
+                    b.HasOne("StrategyGame.Model.Entities.Models.Epuletek.Epulet", "Epulet")
                         .WithMany()
-                        .HasForeignKey("epuletId");
+                        .HasForeignKey("EpuletId");
                 });
 
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Termelok.NepessegTermelo", b =>
                 {
-                    b.HasOne("StrategyGame.Model.Entities.Models.Epuletek.Epulet", "epulet")
+                    b.HasOne("StrategyGame.Model.Entities.Models.Epuletek.Epulet", "Epulet")
                         .WithMany()
-                        .HasForeignKey("epuletId");
+                        .HasForeignKey("EpuletId");
                 });
 
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Epuletek.AramlasIranyito", b =>
