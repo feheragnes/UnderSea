@@ -8,48 +8,49 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
   styleUrls: ['./buildings.component.scss']
 })
 export class BuildingsComponent implements OnInit {
-  colorclicked = 'rgba(255, 255, 255, 0.25)';
-  color = 'transparent';
-  isActive = true;
-  activeCard;
+  private activeCard;
+  private epuletInfo;
 
   constructor(private epuletService: EpuletService) {}
-  ngOnInit() {}
+  ngOnInit() {
+    this.getEpuletInfo();
+  }
 
-  changeColor(id) {
-    document.getElementById('card1').style.backgroundColor = 'transparent';
-    document.getElementById('card2').style.backgroundColor = 'transparent';
+  setActive(id: string) {
     this.activeCard = id;
-    var x = document.getElementById(id);
-    x.style.backgroundColor = 'rgba(255, 255, 255, 0.25)';
+  }
+
+  getEpuletInfo() {
+    this.epuletService.getEpuletInfo().subscribe(
+      data => {
+        this.epuletInfo = data;
+        console.log(this.epuletInfo);
+      },
+      err => console.error(err),
+      () => {
+        console.log('done loading epuletInfo');
+      }
+    );
   }
 
   buyBuilding() {
-    if (this.activeCard == 'card1') {
-      this.epuletService.buyEpulet('ZatonyVar').subscribe(
-        data => {
-          console.log(data);
-        },
-        error => {
-          console.log(error);
-        },
-        () => {
-          console.log('done building');
-        }
-      );
+    let type;
+    if (this.activeCard === 'card1') {
+      type = 'ZatonyVar';
     }
-    if (this.activeCard == 'card2') {
-      this.epuletService.buyEpulet('AramlasIranyito').subscribe(
-        data => {
-          console.log(data);
-        },
-        error => {
-          console.log(error);
-        },
-        () => {
-          console.log('done building');
-        }
-      );
+    if (this.activeCard === 'card2') {
+      type = 'AramlasIranyito';
     }
+    this.epuletService.buyEpulet(type).subscribe(
+      data => {
+        console.log(data);
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
+        console.log('done building');
+      }
+    );
   }
 }

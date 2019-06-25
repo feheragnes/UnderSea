@@ -14,9 +14,9 @@
     <div class="cards">
       <mat-card
         id="card1"
-        (click)="changeColor('card1')"
+        (click)="setActive('card1')"
         class="smallcard"
-        [style.backgroundcolor]="color"
+        [class.active]="activeCard == 'card1'"
       >
         <mat-card-content>
           <img src="assets\images\undersea_game-09.png" />
@@ -26,7 +26,12 @@
           </div>
         </mat-card-content>
       </mat-card>
-      <mat-card id="card2" (click)="changeColor('card2')" class="smallcard">
+      <mat-card
+        id="card2"
+        (click)="setActive('card2')"
+        class="smallcard"
+        [class.active]="activeCard == 'card2'"
+      >
         <mat-card-content>
           <img src="assets\images\undersea_game-10.png" />
           <div class="text">
@@ -35,7 +40,12 @@
           </div>
         </mat-card-content>
       </mat-card>
-      <mat-card id="card3" (click)="changeColor('card3')" class="smallcard">
+      <mat-card
+        id="card3"
+        (click)="setActive('card3')"
+        class="smallcard"
+        [class.active]="activeCard == 'card3'"
+      >
         <mat-card-content>
           <img src="assets\images\undersea_game-09.png" />
           <div class="text">
@@ -44,7 +54,12 @@
           </div>
         </mat-card-content>
       </mat-card>
-      <mat-card id="card4" (click)="changeColor('card4')" class="smallcard">
+      <mat-card
+        id="card4"
+        (click)="setActive('card4')"
+        class="smallcard"
+        [class.active]="activeCard == 'card4'"
+      >
         <mat-card-content>
           <img src="assets\images\undersea_game-03.png" />
           <div class="text">
@@ -53,7 +68,12 @@
           </div>
         </mat-card-content>
       </mat-card>
-      <mat-card id="card5" (click)="changeColor('card5')" class="smallcard">
+      <mat-card
+        id="card5"
+        (click)="setActive('card5')"
+        class="smallcard"
+        [class.active]="activeCard == 'card5'"
+      >
         <mat-card-content>
           <img src="assets\images\undersea_game-09.png" />
           <div class="text">
@@ -62,7 +82,12 @@
           </div>
         </mat-card-content>
       </mat-card>
-      <mat-card id="card6" (click)="changeColor('card6')" class="smallcard">
+      <mat-card
+        id="card6"
+        (click)="setActive('card6')"
+        class="smallcard"
+        [class.active]="activeCard == 'card6'"
+      >
         <mat-card-content>
           <img src="assets\images\undersea_game-09.png" />
           <div class="text">

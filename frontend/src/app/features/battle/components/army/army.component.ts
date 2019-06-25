@@ -13,25 +13,21 @@ export class ArmyComponent implements OnInit {
   changeNumber(type: string, value: number) {
     switch (type) {
       case 'csiko':
-        this.csikoNumber += value;
-        if (this.csikoNumber < 0) {
-          this.csikoNumber = 0;
+        if (this.csikoNumber > 0 || value > 0) {
+          this.csikoNumber += value;
         }
         break;
       case 'foka':
-        this.fokaNumber += value;
-        if (this.fokaNumber < 0) {
-          this.fokaNumber = 0;
+        if (this.fokaNumber > 0 || value > 0) {
+          this.fokaNumber += value;
         }
         break;
       case 'capa':
-        this.capaNumber += value;
-        if (this.capaNumber < 0) {
-          this.capaNumber = 0;
+        if (this.capaNumber > 0 || value > 0) {
+          this.capaNumber += value;
         }
         break;
     }
-    console.log(type, value);
   }
 
   constructor() {}
