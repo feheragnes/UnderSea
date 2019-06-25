@@ -7,7 +7,7 @@ using System.Text;
 
 namespace StrategyGame.Bll.Mappers
 {
-    class AllapotProfile : Profile
+    public class AllapotProfile : Profile
     {
 
         public AllapotProfile()

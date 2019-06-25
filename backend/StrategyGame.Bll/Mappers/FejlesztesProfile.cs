@@ -7,12 +7,11 @@ using System.Text;
 
 namespace StrategyGame.Bll.Mappers
 {
-    class FejlesztesProfile : Profile
+    public class FejlesztesProfile : Profile
     {
         public FejlesztesProfile()
         {
             CreateMap<Fejlesztes, FejlesztesDTO>()
-              .ForMember(e => e.Noveles, opt => opt.MapFrom(e => e.Noveles))
               .ForMember(e => e.SzuksegesKorok, opt => opt.MapFrom(e => e.SzuksegesKorok))
               .ForMember(e => e.AktualisKor, opt => opt.MapFrom(e => e.AktualisKor))
               .ForMember(e => e.Kifejlesztve, opt => opt.MapFrom(e => e.Kifejlesztve))
@@ -26,7 +25,7 @@ namespace StrategyGame.Bll.Mappers
                .IncludeBase<Fejlesztes, FejlesztesDTO>()
                .ReverseMap();
 
-            CreateMap<IszapTraktor, IszapTraktor>()
+            CreateMap<IszapTraktor, IszapTraktorDTO>()
                .IncludeBase<Fejlesztes, FejlesztesDTO>()
                .ReverseMap();
 

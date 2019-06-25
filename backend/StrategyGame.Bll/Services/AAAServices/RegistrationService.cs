@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 using StrategyGame.Bll.Services.AAAServices;
 using StrategyGame.Bll.ServiceInterfaces.AAAServiceInterfaces;
 using Microsoft.Extensions.Configuration;
+using StrategyGame.Model.Entities.Models;
+using StrategyGame.Dal.Context;
+using Microsoft.EntityFrameworkCore;
+using StrategyGame.Bll.ServiceInterfaces;
 
 namespace StrategyGame.Bll.Services.AAAServices
 {
@@ -15,23 +19,27 @@ namespace StrategyGame.Bll.Services.AAAServices
     {
         private readonly SignInManager<StrategyGameUser> _signInManager;
         private readonly UserManager<StrategyGameUser> _userManager;
-        private readonly IConfiguration _configuration;
+        private readonly StrategyGameContext _context;
         private readonly IJWTService _jwtService;
+        private readonly IOrszagService _orszagService;
+
 
         public RegistrationService(
             UserManager<StrategyGameUser> userManager,
             SignInManager<StrategyGameUser> signInManager,
-            IConfiguration configuration,
-            IJWTService jwtService
+            StrategyGameContext context,
+            IJWTService jwtService,
+            IOrszagService orszagService
             )
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _configuration = configuration;
+            _context = context;
             _jwtService = jwtService;
+            _orszagService = orszagService;
         }
 
-        public async Task<object> Register(RegistrationDTO model)
+        public async Task<string> Register(RegistrationDTO model)
         {
             var user = new StrategyGameUser
             {
@@ -43,6 +51,15 @@ namespace StrategyGame.Bll.Services.AAAServices
 
             if (result.Succeeded)
             {
+
+                try
+                {
+                    _orszagService.MakeOrszagUserConnection(user, model.CountryName);
+                }catch(Exception e)
+                {
+                    await _userManager.DeleteAsync(user);
+                    throw e;
+                }
                 await _signInManager.SignInAsync(user, false);
                 return await _jwtService.GenerateJwtToken(model.Email, user);
             }

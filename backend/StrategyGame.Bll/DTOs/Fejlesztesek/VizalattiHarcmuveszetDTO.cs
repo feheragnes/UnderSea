@@ -6,14 +6,9 @@ using System.Threading.Tasks;
 
 namespace StrategyGame.Bll.DTOs.Fejlesztesek
 {
-    class VizalattiHarcmuveszetDTO : FejlesztesDTO, IFejlesztes
+    class VizalattiHarcmuveszetDTO : FejlesztesDTO
     {
         public Task Increase()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task NextTurn()
         {
             throw new NotImplementedException();
         }

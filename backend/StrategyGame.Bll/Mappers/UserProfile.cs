@@ -7,12 +7,12 @@ using System.Text;
 
 namespace StrategyGame.Bll.Mappers
 {
-    class UserProfile : Profile
+    public class UserProfile : Profile
     {
         public UserProfile()
         {
             CreateMap<StrategyGameUser, StrategyGameUserDTO>()
-                 .ForMember(e => e.Orszags, opt => opt.MapFrom(e => e.Orszags))
+                .ForMember(e => e.Email, opt => opt.MapFrom(e => e.Email))
                  .ReverseMap();
         }
     }

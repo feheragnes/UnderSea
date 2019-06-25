@@ -4,7 +4,7 @@ using System.Text;
 
 namespace StrategyGame.Bll.DTOs.Egysegek
 {
-    class EgysegDTO
+    public class EgysegDTO
     {
         public Guid Id { get; set; }
         public long Tamadas { get; set; }

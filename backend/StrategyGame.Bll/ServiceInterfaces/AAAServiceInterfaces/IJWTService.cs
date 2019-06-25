@@ -8,6 +8,6 @@ namespace StrategyGame.Bll.ServiceInterfaces.AAAServiceInterfaces
 {
     public interface IJWTService
     {
-        Task<object> GenerateJwtToken(string email, StrategyGameUser user);
+        Task<string> GenerateJwtToken(string email, StrategyGameUser user);
     }
 }

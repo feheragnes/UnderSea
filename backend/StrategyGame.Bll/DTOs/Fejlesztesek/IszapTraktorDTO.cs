@@ -6,16 +6,19 @@ using System.Threading.Tasks;
 
 namespace StrategyGame.Bll.DTOs.Fejlesztesek
 {
-    class IszapTraktorDTO : FejlesztesDTO, IFejlesztes
+    class IszapTraktorDTO : FejlesztesDTO, ITermelo
     {
         public Task Increase()
         {
             throw new NotImplementedException();
         }
 
-        public Task NextTurn()
+        public async Task<OrszagDTO> SetTermeles(OrszagDTO orszag)
         {
-            throw new NotImplementedException();
+                var tmp = (double)orszag.KorallTermeles;
+              //  tmp *= Noveles / 100;
+                orszag.KorallTermeles = Convert.ToInt64(Math.Round(tmp));
+            return orszag;
         }
     }
 }

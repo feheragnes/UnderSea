@@ -7,13 +7,14 @@ using StrategyGame.Model.Entities.Models;
 using StrategyGame.Model.Entities.Models.Egysegek;
 using StrategyGame.Model.Entities.Models.Epuletek;
 using StrategyGame.Model.Entities.Models.Fejlesztesek;
+using StrategyGame.Model.Entities.Models.Termelok;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace StrategyGame.Dal.Context
 {
-    public class StrategyGameContext : IdentityDbContext<StrategyGameUser,StrategyGameRole,Guid>
+    public class StrategyGameContext : IdentityDbContext<StrategyGameUser, StrategyGameRole, Guid>, IStrategyGameContext
     {
         public StrategyGameContext(DbContextOptions<StrategyGameContext> options)
             : base(options)
@@ -27,6 +28,9 @@ namespace StrategyGame.Dal.Context
         public DbSet<Fejlesztes> Fejleszteses { get; set; }
         public DbSet<Orszag> Orszags { get; set; }
         public DbSet<Allapot> Allapots { get; set; }
+        public DbSet<KorallTermelo> KorallTermelos {get;set;}
+        public DbSet<NepessegTermelo> NepessegTermelos { get; set; }
+        public DbSet<EgysegTermelo> EgysegTermelos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -43,9 +47,24 @@ namespace StrategyGame.Dal.Context
             builder.Entity<CsataCsiko>().HasBaseType<Egyseg>();
             builder.Entity<LezerCapa>().HasBaseType<Egyseg>();
 
-            builder.ApplyConfiguration(new OrszagUserConfiguration());
+           // builder.ApplyConfiguration(new OrszagUserConfiguration());
             builder.ApplyConfiguration(new CsapatConfiguration());
+        }
 
+        public override int SaveChanges()
+        {
+            try
+            {
+                return base.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException e)
+            {
+                throw new Exception("Concurrency error");
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
         }
     }
 }

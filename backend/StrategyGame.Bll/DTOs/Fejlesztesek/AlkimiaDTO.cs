@@ -6,16 +6,19 @@ using System.Threading.Tasks;
 
 namespace StrategyGame.Bll.DTOs.Fejlesztesek
 {
-    public class AlkimiaDTO : FejlesztesDTO, IFejlesztes
+    public class AlkimiaDTO : FejlesztesDTO, ITermelo
     {
-        public Task Increase()
+        public  Task Increase()
         {
             throw new NotImplementedException();
         }
 
-        public Task NextTurn()
+        public async Task<OrszagDTO> SetTermeles(OrszagDTO orszag)
         {
-            throw new NotImplementedException();
+                var tmp = (double)orszag.GyongyTermeles;
+              //  tmp *= Noveles / 100;
+                orszag.GyongyTermeles = Convert.ToInt64(Math.Round(tmp));
+            return orszag;
         }
     }
 }

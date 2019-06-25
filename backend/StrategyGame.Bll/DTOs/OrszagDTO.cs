@@ -6,20 +6,21 @@ using System.Text;
 
 namespace StrategyGame.Bll.DTOs
 {
-    class OrszagDTO
+    public class OrszagDTO
     {
-
         public Guid Id { get; set; }
+
+        public string Nev { get; set; }
 
         public long Gyongy { get; set; }
 
         public long Korall { get; set; }
+        public long Helyezes { get; set; }
+        public long KorallTermeles { get; set; }
+        public long GyongyTermeles { get; set; }
+        public IList<SeregInfoDTO> SeregInfoDTOs { get; set; }
+        public IList<EpuletInfoDTO> EpuletInfoDTOs { get; set; }
 
-        public IList<EpuletDTO> Epulets { get; set; } = new List<EpuletDTO>();
-
-        public IList<CsapatDTO> OtthoniCsapats { get; set; } = new List<CsapatDTO>();
-        public IList<CsapatDTO> TamadoCsapats { get; set; } = new List<CsapatDTO>();
-
-        public IList<FejlesztesDTO> Fejleszteses { get; set; } = new List<FejlesztesDTO>();
+        
     }
 }

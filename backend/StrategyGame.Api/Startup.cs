@@ -22,6 +22,11 @@ using Hangfire.SqlServer;
 using AutoMapper;
 using StrategyGame.Bll.ServiceInterfaces.AAAServiceInterfaces;
 using StrategyGame.Bll.Services.AAAServices;
+using Swashbuckle.AspNetCore.Swagger;
+using StrategyGame.Bll.Mappers;
+using StrategyGame.Bll.Services;
+using StrategyGame.Bll.ServiceInterfaces;
+using StrategyGame.Api.Mappers;
 
 namespace StrategyGame.Api
 {
@@ -36,6 +41,7 @@ namespace StrategyGame.Api
         }
 
         public IConfiguration Configuration { get; }
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -108,12 +114,46 @@ namespace StrategyGame.Api
                     ClockSkew = TimeSpan.Zero
                 };
             });
+            services.AddScoped<IOrszagService, OrszagService>();
+            services.AddScoped<IGlobalService, GlobalService>();
+            services.AddScoped<IEpuletService, EpuletService>();
+            services.AddScoped<ICommonService, CommonService>();
+            services.AddScoped<IEgysegService, EgysegService>();
+            services.AddScoped<IFejlesztesService, FejlesztesService>();
             services.AddScoped<IJWTService, JWTService>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IRegistrationService, RegistrationService>();
-            services.AddAutoMapper();
+            //services.AddAutoMapper(typeof(Startup));
             services.AddHangfireServer();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v0.1", new Info { Title = "UnderSeaApi", Version = "v0.1" });
+            });
+            
+            services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowSpecificOrigins,
+                builder =>
+                {
+                    builder.WithOrigins("localhost:4200").AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader();
+                });
+            });
+            services.AddRouting(opt => opt.LowercaseUrls = true);
             services.AddMvc();
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new FejlesztesProfile());
+                mc.AddProfile(new AllapotProfile());
+                mc.AddProfile(new CsapatProfile());
+                mc.AddProfile(new EgysegProfile());
+                mc.AddProfile(new EpuletProfile());
+                mc.AddProfile(new JatekProfile());
+                mc.AddProfile(new OrszagProfile());
+                mc.AddProfile(new UserProfile());
+                mc.AddProfile(new ViewModelProfile());
+            });
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -125,9 +165,17 @@ namespace StrategyGame.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseCors(MyAllowSpecificOrigins);
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("./swagger/v0.1/swagger.json", "UnderSea API v0.1");
+                c.RoutePrefix = string.Empty;
+            });
             app.UseAuthentication();
             app.UseMvc();
+
+
             //ctx.Database.EnsureCreated();
         }
     }

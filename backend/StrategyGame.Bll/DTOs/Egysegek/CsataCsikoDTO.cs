@@ -7,5 +7,6 @@ namespace StrategyGame.Bll.DTOs.Egysegek
 {
     class CsataCsikoDTO : EgysegDTO, IEgyseg
     {
+        public long Ertek { get; set; } = 5;
     }
 }

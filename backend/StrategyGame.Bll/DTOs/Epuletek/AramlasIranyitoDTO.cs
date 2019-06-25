@@ -6,11 +6,26 @@ using System.Threading.Tasks;
 
 namespace StrategyGame.Bll.DTOs.Epuletek
 {
-    class AramlasIranyitoDTO : EpuletDTO, IEpulet
+    public class AramlasIranyitoDTO : EpuletDTO, ITermelo, INepesseg
     {
+        public long Nepesseg { get; set; }
+        public long Korall { get; set; }
+
+        public async Task<long> GetNepesseg()
+        {
+            return Nepesseg;
+        }
+
         public Task NextTurn()
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<OrszagDTO> SetTermeles(OrszagDTO orszag)
+        {
+                orszag.KorallTermeles += Korall;
+                orszag.GyongyTermeles += Nepesseg * 50;
+            return orszag;
         }
     }
 }

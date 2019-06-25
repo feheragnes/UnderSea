@@ -8,6 +8,6 @@ namespace StrategyGame.Bll.ServiceInterfaces.AAAServiceInterfaces
 {
     public interface IRegistrationService
     {
-        Task<object> Register(RegistrationDTO model);
+        Task<string> Register(RegistrationDTO model);
     }
 }

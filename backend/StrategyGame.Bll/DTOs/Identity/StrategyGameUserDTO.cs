@@ -4,8 +4,10 @@ using System.Text;
 
 namespace StrategyGame.Bll.DTOs.Identity
 {
-    class StrategyGameUserDTO
+    public class StrategyGameUserDTO
     {
-        public IList<OrszagDTO> Orszags { get; set; } = new List<OrszagDTO>();
+       public string Email { get; set; }
+
+        public string OrszagNev { get; set; }
     }
 }
