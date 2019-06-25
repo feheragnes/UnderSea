@@ -26,6 +26,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using StrategyGame.Bll.Mappers;
 using StrategyGame.Bll.Services;
 using StrategyGame.Bll.ServiceInterfaces;
+using StrategyGame.Api.Mappers;
 
 namespace StrategyGame.Api
 {
@@ -137,6 +138,7 @@ namespace StrategyGame.Api
                     builder.WithOrigins("localhost:4200").AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader();
                 });
             });
+            services.AddRouting(opt => opt.LowercaseUrls = true);
             services.AddMvc();
             var mappingConfig = new MapperConfiguration(mc =>
             {
@@ -148,6 +150,7 @@ namespace StrategyGame.Api
                 mc.AddProfile(new JatekProfile());
                 mc.AddProfile(new OrszagProfile());
                 mc.AddProfile(new UserProfile());
+                mc.AddProfile(new ViewModelProfile());
             });
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);

@@ -7,7 +7,7 @@ namespace StrategyGame.Bll.DTOs
 {
     public class SeregInfoDTO
     {
-        public SeregInfoDTO(long m, int ar, EgysegTipus t)
+        public SeregInfoDTO(long m, long ar, EgysegTipus t)
         {
             Mennyiseg = m;
             Ar = ar;
@@ -15,7 +15,7 @@ namespace StrategyGame.Bll.DTOs
         }
         public EgysegTipus Tipus { get; set; }
         public long Mennyiseg { get; set; }
-        public int Ar { get; set; }
+        public long Ar { get; set; }
        
     }
 }
