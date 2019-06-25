@@ -8,10 +8,7 @@ namespace StrategyGame.Bll.DTOs
     public class EpuletInfoDTO
     {
 
-        public EpuletInfoDTO()
-        {
-
-        }
+        public EpuletInfoDTO(){}
         public EpuletInfoDTO(EpuletTipus t, long ar, long m)
         {
             Tipus = t;

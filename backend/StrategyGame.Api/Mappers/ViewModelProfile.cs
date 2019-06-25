@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using StrategyGame.Api.ViewModels;
 using StrategyGame.Api.ViewModels.AAAViewModels;
 using StrategyGame.Api.ViewModels.EgysegViewModels;
 using StrategyGame.Api.ViewModels.EpuletViewModels;
@@ -30,7 +31,13 @@ namespace StrategyGame.Api.Mappers
                 .ForMember(x => x.SeregInfo, opt => opt.MapFrom(y => y.SeregInfoDTOs))
                 .ForMember(x => x.EpuletInfo, opt => opt.MapFrom(y => y.EpuletInfoDTOs))
                 .ReverseMap();
-                
+            CreateMap<HarcDTO, HarcViewModel>()
+                .ForMember(x => x.TamadoCsapat, opt => opt.MapFrom(y => y.TamadoCsapat))
+                .ForMember(x => x.VedekezoCsapat, opt => opt.MapFrom(y => y.VedekezoCsapat))
+                .ForMember(x => x.HarcEredmeny, opt => opt.MapFrom(y => Enum.GetName(typeof(HarcEredmenyTipus), y.HarcEredmeny)));
+
+
+
         }
     }
 }

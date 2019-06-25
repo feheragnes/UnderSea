@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StrategyGame.Api.ViewModels
 {
-    public class HarcViewModell
+    public class HarcViewModel
     {
         public List<SeregInfoViewModel> TamadoCsapat { get; set; }
         public List<SeregInfoViewModel> VedekezoCsapat { get; set; }

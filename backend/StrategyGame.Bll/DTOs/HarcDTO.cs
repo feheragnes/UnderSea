@@ -8,8 +8,8 @@ namespace StrategyGame.Bll.DTOs
 {
     public class HarcDTO
     {
-        public List<EgysegDTO> TamadoCsapat { get; set; }
-        public List<EgysegDTO> VedekezoCsapat { get; set; }
+        public List<SeregInfoDTO> TamadoCsapat { get; set; }
+        public List<SeregInfoDTO> VedekezoCsapat { get; set; }
         public HarcEredmenyTipus HarcEredmeny { get; set; }
 
         public void CalculateEredmeny()
@@ -18,7 +18,12 @@ namespace StrategyGame.Bll.DTOs
 
             TamadoCsapat.ForEach(x =>
             {
-              //  x.
+                tamadoEro += (x.Tamadas * x.Mennyiseg);
+            });
+
+            VedekezoCsapat.ForEach(x =>
+            {
+                vedekezoEro += (x.Tamadas * x.Mennyiseg);
             });
         }
     }
