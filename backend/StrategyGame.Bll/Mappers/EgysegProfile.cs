@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using StrategyGame.Bll.DTOs.DTOEnums;
 using StrategyGame.Bll.DTOs.Egysegek;
 using StrategyGame.Model.Entities.Models.Egysegek;
 using System;
@@ -32,6 +33,18 @@ namespace StrategyGame.Bll.Mappers
             CreateMap<RohamFoka, RohamFokaDTO>()
                 .IncludeBase<Egyseg, EgysegDTO>()
                 .ReverseMap();
+
+            CreateMap<Egyseg, EgysegInfoDTO>()
+                .ForMember(x => x.Tipus, opt => opt.MapFrom(y => Enum.Parse<EgysegTipus>(y.GetType().Name)))
+                .ForMember(x => x.Mennyiseg, opt => opt.MapFrom(y => 0));
+            CreateMap<RohamFoka, EgysegInfoDTO>()
+                .IncludeBase<Egyseg, EgysegInfoDTO>();
+            CreateMap<LezerCapa, EgysegInfoDTO>()
+                .IncludeBase<Egyseg, EgysegInfoDTO>();
+            CreateMap<CsataCsiko, EgysegInfoDTO>()
+                .IncludeBase<Egyseg, EgysegInfoDTO>();
+
+
         }
     }
 }

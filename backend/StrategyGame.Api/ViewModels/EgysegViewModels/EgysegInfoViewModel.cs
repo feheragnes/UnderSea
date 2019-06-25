@@ -1,22 +1,18 @@
-﻿using StrategyGame.Bll.DTOs.DTOEnums;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace StrategyGame.Bll.DTOs.Egysegek
+namespace StrategyGame.Api.ViewModels.EgysegViewModels
 {
-    public class EgysegInfoDTO
+    public class EgysegInfoViewModel
     {
-        public EgysegInfoDTO()
-        {
-
-        }
         public long Tamadas { get; set; }
         public long Vedekezes { get; set; }
         public long Ar { get; set; }
         public long Zsold { get; set; }
         public long Ellatas { get; set; }
         public long Mennyiseg { get; set; }
-        public EgysegTipus Tipus { get; set; }
+        public string Tipus { get; set; }
     }
 }

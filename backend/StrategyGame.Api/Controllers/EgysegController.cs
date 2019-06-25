@@ -51,5 +51,10 @@ namespace StrategyGame.Api.Controllers
             await _egysegService.AddEgysegAsync(_mapper.Map < List < SeregInfoDTO >> (egysegs), UserId);
             return Ok();
         }
+        [HttpGet]
+        public async Task<ActionResult<List<EgysegInfoViewModel>>> GetEgysegInfos()
+        {
+            return _mapper.Map<List<EgysegInfoViewModel>>(await _egysegService.GetEgysegInfoDTOs(UserId));
+        }
     }
 }

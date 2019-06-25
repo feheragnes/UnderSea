@@ -63,10 +63,10 @@ namespace StrategyGame.Bll.Services
 
             currentOrszag.Gyongy -= osszKoltseg;
 
-             _context.SaveChanges();
+            _context.SaveChanges();
         }
 
-       
+
         public async Task<List<EgysegDTO>> GetAllEgysegsFromOneUserAsync(Guid userId)
         {
             Orszag currentOrszag = await _commonService.GetCurrentOrszag(userId);
@@ -112,23 +112,26 @@ namespace StrategyGame.Bll.Services
             List<SeregInfoDTO> seregInfo = new List<SeregInfoDTO>();
             seregInfo.Add(new SeregInfoDTO(rohamFokaMennyiseg, EgysegTipus.RohamFoka));
             seregInfo.Add(new SeregInfoDTO(csataCsikoMennyiseg, EgysegTipus.CsataCsiko));
-            seregInfo.Add(new SeregInfoDTO(lezerCapaMennyiseg,  EgysegTipus.LezerCapa));
+            seregInfo.Add(new SeregInfoDTO(lezerCapaMennyiseg, EgysegTipus.LezerCapa));
 
             return seregInfo;
         }
 
-       /* public async Task<List<EgysegInfoDTO>> GetEgysegInfoDTOs(Guid userId)
+        public async Task<List<EgysegInfoDTO>> GetEgysegInfoDTOs(Guid userId)
         {
             Orszag currentOrszag = await _commonService.GetCurrentOrszag(userId);
             var egysegInfoDtos = new List<EgysegInfoDTO>();
-            currentOrszag.OtthoniCsapats.FirstOrDefault(x => x.Celpont == null).Egysegs.ToList().ForEach(x =>
-              {
-                  if (egysegInfoDtos.Where(y => y.Tipus == Enum.Parse<EgysegTipus>(x.GetType().ToString()))
-                  {
-
-                  }
-              });
-        }*/
+            egysegInfoDtos.Add(_mapper.Map<EgysegInfoDTO>(new RohamFoka()));
+            egysegInfoDtos.Add(_mapper.Map<EgysegInfoDTO>(new LezerCapa()));
+            egysegInfoDtos.Add(_mapper.Map<EgysegInfoDTO>(new CsataCsiko()));
+            currentOrszag?.OtthoniCsapats
+                .FirstOrDefault(x => x.Celpont == null)
+                ?.Egysegs.ToList()
+                .ForEach(x => egysegInfoDtos
+                              .FirstOrDefault(y => y.Tipus == Enum.Parse<EgysegTipus>(x.GetType().Name))
+                              .Mennyiseg++);
+            return egysegInfoDtos;
+        }
 
         public async Task SaveChangesAsync()
         {
