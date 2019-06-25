@@ -8,16 +8,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   border-radius: 2rem;
 }
 
 mat-card-header {
   color: #1c3e76;
-}
-
-.register {
-  color: #9ffff0;
-  font-size: 18px;
 }
 
 .form-rounded {
@@ -41,13 +37,15 @@ mat-card-header {
   font-size: 18px;
   width: 192px;
   height: 50px;
-  margin-top: 46px;
+  margin-top: 30px;
   margin-bottom: 15px;
   border-radius: 2rem;
   background: linear-gradient(to right, #0fcfde 0%, #9ffff0 100%);
-  align-self: center;
 }
-
+.register {
+  color: #9ffff0;
+  font-size: 18px;
+}
 p {
   font-size: 32px;
 }
@@ -60,5 +58,16 @@ h1 {
 mat-card-actions {
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+input:focus {
+  outline: none;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }

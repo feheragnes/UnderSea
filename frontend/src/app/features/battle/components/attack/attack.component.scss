@@ -124,3 +124,7 @@ button {
   background: #9ffff0;
   cursor: pointer;
 }
+
+input:focus {
+  outline: none;
+}

@@ -12,6 +12,10 @@ export class BuildingsComponent implements OnInit {
   color = "transparent";
   isActive = true;
   activeCard;
+
+  constructor(private epuletService: EpuletService) {}
+  ngOnInit() {}
+
   changeColor(id) {
     document.getElementById("card1").style.backgroundColor = "transparent";
     document.getElementById("card2").style.backgroundColor = "transparent";
@@ -48,9 +52,4 @@ export class BuildingsComponent implements OnInit {
       );
     }
   }
-  constructor(
-    private epuletService: EpuletService,
-    private readonly authService: AuthenticationService
-  ) {}
-  ngOnInit() {}
 }
