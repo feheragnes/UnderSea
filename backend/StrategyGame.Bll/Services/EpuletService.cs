@@ -43,10 +43,10 @@ namespace StrategyGame.Bll.Services
             return currentEpulets.Find(x => x.Id == id);
         }
 
-        public async Task<List<Epulet>> GetAllEpuletsFromOneUserAsync(Guid userId)
+        public async Task<List<EpuletInfoDTO>> GetAllEpuletsFromOneUserAsync(Guid userId)
         {
             Orszag currentOrszag = await _commonService.GetCurrentOrszag(userId);
-            return currentOrszag.Epulets.ToList();
+            return _mapper.Map<List<EpuletInfoDTO>> ( currentOrszag.Epulets.ToList());
         }
 
 

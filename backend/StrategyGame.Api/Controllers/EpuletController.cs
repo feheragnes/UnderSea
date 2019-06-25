@@ -10,6 +10,8 @@ using StrategyGame.Model.Entities.Identity;
 using Newtonsoft.Json.Linq;
 using StrategyGame.Model.Entities.Models.Epuletek;
 using StrategyGame.Model.Entities.Models;
+using StrategyGame.Api.ViewModels.EpuletViewModels;
+using AutoMapper;
 
 namespace StrategyGame.Api.Controllers
 {
@@ -21,25 +23,27 @@ namespace StrategyGame.Api.Controllers
         private readonly IEpuletService _epuletService;
         private readonly IOrszagService _orszagService;
         private readonly ICommonService _commonService;
+        private readonly IMapper _mapper;
 
-        public EpuletController(IEpuletService epuletService, IOrszagService orszagService,ICommonService commonService,UserManager<StrategyGameUser> userManager):base(userManager)
+        public EpuletController(IEpuletService epuletService, IOrszagService orszagService,ICommonService commonService,UserManager<StrategyGameUser> userManager, IMapper mapper):base(userManager)
         {
             _epuletService = epuletService;
             _orszagService = orszagService;
             _commonService = commonService;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Epulet>>> GetUserEpulets()
+        public async Task<ActionResult<List<EpuletInfoViewModel>>> GetUserEpulets()
         {
-           
-            return  await _epuletService.GetAllEpuletsFromOneUserAsync(UserId);
+            Orszag currentOrszag = await _commonService.GetCurrentOrszag(UserId);
+           return _mapper.Map<List<EpuletInfoViewModel>> (await _epuletService.GetFelepultEpuletsFromOneUserAsync(currentOrszag));
         }
 
         [HttpPost]
-        public async Task<IActionResult> BuyEpulets([FromBody]  List<EpuletInfoDTO> epulets)
+        public async Task<IActionResult> BuyEpulets([FromBody]  List<EpuletInfoViewModel> epulets)
         {
-            await _epuletService.AddEpuletAsync(epulets, UserId);
+            await _epuletService.AddEpuletAsync(_mapper.Map<List<EpuletInfoDTO>> (epulets), UserId);
             return Ok();
         }
 
@@ -51,10 +55,10 @@ namespace StrategyGame.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Epulet>>> GetEpuletInfos()
+        public async Task<ActionResult<List<EpuletInfoViewModel>>> GetEpuletInfos()
         {
 
-            return await _epuletService.GetAllEpuletsFromOneUserAsync(UserId);
+            return  _mapper.Map < List < EpuletInfoViewModel >> (await _epuletService.GetAllEpuletsFromOneUserAsync(UserId));
         }
     }
 }
