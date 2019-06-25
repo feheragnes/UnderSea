@@ -1,0 +1,56 @@
+<h1>UNDERSEA</h1>
+<mat-card class="card">
+  <mat-card-header>
+    <p>Regisztráció</p>
+  </mat-card-header>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <mat-card-content>
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control form-rounded"
+          placeholder="Email"
+          required
+          formControlName="email"
+        />
+      </div>
+
+      <div class="form-group">
+        <input
+          type="password"
+          class="form-control form-rounded"
+          placeholder="Jelszó"
+          required
+          formControlName="password"
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="password"
+          class="form-control form-rounded"
+          placeholder="Jelszó mégegyszer"
+          required
+          formControlName="confirmPassword"
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control form-rounded"
+          placeholder="Az országod neve"
+          required
+          formControlName="countryName"
+        />
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <div class="form-group">
+        <button class="register" mat-raised-button>Regisztráció</button>
+      </div>
+      <a class="login" mat-button routerLink="/login">
+        Belépés
+      </a>
+    </mat-card-actions>
+  </form>
+</mat-card>

@@ -1,0 +1,25 @@
+.main {
+  height: 700px;
+  width: 100%;
+  background-color: transparent;
+}
+
+.pic1 {
+  position: fixed;
+  top: 500px;
+  left: 800px;
+  z-index: 3;
+}
+
+.pic2 {
+  position: fixed;
+  z-index: 2;
+  top: 110px;
+  left: 850px;
+}
+.pic3 {
+  position: fixed;
+  z-index: 1;
+  top: 290px;
+  left: 640px;
+}

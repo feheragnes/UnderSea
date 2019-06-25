@@ -1,0 +1,129 @@
+<mat-card class="maincard">
+  <mat-card-header>
+    <p>Sereg</p>
+  </mat-card-header>
+  <div class="card">
+    <div class="data">
+      <div class="column">
+        <mat-card class="icon">
+          <img src="\assets\images\007-shark-l.svg" />
+        </mat-card>
+        <h4>Lézercápa</h4>
+        <div class="info">
+          <div class="infoColumn1">
+            <p>Birtokodban</p>
+            <p>Támadás/Védekezés</p>
+            <p>Zsold ( /kör/példány)</p>
+            <p>Ellátmány ( /kör/példány)</p>
+            <p>Ár</p>
+          </div>
+          <div class="infoColumn2">
+            <p>0</p>
+            <p>5/5</p>
+            <p>1 gyöngy</p>
+            <p>1 korall</p>
+            <p>200 gyöngy</p>
+          </div>
+        </div>
+        <div class="buttons">
+          <button
+            mat-fab
+            class="setterButton"
+            (click)="changeNumber('capa', -1)"
+          >
+            -
+          </button>
+          <p>{{ capaNumber }}</p>
+          <button
+            mat-fab
+            class="setterButton"
+            (click)="changeNumber('capa', 1)"
+          >
+            +
+          </button>
+        </div>
+      </div>
+      <div class="column">
+        <mat-card class="icon">
+          <img src="\assets\images\025-seal-l.svg" />
+        </mat-card>
+        <h4>Rohamfóka</h4>
+        <div class="info">
+          <div class="infoColumn1">
+            <p>Birtokodban</p>
+            <p>Támadás/Védekezés</p>
+            <p>Zsold ( /kör/példány)</p>
+            <p>Ellátmány ( /kör/példány)</p>
+            <p>Ár</p>
+          </div>
+          <div class="infoColumn2">
+            <p>0</p>
+            <p>5/5</p>
+            <p>1 gyöngy</p>
+            <p>1 korall</p>
+            <p>200 gyöngy</p>
+          </div>
+        </div>
+        <div class="buttons">
+          <button
+            mat-fab
+            class="setterButton"
+            (click)="changeNumber('foka', -1)"
+          >
+            -
+          </button>
+          <p>{{ fokaNumber }}</p>
+          <button
+            mat-fab
+            class="setterButton"
+            (click)="changeNumber('foka', 1)"
+          >
+            +
+          </button>
+        </div>
+      </div>
+      <div class="column">
+        <mat-card class="icon">
+          <img src="\assets\images\013-seahorse-l.svg" />
+        </mat-card>
+        <h4>Csatacsikó</h4>
+        <div class="info">
+          <div class="infoColumn1">
+            <p>Birtokodban</p>
+            <p>Támadás/Védekezés</p>
+            <p>Zsold ( /kör/példány)</p>
+            <p>Ellátmány ( /kör/példány)</p>
+            <p>Ár</p>
+          </div>
+          <div class="infoColumn2">
+            <p>0</p>
+            <p>5/5</p>
+            <p>1 gyöngy</p>
+            <p>1 korall</p>
+            <p>200 gyöngy</p>
+          </div>
+        </div>
+        <div class="buttons">
+          <button
+            mat-fab
+            class="setterButton"
+            (click)="changeNumber('csiko', -1)"
+          >
+            -
+          </button>
+          <p>{{ csikoNumber }}</p>
+          <button
+            mat-fab
+            class="setterButton"
+            (click)="changeNumber('csiko', 1)"
+          >
+            +
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <hr width="100%" />
+    <button mat-raised-button class="confirmButton">Megveszem</button>
+  </div>
+</mat-card>

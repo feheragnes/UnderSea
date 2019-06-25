@@ -1,0 +1,94 @@
+<div *ngIf="orszagInfo">
+  <div class="border">
+    <mat-toolbar>
+      <div class="column1">
+        <div class="data">
+          <span>4.kör</span>
+          <span>{{ orszagInfo.helyezes }}.hely</span>
+        </div>
+      </div>
+      <div class="column2">
+        <div class="icons">
+          <div class="icontext">
+            <mat-card class="icon">
+              <img src="assets\images\007-shark.svg" />
+            </mat-card>
+            <span>{{ this.capa[0].mennyiseg }}</span>
+          </div>
+          <div class="icontext">
+            <mat-card class="icon">
+              <img src="assets\images\025-seal.svg" />
+            </mat-card>
+            <span>{{ this.foka[0].mennyiseg }}</span>
+          </div>
+          <div class="icontext">
+            <mat-card class="icon">
+              <img src="assets\images\013-seahorse.svg" />
+            </mat-card>
+            <span>{{ this.csiko[0].mennyiseg }}</span>
+          </div>
+          <div class="icontext">
+            <mat-card class="icon">
+              <img src="assets\images\shell.svg" />
+            </mat-card>
+            <div class="doubletext">
+              <span>{{ this.gyongy }}</span>
+              <h5>{{ this.orszagInfo.gyongyTermeles }}/kör</h5>
+            </div>
+          </div>
+          <div class="icontext">
+            <mat-card class="icon">
+              <img src="assets\images\018-coral.svg" />
+            </mat-card>
+            <div class="doubletext">
+              <span>{{ this.korall }}</span>
+              <h5>{{ this.orszagInfo.korallTermeles }}/kör</h5>
+            </div>
+          </div>
+          <div class="icontext">
+            <mat-card class="icon"> </mat-card>
+            <div class="doubletext">
+              <span>{{ this.zatonyvar[0].mennyiseg }}</span>
+              <h5>? épül</h5>
+            </div>
+          </div>
+          <div class="icontext">
+            <mat-card class="icon"> </mat-card>
+            <div class="doubletext">
+              <span>{{ this.aramlasiranyito[0].mennyiseg }}</span>
+              <h5>? épül</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-toolbar>
+
+    <mat-sidenav-container class="example-container">
+      <mat-sidenav mode="side" opened>
+        <button mat-raised-button routerLink="buildings">Épületek</button>
+        <button mat-raised-button routerLink="attack">Támadás</button>
+        <button mat-raised-button routerLink="powerups">Fejlesztések</button>
+        <button mat-raised-button routerLink="fight">Harc</button>
+        <button mat-raised-button routerLink="rankings">Ranglista</button>
+        <button mat-raised-button routerLink="army">Sereg</button>
+        <mat-card class="card">
+          <mat-card class="malecard">
+            <img src="assets\images\002-male.svg" />
+          </mat-card>
+          <p>{{ orszagInfo.nev }}</p>
+          <a class="profile" mat-button routerLink="">
+            Profil
+          </a>
+          <a class="logout" mat-button (click)="logout()">
+            Kijelentkezés
+          </a>
+        </mat-card>
+        <h1>UNDERSEA</h1>
+      </mat-sidenav>
+      <mat-sidenav-content>
+        <div class="country"><app-country></app-country></div>
+        <div class="router"><router-outlet></router-outlet></div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+</div>

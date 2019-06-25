@@ -1,14 +1,31 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
 
-import { ExamplePageComponent } from './pages/example/example.page.component';
+import { BattleComponent } from "./pages/battle/battle.component";
+import { BuildingsComponent } from "./components/buildings/buildings.component";
+import { AttackComponent } from "./components/attack/attack.component";
+import { PowerupsComponent } from "./components/powerups/powerups.component";
+import { ArmyComponent } from "./components/army/army.component";
+import { RankingsComponent } from "./components/rankings/rankings.component";
+import { FightsComponent } from "./components/fights/fights.component";
 
 const routes: Routes = [
-    { path: '', component: ExamplePageComponent },
+  {
+    path: "",
+    component: BattleComponent,
+    children: [
+      { path: "buildings", component: BuildingsComponent },
+      { path: "attack", component: AttackComponent },
+      { path: "powerups", component: PowerupsComponent },
+      { path: "army", component: ArmyComponent },
+      { path: "rankings", component: RankingsComponent },
+      { path: "fight", component: FightsComponent }
+    ]
+  }
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
 })
-export class BattleRoutingModule { }
+export class BattleRoutingModule {}

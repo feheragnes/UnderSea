@@ -1,0 +1,25 @@
+<mat-card class="maincard">
+  <mat-card-header>
+    <p>Ranglista</p>
+  </mat-card-header>
+  <div class="card">
+    <input
+      type="text"
+      class="form-control form-rounded"
+      placeholder="Felhasználónév"
+    />
+    <mat-list role="list">
+      <div *ngFor="let country of ranglista; index as i">
+        <hr width="770px" />
+        <mat-list-item>
+          <div class="country">
+            <h4>{{ i + 1 }}. {{ country.orszag }}</h4>
+          </div>
+          <div class="points">
+            <p>{{ country.pont }}</p>
+          </div>
+        </mat-list-item>
+      </div>
+    </mat-list>
+  </div>
+</mat-card>

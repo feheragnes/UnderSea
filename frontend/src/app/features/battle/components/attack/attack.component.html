@@ -1,0 +1,79 @@
+<mat-card class="maincard">
+  <mat-card-header>
+    <p>Támadás</p>
+  </mat-card-header>
+  <div class="card">
+    <div class="data">
+      <div class="column">
+        <h4>1. Jelöld ki, kit szeretnél megtámadni:</h4>
+        <input
+          type="text"
+          class="form-control form-rounded"
+          placeholder="Felhasználónév"
+        />
+      </div>
+      <div class="column">
+        <h4>2. Állítsd be, kiket küldesz harcba:</h4>
+        <div class="smallrow">
+          <div class="smallcolumn">
+            <mat-card class="icon">
+              <img src="assets\images\007-shark.svg" />
+            </mat-card>
+          </div>
+          <div class="smallcolumn">
+            <h5>Lézercápa: {{ capaNumber }} példány</h5>
+            <input
+              type="range"
+              class="slider"
+              #capa
+              min="0"
+              max="10"
+              value="0"
+              (input)="inputChanged('capa', capa.value)"
+            />
+          </div>
+        </div>
+        <div class="smallrow">
+          <div class="smallcolumn">
+            <mat-card class="icon">
+              <img src="assets\images\025-seal.svg" />
+            </mat-card>
+          </div>
+          <div class="smallcolumn">
+            <h5>Rohamfóka: {{ fokaNumber }} példány</h5>
+            <input
+              type="range"
+              class="slider"
+              #foka
+              min="0"
+              max="10"
+              value="0"
+              (input)="inputChanged('foka', foka.value)"
+            />
+          </div>
+        </div>
+        <div class="smallrow">
+          <div class="smallcolumn">
+            <mat-card class="icon">
+              <img src="assets\images\013-seahorse.svg" />
+            </mat-card>
+          </div>
+          <div class="smallcolumn">
+            <h5>Csatacsikó: {{ csikoNumber }} példány</h5>
+            <input
+              type="range"
+              class="slider"
+              #csiko
+              min="0"
+              max="10"
+              value="0"
+              (input)="inputChanged('csiko', csiko.value)"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr width="100%" />
+    <button mat-raised-button>Megtámadom!</button>
+  </div>
+</mat-card>

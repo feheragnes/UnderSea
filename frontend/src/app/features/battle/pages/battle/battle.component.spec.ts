@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ExamplePageComponent } from './example.page.component';
+import { BattleComponent } from './battle.component';
 
-describe('ExamplePageComponent', () => {
-  let component: ExamplePageComponent;
-  let fixture: ComponentFixture<ExamplePageComponent>;
+describe('BattleComponent', () => {
+  let component: BattleComponent;
+  let fixture: ComponentFixture<BattleComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ExamplePageComponent ]
+      declarations: [ BattleComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ExamplePageComponent);
+    fixture = TestBed.createComponent(BattleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

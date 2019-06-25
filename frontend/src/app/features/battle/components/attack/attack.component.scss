@@ -1,0 +1,126 @@
+.maincard {
+  width: 869px;
+  height: 748px;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  background-color: #03255f;
+  border-radius: 2rem;
+}
+
+.card {
+  margin-left: 48px;
+  margin-right: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.data {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 500px;
+}
+.column {
+  width: 50%;
+}
+mat-card-header {
+  font-size: 32px;
+}
+
+h4 {
+  font-size: 16px;
+  margin: 0px;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 13px;
+}
+h5 {
+  font-size: 16px;
+  margin-top: 8px;
+  margin-bottom: 0px;
+  color: white;
+}
+
+hr {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+button {
+  color: #001234;
+  font-size: 18px;
+  width: 192px;
+  height: 50px;
+  border-radius: 2rem;
+  background: linear-gradient(to right, #0fcfde 0%, #9ffff0 100%);
+}
+.smallrow {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+}
+
+.form-rounded {
+  border-radius: 2rem;
+  height: 40px;
+  width: 90%;
+  margin-bottom: 19px;
+  background-color: rgba(255, 255, 255, 0.39);
+  border: rgba(255, 255, 255, 0.39);
+  color: #1c3e76;
+  padding: 2px;
+  padding-left: 20px;
+  font-size: 16px;
+}
+.form-rounded::placeholder {
+  color: #1c3e76;
+}
+
+.icon {
+  background-color: #9ffff0;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #428dff;
+  width: 59px;
+  height: 59px;
+  padding: 0px;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 233px;
+  height: 5px;
+  border-radius: 5px;
+  background: #ffffff;
+  outline: #707070;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #9ffff0;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #9ffff0;
+  cursor: pointer;
+}

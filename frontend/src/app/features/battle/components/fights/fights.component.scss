@@ -1,0 +1,47 @@
+.maincard {
+  width: 869px;
+  height: 645px;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  background-color: #03255f;
+  border-radius: 2rem;
+}
+.card {
+  margin-left: 48px;
+  margin-right: 48px;
+  width: 770px;
+}
+
+mat-card-header {
+  font-size: 32px;
+}
+
+hr {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  margin: 0px;
+  padding: 0px;
+}
+
+mat-list * {
+  color: white;
+}
+
+mat-divider {
+  background-color: white;
+  width: 770px;
+}
+
+.opponent {
+  width: 20%;
+}
+.data {
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.result {
+  width: 10%;
+  text-align: right;
+}
