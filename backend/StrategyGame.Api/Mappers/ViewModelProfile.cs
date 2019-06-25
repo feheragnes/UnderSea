@@ -4,6 +4,7 @@ using StrategyGame.Api.ViewModels.AAAViewModels;
 using StrategyGame.Api.ViewModels.EgysegViewModels;
 using StrategyGame.Api.ViewModels.EpuletViewModels;
 using StrategyGame.Api.ViewModels.OrszagViewModels;
+using StrategyGame.Api.ViewModels.TamadasViewModels;
 using StrategyGame.Bll.DTOs;
 using StrategyGame.Bll.DTOs.AAADTOs;
 using StrategyGame.Bll.DTOs.DTOEnums;
@@ -20,6 +21,7 @@ namespace StrategyGame.Api.Mappers
         {
             CreateMap<LoginDTO, LoginViewModel>().ReverseMap();
             CreateMap<RegistrationDTO, RegisterViewModel>().ReverseMap();
+
             CreateMap<SeregInfoDTO, SeregInfoViewModel>()
                 .ForMember(x => x.Tipus, opt => opt.MapFrom(y => Enum.GetName(typeof(EgysegTipus), y.Tipus)))
                 .ReverseMap();
@@ -37,6 +39,13 @@ namespace StrategyGame.Api.Mappers
                 .ForMember(x => x.HarcEredmeny, opt => opt.MapFrom(y => Enum.GetName(typeof(HarcEredmenyTipus), y.HarcEredmeny)));
 
 
+
+            CreateMap<SeregInfoDTO, TamadoSeregInfoViewModel>().ReverseMap();
+            CreateMap<TamadasDTO, TamadasViewModel>()
+                .ForMember(x => x.Orszag, opt => opt.MapFrom(y => y.EllensegesOrszagok))
+                .ForMember(x => x.Sereg, opt => opt.MapFrom(y => y.OtthoniEgysegek))
+                .ReverseMap();
+                
 
         }
     }

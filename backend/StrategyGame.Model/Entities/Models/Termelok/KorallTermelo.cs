@@ -5,9 +5,7 @@ using System.Text;
 namespace StrategyGame.Model.Entities.Models.Termelok
 {
     public class KorallTermelo : AbstractTermelo
-    {
-        public Guid Id { get; set; }
-
-        public long Ertek { get; set; }
+   {
+       public long Ertek { get; set; }
     }
 }
