@@ -6,7 +6,7 @@ namespace StrategyGame.Model.Entities.Models.Termelok
 {
     public class NepessegTermelo : AbstractTermelo
     {
-        public Guid id { get; set; }
+        public Guid Id { get; set; }
 
 
         public long Ertek { get; set; }
