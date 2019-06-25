@@ -45,9 +45,9 @@ namespace StrategyGame.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<TamadasViewModel>>> GetTamadasInfos()
+        public async Task<ActionResult<TamadasViewModel>> GetTamadasInfos()
         {
-            return _mapper.Map<List<TamadasViewModel>>(await  _orszagService.GetTamadasDTO(UserId));
+            return _mapper.Map<TamadasViewModel>(await  _orszagService.GetTamadasDTO(UserId));
         }
         
         [HttpPost]

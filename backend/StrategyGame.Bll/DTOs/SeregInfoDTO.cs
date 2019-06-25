@@ -7,6 +7,10 @@ namespace StrategyGame.Bll.DTOs
 {
     public class SeregInfoDTO
     {
+        public SeregInfoDTO()
+        {
+
+        }
         public SeregInfoDTO(long m, EgysegTipus tipus)
         {
             Mennyiseg = m;

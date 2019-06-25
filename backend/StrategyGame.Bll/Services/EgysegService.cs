@@ -117,6 +117,19 @@ namespace StrategyGame.Bll.Services
             return seregInfo;
         }
 
+       /* public async Task<List<EgysegInfoDTO>> GetEgysegInfoDTOs(Guid userId)
+        {
+            Orszag currentOrszag = await _commonService.GetCurrentOrszag(userId);
+            var egysegInfoDtos = new List<EgysegInfoDTO>();
+            currentOrszag.OtthoniCsapats.FirstOrDefault(x => x.Celpont == null).Egysegs.ToList().ForEach(x =>
+              {
+                  if (egysegInfoDtos.Where(y => y.Tipus == Enum.Parse<EgysegTipus>(x.GetType().ToString()))
+                  {
+
+                  }
+              });
+        }*/
+
         public async Task SaveChangesAsync()
         {
             try
