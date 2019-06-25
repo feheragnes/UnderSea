@@ -21,6 +21,7 @@ namespace StrategyGame.Model.Entities.Models.Epuletek
         public long AktualisKor { get; set; }
 
         public bool Felepult { get; set; }
+        public Orszag Orszag { get; set; }
    
     }
    

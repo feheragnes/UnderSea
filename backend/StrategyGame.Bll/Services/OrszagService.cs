@@ -55,7 +55,7 @@ namespace StrategyGame.Bll.Services
             {
                 user.Orszag = await InitOrszag(orszagNev);
                 await _context.SaveChangesAsync();
-            }catch(Exception e)
+            } catch (Exception e)
             {
                 throw e;
             }
@@ -97,6 +97,13 @@ namespace StrategyGame.Bll.Services
         {
             var sorted = await _globalService.GetRanglista();
             return (sorted.IndexOf(sorted.FirstOrDefault(x => x.Orszag == orszag.Nev))) + 1;
+        }
+        private async Task<long> GetKorallTermeles(Orszag orszag)
+        {
+            return await _context.KorallTermelos
+                .Include(x => x.Epulet).ThenInclude(x => x.Orszag)
+                .Where(x => x.Epulet.Orszag.Id == orszag.Id)
+                .SumAsync(x => x.Ertek);
         }
         private async Task<OrszagDTO> GetTermeles(Orszag orszag)
         {
