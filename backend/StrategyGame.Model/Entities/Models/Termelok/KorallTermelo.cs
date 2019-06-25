@@ -4,7 +4,7 @@ using System.Text;
 
 namespace StrategyGame.Model.Entities.Models.Termelok
 {
-    public class KorallTermelo
+    public class KorallTermelo : AbstractTermelo
     {
         public Guid id { get; set; }
 
