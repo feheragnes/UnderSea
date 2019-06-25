@@ -8,8 +8,6 @@ namespace StrategyGame.Model.Entities.Models.Fejlesztesek
     public abstract class Fejlesztes
     {
         public Guid Id { get; set; }
-
-        public long Noveles { get; set; }
         public long SzuksegesKorok { get; set; }
         public long AktualisKor { get; set; }
         public bool Kifejlesztve { get; set; }
