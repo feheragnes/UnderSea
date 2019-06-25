@@ -7,6 +7,6 @@ namespace StrategyGame.Model.Entities.Models.Termelok
 {
     public abstract class AbstractTermelo
     {
-        public Epulet epulet { get; set; }
+        public Epulet Epulet { get; set; }
     }
 }
