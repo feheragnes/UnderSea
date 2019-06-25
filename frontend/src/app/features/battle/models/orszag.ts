@@ -6,14 +6,14 @@ export interface Orszag {
   helyezes: number;
   korallTermeles: number;
   gyongyTermeles: number;
-  seregInfoDTOs: [
+  seregInfo: [
     {
       mennyiseg: number;
       ar: number;
       tipus: string;
     }
   ];
-  epuletInfoDTOs: [
+  epuletInfo: [
     {
       tipus: string;
       ar: number;

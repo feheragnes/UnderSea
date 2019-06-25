@@ -28,7 +28,7 @@ export class AuthenticationService {
     const email = currentUser.email;
     const password = currentUser.password;
     return this.http
-      .post<any>(environment.apiUrl + `/Account/Login`, { email, password })
+      .post<any>(environment.apiUrl + `/account/login`, { email, password })
       .pipe(
         map(user => {
           // login successful if there's a jwt token in the response
@@ -52,7 +52,7 @@ export class AuthenticationService {
     };
     console.log(parameter);
     return this.http.post<any>(
-      environment.apiUrl + `/Account/Register`,
+      environment.apiUrl + `/account/register`,
       parameter
     );
   }

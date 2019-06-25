@@ -7,12 +7,12 @@ import { environment } from "src/environments/environment";
   providedIn: "root"
 })
 export class GlobalService {
-  private globalUrl = environment.apiUrl + "/Global";
+  private globalUrl = environment.apiUrl + "/global";
 
   constructor(private http: HttpClient) {}
 
   getRanglista(): Observable<any> {
-    const url = `${this.globalUrl}/GetRanglista`;
+    const url = `${this.globalUrl}/getranglista`;
     return this.http.get<any>(url);
   }
 }

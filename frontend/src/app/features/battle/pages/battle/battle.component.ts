@@ -30,16 +30,14 @@ export class BattleComponent implements OnInit {
         this.orszagInfo = data;
         this.gyongy = data.gyongy;
         this.korall = data.korall;
-        this.csiko = data.seregInfoDTOs.filter(x => x.tipus == "CsataCsiko");
-        this.foka = data.seregInfoDTOs.filter(x => x.tipus == "RohamFoka");
-        this.capa = data.seregInfoDTOs.filter(x => x.tipus == "LezerCapa");
+        this.csiko = data.seregInfo.filter(x => x.tipus == "CsataCsiko");
+        this.foka = data.seregInfo.filter(x => x.tipus == "RohamFoka");
+        this.capa = data.seregInfo.filter(x => x.tipus == "LezerCapa");
         console.log(this.orszagInfo);
-        this.aramlasiranyito = data.epuletInfoDTOs.filter(
+        this.aramlasiranyito = data.epuletInfo.filter(
           x => x.tipus == "AramlasIranyito"
         );
-        this.zatonyvar = data.epuletInfoDTOs.filter(
-          x => x.tipus == "ZatonyVar"
-        );
+        this.zatonyvar = data.epuletInfo.filter(x => x.tipus == "ZatonyVar");
       },
       err => console.error(err),
       () => {

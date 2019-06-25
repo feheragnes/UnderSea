@@ -8,12 +8,12 @@ import { environment } from "src/environments/environment";
   providedIn: "root"
 })
 export class OrszagService {
-  private orszagUrl = environment.apiUrl + "/Orszag";
+  private orszagUrl = environment.apiUrl + "/orszag";
 
   constructor(private http: HttpClient) {}
 
   getOrszagInfo(): Observable<Orszag> {
-    const url = `${this.orszagUrl}/GetOrszagInfos`;
+    const url = `${this.orszagUrl}/getorszaginfos`;
     return this.http.get<Orszag>(url);
   }
 }
