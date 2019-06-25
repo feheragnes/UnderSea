@@ -1,10 +1,10 @@
-import { Component, OnInit } from "@angular/core";
-import { GlobalService } from "../../services/global.service";
+import { Component, OnInit } from '@angular/core';
+import { GlobalService } from '../../services/global.service';
 
 @Component({
-  selector: "app-rankings",
-  templateUrl: "./rankings.component.html",
-  styleUrls: ["./rankings.component.scss"]
+  selector: 'app-rankings',
+  templateUrl: './rankings.component.html',
+  styleUrls: ['./rankings.component.scss']
 })
 export class RankingsComponent implements OnInit {
   private ranglista;
@@ -22,7 +22,7 @@ export class RankingsComponent implements OnInit {
       },
       err => console.error(err),
       () => {
-        console.log("done loading ranglista");
+        console.log('done loading ranglista');
       }
     );
   }

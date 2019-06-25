@@ -1,9 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: "app-army",
-  templateUrl: "./army.component.html",
-  styleUrls: ["./army.component.scss"]
+  selector: 'app-army',
+  templateUrl: './army.component.html',
+  styleUrls: ['./army.component.scss']
 })
 export class ArmyComponent implements OnInit {
   private capaNumber = 0;
@@ -12,17 +12,23 @@ export class ArmyComponent implements OnInit {
 
   changeNumber(type: string, value: number) {
     switch (type) {
-      case "csiko":
+      case 'csiko':
         this.csikoNumber += value;
-        if (this.csikoNumber < 0) this.csikoNumber = 0;
+        if (this.csikoNumber < 0) {
+          this.csikoNumber = 0;
+        }
         break;
-      case "foka":
+      case 'foka':
         this.fokaNumber += value;
-        if (this.fokaNumber < 0) this.fokaNumber = 0;
+        if (this.fokaNumber < 0) {
+          this.fokaNumber = 0;
+        }
         break;
-      case "capa":
+      case 'capa':
         this.capaNumber += value;
-        if (this.capaNumber < 0) this.capaNumber = 0;
+        if (this.capaNumber < 0) {
+          this.capaNumber = 0;
+        }
         break;
     }
     console.log(type, value);

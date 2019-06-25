@@ -6,17 +6,11 @@
     <mat-card-content>
       <h4>Kattints rá, amelyiket szeretnéd megvenni.</h4>
       <div class="cards">
-        <mat-card
-          id="card1"
-          (click)="changeColor('card1')"
-          class="smallcard"
-          [style.backgroundcolor]="color"
-        >
+        <mat-card id="card1" (click)="changeColor('card1')" class="smallcard">
           <mat-card-content>
             <img src="assets\images\undersea_game-07.png" />
             <h4>Zátonyvár</h4>
-            <h4>50 embert ad a népességhez</h4>
-            <h4>200 krumplit termel körönként</h4>
+            <h4>200 egységnek nyújt szállást</h4>
             <h5>1 db</h5>
             <h5>45 gyöngy/db</h5>
           </mat-card-content>
@@ -25,7 +19,8 @@
           <mat-card-content>
             <img src="assets\images\undersea_game-05.png" />
             <h4>Áramlásirányító</h4>
-            <h4>200 egységnek nyújt szállást</h4>
+            <h4>50 lakost ad a népességhez</h4>
+            <h4>200 korallt termel körönként</h4>
             <h5>0 db</h5>
             <h5>35 gyöngy/db</h5>
           </mat-card-content>

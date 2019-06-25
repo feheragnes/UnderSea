@@ -1,9 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: "app-attack",
-  templateUrl: "./attack.component.html",
-  styleUrls: ["./attack.component.scss"]
+  selector: 'app-attack',
+  templateUrl: './attack.component.html',
+  styleUrls: ['./attack.component.scss']
 })
 export class AttackComponent implements OnInit {
   private capaNumber = 0;
@@ -11,15 +11,15 @@ export class AttackComponent implements OnInit {
   private csikoNumber = 0;
   inputChanged(type: string, value: number) {
     switch (type) {
-      case "csiko":
+      case 'csiko':
         this.csikoNumber = value;
 
         break;
-      case "foka":
+      case 'foka':
         this.fokaNumber = value;
 
         break;
-      case "capa":
+      case 'capa':
         this.capaNumber = value;
         break;
     }

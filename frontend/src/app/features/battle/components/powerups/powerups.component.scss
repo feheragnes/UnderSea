@@ -26,7 +26,9 @@
 mat-card-header {
   font-size: 32px;
 }
-
+mat-card-content {
+  padding-bottom: 30px;
+}
 .smallcard {
   width: 236px;
   height: 231px;
@@ -37,6 +39,7 @@ mat-card-header {
   display: flex;
   flex-direction: column;
   box-shadow: 0px 0px 0px 0px transparent;
+  justify-content: flex-end;
 }
 
 h4 {

@@ -7,11 +7,6 @@
   background-color: #03255f;
   border-radius: 2rem;
 }
-mat-card-content {
-  margin-left: 48px;
-  margin-right: 48px;
-}
-
 mat-card-header {
   font-size: 32px;
 }
@@ -20,6 +15,8 @@ mat-card-header {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  margin-left: 40px;
+  margin-right: 40px;
 }
 
 .smallcard {
@@ -29,6 +26,9 @@ mat-card-header {
   text-align: center;
   border-radius: 2rem;
   box-shadow: 0px 0px 0px 0px transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 h4 {
