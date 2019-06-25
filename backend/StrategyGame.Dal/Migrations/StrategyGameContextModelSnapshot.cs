@@ -310,14 +310,14 @@ namespace StrategyGame.Dal.Migrations
 
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Novelok.AdoNovelo", b =>
                 {
-                    b.Property<Guid>("id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("Ertek");
 
                     b.Property<Guid?>("FejlesztesId");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.HasIndex("FejlesztesId");
 
@@ -326,14 +326,14 @@ namespace StrategyGame.Dal.Migrations
 
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Novelok.KorallNovelo", b =>
                 {
-                    b.Property<Guid>("id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("Ertek");
 
                     b.Property<Guid?>("FejlesztesId");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.HasIndex("FejlesztesId");
 
@@ -342,14 +342,14 @@ namespace StrategyGame.Dal.Migrations
 
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Novelok.TamadasNovelo", b =>
                 {
-                    b.Property<Guid>("id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("Ertek");
 
                     b.Property<Guid?>("FejlesztesId");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.HasIndex("FejlesztesId");
 
@@ -358,14 +358,14 @@ namespace StrategyGame.Dal.Migrations
 
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Novelok.VedekezesNovelo", b =>
                 {
-                    b.Property<Guid>("id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("Ertek");
 
                     b.Property<Guid?>("FejlesztesId");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.HasIndex("FejlesztesId");
 
@@ -392,14 +392,14 @@ namespace StrategyGame.Dal.Migrations
 
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Termelok.EgysegTermelo", b =>
                 {
-                    b.Property<Guid>("id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<Guid?>("EpuletId");
 
                     b.Property<long>("Ertek");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.HasIndex("EpuletId");
 
@@ -408,14 +408,14 @@ namespace StrategyGame.Dal.Migrations
 
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Termelok.KorallTermelo", b =>
                 {
-                    b.Property<Guid>("id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<Guid?>("EpuletId");
 
                     b.Property<long>("Ertek");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.HasIndex("EpuletId");
 
@@ -424,14 +424,14 @@ namespace StrategyGame.Dal.Migrations
 
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Termelok.NepessegTermelo", b =>
                 {
-                    b.Property<Guid>("id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<Guid?>("EpuletId");
 
                     b.Property<long>("Ertek");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.HasIndex("EpuletId");
 
@@ -463,13 +463,13 @@ namespace StrategyGame.Dal.Migrations
                 {
                     b.HasBaseType("StrategyGame.Model.Entities.Models.Epuletek.Epulet");
 
-                    b.Property<Guid?>("Korallid");
+                    b.Property<Guid?>("KorallId");
 
-                    b.Property<Guid?>("Nepessegid");
+                    b.Property<Guid?>("NepessegId");
 
-                    b.HasIndex("Korallid");
+                    b.HasIndex("KorallId");
 
-                    b.HasIndex("Nepessegid");
+                    b.HasIndex("NepessegId");
 
                     b.HasDiscriminator().HasValue("AramlasIranyito");
                 });
@@ -478,9 +478,9 @@ namespace StrategyGame.Dal.Migrations
                 {
                     b.HasBaseType("StrategyGame.Model.Entities.Models.Epuletek.Epulet");
 
-                    b.Property<Guid?>("Szallasid");
+                    b.Property<Guid?>("SzallasId");
 
-                    b.HasIndex("Szallasid");
+                    b.HasIndex("SzallasId");
 
                     b.HasDiscriminator().HasValue("ZatonyVar");
                 });
@@ -489,9 +489,9 @@ namespace StrategyGame.Dal.Migrations
                 {
                     b.HasBaseType("StrategyGame.Model.Entities.Models.Fejlesztesek.Fejlesztes");
 
-                    b.Property<Guid?>("Gyöngyid");
+                    b.Property<Guid?>("GyöngyId");
 
-                    b.HasIndex("Gyöngyid");
+                    b.HasIndex("GyöngyId");
 
                     b.HasDiscriminator().HasValue("Alkimia");
                 });
@@ -500,9 +500,9 @@ namespace StrategyGame.Dal.Migrations
                 {
                     b.HasBaseType("StrategyGame.Model.Entities.Models.Fejlesztesek.Fejlesztes");
 
-                    b.Property<Guid?>("Korallid");
+                    b.Property<Guid?>("KorallId");
 
-                    b.HasIndex("Korallid");
+                    b.HasIndex("KorallId");
 
                     b.HasDiscriminator().HasValue("IszapKombajn");
                 });
@@ -511,10 +511,10 @@ namespace StrategyGame.Dal.Migrations
                 {
                     b.HasBaseType("StrategyGame.Model.Entities.Models.Fejlesztesek.Fejlesztes");
 
-                    b.Property<Guid?>("Korallid")
-                        .HasColumnName("IszapTraktor_Korallid");
+                    b.Property<Guid?>("KorallId")
+                        .HasColumnName("IszapTraktor_KorallId");
 
-                    b.HasIndex("Korallid");
+                    b.HasIndex("KorallId");
 
                     b.HasDiscriminator().HasValue("IszapTraktor");
                 });
@@ -523,9 +523,9 @@ namespace StrategyGame.Dal.Migrations
                 {
                     b.HasBaseType("StrategyGame.Model.Entities.Models.Fejlesztesek.Fejlesztes");
 
-                    b.Property<Guid?>("Vedekezesid");
+                    b.Property<Guid?>("VedekezesId");
 
-                    b.HasIndex("Vedekezesid");
+                    b.HasIndex("VedekezesId");
 
                     b.HasDiscriminator().HasValue("KorallFal");
                 });
@@ -534,9 +534,9 @@ namespace StrategyGame.Dal.Migrations
                 {
                     b.HasBaseType("StrategyGame.Model.Entities.Models.Fejlesztesek.Fejlesztes");
 
-                    b.Property<Guid?>("Tamadasid");
+                    b.Property<Guid?>("TamadasId");
 
-                    b.HasIndex("Tamadasid");
+                    b.HasIndex("TamadasId");
 
                     b.HasDiscriminator().HasValue("SzonarAgyu");
                 });
@@ -689,53 +689,53 @@ namespace StrategyGame.Dal.Migrations
                 {
                     b.HasOne("StrategyGame.Model.Entities.Models.Termelok.KorallTermelo", "Korall")
                         .WithMany()
-                        .HasForeignKey("Korallid");
+                        .HasForeignKey("KorallId");
 
                     b.HasOne("StrategyGame.Model.Entities.Models.Termelok.NepessegTermelo", "Nepesseg")
                         .WithMany()
-                        .HasForeignKey("Nepessegid");
+                        .HasForeignKey("NepessegId");
                 });
 
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Epuletek.ZatonyVar", b =>
                 {
                     b.HasOne("StrategyGame.Model.Entities.Models.Termelok.EgysegTermelo", "Szallas")
                         .WithMany()
-                        .HasForeignKey("Szallasid");
+                        .HasForeignKey("SzallasId");
                 });
 
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Fejlesztesek.Alkimia", b =>
                 {
                     b.HasOne("StrategyGame.Model.Entities.Models.Novelok.AdoNovelo", "Gyöngy")
                         .WithMany()
-                        .HasForeignKey("Gyöngyid");
+                        .HasForeignKey("GyöngyId");
                 });
 
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Fejlesztesek.IszapKombajn", b =>
                 {
                     b.HasOne("StrategyGame.Model.Entities.Models.Novelok.KorallNovelo", "Korall")
                         .WithMany()
-                        .HasForeignKey("Korallid");
+                        .HasForeignKey("KorallId");
                 });
 
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Fejlesztesek.IszapTraktor", b =>
                 {
                     b.HasOne("StrategyGame.Model.Entities.Models.Novelok.KorallNovelo", "Korall")
                         .WithMany()
-                        .HasForeignKey("Korallid");
+                        .HasForeignKey("KorallId");
                 });
 
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Fejlesztesek.KorallFal", b =>
                 {
                     b.HasOne("StrategyGame.Model.Entities.Models.Novelok.VedekezesNovelo", "Vedekezes")
                         .WithMany()
-                        .HasForeignKey("Vedekezesid");
+                        .HasForeignKey("VedekezesId");
                 });
 
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Fejlesztesek.SzonarAgyu", b =>
                 {
                     b.HasOne("StrategyGame.Model.Entities.Models.Novelok.TamadasNovelo", "Tamadas")
                         .WithMany()
-                        .HasForeignKey("Tamadasid");
+                        .HasForeignKey("TamadasId");
                 });
 #pragma warning restore 612, 618
         }

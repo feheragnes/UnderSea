@@ -14,7 +14,8 @@ namespace StrategyGame.Bll.ServiceInterfaces
         Task<List<EpuletInfoDTO>> GetAllEpuletsFromOneUserAsync(Guid userId);
         Task<List<EpuletInfoDTO>> GetFelepultEpuletsFromOneUserAsync(Orszag currentOrszag);
         Task<Epulet> GetEpuletByIdAsync(Guid id, Guid userId);
-        Task<long> GetActiveEpitesCount(Orszag currentOrszag);
+        Task<long> GetEpuloAramlasiranyitoCout(Orszag currentOrszag);
+        Task<long> GetEpuloZatonyvarCount(Orszag currentOrszag);
         Task AddEpuletAsync(List<EpuletInfoDTO> epulets, Guid userId);
     }
 }
