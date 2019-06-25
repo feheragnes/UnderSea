@@ -11,6 +11,7 @@ namespace StrategyGame.Model.Entities.Models.Fejlesztesek
         public KorallNovelo Korall { get; set; }
         public IszapKombajn() : base()
         {
+            Korall = new KorallNovelo();
             Korall.Ertek = 15;
         }
     }

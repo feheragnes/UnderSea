@@ -4,7 +4,7 @@ using System.Text;
 
 namespace StrategyGame.Model.Entities.Models.Novelok
 {
-    public class AdoNovelo
+    public class AdoNovelo : AbstractNovelo
     {
         public Guid id { get; set; }
         public int Ertek { get; set; }

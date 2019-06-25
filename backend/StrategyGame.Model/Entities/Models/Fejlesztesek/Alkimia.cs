@@ -10,6 +10,7 @@ namespace StrategyGame.Model.Entities.Models.Fejlesztesek
         public AdoNovelo Gyöngy { get; set; }
         public Alkimia() : base()
         {
+            Gyöngy = new AdoNovelo();
             Gyöngy.Ertek = 30;
         }
     }

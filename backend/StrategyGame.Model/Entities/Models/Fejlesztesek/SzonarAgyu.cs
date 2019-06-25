@@ -10,6 +10,7 @@ namespace StrategyGame.Model.Entities.Models.Fejlesztesek
         public TamadasNovelo Tamadas { get; set; }
         public SzonarAgyu() : base()
         {
+            Tamadas = new TamadasNovelo();
             Tamadas.Ertek = 20;
         }
     }

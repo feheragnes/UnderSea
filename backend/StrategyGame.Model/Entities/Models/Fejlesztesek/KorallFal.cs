@@ -10,6 +10,7 @@ namespace StrategyGame.Model.Entities.Models.Fejlesztesek
         public VedekezesNovelo Vedekezes { get; set; }
         public KorallFal() : base()
         {
+            Vedekezes = new VedekezesNovelo();
             Vedekezes.Ertek = 20;
         }
     }
