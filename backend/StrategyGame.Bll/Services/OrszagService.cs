@@ -64,7 +64,7 @@ namespace StrategyGame.Bll.Services
         {
 
             var orszag = new Orszag { Nev = orszagNev, Korall = 0, Gyongy = 1000 };
-            orszag.Epulets.Add(new AramlasIranyito());
+            orszag.Epulets.Add(new AramlasIranyito() { Felepult = true});
             if (_context.Orszags.FirstOrDefault(x => x.Nev.ToUpper() == orszagNev.ToUpper()) == null)
             {
                 await _context.Orszags.AddAsync(orszag);
