@@ -6,7 +6,7 @@ namespace StrategyGame.Model.Entities.Models.Novelok
 {
     public class TamadasNovelo : AbstractNovelo
     {
-        public Guid id { get; set; }
+        public Guid Id { get; set; }
 
         public int Ertek { get; set; }
 
