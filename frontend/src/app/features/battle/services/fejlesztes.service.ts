@@ -6,23 +6,23 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class EpuletService {
-  private epuletUrl = environment.apiUrl + '/epulet';
+export class FejlesztesService {
+  private fejlesztesUrl = environment.apiUrl + '/fejlesztes';
 
   constructor(private http: HttpClient) {}
 
-  getEpuletInfo(): Observable<any> {
-    const url = `${this.epuletUrl}/getuserepulets`;
+  getFejlesztesInfo(): Observable<any> {
+    const url = `${this.fejlesztesUrl}/getfejlesztesinfos`;
     return this.http.get<any>(url);
   }
 
-  buyEpulet(type: string) {
+  buyFejlesztes(type: string) {
     const parameter = {
-      tipus: type,
-      ar: 1,
-      mennyiseg: 1
+      tipus: type
     };
     console.log(parameter);
-    return this.http.post<any>(`${this.epuletUrl}/buyepulets`, [parameter]);
+    return this.http.post<any>(`${this.fejlesztesUrl}/buyfejlesztes`, [
+      parameter
+    ]);
   }
 }
