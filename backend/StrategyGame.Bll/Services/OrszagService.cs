@@ -88,8 +88,10 @@ namespace StrategyGame.Bll.Services
                 Nev = orszag.Nev,
                 Korall = orszag.Korall,
                 Helyezes = await GetHelyezes(orszag),
-                GyongyTermeles = (await GetTermeles(orszag)).GyongyTermeles,
-                KorallTermeles = (await GetTermeles(orszag)).KorallTermeles,
+                GyongyTermeles = await GetGyongyTermeles(orszag),
+                KorallTermeles = await GetKorallTermeles(orszag),
+                EpuloAramlasIranyito = await _epuletService.GetEpuloAramlasiranyitoCout(orszag),
+                EpuloZatonyVar = await _epuletService.GetEpuloZatonyvarCount(orszag),
                 SeregInfoDTOs = await GetSeregInfoDTOs(orszag),
                 EpuletInfoDTOs = await GetEpuletInfoDTOs(orszag)
             };
@@ -106,6 +108,13 @@ namespace StrategyGame.Bll.Services
                 .Include(x => x.Epulet).ThenInclude(x => x.Orszag)
                 .Where(x => x.Epulet.Orszag.Id == orszag.Id)
                 .SumAsync(x => x.Ertek);
+        }
+        private async Task<long> GetGyongyTermeles(Orszag orszag)
+        {
+            return await _context.NepessegTermelos
+                 .Include(x => x.Epulet).ThenInclude(x => x.Orszag)
+                 .Where(x => x.Epulet.Orszag.Id == orszag.Id)
+                 .SumAsync(x => x.Ertek) *1;
         }
         private async Task<OrszagDTO> GetTermeles(Orszag orszag)
         {

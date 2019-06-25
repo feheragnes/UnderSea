@@ -8,8 +8,8 @@ namespace StrategyGame.Model.Entities.Models.Fejlesztesek
     public class VizalattiHarcmuveszet : Fejlesztes
     {
 
-        TamadasNovelo Tamadas;
-        VedekezesNovelo Vedekezes;
+        public TamadasNovelo Tamadas { get; set; }
+        public VedekezesNovelo Vedekezes { get; set; }
 
         public VizalattiHarcmuveszet() : base()
         {
