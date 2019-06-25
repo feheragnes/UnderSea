@@ -81,11 +81,10 @@ namespace StrategyGame.Bll.Services.AAAServices
             List<Fejlesztes> keszFejleszteses = currentOrszag.Fejleszteses.Where(x => x.Kifejlesztve == true).ToList();
             List<FejlesztesInfoDTO> keszDTOList = new List<FejlesztesInfoDTO>();
 
-            var asd = (FejlesztesTipus)Enum.Parse(typeof(FejlesztesTipus), keszFejleszteses[0].GetType().Name);
 
             keszFejleszteses.ForEach(x =>
             {
-                keszDTOList.Add(new FejlesztesInfoDTO((FejlesztesTipus)Enum.Parse(typeof(FejlesztesTipus), x.GetType().Name), false));
+                keszDTOList.Add(new FejlesztesInfoDTO((FejlesztesTipus)Enum.Parse(typeof(FejlesztesTipus), x.GetType().Name), false, x.AktualisKor));
             });
             
             return keszDTOList;
@@ -97,5 +96,19 @@ namespace StrategyGame.Bll.Services.AAAServices
             return currentOrszag.Fejleszteses.ToList().FindAll(x => x.Kifejlesztve == false).Count();
         }
 
+        public async Task<List<FejlesztesInfoDTO>> GetFejlesztesInfoDTOs(Guid userId)
+        {
+            Orszag currentOrszag = await _commonService.GetCurrentOrszag(userId);
+            List<Fejlesztes> userFejleszteses = currentOrszag.Fejleszteses.ToList();
+
+            List<FejlesztesInfoDTO> returnDtoList = new List<FejlesztesInfoDTO>();
+
+            userFejleszteses.ForEach(x =>
+            {
+                returnDtoList.Add(new FejlesztesInfoDTO((FejlesztesTipus)Enum.Parse(typeof(FejlesztesTipus), x.GetType().Name), x.Kifejlesztve, x.AktualisKor));
+            });
+
+            return returnDtoList;
+        }
     }
 }

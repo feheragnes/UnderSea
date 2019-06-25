@@ -12,6 +12,7 @@ namespace StrategyGame.Bll.ServiceInterfaces
     {
         Task<List<FejlesztesInfoDTO>> GetFinishedFejlesztesesAsync(Guid userId);
         Task<long> GetActiveFejlesztesCount(Orszag currentOrszag);
+        Task<List<FejlesztesInfoDTO>> GetFejlesztesInfoDTOs(Guid userId);
         Task AddFejlesztesAsync(FejlesztesInfoDTO fejlesztes, Guid userId);
     }
 }

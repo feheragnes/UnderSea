@@ -39,7 +39,6 @@ namespace StrategyGame.Api.Mappers
                 .ForMember(x => x.HarcEredmeny, opt => opt.MapFrom(y => Enum.GetName(typeof(HarcEredmenyTipus), y.HarcEredmeny)));
 
 
-
             CreateMap<SeregInfoDTO, TamadoSeregInfoViewModel>().ReverseMap();
             CreateMap<TamadasDTO, TamadasViewModel>()
                 .ForMember(x => x.Orszag, opt => opt.MapFrom(y => y.EllensegesOrszagok))
