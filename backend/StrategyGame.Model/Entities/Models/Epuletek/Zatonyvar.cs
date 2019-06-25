@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StrategyGame.Model.Entities.Models.Termelok;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -9,10 +10,11 @@ namespace StrategyGame.Model.Entities.Models.Epuletek
         public ZatonyVar(): base()
         {
             Ar = 1000;
+            Szallas = new EgysegTermelo();
+            Szallas.Ertek = 200;
             SzuksegesKorok = 5;
-            Szallas = 200;
         }
-        public long Szallas { get; set; }
 
+        public EgysegTermelo Szallas { get; set; }
     }
 }
