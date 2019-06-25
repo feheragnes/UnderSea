@@ -1,3 +1,78 @@
-<p>
-  powerups works!
-</p>
+<mat-card class="maincard">
+  <mat-card-header>
+    <p>Fejlesztések</p>
+  </mat-card-header>
+  <div class="card">
+    <h4>
+      Kattints rá, amelyiket szeretnéd megvenni.
+    </h4>
+    <h4>
+      Minden fejlesztés 15 kört vesz igénybe, egyszerre csak egy dolog
+      fejleszthető és minden csak egyszer fejleszthető ki (nem lehet két
+      kombájn).
+    </h4>
+    <div class="cards">
+      <mat-card
+        id="card1"
+        (click)="changeColor('card1')"
+        class="smallcard"
+        [style.backgroundcolor]="color"
+      >
+        <mat-card-content>
+          <img src="assets\images\undersea_game-09.png" />
+          <div class="text">
+            <h5>Iszaptraktor</h5>
+            <h5>növeli a krumpli termesztést 10%-kal</h5>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <mat-card id="card2" (click)="changeColor('card2')" class="smallcard">
+        <mat-card-content>
+          <img src="assets\images\undersea_game-10.png" />
+          <div class="text">
+            <h5>Iszapkombájn</h5>
+            <h5>növeli a korall termesztést 15%-kal</h5>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <mat-card id="card3" (click)="changeColor('card3')" class="smallcard">
+        <mat-card-content>
+          <img src="assets\images\undersea_game-09.png" />
+          <div class="text">
+            <h5>Korallfal</h5>
+            <h5>növeli a védelmi pontokat 20%-kal</h5>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <mat-card id="card4" (click)="changeColor('card4')" class="smallcard">
+        <mat-card-content>
+          <img src="assets\images\undersea_game-03.png" />
+          <div class="text">
+            <h5>Szonárágyú</h5>
+            <h5>növeli a támadópontokat 20%-kal</h5>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <mat-card id="card5" (click)="changeColor('card5')" class="smallcard">
+        <mat-card-content>
+          <img src="assets\images\undersea_game-09.png" />
+          <div class="text">
+            <h5>Vízalatti harcművészetek</h5>
+            <h5>növeli a védelmi és támadóerőt 10%-kal</h5>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <mat-card id="card6" (click)="changeColor('card6')" class="smallcard">
+        <mat-card-content>
+          <img src="assets\images\undersea_game-09.png" />
+          <div class="text">
+            <h5>Alkímia</h5>
+            <h5>növeli a beszedett adót 30%-kal</h5>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <hr width="100%" />
+    <button mat-raised-button>Megépítem</button>
+  </div>
+</mat-card>
