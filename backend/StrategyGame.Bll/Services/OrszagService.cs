@@ -51,8 +51,14 @@ namespace StrategyGame.Bll.Services
 
         public async void MakeOrszagUserConnection(StrategyGameUser user, string orszagNev)
         {
-            user.Orszag = await InitOrszag(orszagNev);
-            await _context.SaveChangesAsync();
+            try
+            {
+                user.Orszag = await InitOrszag(orszagNev);
+                await _context.SaveChangesAsync();
+            }catch(Exception e)
+            {
+                throw e;
+            }
         }
         public async Task<Orszag> InitOrszag(string orszagNev)
         {
