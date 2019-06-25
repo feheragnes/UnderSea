@@ -8,6 +8,7 @@ import { GlobalService } from "../../services/global.service";
 })
 export class RankingsComponent implements OnInit {
   private ranglista;
+  filteredranglista;
   constructor(private globalService: GlobalService) {}
 
   ngOnInit() {
@@ -17,11 +18,19 @@ export class RankingsComponent implements OnInit {
     this.globalService.getRanglista().subscribe(
       data => {
         this.ranglista = data;
+        this.filteredranglista = data;
       },
       err => console.error(err),
       () => {
         console.log("done loading ranglista");
       }
     );
+  }
+  search(value: string) {
+    this.filteredranglista = this.ranglista.filter(b => {
+      if (b.orszag.toUpperCase().includes(value.toUpperCase())) {
+        return b;
+      }
+    });
   }
 }
