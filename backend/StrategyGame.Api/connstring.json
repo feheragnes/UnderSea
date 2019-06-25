@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "StrategyGameContextConnection": "Server=(localdb)\\MSSQLLocalDB;Database=StrategyGameDb;Trusted_Connection=True;"
+  }
+}
