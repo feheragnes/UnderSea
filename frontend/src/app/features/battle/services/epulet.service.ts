@@ -22,7 +22,7 @@ export class EpuletService {
       mennyiseg: 1
     };
     console.log(parameter);
-    this.http.post<any>(`http://localhost:51554/epulet/buyepulets`, [
+    return this.http.post<any>(`http://localhost:51554/epulet/buyepulets`, [
       parameter
     ]);
   }

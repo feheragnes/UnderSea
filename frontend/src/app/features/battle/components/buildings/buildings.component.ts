@@ -22,12 +22,30 @@ export class BuildingsComponent implements OnInit {
 
   buyBuilding() {
     if (this.activeCard == "card1") {
-      this.authService.buyEpulet("ZatonyVar");
-      console.log("lol1");
+      this.epuletService.buyEpulet("ZatonyVar").subscribe(
+        data => {
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+        },
+        () => {
+          console.log("done building");
+        }
+      );
     }
     if (this.activeCard == "card2") {
-      this.epuletService.buyEpulet("AramlasIranyito");
-      console.log("lol2");
+      this.epuletService.buyEpulet("AramlasIranyito").subscribe(
+        data => {
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+        },
+        () => {
+          console.log("done building");
+        }
+      );
     }
   }
   constructor(

@@ -57,16 +57,6 @@ export class AuthenticationService {
     );
   }
 
-  buyEpulet(type: string) {
-    const parameter = {
-      tipus: type,
-      ar: 1,
-      mennyiseg: 1
-    };
-    console.log(parameter);
-    this.http.post<any>(`${environment.apiUrl}/epulet/buyepulets`, [parameter]);
-  }
-
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem("currentUser");
