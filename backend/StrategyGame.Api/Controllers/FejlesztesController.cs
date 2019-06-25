@@ -9,6 +9,7 @@ using StrategyGame.Bll.DTOs;
 using StrategyGame.Bll.DTOs.Fejlesztesek;
 using StrategyGame.Bll.ServiceInterfaces;
 using StrategyGame.Model.Entities.Identity;
+using StrategyGame.Model.Entities.Models;
 
 namespace StrategyGame.Api.Controllers
 {
@@ -41,9 +42,10 @@ namespace StrategyGame.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<bool>> GetIsActiveConstruction()
+        public async Task<ActionResult<long>> GetActiveFejlesztesNumber()
             {
-            return await _fejlesztesService.GetIfCurrentlyActiveFejlesztes(UserId);
+            Orszag currentOrszag = await _commonService.GetCurrentOrszag(UserId);
+            return await _fejlesztesService.GetActiveFejlesztesCount(currentOrszag);
             }
 
 

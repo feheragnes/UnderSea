@@ -30,25 +30,26 @@ namespace StrategyGame.Api.Controllers
             _orszagService = orszagService;
             _commonService = commonService;
         }
+
         [HttpGet]
-        public async Task<ActionResult<List<SeregInfoDTO>>> GetUserEgysegs()
+        public async Task<ActionResult<List<SeregInfoDTO>>> GetOtthonMaradtCsapatFromOneUser()
         {
-         
-            return await _egysegService.GetOtthoniEgysegsAsync(UserId);
+            Orszag currentOrszag = await _commonService.GetCurrentOrszag(UserId);
+            return await _egysegService.GetOtthoniEgysegsFromOneUserAsync(currentOrszag);
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetEgysegInfos()
+        public async Task<ActionResult<List<EgysegDTO>>> GetAllEgysegsFromOneUser()
         {
-            return Ok(_egysegService.GetAllEgysegsAsync(UserId));
+            return await _egysegService.GetAllEgysegsFromOneUserAsync(UserId);
         }
+
 
         [HttpPost]
         public async Task<IActionResult> BuyEgysegs([FromBody] List<SeregInfoDTO> egysegs)
         {
             await _egysegService.AddEgysegAsync(egysegs, UserId);
-
-            return Ok("Not implemented");
+            return Ok();
         }
     }
 }
