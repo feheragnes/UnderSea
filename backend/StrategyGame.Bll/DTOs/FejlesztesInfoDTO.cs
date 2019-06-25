@@ -11,7 +11,7 @@ namespace StrategyGame.Bll.DTOs
         {
             Tipus = t;
             Kifejlesztve = k;
-            JelenlegiKor = JelenlegiKor;
+            AktualisKor = ak;
         }
         public FejlesztesTipus Tipus { get; set; }
 

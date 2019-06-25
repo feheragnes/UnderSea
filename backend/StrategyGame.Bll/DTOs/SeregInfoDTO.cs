@@ -10,6 +10,7 @@ namespace StrategyGame.Bll.DTOs
         public SeregInfoDTO(long m, EgysegTipus tipus)
         {
             Mennyiseg = m;
+            Tipus = tipus;
 
             if(tipus == EgysegTipus.CsataCsiko)
             {
