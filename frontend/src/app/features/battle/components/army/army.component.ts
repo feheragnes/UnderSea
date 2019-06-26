@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { EgysegService } from '../../services/egyseg.service';
 
 @Component({
@@ -14,6 +14,7 @@ export class ArmyComponent implements OnInit {
   capaInfo;
   csikoInfo;
   fokaInfo;
+  @Output() stateChanged = new EventEmitter();
 
   constructor(private egysegService: EgysegService) {}
 

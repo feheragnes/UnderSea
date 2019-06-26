@@ -1,14 +1,13 @@
-import { Component, OnInit } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { first } from "rxjs/operators";
-import { AuthenticationService } from "src/app/services/authentication.service";
-import { AlertService } from "src/app/services/alert.service";
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
-  selector: "app-login",
-  templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.scss"]
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
@@ -21,22 +20,22 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private alertService: AlertService
+    private toastr: ToastrService
   ) {
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
-      this.router.navigate(["/"]);
+      this.router.navigate(['/']);
     }
   }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      email: ["", Validators.required],
-      password: ["", Validators.required]
+      email: ['', Validators.required],
+      password: ['', Validators.required]
     });
 
     // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams["returnUrl"] || "/";
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   // convenience getter for easy access to form fields
@@ -56,10 +55,11 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(this.loginForm.value).subscribe(
       data => {
         this.router.navigate([this.returnUrl]);
+        this.toastr.success('Sikeres bejelentkezés! :)');
       },
       error => {
         console.log(error);
-        this.alertService.error(error);
+        this.toastr.error(error, 'Sikertelen bejelentkezés :(');
         this.loading = false;
       }
     );

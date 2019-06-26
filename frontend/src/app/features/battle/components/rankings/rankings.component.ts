@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { GlobalService } from '../../services/global.service';
 
 @Component({
@@ -9,6 +9,7 @@ import { GlobalService } from '../../services/global.service';
 export class RankingsComponent implements OnInit {
   private ranglista;
   filteredranglista;
+  @Output() stateChanged = new EventEmitter();
   constructor(private globalService: GlobalService) {}
 
   ngOnInit() {

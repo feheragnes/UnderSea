@@ -1,11 +1,11 @@
-import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from "./app-routing.module";
-import { AppComponent } from "./app.component";
-import { CoreModule } from "./core/core.module";
-import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { CoreModule } from './core/core.module';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatButtonModule,
   MatCardModule,
@@ -21,28 +21,29 @@ import {
   MatSliderModule,
   MatToolbarModule,
   MatGridListModule
-} from "@angular/material";
+} from '@angular/material';
 
-import { LoginComponent } from "./features/login/login/login.component";
-import { RegisterComponent } from "./features/login/register/register.component";
-import { AlertComponent } from "./alert/alert.component";
-import { JwtInterceptor } from "./jwt.interceptor";
-import { ErrorInterceptor } from "./error.interceptor";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { AuthGuard } from "./core/guards/auth.guard";
+import { LoginComponent } from './features/login/login/login.component';
+import { RegisterComponent } from './features/login/register/register.component';
+import { JwtInterceptor } from './jwt.interceptor';
+import { ErrorInterceptor } from './error.interceptor';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthGuard } from './core/guards/auth.guard';
+
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    RegisterComponent,
-    AlertComponent
-  ],
+  declarations: [AppComponent, LoginComponent, RegisterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CoreModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true
+    }),
     MatCardModule,
     MatChipsModule,
     MatExpansionModule,

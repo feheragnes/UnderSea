@@ -56,7 +56,7 @@ export class BattleComponent implements OnInit {
   }
 
   onActivate(elementRef) {
-    elementRef.built.subscribe(event => {
+    elementRef.stateChanged.subscribe(event => {
       console.log('siker');
       this.getOrszagInfo();
     });

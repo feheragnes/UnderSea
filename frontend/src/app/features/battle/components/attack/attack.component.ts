@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TamadasService } from '../../services/tamadas.service';
 
 @Component({
@@ -17,6 +17,7 @@ export class AttackComponent implements OnInit {
   fokaInfo;
   capaInfo;
   csikoInfo;
+  @Output() stateChanged = new EventEmitter();
 
   constructor(private tamadasService: TamadasService) {}
 

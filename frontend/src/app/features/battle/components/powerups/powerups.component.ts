@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FejlesztesService } from '../../services/fejlesztes.service';
 
 @Component({
@@ -16,6 +16,7 @@ export class PowerupsComponent implements OnInit {
   korallInfo;
   szonarAgyuInfo;
   vizalattiHarmuveszetInfo;
+  @Output() stateChanged = new EventEmitter();
 
   constructor(private fejlesztesService: FejlesztesService) {}
 
