@@ -1,12 +1,12 @@
-import { Component, OnInit } from "@angular/core";
-import { AuthenticationService } from "src/app/services/authentication.service";
-import { Router } from "@angular/router";
-import { OrszagService } from "../../services/orszag.service";
+import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { Router } from '@angular/router';
+import { OrszagService } from '../../services/orszag.service';
 
 @Component({
-  selector: "app-battle",
-  templateUrl: "./battle.component.html",
-  styleUrls: ["./battle.component.scss"]
+  selector: 'app-battle',
+  templateUrl: './battle.component.html',
+  styleUrls: ['./battle.component.scss']
 })
 export class BattleComponent implements OnInit {
   private orszagInfo;
@@ -30,18 +30,18 @@ export class BattleComponent implements OnInit {
         this.orszagInfo = data;
         this.gyongy = data.gyongy;
         this.korall = data.korall;
-        this.csiko = data.seregInfo.filter(x => x.tipus == "CsataCsiko");
-        this.foka = data.seregInfo.filter(x => x.tipus == "RohamFoka");
-        this.capa = data.seregInfo.filter(x => x.tipus == "LezerCapa");
+        this.csiko = data.seregInfo.filter(x => x.tipus == 'CsataCsiko');
+        this.foka = data.seregInfo.filter(x => x.tipus == 'RohamFoka');
+        this.capa = data.seregInfo.filter(x => x.tipus == 'LezerCapa');
         console.log(this.orszagInfo);
         this.aramlasiranyito = data.epuletInfo.filter(
-          x => x.tipus == "AramlasIranyito"
+          x => x.tipus == 'AramlasIranyito'
         );
-        this.zatonyvar = data.epuletInfo.filter(x => x.tipus == "ZatonyVar");
+        this.zatonyvar = data.epuletInfo.filter(x => x.tipus == 'ZatonyVar');
       },
       err => console.error(err),
       () => {
-        console.log("done loading orszagInfo");
+        console.log('done loading orszagInfo');
       }
     );
   }
@@ -49,8 +49,15 @@ export class BattleComponent implements OnInit {
   ngOnInit() {
     this.getOrszagInfo();
   }
+
   logout() {
     this.authenticationService.logout();
-    this.router.navigate(["/login"]);
+    this.router.navigate(['/login']);
+  }
+
+  onActivate(componentReference) {
+    console.log(componentReference);
+    // componentReference.anyFunction();
+    this.getOrszagInfo();
   }
 }

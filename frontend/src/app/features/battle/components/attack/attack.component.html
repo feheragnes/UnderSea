@@ -1,4 +1,4 @@
-<mat-card class="maincard">
+<mat-card class="maincard" *ngIf="tamadasInfo">
   <mat-card-header>
     <p>Támadás</p>
   </mat-card-header>
@@ -9,8 +9,22 @@
         <input
           type="text"
           class="form-control form-rounded"
-          placeholder="Felhasználónév"
+          placeholder="Országnév"
+          (input)="search(searchBox.value)"
+          #searchBox
         />
+        <mat-list role="list">
+          <div
+            *ngFor="let country of filteredCountries"
+            (click)="selectCountry(country)"
+            [class.active]="selectedCountry == country"
+          >
+            <hr />
+            <mat-list-item>
+              <h4>{{ country }}</h4>
+            </mat-list-item>
+          </div>
+        </mat-list>
       </div>
       <div class="column">
         <h4>2. Állítsd be, kiket küldesz harcba:</h4>
@@ -27,9 +41,9 @@
               class="slider"
               #capa
               min="0"
-              max="10"
+              max="{{ this.capaInfo.mennyiseg }}"
               value="0"
-              (input)="inputChanged('capa', capa.value)"
+              [(ngModel)]="capaNumber"
             />
           </div>
         </div>
@@ -46,9 +60,9 @@
               class="slider"
               #foka
               min="0"
-              max="10"
+              max="{{ this.fokaInfo.mennyiseg }}"
               value="0"
-              (input)="inputChanged('foka', foka.value)"
+              [(ngModel)]="fokaNumber"
             />
           </div>
         </div>
@@ -65,9 +79,9 @@
               class="slider"
               #csiko
               min="0"
-              max="10"
+              max="{{ this.csikoInfo.mennyiseg }}"
               value="0"
-              (input)="inputChanged('csiko', csiko.value)"
+              [(ngModel)]="csikoNumber"
             />
           </div>
         </div>

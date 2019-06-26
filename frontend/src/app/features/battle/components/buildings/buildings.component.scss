@@ -7,11 +7,6 @@
   background-color: #03255f;
   border-radius: 2rem;
 }
-mat-card-content {
-  margin-left: 48px;
-  margin-right: 48px;
-}
-
 mat-card-header {
   font-size: 32px;
 }
@@ -20,14 +15,21 @@ mat-card-header {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  margin-left: 40px;
+  margin-right: 40px;
 }
 
 .smallcard {
+  background-color: 'transparent';
   width: 296px;
   height: 315px;
   background-color: transparent;
   text-align: center;
   border-radius: 2rem;
+  box-shadow: 0px 0px 0px 0px transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 h4 {
@@ -68,4 +70,8 @@ button {
   flex-wrap: wrap;
   justify-content: space-evenly;
   margin-top: 20px;
+}
+
+.active {
+  background-color: rgba(255, 255, 255, 0.25);
 }

@@ -1,4 +1,4 @@
-<mat-card class="maincard">
+<mat-card class="maincard" *ngIf="epuletInfo">
   <mat-card-header>
     <p>Épületek</p>
   </mat-card-header>
@@ -8,26 +8,31 @@
       <div class="cards">
         <mat-card
           id="card1"
-          (click)="changeColor('card1')"
+          (click)="setActive('card1')"
           class="smallcard"
-          [style.backgroundcolor]="color"
+          [class.active]="activeCard == 'card1'"
         >
           <mat-card-content>
             <img src="assets\images\undersea_game-07.png" />
             <h4>Zátonyvár</h4>
-            <h4>50 embert ad a népességhez</h4>
-            <h4>200 krumplit termel körönként</h4>
-            <h5>1 db</h5>
-            <h5>45 gyöngy/db</h5>
+            <h4>200 egységnek nyújt szállást</h4>
+            <h5>{{ this.zatonyvarInfo.mennyiseg }} db</h5>
+            <h5>{{ this.zatonyvarInfo.ar }} gyöngy/db</h5>
           </mat-card-content>
         </mat-card>
-        <mat-card id="card2" (click)="changeColor('card2')" class="smallcard">
+        <mat-card
+          id="card2"
+          (click)="setActive('card2')"
+          class="smallcard"
+          [class.active]="activeCard == 'card2'"
+        >
           <mat-card-content>
             <img src="assets\images\undersea_game-05.png" />
             <h4>Áramlásirányító</h4>
-            <h4>200 egységnek nyújt szállást</h4>
-            <h5>0 db</h5>
-            <h5>35 gyöngy/db</h5>
+            <h4>50 lakost ad a népességhez</h4>
+            <h4>200 korallt termel körönként</h4>
+            <h5>{{ this.aramlasiranyitoInfo.mennyiseg }} db</h5>
+            <h5>{{ this.aramlasiranyitoInfo.ar }} gyöngy/db</h5>
           </mat-card-content>
         </mat-card>
       </div>

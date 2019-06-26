@@ -51,3 +51,7 @@ mat-list * {
 .form-rounded::placeholder {
   color: #1c3e76;
 }
+
+input:focus {
+  outline: none;
+}

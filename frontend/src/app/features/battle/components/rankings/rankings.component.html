@@ -4,12 +4,14 @@
   </mat-card-header>
   <div class="card">
     <input
+      #searchBox
       type="text"
       class="form-control form-rounded"
-      placeholder="Felhasználónév"
+      placeholder="Országnév"
+      (input)="search(searchBox.value)"
     />
     <mat-list role="list">
-      <div *ngFor="let country of ranglista; index as i">
+      <div *ngFor="let country of filteredranglista; index as i">
         <hr width="770px" />
         <mat-list-item>
           <div class="country">

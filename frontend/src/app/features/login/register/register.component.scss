@@ -54,6 +54,8 @@ mat-card-actions {
   width: 192px;
   height: 50px;
   border-radius: 2rem;
+  margin-top: 20px;
+  margin-bottom: 15px;
 }
 
 p {
@@ -63,4 +65,14 @@ h1 {
   font-size: 93px;
   color: #9ffff0;
   text-align: center;
+}
+
+input:focus {
+  outline: none;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

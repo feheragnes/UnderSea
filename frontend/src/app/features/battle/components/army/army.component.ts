@@ -1,34 +1,69 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
+import { EgysegService } from '../../services/egyseg.service';
 
 @Component({
-  selector: "app-army",
-  templateUrl: "./army.component.html",
-  styleUrls: ["./army.component.scss"]
+  selector: 'app-army',
+  templateUrl: './army.component.html',
+  styleUrls: ['./army.component.scss']
 })
 export class ArmyComponent implements OnInit {
   private capaNumber = 0;
   private fokaNumber = 0;
   private csikoNumber = 0;
+  private egysegInfo;
+  capaInfo;
+  csikoInfo;
+  fokaInfo;
+
+  constructor(private egysegService: EgysegService) {}
+
+  ngOnInit() {
+    this.getEgysegInfo();
+  }
 
   changeNumber(type: string, value: number) {
     switch (type) {
-      case "csiko":
-        this.csikoNumber += value;
-        if (this.csikoNumber < 0) this.csikoNumber = 0;
+      case 'csiko':
+        if (this.csikoNumber > 0 || value > 0) {
+          this.csikoNumber += value;
+        }
         break;
-      case "foka":
-        this.fokaNumber += value;
-        if (this.fokaNumber < 0) this.fokaNumber = 0;
+      case 'foka':
+        if (this.fokaNumber > 0 || value > 0) {
+          this.fokaNumber += value;
+        }
         break;
-      case "capa":
-        this.capaNumber += value;
-        if (this.capaNumber < 0) this.capaNumber = 0;
+      case 'capa':
+        if (this.capaNumber > 0 || value > 0) {
+          this.capaNumber += value;
+        }
         break;
     }
-    console.log(type, value);
   }
 
-  constructor() {}
+  getEgysegInfo() {
+    this.egysegService.getEgysegInfo().subscribe(
+      data => {
+        this.egysegInfo = data;
+        console.log(this.egysegInfo);
+        data.forEach(element => {
+          if (element.tipus === 'RohamFoka') {
+            this.fokaInfo = element;
+          }
+          if (element.tipus === 'LezerCapa') {
+            this.capaInfo = element;
+          }
+          if (element.tipus === 'CsataCsiko') {
+            this.csikoInfo = element;
+          }
+        });
+      },
+      err => console.error(err),
+      () => {
+        console.log('done loading egysegInfo');
+      }
+    );
+  }
 
-  ngOnInit() {}
+  buyEgyseg() {}
 }

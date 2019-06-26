@@ -49,14 +49,14 @@
             <mat-card class="icon"> </mat-card>
             <div class="doubletext">
               <span>{{ this.zatonyvar[0].mennyiseg }}</span>
-              <h5>? épül</h5>
+              <h5>{{ this.orszagInfo.epuloZatonyvar }} épül</h5>
             </div>
           </div>
           <div class="icontext">
             <mat-card class="icon"> </mat-card>
             <div class="doubletext">
               <span>{{ this.aramlasiranyito[0].mennyiseg }}</span>
-              <h5>? épül</h5>
+              <h5>{{ this.orszagInfo.epuloAramlasIranyito }} épül</h5>
             </div>
           </div>
         </div>
@@ -68,7 +68,7 @@
         <button mat-raised-button routerLink="buildings">Épületek</button>
         <button mat-raised-button routerLink="attack">Támadás</button>
         <button mat-raised-button routerLink="powerups">Fejlesztések</button>
-        <button mat-raised-button routerLink="fight">Harc</button>
+        <button mat-raised-button routerLink="fight">Harcok</button>
         <button mat-raised-button routerLink="rankings">Ranglista</button>
         <button mat-raised-button routerLink="army">Sereg</button>
         <mat-card class="card">
@@ -87,7 +87,9 @@
       </mat-sidenav>
       <mat-sidenav-content>
         <div class="country"><app-country></app-country></div>
-        <div class="router"><router-outlet></router-outlet></div>
+        <div class="router">
+          <router-outlet (activate)="onActivate($event)"></router-outlet>
+        </div>
       </mat-sidenav-content>
     </mat-sidenav-container>
   </div>

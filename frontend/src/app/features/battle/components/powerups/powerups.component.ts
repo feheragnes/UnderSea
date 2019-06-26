@@ -1,29 +1,98 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
+import { FejlesztesService } from '../../services/fejlesztes.service';
 
 @Component({
-  selector: "app-powerups",
-  templateUrl: "./powerups.component.html",
-  styleUrls: ["./powerups.component.scss"]
+  selector: 'app-powerups',
+  templateUrl: './powerups.component.html',
+  styleUrls: ['./powerups.component.scss']
 })
 export class PowerupsComponent implements OnInit {
-  colorclicked = "rgba(255, 255, 255, 0.25)";
-  color = "transparent";
   isActive = true;
   private activeCard;
-  changeColor(id) {
-    console.log(id);
-    document.getElementById("card1").style.backgroundColor = "transparent";
-    document.getElementById("card2").style.backgroundColor = "transparent";
-    document.getElementById("card3").style.backgroundColor = "transparent";
-    document.getElementById("card4").style.backgroundColor = "transparent";
-    document.getElementById("card5").style.backgroundColor = "transparent";
-    document.getElementById("card6").style.backgroundColor = "transparent";
-    this.activeCard = id;
-    var x = document.getElementById(id);
-    x.style.backgroundColor = "rgba(255, 255, 255, 0.25)";
+  private fejlesztesInfo;
+  traktorInfo;
+  kombajnInfo;
+  alkimiaInfo;
+  korallInfo;
+  szonarAgyuInfo;
+  vizalattiHarmuveszetInfo;
+
+  constructor(private fejlesztesService: FejlesztesService) {}
+
+  ngOnInit() {
+    this.getFejlesztesInfos();
   }
 
-  constructor() {}
+  setActive(id: string) {
+    this.activeCard = id;
+  }
 
-  ngOnInit() {}
+  getFejlesztesInfos() {
+    this.fejlesztesService.getFejlesztesInfo().subscribe(
+      data => {
+        this.fejlesztesInfo = data;
+        console.log(this.fejlesztesInfo);
+        data.forEach(element => {
+          if (element.tipus === 'IszapTraktor') {
+            this.traktorInfo = element;
+          }
+          if (element.tipus === 'IszapKombajn') {
+            this.kombajnInfo = element;
+          }
+          if (element.tipus === 'Alkimia') {
+            this.alkimiaInfo = element;
+          }
+          if (element.tipus === 'KorallFal') {
+            this.korallInfo = element;
+          }
+          if (element.tipus === 'SzonarAgyu') {
+            this.szonarAgyuInfo = element;
+          }
+          if (element.tipus === 'VizalattiHarmuveszet') {
+            this.vizalattiHarmuveszetInfo = element;
+          }
+        });
+      },
+      err => console.error(err),
+      () => {
+        console.log('done loading fejlesztesInfo');
+      }
+    );
+  }
+
+  buyFejlesztes() {
+    let type;
+    switch (this.activeCard) {
+      case 'card1':
+        type = 'IszapTraktor';
+        break;
+      case 'card2':
+        type = 'IszapKombajn';
+        break;
+      case 'card3':
+        type = 'KorallFal';
+        break;
+      case 'card4':
+        type = 'SzonarAgyu';
+        break;
+      case 'card5':
+        type = 'VizalattiHarmuveszet';
+        break;
+      case 'card6':
+        type = 'Alkimia';
+        break;
+    }
+    this.fejlesztesService.buyFejlesztes(type).subscribe(
+      data => {
+        console.log(data);
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
+        console.log('done building');
+        this.getFejlesztesInfos();
+      }
+    );
+  }
 }
