@@ -21,8 +21,9 @@ export class FejlesztesService {
       tipus: type
     };
     console.log(parameter);
-    return this.http.post<any>(`${this.fejlesztesUrl}/buyfejlesztes`, [
+    return this.http.post<any>(
+      `${this.fejlesztesUrl}/buyfejlesztes`,
       parameter
-    ]);
+    );
   }
 }

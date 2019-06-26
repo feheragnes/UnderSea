@@ -19,7 +19,12 @@
         [class.active]="activeCard == 'card1'"
       >
         <mat-card-content>
-          <div class="state">kész</div>
+          <div class="state" *ngIf="traktorInfo && traktorInfo.kifejlesztve">
+            kész
+          </div>
+          <div class="state" *ngIf="traktorInfo && !traktorInfo.kifejlesztve">
+            még {{ 15 - traktorInfo.aktualisKor }} kör
+          </div>
           <div class="powerup">
             <img src="assets\images\undersea_game-09.png" />
             <div class="text">
@@ -36,7 +41,12 @@
         [class.active]="activeCard == 'card2'"
       >
         <mat-card-content>
-          <div class="state">kész</div>
+          <div class="state" *ngIf="kombajnInfo && kombajnInfo.kifejlesztve">
+            kész
+          </div>
+          <div class="state" *ngIf="kombajnInfo && !kombajnInfo.kifejlesztve">
+            még {{ 15 - kombajnInfo.aktualisKor }} kör
+          </div>
           <div class="powerup">
             <img src="assets\images\undersea_game-10.png" />
             <div class="text">
@@ -53,7 +63,12 @@
         [class.active]="activeCard == 'card3'"
       >
         <mat-card-content>
-          <div class="state">kész</div>
+          <div class="state" *ngIf="korallInfo && korallInfo.kifejlesztve">
+            kész
+          </div>
+          <div class="state" *ngIf="korallInfo && !korallInfo.kifejlesztve">
+            még {{ 15 - korallInfo.aktualisKor }} kör
+          </div>
           <div class="powerup">
             <img src="assets\images\undersea_game-09.png" />
             <div class="text">
@@ -70,7 +85,18 @@
         [class.active]="activeCard == 'card4'"
       >
         <mat-card-content>
-          <div class="state">kész</div>
+          <div
+            class="state"
+            *ngIf="szonarAgyuInfo && szonarAgyuInfo.kifejlesztve"
+          >
+            kész
+          </div>
+          <div
+            class="state"
+            *ngIf="szonarAgyuInfo && !szonarAgyuInfo.kifejlesztve"
+          >
+            még {{ 15 - szonarAgyuInfo.aktualisKor }} kör
+          </div>
           <div class="powerup">
             <img src="assets\images\undersea_game-03.png" />
             <div class="text">
@@ -87,7 +113,22 @@
         [class.active]="activeCard == 'card5'"
       >
         <mat-card-content>
-          <div class="state">kész</div>
+          <div
+            class="state"
+            *ngIf="
+              vizalattiHarmuveszetInfo && vizalattiHarmuveszetInfo.kifejlesztve
+            "
+          >
+            kész
+          </div>
+          <div
+            class="state"
+            *ngIf="
+              vizalattiHarmuveszetInfo && !vizalattiHarmuveszetInfo.kifejlesztve
+            "
+          >
+            még {{ 15 - vizalattiHarmuveszetInfo.aktualisKor }} kör
+          </div>
           <div class="powerup">
             <img src="assets\images\undersea_game-09.png" />
             <div class="text">
@@ -104,7 +145,12 @@
         [class.active]="activeCard == 'card6'"
       >
         <mat-card-content>
-          <div class="state">kész</div>
+          <div class="state" *ngIf="alkimiaInfo && alkimiaInfo.kifejlesztve">
+            kész
+          </div>
+          <div class="state" *ngIf="alkimiaInfo && !alkimiaInfo.kifejlesztve">
+            még {{ 15 - alkimiaInfo.aktualisKor }} kör
+          </div>
           <div class="powerup">
             <img src="assets\images\undersea_game-09.png" />
             <div class="text">
@@ -116,6 +162,6 @@
       </mat-card>
     </div>
     <hr width="100%" />
-    <button mat-raised-button>Megépítem</button>
+    <button mat-raised-button (click)="buyFejlesztes()">Megépítem</button>
   </div>
 </mat-card>

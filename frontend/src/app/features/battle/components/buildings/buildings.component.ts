@@ -8,8 +8,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
   styleUrls: ['./buildings.component.scss']
 })
 export class BuildingsComponent implements OnInit {
-  @Output()
-  built = new EventEmitter<string>();
+  @Output() built: EventEmitter<any> = new EventEmitter();
 
   private activeCard;
   private epuletInfo;
@@ -62,7 +61,7 @@ export class BuildingsComponent implements OnInit {
         console.log(error);
       },
       () => {
-        this.built.emit('complete');
+        this.built.emit('hello aa buildingsből');
         console.log('done building');
       }
     );

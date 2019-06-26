@@ -14,7 +14,7 @@ export class PowerupsComponent implements OnInit {
   kombajnInfo;
   alkimiaInfo;
   korallInfo;
-  szonarAgyuiIfo;
+  szonarAgyuInfo;
   vizalattiHarmuveszetInfo;
 
   constructor(private fejlesztesService: FejlesztesService) {}
@@ -46,7 +46,7 @@ export class PowerupsComponent implements OnInit {
             this.korallInfo = element;
           }
           if (element.tipus === 'SzonarAgyu') {
-            this.szonarAgyuiIfo = element;
+            this.szonarAgyuInfo = element;
           }
           if (element.tipus === 'VizalattiHarmuveszet') {
             this.vizalattiHarmuveszetInfo = element;
@@ -56,6 +56,42 @@ export class PowerupsComponent implements OnInit {
       err => console.error(err),
       () => {
         console.log('done loading fejlesztesInfo');
+      }
+    );
+  }
+
+  buyFejlesztes() {
+    let type;
+    switch (this.activeCard) {
+      case 'card1':
+        type = 'IszapTraktor';
+        break;
+      case 'card2':
+        type = 'IszapKombajn';
+        break;
+      case 'card3':
+        type = 'KorallFal';
+        break;
+      case 'card4':
+        type = 'SzonarAgyu';
+        break;
+      case 'card5':
+        type = 'VizalattiHarmuveszet';
+        break;
+      case 'card6':
+        type = 'Alkimia';
+        break;
+    }
+    this.fejlesztesService.buyFejlesztes(type).subscribe(
+      data => {
+        console.log(data);
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
+        console.log('done building');
+        this.getFejlesztesInfos();
       }
     );
   }

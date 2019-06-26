@@ -49,12 +49,15 @@ export class BattleComponent implements OnInit {
   ngOnInit() {
     this.getOrszagInfo();
   }
+
   logout() {
     this.authenticationService.logout();
     this.router.navigate(['/login']);
   }
 
-  someMethod() {
-    console.log('hello');
+  onActivate(componentReference) {
+    console.log(componentReference);
+    // componentReference.anyFunction();
+    this.getOrszagInfo();
   }
 }
