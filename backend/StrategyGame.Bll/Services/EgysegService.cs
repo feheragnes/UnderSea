@@ -92,7 +92,6 @@ namespace StrategyGame.Bll.Services
         {
             Csapat otthoniEgysegek = currentOrszag.OtthoniCsapats.FirstOrDefault(T => T.Celpont == null);
 
-            otthoniEgysegek.Egysegs.GroupBy(e => e.GetType().Name);
 
             if (otthoniEgysegek == null)
                 return new List<SeregInfoDTO>() {new SeregInfoDTO(0, EgysegTipus.RohamFoka),
