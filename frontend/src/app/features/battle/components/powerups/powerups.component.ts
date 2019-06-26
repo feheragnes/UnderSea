@@ -10,6 +10,12 @@ export class PowerupsComponent implements OnInit {
   isActive = true;
   private activeCard;
   private fejlesztesInfo;
+  traktorInfo;
+  kombajnInfo;
+  alkimiaInfo;
+  korallInfo;
+  szonarAgyuiIfo;
+  vizalattiHarmuveszetInfo;
 
   constructor(private fejlesztesService: FejlesztesService) {}
 
@@ -26,6 +32,26 @@ export class PowerupsComponent implements OnInit {
       data => {
         this.fejlesztesInfo = data;
         console.log(this.fejlesztesInfo);
+        data.forEach(element => {
+          if (element.tipus === 'IszapTraktor') {
+            this.traktorInfo = element;
+          }
+          if (element.tipus === 'IszapKombajn') {
+            this.kombajnInfo = element;
+          }
+          if (element.tipus === 'Alkimia') {
+            this.alkimiaInfo = element;
+          }
+          if (element.tipus === 'KorallFal') {
+            this.korallInfo = element;
+          }
+          if (element.tipus === 'SzonarAgyu') {
+            this.szonarAgyuiIfo = element;
+          }
+          if (element.tipus === 'VizalattiHarmuveszet') {
+            this.vizalattiHarmuveszetInfo = element;
+          }
+        });
       },
       err => console.error(err),
       () => {

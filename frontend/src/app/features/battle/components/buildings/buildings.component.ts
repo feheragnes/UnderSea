@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { EpuletService } from '../../services/epulet.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
@@ -8,8 +8,13 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
   styleUrls: ['./buildings.component.scss']
 })
 export class BuildingsComponent implements OnInit {
+  @Output()
+  built = new EventEmitter<string>();
+
   private activeCard;
   private epuletInfo;
+  zatonyvarInfo;
+  aramlasiranyitoInfo;
 
   constructor(private epuletService: EpuletService) {}
   ngOnInit() {
@@ -25,6 +30,14 @@ export class BuildingsComponent implements OnInit {
       data => {
         this.epuletInfo = data;
         console.log(this.epuletInfo);
+        data.forEach(element => {
+          if (element.tipus === 'AramlasIranyito') {
+            this.aramlasiranyitoInfo = element;
+          }
+          if (element.tipus === 'ZatonyVar') {
+            this.zatonyvarInfo = element;
+          }
+        });
       },
       err => console.error(err),
       () => {
@@ -49,6 +62,7 @@ export class BuildingsComponent implements OnInit {
         console.log(error);
       },
       () => {
+        this.built.emit('complete');
         console.log('done building');
       }
     );

@@ -27,6 +27,7 @@ import { FightsComponent } from './components/fights/fights.component';
 import { RankingsComponent } from './components/rankings/rankings.component';
 import { ArmyComponent } from './components/army/army.component';
 import { CountryComponent } from './components/country/country.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -45,7 +46,8 @@ import { CountryComponent } from './components/country/country.component';
     MatToolbarModule,
     MatGridListModule,
     MatButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [BattleService],
   declarations: [

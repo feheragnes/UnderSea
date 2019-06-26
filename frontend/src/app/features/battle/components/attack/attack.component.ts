@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TamadasService } from '../../services/tamadas.service';
 
 @Component({
   selector: 'app-attack',
@@ -6,26 +7,58 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./attack.component.scss']
 })
 export class AttackComponent implements OnInit {
-  private capaNumber = 0;
+  capaNumber = 0;
   private fokaNumber = 0;
   private csikoNumber = 0;
-  inputChanged(type: string, value: number) {
-    switch (type) {
-      case 'csiko':
-        this.csikoNumber = value;
+  private tamadasInfo;
+  private countries;
+  private filteredCountries;
+  private selectedCountry;
+  fokaInfo;
+  capaInfo;
+  csikoInfo;
 
-        break;
-      case 'foka':
-        this.fokaNumber = value;
+  constructor(private tamadasService: TamadasService) {}
 
-        break;
-      case 'capa':
-        this.capaNumber = value;
-        break;
-    }
+  ngOnInit() {
+    this.getTamadasInfos();
   }
 
-  constructor() {}
+  getTamadasInfos() {
+    this.tamadasService.getTamadasInfo().subscribe(
+      data => {
+        this.tamadasInfo = data;
+        this.countries = data.orszag;
+        this.filteredCountries = data.orszag;
+        data.sereg.forEach(element => {
+          if (element.tipus === 'RohamFoka') {
+            this.fokaInfo = element;
+          }
+          if (element.tipus === 'LezerCapa') {
+            this.capaInfo = element;
+          }
+          if (element.tipus === 'CsataCsiko') {
+            this.csikoInfo = element;
+          }
+        });
+        console.log(this.tamadasInfo);
+      },
+      err => console.error(err),
+      () => {
+        console.log('done loading tamadasInfo');
+      }
+    );
+  }
 
-  ngOnInit() {}
+  search(value: string) {
+    this.filteredCountries = this.countries.filter(b => {
+      if (b.toUpperCase().includes(value.toUpperCase())) {
+        return b;
+      }
+    });
+  }
+
+  selectCountry(country: string) {
+    this.selectedCountry = country;
+  }
 }

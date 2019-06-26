@@ -27,7 +27,12 @@ mat-card-header {
   font-size: 32px;
 }
 mat-card-content {
-  padding-bottom: 30px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
 }
 .smallcard {
   width: 236px;
@@ -39,7 +44,6 @@ mat-card-content {
   display: flex;
   flex-direction: column;
   box-shadow: 0px 0px 0px 0px transparent;
-  justify-content: flex-end;
 }
 
 h4 {
@@ -79,4 +83,13 @@ button {
 
 .active {
   background-color: rgba(255, 255, 255, 0.25);
+}
+
+.state {
+  color: white;
+  align-self: flex-start;
+}
+
+.powerup {
+  justify-self: flex-end;
 }
