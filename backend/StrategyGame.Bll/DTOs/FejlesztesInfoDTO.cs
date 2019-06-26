@@ -7,6 +7,7 @@ namespace StrategyGame.Bll.DTOs
 {
     public class FejlesztesInfoDTO
     {
+        public FejlesztesInfoDTO() { }
         public FejlesztesInfoDTO(FejlesztesTipus t, bool k, long ak)
         {
             Tipus = t;

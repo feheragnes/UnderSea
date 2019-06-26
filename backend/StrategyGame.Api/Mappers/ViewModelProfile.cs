@@ -52,6 +52,11 @@ namespace StrategyGame.Api.Mappers
 
             CreateMap<EgysegInfoDTO, EgysegInfoViewModel>()
                 .ForMember(x => x.Tipus, opt => opt.MapFrom(y => Enum.GetName(typeof(EgysegTipus), y.Tipus)));
+
+            CreateMap<FejlesztesInfoDTO, FejlesztesVetelViewModel>()
+                .ForMember(x => x.Tipus, opt => opt.MapFrom(y => Enum.GetName(typeof(FejlesztesTipus), y.Tipus)));
+            CreateMap<FejlesztesVetelViewModel, FejlesztesInfoDTO>()
+                .ForMember(x => x.Tipus, opt => opt.MapFrom(y => Enum.Parse<FejlesztesTipus>(y.Tipus)));
                 
 
         }

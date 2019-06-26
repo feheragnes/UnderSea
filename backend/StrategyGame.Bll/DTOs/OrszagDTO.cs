@@ -20,6 +20,8 @@ namespace StrategyGame.Bll.DTOs
         public long GyongyTermeles { get; set; }
         public long EpuloAramlasIranyito { get; set; }
         public long EpuloZatonyVar { get; set; }
+        public long VedekezoBonusz { get; set; }
+        public long TamadoBonusz { get; set; }
         public IList<SeregInfoDTO> SeregInfoDTOs { get; set; }
         public IList<EpuletInfoDTO> EpuletInfoDTOs { get; set; }
 

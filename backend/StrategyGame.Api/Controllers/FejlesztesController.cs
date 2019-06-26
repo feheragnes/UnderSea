@@ -58,9 +58,16 @@ namespace StrategyGame.Api.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> BuyFejlesztes([FromBody] FejlesztesInfoDTO fejlesztes)
+        public async Task<IActionResult> BuyFejlesztes([FromBody] FejlesztesVetelViewModel fejlesztes)
         {
-            return Ok(_fejlesztesService.AddFejlesztesAsync(fejlesztes, UserId));
+            try
+            {
+                await _fejlesztesService.AddFejlesztesAsync(_mapper.Map<FejlesztesInfoDTO>(fejlesztes), UserId);
+                return Ok();
+            }catch(Exception e)
+            {
+                return BadRequest(e);
+            }
         }
 
         

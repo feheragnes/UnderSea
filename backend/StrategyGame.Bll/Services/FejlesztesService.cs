@@ -33,16 +33,14 @@ namespace StrategyGame.Bll.Services.AAAServices
         public async Task AddFejlesztesAsync(FejlesztesInfoDTO fejlesztes, Guid userId)
         {
             Orszag currentOrszag = await _commonService.GetCurrentOrszag(userId);
-            List<Fejlesztes> fejleszteses = currentOrszag.Fejleszteses.ToList();
-
             string fejlesztesTipus = Enum.GetName(typeof(FejlesztesTipus), fejlesztes.Tipus); ;
 
-            fejleszteses.ForEach(x =>
+            currentOrszag?.Fejleszteses.ToAsyncEnumerable().ForEachAsync(x =>
             {
                 if (x.Kifejlesztve == false)
                     throw new InvalidOperationException("Another PowerUp is under development");
 
-                if (x.GetType().ToString() == fejlesztesTipus)
+                if (x.GetType().Name == fejlesztesTipus)
                     throw new InvalidOperationException("You already have the chosen PowerUp");
             });
 

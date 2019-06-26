@@ -8,6 +8,7 @@ namespace StrategyGame.Bll.DTOs.DTOEnums
     {
         Gyozelem,
         Vereseg,
-        Dontetlen
+        Dontetlen,
+        Folyamatban
     }
 }

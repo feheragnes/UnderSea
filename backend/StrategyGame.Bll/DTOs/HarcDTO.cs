@@ -15,19 +15,5 @@ namespace StrategyGame.Bll.DTOs
         public List<SeregInfoDTO> VedekezoCsapat { get; set; }
         public HarcEredmenyTipus HarcEredmeny { get; set; }
 
-        public void CalculateEredmeny()
-        {
-            long tamadoEro = 0, vedekezoEro = 0;
-
-            TamadoCsapat.ForEach(x =>
-            {
-                tamadoEro += (x.Tamadas * x.Mennyiseg);
-            });
-
-            VedekezoCsapat.ForEach(x =>
-            {
-                vedekezoEro += (x.Tamadas * x.Mennyiseg);
-            });
-        }
     }
 }
