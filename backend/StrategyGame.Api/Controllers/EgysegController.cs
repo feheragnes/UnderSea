@@ -60,7 +60,13 @@ namespace StrategyGame.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<List<EgysegInfoViewModel>>> GetEgysegInfos()
         {
-            return _mapper.Map<List<EgysegInfoViewModel>>(await _egysegService.GetEgysegInfoDTOs(UserId));
+            try
+            {
+                return _mapper.Map<List<EgysegInfoViewModel>>(await _egysegService.GetEgysegInfoDTOs(UserId));
+            }catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
     }
 }
