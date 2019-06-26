@@ -49,7 +49,7 @@ namespace StrategyGame.Bll.Services
             _globalService = globalService;
         }
 
-        public async void MakeOrszagUserConnection(StrategyGameUser user, string orszagNev)
+        public async Task MakeOrszagUserConnection(StrategyGameUser user, string orszagNev)
         {
             try
             {
@@ -69,7 +69,6 @@ namespace StrategyGame.Bll.Services
             if (_context.Orszags.FirstOrDefault(x => x.Nev.ToUpper() == orszagNev.ToUpper()) == null)
             {
                 await _context.Orszags.AddAsync(orszag);
-                await _context.SaveChangesAsync();
                 return orszag;
             }
             throw new ArgumentException("Country already exists");

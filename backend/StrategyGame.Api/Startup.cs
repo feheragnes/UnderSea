@@ -79,11 +79,10 @@ namespace StrategyGame.Api
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
             services.AddDbContext<StrategyGameContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("StrategyGameContextConnection")));
-
-
 
             services.AddIdentity<StrategyGameUser, StrategyGameRole>(options =>
             {
