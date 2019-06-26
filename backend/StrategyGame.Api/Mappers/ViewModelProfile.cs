@@ -10,6 +10,7 @@ using StrategyGame.Bll.DTOs;
 using StrategyGame.Bll.DTOs.AAADTOs;
 using StrategyGame.Bll.DTOs.DTOEnums;
 using StrategyGame.Bll.DTOs.Egysegek;
+using StrategyGame.Model.Entities.Models.Egysegek;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,6 +58,10 @@ namespace StrategyGame.Api.Mappers
                 .ForMember(x => x.Tipus, opt => opt.MapFrom(y => Enum.GetName(typeof(FejlesztesTipus), y.Tipus)));
             CreateMap<FejlesztesVetelViewModel, FejlesztesInfoDTO>()
                 .ForMember(x => x.Tipus, opt => opt.MapFrom(y => Enum.Parse<FejlesztesTipus>(y.Tipus)));
+
+            CreateMap<EgysegVetelViewModel, SeregInfoDTO>()
+                .ForMember(x => x.Tipus, opt => opt.MapFrom(y => Enum.Parse<EgysegTipus>(y.Tipus)))
+                .ForMember(x => x.Ar, opt => opt.MapFrom(y => (Activator.CreateInstance(Type.GetType(y.Tipus)) as Egyseg).Ar));
                 
 
         }

@@ -46,7 +46,7 @@ namespace StrategyGame.Api.Controllers
     
 
         [HttpPost]
-        public async Task<IActionResult> BuyEgysegs([FromBody] List<SeregInfoViewModel> egysegs)
+        public async Task<IActionResult> BuyEgysegs([FromBody] List<EgysegVetelViewModel> egysegs)
         {
             await _egysegService.AddEgysegAsync(_mapper.Map < List < SeregInfoDTO >> (egysegs), UserId);
             return Ok();
