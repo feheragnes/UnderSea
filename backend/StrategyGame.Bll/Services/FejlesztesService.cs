@@ -44,6 +44,7 @@ namespace StrategyGame.Bll.Services.AAAServices
                     throw new InvalidOperationException("You already have the chosen PowerUp");
             });
 
+            
             switch (fejlesztes.Tipus)
             {
                 case FejlesztesTipus.Alkimia:

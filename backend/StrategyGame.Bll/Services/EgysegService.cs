@@ -90,32 +90,34 @@ namespace StrategyGame.Bll.Services
 
         public async Task<List<SeregInfoDTO>> GetOtthoniEgysegsFromOneUserAsync(Orszag currentOrszag)
         {
-            Csapat otthoniEgysegek = currentOrszag.OtthoniCsapats.FirstOrDefault(T => T.Celpont == null);
-
-
-            if (otthoniEgysegek == null)
-                return new List<SeregInfoDTO>() {new SeregInfoDTO(0, EgysegTipus.RohamFoka),
-                                                  new SeregInfoDTO(0, EgysegTipus.CsataCsiko),
-                                                  new SeregInfoDTO(0, EgysegTipus.LezerCapa) };
-
-            long rohamFokaMennyiseg = 0, csataCsikoMennyiseg = 0, lezerCapaMennyiseg = 0;
-
-            otthoniEgysegek.Egysegs.ToList().ForEach(x =>
+            try
             {
-                if (x.GetType() == typeof(RohamFoka))
-                    rohamFokaMennyiseg++;
-                if (x.GetType() == typeof(CsataCsiko))
-                    csataCsikoMennyiseg++;
-                if (x.GetType() == typeof(LezerCapa))
-                    lezerCapaMennyiseg++;
-            });
+                var otthoniEgysegek = currentOrszag.OtthoniCsapats?.SingleOrDefault(T => T.Celpont == null)?.Egysegs.GroupBy(e => e.Discriminator);
 
-            List<SeregInfoDTO> seregInfo = new List<SeregInfoDTO>();
-            seregInfo.Add(new SeregInfoDTO(rohamFokaMennyiseg, EgysegTipus.RohamFoka));
-            seregInfo.Add(new SeregInfoDTO(csataCsikoMennyiseg, EgysegTipus.CsataCsiko));
-            seregInfo.Add(new SeregInfoDTO(lezerCapaMennyiseg, EgysegTipus.LezerCapa));
+            var seregInfoList = new List<SeregInfoDTO>();
 
-            return seregInfo;
+            if (otthoniEgysegek != null)
+            {
+                foreach (var egysegek in otthoniEgysegek)
+                {
+                    var egysegekDTO = _mapper.Map<List<EgysegDTO>>(egysegek.ToList());
+                    seregInfoList.Add(new SeregInfoDTO()
+                    {
+                        Ar = egysegekDTO.Sum(e => e.Ar),
+                        Mennyiseg = egysegekDTO.Count,
+                        Tamadas = egysegekDTO.Sum(e => e.Tamadas),
+                        Vedekezes = egysegek.Sum(e => e.Vedekezes),
+                        Tipus = Enum.Parse<EgysegTipus>(egysegek.Key)
+                    });
+                }
+            }
+                return seregInfoList;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
         }
 
         public async Task<List<EgysegInfoDTO>> GetEgysegInfoDTOs(Guid userId)

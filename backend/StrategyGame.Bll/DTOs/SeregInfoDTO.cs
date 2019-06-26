@@ -37,8 +37,6 @@ namespace StrategyGame.Bll.DTOs
             }
         }
 
-        public IList<EgysegDTO> Egysegek { get; set; }
-
         public EgysegTipus Tipus { get; set; }
         public long Mennyiseg { get; set; }
         public long Ar { get; set; }
