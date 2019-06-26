@@ -8,11 +8,6 @@ namespace StrategyGame.Model.Entities.Models.Egysegek
     {
         public CsataCsiko() : base()
         {
-            Ar = 50;
-            Tamadas = 2;
-            Vedekezes = 6;
-            Zsold = 1;
-            Ellatas = 1;
         }
     }
 }

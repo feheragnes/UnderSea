@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using StrategyGame.Bll.DTOs.DTOEnums;
 using StrategyGame.Bll.DTOs.Egysegek;
 using StrategyGame.Model.Entities.Models.Egysegek;
+using StrategyGame.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -43,6 +43,8 @@ namespace StrategyGame.Bll.Mappers
                 .IncludeBase<Egyseg, EgysegInfoDTO>();
             CreateMap<CsataCsiko, EgysegInfoDTO>()
                 .IncludeBase<Egyseg, EgysegInfoDTO>();
+
+            CreateMap<EgysegInfo, EgysegInfoDTO>();
 
 
         }

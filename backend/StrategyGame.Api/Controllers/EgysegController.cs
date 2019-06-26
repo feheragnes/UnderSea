@@ -48,13 +48,25 @@ namespace StrategyGame.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> BuyEgysegs([FromBody] List<EgysegVetelViewModel> egysegs)
         {
-            await _egysegService.AddEgysegAsync(_mapper.Map < List < SeregInfoDTO >> (egysegs), UserId);
-            return Ok();
+            try
+            {
+                await _egysegService.AddEgysegAsync(_mapper.Map<List<SeregInfoDTO>>(egysegs), UserId);
+                return Ok("Egysegek megveve!");
+            }catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
         [HttpGet]
         public async Task<ActionResult<List<EgysegInfoViewModel>>> GetEgysegInfos()
         {
-            return _mapper.Map<List<EgysegInfoViewModel>>(await _egysegService.GetEgysegInfoDTOs(UserId));
+            try
+            {
+                return _mapper.Map<List<EgysegInfoViewModel>>(await _egysegService.GetEgysegInfoDTOs(UserId));
+            }catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
     }
 }

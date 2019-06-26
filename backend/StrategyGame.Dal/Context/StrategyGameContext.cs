@@ -9,13 +9,14 @@ using StrategyGame.Model.Entities.Models.Epuletek;
 using StrategyGame.Model.Entities.Models.Fejlesztesek;
 using StrategyGame.Model.Entities.Models.Novelok;
 using StrategyGame.Model.Entities.Models.Termelok;
+using StrategyGame.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace StrategyGame.Dal.Context
 {
-    public class StrategyGameContext : IdentityDbContext<StrategyGameUser, StrategyGameRole, Guid>, IStrategyGameContext
+    public class StrategyGameContext : IdentityDbContext<StrategyGameUser, StrategyGameRole, Guid>
     {
         public StrategyGameContext(DbContextOptions<StrategyGameContext> options)
             : base(options)
@@ -36,6 +37,7 @@ namespace StrategyGame.Dal.Context
         public DbSet<AdoNovelo> AdoNovelos { get; set; }
         public DbSet<TamadasNovelo> TamadasNovelos { get; set; }
         public DbSet<VedekezesNovelo> VedekezesNovelos { get; set; }
+        public DbSet<EgysegInfo> EgysegInfos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -66,6 +68,12 @@ namespace StrategyGame.Dal.Context
 
             // builder.ApplyConfiguration(new OrszagUserConfiguration());
             builder.ApplyConfiguration(new CsapatConfiguration());
+            builder.Entity<EgysegInfo>().HasData
+                (
+                new EgysegInfo { Id =new Guid("00000000-0000-0000-0000-000000000001"), Tipus = EgysegTipus.RohamFoka, Ar = 50, Ellatas = 1, Zsold = 1, Tamadas = 6, Vedekezes = 2},
+                new EgysegInfo { Id = new Guid("00000000-0000-0000-0000-000000000002"), Tipus = EgysegTipus.CsataCsiko, Ar = 50, Ellatas = 1, Zsold = 1, Tamadas = 2, Vedekezes = 6 },
+                new EgysegInfo { Id = new Guid("00000000-0000-0000-0000-000000000003"), Tipus = EgysegTipus.LezerCapa, Ar = 100, Ellatas = 2, Zsold = 3, Tamadas = 5, Vedekezes = 5 }
+                );
         }
 
         public override int SaveChanges()

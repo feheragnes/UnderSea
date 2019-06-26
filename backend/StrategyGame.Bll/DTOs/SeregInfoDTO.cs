@@ -1,5 +1,6 @@
-﻿using StrategyGame.Bll.DTOs.DTOEnums;
+﻿
 using StrategyGame.Bll.DTOs.Egysegek;
+using StrategyGame.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -36,8 +37,6 @@ namespace StrategyGame.Bll.DTOs
                 Vedekezes = 5;
             }
         }
-
-        public IList<EgysegDTO> Egysegek { get; set; }
 
         public EgysegTipus Tipus { get; set; }
         public long Mennyiseg { get; set; }

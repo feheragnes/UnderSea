@@ -1,12 +1,13 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
-using StrategyGame.Bll.DTOs.DTOEnums;
+
 using StrategyGame.Bll.DTOs;
 using StrategyGame.Bll.ServiceInterfaces;
 using StrategyGame.Dal.Context;
 using StrategyGame.Model.Entities.Identity;
 using StrategyGame.Model.Entities.Models;
 using StrategyGame.Model.Entities.Models.Fejlesztesek;
+using StrategyGame.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,16 +36,19 @@ namespace StrategyGame.Bll.Services.AAAServices
             Orszag currentOrszag = await _commonService.GetCurrentOrszag(userId);
             string fejlesztesTipus = Enum.GetName(typeof(FejlesztesTipus), fejlesztes.Tipus); ;
 
-            currentOrszag?.Fejleszteses.ToAsyncEnumerable().ForEachAsync(x =>
+            if (currentOrszag?.Fejleszteses.Where(x => x.Kifejlesztve == false)?.Count() !=0)
             {
-                if (x.Kifejlesztve == false)
-                    throw new InvalidOperationException("Another PowerUp is under development");
+                throw new InvalidOperationException("Another PowerUp is under development");
+            }
+            if (currentOrszag?.Fejleszteses.Where(x => x.GetType().Name == fejlesztesTipus)?.Count() != 0)
+            {
+                throw new InvalidOperationException("You already have the chosen PowerUp");
+            }
 
-                if (x.GetType().Name == fejlesztesTipus)
-                    throw new InvalidOperationException("You already have the chosen PowerUp");
-            });
 
-            switch (fejlesztes.Tipus)
+            
+
+                switch (fejlesztes.Tipus)
             {
                 case FejlesztesTipus.Alkimia:
                     currentOrszag.Fejleszteses.Add(new Alkimia());
@@ -84,7 +88,7 @@ namespace StrategyGame.Bll.Services.AAAServices
             {
                 keszDTOList.Add(new FejlesztesInfoDTO((FejlesztesTipus)Enum.Parse(typeof(FejlesztesTipus), x.GetType().Name), false, x.AktualisKor));
             });
-            
+
             return keszDTOList;
         }
 
