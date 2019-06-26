@@ -19,6 +19,8 @@ namespace StrategyGame.Api.ViewModels.OrszagViewModels
         public long Helyezes { get; set; }
         public long KorallTermeles { get; set; }
         public long GyongyTermeles { get; set; }
+        public long EpuloAramlasIranyito { get; set; }
+        public long EpuloZatonyvar { get; set; }
         public IList<SeregInfoViewModel> SeregInfo { get; set; }
         public IList<EpuletInfoViewModel> EpuletInfo { get; set; }
     }

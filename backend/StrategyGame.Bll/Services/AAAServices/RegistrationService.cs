@@ -51,11 +51,10 @@ namespace StrategyGame.Bll.Services.AAAServices
 
             if (result.Succeeded)
             {
-
                 try
                 {
-                    _orszagService.MakeOrszagUserConnection(user, model.CountryName);
-                }catch(Exception e)
+                    await _orszagService.MakeOrszagUserConnection(user, model.CountryName);
+                } catch(Exception e)
                 {
                     await _userManager.DeleteAsync(user);
                     throw e;

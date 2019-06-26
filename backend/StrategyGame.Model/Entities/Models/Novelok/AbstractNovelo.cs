@@ -8,5 +8,6 @@ namespace StrategyGame.Model.Entities.Models.Novelok
     public abstract class AbstractNovelo
     {
         public Fejlesztes Fejlesztes { get; set; }
+        public Guid FejlesztesId { get; set; }
     }
 }

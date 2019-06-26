@@ -11,6 +11,7 @@ namespace StrategyGame.Model.Entities.Models.Fejlesztesek
         public long SzuksegesKorok { get; set; }
         public long AktualisKor { get; set; }
         public bool Kifejlesztve { get; set; }
+        public Orszag Orszag { get; set; }
 
 
         public Fejlesztes()

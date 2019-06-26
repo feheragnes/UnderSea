@@ -47,12 +47,6 @@ namespace StrategyGame.Api.Controllers
             return Ok();
         }
 
-        [HttpGet]
-        public async Task<ActionResult<long>> GetActiveEpitesNumber()
-        {
-            Orszag currentOrszag = await _commonService.GetCurrentOrszag(UserId);
-            return await _epuletService.GetActiveEpitesCount(currentOrszag);
-        }
 
         [HttpGet]
         public async Task<ActionResult<List<EpuletInfoViewModel>>> GetEpuletInfos()

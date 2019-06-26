@@ -6,8 +6,6 @@ namespace StrategyGame.Model.Entities.Models.Termelok
 {
     public class EgysegTermelo : AbstractTermelo
     {
-        public Guid id { get; set; }
-
         public long Ertek { get; set; }
     }
 }

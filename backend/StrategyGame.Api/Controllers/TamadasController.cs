@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
+using StrategyGame.Api.ViewModels.TamadasViewModels;
 using StrategyGame.Bll.DTOs;
 using StrategyGame.Bll.ServiceInterfaces;
 using StrategyGame.Dal.Context;
@@ -21,13 +22,19 @@ namespace StrategyGame.Api.Controllers
     {
         private readonly IOrszagService _orszagService;
         private readonly ICommonService _commonService;
+        private readonly IMapper _mapper;
         private readonly IEgysegService _egysegService;
 
-        public TamadasController(IEgysegService egysegService, IOrszagService orszagService, ICommonService commonService,UserManager<StrategyGameUser> userManager):base(userManager)
+        public TamadasController(IEgysegService egysegService, 
+            IOrszagService orszagService, 
+            ICommonService commonService, 
+            IMapper mapper,
+            UserManager<StrategyGameUser> userManager):base(userManager)
         {
             _egysegService = egysegService;
             _orszagService = orszagService;
             _commonService = commonService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -38,9 +45,9 @@ namespace StrategyGame.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetEllensegesOrszags()
+        public async Task<ActionResult<TamadasViewModel>> GetTamadasInfos()
         {
-            return Ok("Not implemented");
+            return _mapper.Map<TamadasViewModel>(await  _orszagService.GetTamadasDTO(UserId));
         }
         
         [HttpPost]

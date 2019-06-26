@@ -27,7 +27,7 @@ namespace StrategyGame.Bll.Services
             throw new NotImplementedException();
         }
 
-        public async void SetOrszagScores()
+        public async Task SetOrszagScores()
         {
             await _context.Orszags.Include(x=>x.Epulets).ForEachAsync(async x => 
             {

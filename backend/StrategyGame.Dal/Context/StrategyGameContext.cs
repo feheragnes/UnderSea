@@ -7,6 +7,7 @@ using StrategyGame.Model.Entities.Models;
 using StrategyGame.Model.Entities.Models.Egysegek;
 using StrategyGame.Model.Entities.Models.Epuletek;
 using StrategyGame.Model.Entities.Models.Fejlesztesek;
+using StrategyGame.Model.Entities.Models.Novelok;
 using StrategyGame.Model.Entities.Models.Termelok;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,10 @@ namespace StrategyGame.Dal.Context
         public DbSet<KorallTermelo> KorallTermelos {get;set;}
         public DbSet<NepessegTermelo> NepessegTermelos { get; set; }
         public DbSet<EgysegTermelo> EgysegTermelos { get; set; }
+        public DbSet<KorallNovelo> KorallNovelos { get; set; }
+        public DbSet<AdoNovelo> AdoNovelos { get; set; }
+        public DbSet<TamadasNovelo> TamadasNovelos { get; set; }
+        public DbSet<VedekezesNovelo> VedekezesNovelos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -47,7 +52,19 @@ namespace StrategyGame.Dal.Context
             builder.Entity<CsataCsiko>().HasBaseType<Egyseg>();
             builder.Entity<LezerCapa>().HasBaseType<Egyseg>();
 
-           // builder.ApplyConfiguration(new OrszagUserConfiguration());
+            builder.Entity<NepessegTermelo>().HasOne(x => x.Epulet as AramlasIranyito).WithOne(x => x.Nepesseg);
+            builder.Entity<KorallTermelo>().HasOne(x => x.Epulet as AramlasIranyito).WithOne(x => x.Korall);
+            builder.Entity<EgysegTermelo>().HasOne(x => x.Epulet as ZatonyVar).WithOne(x => x.Szallas);
+
+            builder.Entity<AdoNovelo>().HasOne(x => x.Fejlesztes as Alkimia).WithOne(x => x.Gyöngy);
+            builder.Entity<KorallNovelo>().HasOne(x => x.Fejlesztes as IszapKombajn).WithOne(x => x.Korall);
+            builder.Entity<KorallNovelo>().HasOne(x => x.Fejlesztes as IszapTraktor).WithOne(x => x.Korall);
+            builder.Entity<TamadasNovelo>().HasOne(x => x.Fejlesztes as SzonarAgyu).WithOne(x => x.Tamadas);
+            builder.Entity<TamadasNovelo>().HasOne(x => x.Fejlesztes as VizalattiHarcmuveszet).WithOne(x => x.Tamadas);
+            builder.Entity<VedekezesNovelo>().HasOne(x => x.Fejlesztes as VizalattiHarcmuveszet).WithOne(x => x.Vedekezes);
+            builder.Entity<VedekezesNovelo>().HasOne(x => x.Fejlesztes as KorallFal).WithOne(x => x.Vedekezes);
+
+            // builder.ApplyConfiguration(new OrszagUserConfiguration());
             builder.ApplyConfiguration(new CsapatConfiguration());
         }
 

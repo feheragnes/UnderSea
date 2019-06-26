@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
+using StrategyGame.Api.ViewModels.EgysegViewModels;
 using StrategyGame.Bll.DTOs;
 using StrategyGame.Bll.DTOs.Egysegek;
 using StrategyGame.Bll.ServiceInterfaces;
@@ -23,12 +25,15 @@ namespace StrategyGame.Api.Controllers
         private readonly IOrszagService _orszagService;
         private readonly ICommonService _commonService;
         private readonly IEgysegService _egysegService;
+        private readonly IMapper _mapper;
 
-        public EgysegController(IEgysegService egysegService, IOrszagService orszagService,ICommonService commonService,UserManager<StrategyGameUser> userManager):base(userManager)
+
+        public EgysegController(IEgysegService egysegService, IOrszagService orszagService,ICommonService commonService,UserManager<StrategyGameUser> userManager, IMapper mapper):base(userManager)
         {
             _egysegService = egysegService;
             _orszagService = orszagService;
             _commonService = commonService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -38,18 +43,18 @@ namespace StrategyGame.Api.Controllers
             return await _egysegService.GetOtthoniEgysegsFromOneUserAsync(currentOrszag);
         }
 
-        [HttpGet]
-        public async Task<ActionResult<List<EgysegDTO>>> GetAllEgysegsFromOneUser()
-        {
-            return await _egysegService.GetAllEgysegsFromOneUserAsync(UserId);
-        }
-
+    
 
         [HttpPost]
-        public async Task<IActionResult> BuyEgysegs([FromBody] List<SeregInfoDTO> egysegs)
+        public async Task<IActionResult> BuyEgysegs([FromBody] List<EgysegVetelViewModel> egysegs)
         {
-            await _egysegService.AddEgysegAsync(egysegs, UserId);
+            await _egysegService.AddEgysegAsync(_mapper.Map < List < SeregInfoDTO >> (egysegs), UserId);
             return Ok();
+        }
+        [HttpGet]
+        public async Task<ActionResult<List<EgysegInfoViewModel>>> GetEgysegInfos()
+        {
+            return _mapper.Map<List<EgysegInfoViewModel>>(await _egysegService.GetEgysegInfoDTOs(UserId));
         }
     }
 }

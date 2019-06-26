@@ -22,7 +22,9 @@ namespace StrategyGame.Model.Entities.Models.Epuletek
 
         public bool Felepult { get; set; }
         public Orszag Orszag { get; set; }
-   
+
+        //public Guid? OrszagId { get; set; }
+
     }
    
  }

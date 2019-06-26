@@ -63,10 +63,10 @@ namespace StrategyGame.Bll.Services
 
             currentOrszag.Gyongy -= osszKoltseg;
 
-             _context.SaveChanges();
+            _context.SaveChanges();
         }
 
-       
+
         public async Task<List<EgysegDTO>> GetAllEgysegsFromOneUserAsync(Guid userId)
         {
             Orszag currentOrszag = await _commonService.GetCurrentOrszag(userId);
@@ -92,10 +92,12 @@ namespace StrategyGame.Bll.Services
         {
             Csapat otthoniEgysegek = currentOrszag.OtthoniCsapats.FirstOrDefault(T => T.Celpont == null);
 
+            otthoniEgysegek.Egysegs.GroupBy(e => e.GetType().Name);
+
             if (otthoniEgysegek == null)
-                return new List<SeregInfoDTO>() {new SeregInfoDTO(0,50,EgysegTipus.RohamFoka),
-                                                  new SeregInfoDTO(0,50,EgysegTipus.CsataCsiko),
-                                                  new SeregInfoDTO(0,100,EgysegTipus.LezerCapa) };
+                return new List<SeregInfoDTO>() {new SeregInfoDTO(0, EgysegTipus.RohamFoka),
+                                                  new SeregInfoDTO(0, EgysegTipus.CsataCsiko),
+                                                  new SeregInfoDTO(0, EgysegTipus.LezerCapa) };
 
             long rohamFokaMennyiseg = 0, csataCsikoMennyiseg = 0, lezerCapaMennyiseg = 0;
 
@@ -110,11 +112,27 @@ namespace StrategyGame.Bll.Services
             });
 
             List<SeregInfoDTO> seregInfo = new List<SeregInfoDTO>();
-            seregInfo.Add(new SeregInfoDTO(rohamFokaMennyiseg, 50, EgysegTipus.RohamFoka));
-            seregInfo.Add(new SeregInfoDTO(csataCsikoMennyiseg, 50, EgysegTipus.CsataCsiko));
-            seregInfo.Add(new SeregInfoDTO(lezerCapaMennyiseg, 100, EgysegTipus.LezerCapa));
+            seregInfo.Add(new SeregInfoDTO(rohamFokaMennyiseg, EgysegTipus.RohamFoka));
+            seregInfo.Add(new SeregInfoDTO(csataCsikoMennyiseg, EgysegTipus.CsataCsiko));
+            seregInfo.Add(new SeregInfoDTO(lezerCapaMennyiseg, EgysegTipus.LezerCapa));
 
             return seregInfo;
+        }
+
+        public async Task<List<EgysegInfoDTO>> GetEgysegInfoDTOs(Guid userId)
+        {
+            Orszag currentOrszag = await _commonService.GetCurrentOrszag(userId);
+            var egysegInfoDtos = new List<EgysegInfoDTO>();
+            egysegInfoDtos.Add(_mapper.Map<EgysegInfoDTO>(new RohamFoka()));
+            egysegInfoDtos.Add(_mapper.Map<EgysegInfoDTO>(new LezerCapa()));
+            egysegInfoDtos.Add(_mapper.Map<EgysegInfoDTO>(new CsataCsiko()));
+            currentOrszag?.OtthoniCsapats
+                .FirstOrDefault(x => x.Celpont == null)
+                ?.Egysegs.ToList()
+                .ForEach(x => egysegInfoDtos
+                              .FirstOrDefault(y => y.Tipus == Enum.Parse<EgysegTipus>(x.GetType().Name))
+                              .Mennyiseg++);
+            return egysegInfoDtos;
         }
 
         public async Task SaveChangesAsync()

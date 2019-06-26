@@ -73,15 +73,17 @@ namespace StrategyGame.Bll.Services
             return felepultDtoList;
         }
 
-        public async Task<long> GetActiveEpitesCount(Orszag currentOrszag)
-        {
-            return currentOrszag.Epulets.ToList().FindAll(x => x.Felepult == false).Count();
-        }
 
         public async Task AddEpuletAsync(List<EpuletInfoDTO> epulets, Guid userId)
         {
-            Orszag currentOrszag = await _commonService.GetCurrentOrszag(userId);
+            var currentOrszag = (await _context.Users
+                                  .Include(x => x.Orszag)
+                                  .ThenInclude(x => x.Epulets)
+                                  .FirstOrDefaultAsync(x => x.Id == userId))
+                                  .Orszag;
+
             List<Epulet> currentEpulets = currentOrszag.Epulets.ToList();
+
             currentEpulets.ForEach(x =>
             {
                 if (x.Felepult == false)
@@ -90,28 +92,42 @@ namespace StrategyGame.Bll.Services
 
             long osszKoltseg = 0;
 
-            epulets.ForEach(x =>
+
+            var aramlasIranyitos = epulets.FindAll(e => e.Tipus == EpuletTipus.AramlasIranyito);
+            var zatonyVars = epulets.FindAll(e => e.Tipus == EpuletTipus.ZatonyVar);
+            var epuletsToBuy = new List<Epulet>();
+
+            aramlasIranyitos.ForEach(x =>
             {
-                osszKoltseg += (x.Ar * x.Mennyiseg);
+                epuletsToBuy.Add(new AramlasIranyito());
+            });
+            zatonyVars.ForEach(x =>
+            {
+                epuletsToBuy.Add(new ZatonyVar());
+            });
+
+            epuletsToBuy.ForEach(x =>
+            {
+                osszKoltseg += x.Ar;
             });
 
             if (osszKoltseg > currentOrszag.Gyongy)
                 throw new ArgumentException("You don't have enough Gyöngy");
 
-            var aramlasIranyitos = epulets.FindAll(e => e.Tipus == EpuletTipus.AramlasIranyito);
-            var zatonyVars = epulets.FindAll(e => e.Tipus == EpuletTipus.ZatonyVar);
-
-            aramlasIranyitos.ForEach(x =>
-            {
-                currentEpulets.Add(new AramlasIranyito());
-            });
-            zatonyVars.ForEach(x =>
-            {
-                currentEpulets.Add(new ZatonyVar());
-            });
-
+            (currentOrszag.Epulets as List<Epulet>).AddRange(epuletsToBuy);
             currentOrszag.Gyongy -= osszKoltseg;
+
             _context.SaveChanges();
+        }
+
+        public async Task<long> GetEpuloAramlasiranyitoCout(Orszag currentOrszag)
+        {
+            return currentOrszag.Epulets.ToList().FindAll(x => x.Felepult == false && x is AramlasIranyito).Count();
+
+        }
+        public async Task<long> GetEpuloZatonyvarCount(Orszag currentOrszag)
+        {
+            return currentOrszag.Epulets.ToList().FindAll(x => x.Felepult == false && x is ZatonyVar).Count();
         }
     }
 }

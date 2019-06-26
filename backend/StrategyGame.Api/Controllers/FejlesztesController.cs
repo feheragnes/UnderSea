@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using StrategyGame.Api.ViewModels.FejlesztesViewModels;
 using StrategyGame.Bll.DTOs;
 using StrategyGame.Bll.DTOs.Fejlesztesek;
 using StrategyGame.Bll.ServiceInterfaces;
@@ -20,13 +22,19 @@ namespace StrategyGame.Api.Controllers
         private readonly IFejlesztesService _fejlesztesService;
         private readonly IOrszagService _orszagService;
         private readonly ICommonService _commonService;
+        private readonly IMapper _mapper;
 
-        public FejlesztesController(IFejlesztesService fejlesztesService, IOrszagService orszagService, ICommonService commonService, UserManager<StrategyGameUser> userManager) : base(userManager)
+        public FejlesztesController(IFejlesztesService fejlesztesService, 
+            IOrszagService orszagService, 
+            ICommonService commonService, 
+            IMapper mapper,
+            UserManager<StrategyGameUser> userManager) : base(userManager)
         {
 
             _fejlesztesService = fejlesztesService;
             _orszagService = orszagService;
             _commonService = commonService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -36,9 +44,9 @@ namespace StrategyGame.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetFejlesztesInfos()
+        public async Task<ActionResult<List<FejlesztesInfoViewModel>>> GetFejlesztesInfos()
         {
-            return Ok("Not implemented");
+            return _mapper.Map<List<FejlesztesInfoViewModel>>(await _fejlesztesService.GetFejlesztesInfoDTOs(UserId));
         }
 
         [HttpGet]
@@ -50,9 +58,16 @@ namespace StrategyGame.Api.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> BuyFejlesztes([FromBody] FejlesztesInfoDTO fejlesztes)
+        public async Task<IActionResult> BuyFejlesztes([FromBody] FejlesztesVetelViewModel fejlesztes)
         {
-            return Ok(_fejlesztesService.AddFejlesztesAsync(fejlesztes, UserId));
+            try
+            {
+                await _fejlesztesService.AddFejlesztesAsync(_mapper.Map<FejlesztesInfoDTO>(fejlesztes), UserId);
+                return Ok();
+            }catch(Exception e)
+            {
+                return BadRequest(e);
+            }
         }
 
         

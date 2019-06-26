@@ -1,4 +1,5 @@
 ﻿using StrategyGame.Bll.DTOs.DTOEnums;
+using StrategyGame.Bll.DTOs.Egysegek;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,15 +8,42 @@ namespace StrategyGame.Bll.DTOs
 {
     public class SeregInfoDTO
     {
-        public SeregInfoDTO(long m, long ar, EgysegTipus t)
+        public SeregInfoDTO()
+        {
+
+        }
+        public SeregInfoDTO(long m, EgysegTipus tipus)
         {
             Mennyiseg = m;
-            Ar = ar;
-            Tipus = t;
+            Tipus = tipus;
+
+            if(tipus == EgysegTipus.CsataCsiko)
+            {
+                Ar = 50;
+                Tamadas = 2;
+                Vedekezes = 6;
+            }
+            if (tipus == EgysegTipus.RohamFoka)
+            {
+                Ar = 50;
+                Tamadas = 6;
+                Vedekezes = 2;
+            }
+            if (tipus == EgysegTipus.LezerCapa)
+            {
+                Ar = 100;
+                Tamadas = 5;
+                Vedekezes = 5;
+            }
         }
+
+        public IList<EgysegDTO> Egysegek { get; set; }
+
         public EgysegTipus Tipus { get; set; }
         public long Mennyiseg { get; set; }
         public long Ar { get; set; }
-       
+        public long Tamadas { get; set; }
+        public long Vedekezes { get; set; }
+
     }
 }

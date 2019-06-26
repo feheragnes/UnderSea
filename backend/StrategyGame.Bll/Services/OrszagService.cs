@@ -49,24 +49,26 @@ namespace StrategyGame.Bll.Services
             _globalService = globalService;
         }
 
-        public async void MakeOrszagUserConnection(StrategyGameUser user, string orszagNev)
+        public async Task MakeOrszagUserConnection(StrategyGameUser user, string orszagNev)
         {
             try
             {
                 user.Orszag = await InitOrszag(orszagNev);
                 await _context.SaveChangesAsync();
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 throw e;
             }
         }
         public async Task<Orszag> InitOrszag(string orszagNev)
         {
-            var orszag = new Orszag { Nev = orszagNev, Korall = 0, Gyongy = 0 };
+
+            var orszag = new Orszag { Nev = orszagNev, Korall = 0, Gyongy = 1000 };
+            orszag.Epulets.Add(new AramlasIranyito() { Felepult = true });
             if (_context.Orszags.FirstOrDefault(x => x.Nev.ToUpper() == orszagNev.ToUpper()) == null)
             {
                 await _context.Orszags.AddAsync(orszag);
-                await _context.SaveChangesAsync();
                 return orszag;
             }
             throw new ArgumentException("Country already exists");
@@ -86,10 +88,14 @@ namespace StrategyGame.Bll.Services
                 Nev = orszag.Nev,
                 Korall = orszag.Korall,
                 Helyezes = await GetHelyezes(orszag),
-                GyongyTermeles = (await GetTermeles(orszag)).GyongyTermeles,
-                KorallTermeles = (await GetTermeles(orszag)).KorallTermeles,
+                GyongyTermeles = await GetGyongyTermeles(orszag),
+                KorallTermeles = await GetKorallTermeles(orszag),
+                EpuloAramlasIranyito = await _epuletService.GetEpuloAramlasiranyitoCout(orszag),
+                EpuloZatonyVar = await _epuletService.GetEpuloZatonyvarCount(orszag),
                 SeregInfoDTOs = await GetSeregInfoDTOs(orszag),
-                EpuletInfoDTOs = await GetEpuletInfoDTOs(orszag)
+                EpuletInfoDTOs = await GetEpuletInfoDTOs(orszag),
+                TamadoBonusz = await GetTamadasBonusz(orszag),
+                VedekezoBonusz = await GetVedekezesBonusz(orszag)
             };
             return orszagdto;
         }
@@ -100,36 +106,64 @@ namespace StrategyGame.Bll.Services
         }
         private async Task<long> GetKorallTermeles(Orszag orszag)
         {
-            return await _context.KorallTermelos
+            return Convert.ToInt64(Convert.ToDouble(await _context.KorallTermelos
                 .Include(x => x.Epulet).ThenInclude(x => x.Orszag)
                 .Where(x => x.Epulet.Orszag.Id == orszag.Id)
+                .Where(x=>x.Epulet.Felepult == true)
+                .SumAsync(x => x.Ertek))
+                * (Convert.ToDouble(await _context.KorallNovelos
+                .Include(x => x.Fejlesztes).ThenInclude(x => x.Orszag)
+                .Where(x => x.Fejlesztes.Orszag.Id == orszag.Id)
+                .Where(x=>x.Fejlesztes.Kifejlesztve == true)
+                .SumAsync(x => x.Ertek) / 100.0) + 1));
+        }
+        private async Task<long> GetGyongyTermeles(Orszag orszag)
+        {
+            return Convert.ToInt64(Convert.ToDouble(await _context.NepessegTermelos
+                 .Include(x => x.Epulet).ThenInclude(x => x.Orszag)
+                 .Where(x => x.Epulet.Orszag.Id == orszag.Id)
+                 .Where(x=>x.Epulet.Felepult == true)
+                 .SumAsync(x => x.Ertek) * 1)
+                * (Convert.ToDouble(await _context.AdoNovelos
+                .Include(x => x.Fejlesztes).ThenInclude(x => x.Orszag)
+                .Where(x => x.Fejlesztes.Orszag.Id == orszag.Id)
+                .Where(x=>x.Fejlesztes.Kifejlesztve == true)
+                .SumAsync(x => x.Ertek) / 100.0) + 1));
+        }
+        private async Task<long> GetTamadasBonusz(Orszag orszag)
+        {
+            return await _context.TamadasNovelos
+                .Include(x => x.Fejlesztes).ThenInclude(x => x.Orszag)
+                .Where(x => x.Fejlesztes.Orszag.Id == orszag.Id)
+                .Where(x => x.Fejlesztes.Kifejlesztve == true)
                 .SumAsync(x => x.Ertek);
         }
-        private async Task<OrszagDTO> GetTermeles(Orszag orszag)
+        private async Task<long> GetVedekezesBonusz(Orszag orszag)
         {
-            var orszagDTO = new OrszagDTO();
-            orszag = await _context.Orszags
-                .Include(x => x.Epulets)
-                .Include(x => x.Fejleszteses).FirstOrDefaultAsync(x => x.Id == orszag.Id);
-            orszag.Epulets.Where(e => e.Felepult == true).ToList().ForEach(async e =>
+            return await _context.VedekezesNovelos
+                .Include(x => x.Fejlesztes).ThenInclude(x => x.Orszag)
+                .Where(x => x.Fejlesztes.Orszag.Id == orszag.Id)
+                .Where(x => x.Fejlesztes.Kifejlesztve == true)
+                .SumAsync(x => x.Ertek);
+        }
+        public async Task<TamadasDTO> GetTamadasDTO(Guid userId)
+        {
+            var orszag = await _commonService.GetCurrentOrszag(userId);
+            var tamadasDto = new TamadasDTO
             {
-                var ep =  _mapper.Map<EpuletDTO>(e);
-                if (ep is ITermelo)
+                EllensegesOrszagok = await GetEllensegesOrszags(orszag),
+                OtthoniEgysegek = await _egysegService.GetOtthoniEgysegsFromOneUserAsync(orszag)
+            };
+            return tamadasDto;
+        }
+        private async Task<IList<string>> GetEllensegesOrszags(Orszag orszag)
+        {
+            var list = new List<string>();
+            await _context.Orszags.Where(x => x.Id != orszag.Id).ForEachAsync(x =>
                 {
-                    orszagDTO = await (ep as ITermelo).SetTermeles(orszagDTO);
-                }
-            });
-            orszag.Fejleszteses.Where(f => f.Kifejlesztve == true).ToList().ForEach(async f =>
-            {
-                var fe = _mapper.Map<FejlesztesDTO>(f);
-                if (fe is ITermelo)
-                {
-                    orszagDTO = await (fe as ITermelo).SetTermeles(orszagDTO);
-                }
-            });
-
-
-            return orszagDTO;
+                    list.Add(x.Nev);
+                });
+            return list;
         }
         private async Task<IList<SeregInfoDTO>> GetSeregInfoDTOs(Orszag orszag)
         {
@@ -139,5 +173,6 @@ namespace StrategyGame.Bll.Services
         {
             return await _epuletService.GetFelepultEpuletsFromOneUserAsync(orszag);
         }
+
     }
 }
