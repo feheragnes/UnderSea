@@ -1,4 +1,5 @@
 ﻿using StrategyGame.Model.Entities.Models.Egysegek;
+using StrategyGame.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,7 +12,7 @@ namespace StrategyGame.Model.Entities.Models
         public Guid Id { get; set; }
         public Orszag Celpont { get; set; }
         public Orszag Tulajdonos { get; set; }
-        public long Kimenetel { get; set; }
+        public HarcEredmenyTipus Kimenetel { get; set; }
         public IList<Egyseg> Egysegs { get; set; } = new List<Egyseg>();
     }
 }

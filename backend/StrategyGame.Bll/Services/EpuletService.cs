@@ -2,12 +2,13 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using StrategyGame.Bll.DTOs;
-using StrategyGame.Bll.DTOs.DTOEnums;
+
 using StrategyGame.Bll.ServiceInterfaces;
 using StrategyGame.Dal.Context;
 using StrategyGame.Model.Entities.Identity;
 using StrategyGame.Model.Entities.Models;
 using StrategyGame.Model.Entities.Models.Epuletek;
+using StrategyGame.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;

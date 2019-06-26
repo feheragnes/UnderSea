@@ -66,7 +66,7 @@ namespace StrategyGame.Api.Controllers
                 return Ok();
             }catch(Exception e)
             {
-                return BadRequest(e);
+                return BadRequest(e.Message);
             }
         }
 

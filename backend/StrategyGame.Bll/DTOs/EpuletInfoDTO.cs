@@ -1,4 +1,5 @@
-﻿using StrategyGame.Bll.DTOs.DTOEnums;
+﻿
+using StrategyGame.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,7 +9,7 @@ namespace StrategyGame.Bll.DTOs
     public class EpuletInfoDTO
     {
 
-        public EpuletInfoDTO(){}
+        public EpuletInfoDTO(Model.Enums.EpuletTipus aramlasIranyito) {}
         public EpuletInfoDTO(EpuletTipus t, long ar, long m)
         {
             Tipus = t;

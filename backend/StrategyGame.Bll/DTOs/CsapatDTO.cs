@@ -1,5 +1,6 @@
-﻿using StrategyGame.Bll.DTOs.DTOEnums;
+﻿
 using StrategyGame.Bll.DTOs.Egysegek;
+using StrategyGame.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;

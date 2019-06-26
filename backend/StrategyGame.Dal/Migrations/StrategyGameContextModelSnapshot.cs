@@ -200,7 +200,7 @@ namespace StrategyGame.Dal.Migrations
 
                     b.Property<Guid?>("CelpontId");
 
-                    b.Property<long>("Kimenetel");
+                    b.Property<int>("Kimenetel");
 
                     b.Property<Guid?>("TulajdonosId");
 
@@ -240,6 +240,60 @@ namespace StrategyGame.Dal.Migrations
                     b.ToTable("Egysegs");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("Egyseg");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Egysegek.EgysegInfo", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long>("Ar");
+
+                    b.Property<long>("Ellatas");
+
+                    b.Property<long>("Tamadas");
+
+                    b.Property<int>("Tipus");
+
+                    b.Property<long>("Vedekezes");
+
+                    b.Property<long>("Zsold");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EgysegInfos");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000001"),
+                            Ar = 50L,
+                            Ellatas = 1L,
+                            Tamadas = 6L,
+                            Tipus = 0,
+                            Vedekezes = 2L,
+                            Zsold = 1L
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000002"),
+                            Ar = 50L,
+                            Ellatas = 1L,
+                            Tamadas = 2L,
+                            Tipus = 1,
+                            Vedekezes = 6L,
+                            Zsold = 1L
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000003"),
+                            Ar = 100L,
+                            Ellatas = 2L,
+                            Tamadas = 5L,
+                            Tipus = 2,
+                            Vedekezes = 5L,
+                            Zsold = 3L
+                        });
                 });
 
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Epuletek.Epulet", b =>

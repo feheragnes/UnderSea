@@ -13,6 +13,7 @@ using StrategyGame.Model.Entities.Models;
 using StrategyGame.Model.Entities.Models.Egysegek;
 using StrategyGame.Model.Entities.Models.Epuletek;
 using StrategyGame.Model.Entities.Models.Fejlesztesek;
+using StrategyGame.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,6 +67,7 @@ namespace StrategyGame.Bll.Services
 
             var orszag = new Orszag { Nev = orszagNev, Korall = 0, Gyongy = 1000 };
             orszag.Epulets.Add(new AramlasIranyito() { Felepult = true });
+            orszag.OtthoniCsapats.Add(new Csapat() { Kimenetel = HarcEredmenyTipus.Otthon });
             if (_context.Orszags.FirstOrDefault(x => x.Nev.ToUpper() == orszagNev.ToUpper()) == null)
             {
                 await _context.Orszags.AddAsync(orszag);
