@@ -8,7 +8,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
   styleUrls: ['./buildings.component.scss']
 })
 export class BuildingsComponent implements OnInit {
-  @Output() built: EventEmitter<any> = new EventEmitter();
+  @Output() stateChanged = new EventEmitter();
 
   private activeCard;
   private epuletInfo;
@@ -53,6 +53,7 @@ export class BuildingsComponent implements OnInit {
     if (this.activeCard === 'card2') {
       type = 'AramlasIranyito';
     }
+
     this.epuletService.buyEpulet(type).subscribe(
       data => {
         console.log(data);
@@ -61,7 +62,7 @@ export class BuildingsComponent implements OnInit {
         console.log(error);
       },
       () => {
-        this.built.emit('hello aa buildingsből');
+        this.stateChanged.emit(null);
         console.log('done building');
       }
     );
