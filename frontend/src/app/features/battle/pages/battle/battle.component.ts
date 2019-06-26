@@ -55,9 +55,10 @@ export class BattleComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  onActivate(componentReference) {
-    console.log(componentReference);
-    // componentReference.anyFunction();
-    this.getOrszagInfo();
+  onActivate(elementRef) {
+    elementRef.built.subscribe(event => {
+      console.log('siker');
+      this.getOrszagInfo();
+    });
   }
 }
