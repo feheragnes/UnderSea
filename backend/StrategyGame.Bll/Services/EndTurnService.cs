@@ -16,20 +16,59 @@ namespace StrategyGame.Bll.Services
     {
         private readonly StrategyGameContext _context;
         private readonly IMapper _mapper;
+        private readonly IOrszagService _orszagService;
 
-        public EndTurnService(StrategyGameContext context, IMapper mapper)
+        public EndTurnService(StrategyGameContext context, IMapper mapper, IOrszagService orszagService)
         {
             _context = context;
             _mapper = mapper;
+            _orszagService = orszagService;
         }
 
-        public Task DoFejleszteses()
+        public async Task DoFejleszteses()
         {
-            throw new NotImplementedException();
+            await _context.Fejleszteses.ForEachAsync(x => x.AktualisKor++);
+            await _context.Fejleszteses.Where(x => x.AktualisKor == x.SzuksegesKorok).ForEachAsync(x => x.Kifejlesztve = true);
+            await _context.SaveChangesAsync();
+        }
+        public async Task DoEpulets()
+        {
+            await _context.Epulets.ForEachAsync(x => x.AktualisKor++);
+            await _context.Epulets.Where(x => x.AktualisKor == x.SzuksegesKorok).ForEachAsync(x => x.Felepult = true);
+            await _context.SaveChangesAsync();
+        }
+        public async Task DoAdo()
+        {
+            await _context.Orszags.ForEachAsync(async x => x.Gyongy += await _orszagService.GetGyongyTermeles(x));
+            await _context.SaveChangesAsync();
+        }
+        public async Task DoKorall()
+        {
+            await _context.Orszags.ForEachAsync(async x => x.Korall += await _orszagService.GetKorallTermeles(x));
+            await _context.SaveChangesAsync();
+        }
+        public async Task DoZsold()
+        {
+
+        }
+        public async Task DoEtetes()
+        {
+
+        }
+        public async Task DoHarc()
+        {
+
         }
 
         public async Task NextTurn()
         {
+            await DoAdo();
+            await DoKorall();
+            await DoZsold();
+            await DoEtetes();
+            await DoFejleszteses();
+            await DoEpulets();
+            await DoHarc();
             await SetOrszagScores();
         }
         public async Task SetOrszagScores()

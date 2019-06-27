@@ -106,7 +106,7 @@ namespace StrategyGame.Bll.Services
             var sorted = await _globalService.GetRanglista();
             return (sorted.IndexOf(sorted.FirstOrDefault(x => x.Orszag == orszag.Nev))) + 1;
         }
-        private async Task<long> GetKorallTermeles(Orszag orszag)
+        public async Task<long> GetKorallTermeles(Orszag orszag)
         {
             return Convert.ToInt64(Convert.ToDouble(await _context.KorallTermelos
                 .Include(x => x.Epulet).ThenInclude(x => x.Orszag)
@@ -119,7 +119,7 @@ namespace StrategyGame.Bll.Services
                 .Where(x=>x.Fejlesztes.Kifejlesztve == true)
                 .SumAsync(x => x.Ertek) / 100.0) + 1));
         }
-        private async Task<long> GetGyongyTermeles(Orszag orszag)
+        public async Task<long> GetGyongyTermeles(Orszag orszag)
         {
             return Convert.ToInt64(Convert.ToDouble(await _context.NepessegTermelos
                  .Include(x => x.Epulet).ThenInclude(x => x.Orszag)

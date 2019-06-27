@@ -16,5 +16,7 @@ namespace StrategyGame.Bll.ServiceInterfaces
         Task<OrszagDTO> Map(Orszag orszag);
         Task<OrszagDTO> GetUserOrszagInfos(Guid userId);
         Task<TamadasDTO> GetTamadasDTO(Guid userId);
+        Task<long> GetGyongyTermeles(Orszag orszag);
+        Task<long> GetKorallTermeles(Orszag orszag);
     }
 }
