@@ -10,53 +10,43 @@
       <div class="column2">
         <div class="icons">
           <div class="icontext">
-            <mat-card class="icon">
-              <img src="assets\images\007-shark.svg" />
-            </mat-card>
-            <span>{{ this.capa[0] ? this.capa[0].mennyiseg : 0 }}</span>
+            <img class="icon" src="assets\images\icon_harcicapa.svg" />
+            <span>{{ capa[0] ? capa[0].mennyiseg : 0 }}</span>
           </div>
           <div class="icontext">
-            <mat-card class="icon">
-              <img src="assets\images\025-seal.svg" />
-            </mat-card>
-            <span>{{ this.foka[0] ? this.foka[0].mennyiseg : 0 }}</span>
+            <img class="icon" src="assets\images\icon_rohamfoka.svg" />
+            <span>{{ foka[0] ? foka[0].mennyiseg : 0 }}</span>
           </div>
           <div class="icontext">
-            <mat-card class="icon">
-              <img src="assets\images\013-seahorse.svg" />
-            </mat-card>
-            <span>{{ this.csiko[0] ? this.csiko[0].mennyiseg : 0 }}</span>
+            <img src="assets\images\icon_csatacsiko.svg" />
+            <span>{{ csiko[0] ? csiko[0].mennyiseg : 0 }}</span>
           </div>
           <div class="icontext">
-            <mat-card class="icon">
-              <img src="assets\images\shell.svg" />
-            </mat-card>
+            <img class="icon" src="assets\images\icon_gyongy.svg" />
             <div class="doubletext">
-              <span>{{ this.gyongy }}</span>
-              <h5>{{ this.orszagInfo.gyongyTermeles }}/kör</h5>
+              <span>{{ gyongy }}</span>
+              <h5>{{ orszagInfo.gyongyTermeles }}/kör</h5>
             </div>
           </div>
           <div class="icontext">
-            <mat-card class="icon">
-              <img src="assets\images\018-coral.svg" />
-            </mat-card>
+            <img class="icon" src="assets\images\icon_korallfal.svg" />
             <div class="doubletext">
-              <span>{{ this.korall }}</span>
-              <h5>{{ this.orszagInfo.korallTermeles }}/kör</h5>
+              <span>{{ korall }}</span>
+              <h5>{{ orszagInfo.korallTermeles }}/kör</h5>
             </div>
           </div>
           <div class="icontext">
-            <mat-card class="icon"> </mat-card>
+            <img class="icon" src="assets\images\icon_zatonyvar.svg" />
             <div class="doubletext">
-              <span>{{ this.zatonyvar[0].mennyiseg }}</span>
-              <h5>{{ this.orszagInfo.epuloZatonyvar }} épül</h5>
+              <span>{{ zatonyvar[0].mennyiseg }}</span>
+              <h5>{{ orszagInfo.epuloZatonyvar }} épül</h5>
             </div>
           </div>
           <div class="icontext">
-            <mat-card class="icon"> </mat-card>
+            <img class="icon" src="assets\images\icon_aramlasiranyito.svg" />
             <div class="doubletext">
-              <span>{{ this.aramlasiranyito[0].mennyiseg }}</span>
-              <h5>{{ this.orszagInfo.epuloAramlasIranyito }} épül</h5>
+              <span>{{ aramlasiranyito[0].mennyiseg }}</span>
+              <h5>{{ orszagInfo.epuloAramlasIranyito }} épül</h5>
             </div>
           </div>
         </div>

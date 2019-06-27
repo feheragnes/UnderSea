@@ -79,23 +79,8 @@ button {
 }
 
 .icon {
-  background-color: #9ffff0;
-  border-style: solid;
-  border-width: 2px;
-  border-color: #428dff;
-  width: 59px;
-  height: 59px;
-  padding: 0px;
-  border-radius: 1rem;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  margin-right: 10px;
-}
-
-img {
   align-self: center;
+  margin-right: 10px;
 }
 .card * {
   font-size: 21px;
@@ -135,8 +120,9 @@ h1 {
 .doubletext {
   display: flex;
   flex-direction: column;
-  height: 59px;
+  height: 58px;
 }
+
 h5 {
   font-family: baloo;
   font-size: 20px;
