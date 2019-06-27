@@ -11,6 +11,6 @@ namespace StrategyGame.Model.Enums
         IszapTraktor,
         KorallFal,
         SzonarAgyu,
-        VizalattiHarmuveszet
+        VizalattiHarcmuveszet
     }
 }

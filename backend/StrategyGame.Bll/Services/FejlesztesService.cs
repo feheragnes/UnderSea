@@ -64,7 +64,7 @@ namespace StrategyGame.Bll.Services.AAAServices
                 case FejlesztesTipus.SzonarAgyu:
                     currentOrszag.Fejleszteses.Add(new SzonarAgyu());
                     break;
-                case FejlesztesTipus.VizalattiHarmuveszet:
+                case FejlesztesTipus.VizalattiHarcmuveszet:
                     currentOrszag.Fejleszteses.Add(new VizalattiHarcmuveszet());
                     break;
                 default:
