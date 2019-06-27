@@ -10,11 +10,8 @@ namespace StrategyGame.Api.ViewModels.OrszagViewModels
     public class OrszagInfoViewModel
     {
         public Guid Id { get; set; }
-
         public string Nev { get; set; }
-
         public long Gyongy { get; set; }
-
         public long Korall { get; set; }
         public long Helyezes { get; set; }
         public long KorallTermeles { get; set; }

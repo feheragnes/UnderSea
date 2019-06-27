@@ -22,18 +22,21 @@ namespace StrategyGame.Api.Controllers
     {
         private readonly IOrszagService _orszagService;
         private readonly ICommonService _commonService;
+        private readonly ITamadasService _tamadasService;
         private readonly IMapper _mapper;
         private readonly IEgysegService _egysegService;
 
         public TamadasController(IEgysegService egysegService, 
             IOrszagService orszagService, 
             ICommonService commonService, 
+            ITamadasService tamadasService,
             IMapper mapper,
             UserManager<StrategyGameUser> userManager):base(userManager)
         {
             _egysegService = egysegService;
             _orszagService = orszagService;
             _commonService = commonService;
+            _tamadasService = tamadasService;
             _mapper = mapper;
         }
 
@@ -57,9 +60,16 @@ namespace StrategyGame.Api.Controllers
         }
         
         [HttpPost]
-        public async Task<IActionResult> PostTamadas([FromBody]JObject data)
+        public async Task<IActionResult> PostTamadas([FromBody]TamadasInditasViewModel tamadasInditasViewModel)
         {
-            return Ok("Not implemented");
+            try
+            {
+                await _tamadasService.MakeTamadas(_mapper.Map<BejovoTamadasDTO>(tamadasInditasViewModel), UserId);
+                return Ok();
+            }catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpGet]

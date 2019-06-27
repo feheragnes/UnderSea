@@ -65,6 +65,9 @@ namespace StrategyGame.Api.Mappers
             //.ForMember(x => x.Ar, opt => opt.MapFrom(y => (Activator.CreateInstance(Type.GetType(y.Tipus)) as Egyseg).Ar));
 
             CreateMap<RanglistaDTO, RanglistaViewModel>().ReverseMap();
+            CreateMap<TamadasInditasViewModel, BejovoTamadasDTO>()
+                .ForMember(x => x.CelpontNev, opt => opt.MapFrom(y => y.Orszag))
+                .ForMember(x => x.TamadoEgysegek, opt => opt.MapFrom(y => y.TamadoSereg)).ReverseMap();
                 
 
         }

@@ -10,6 +10,8 @@ namespace StrategyGame.Model.Enums
         Vereseg,
         Dontetlen,
         Folyamatban,
-        Otthon
+        Otthon,
+        Tulajdonos,
+        Celpont
     }
 }

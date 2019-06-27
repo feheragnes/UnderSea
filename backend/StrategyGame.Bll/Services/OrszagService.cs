@@ -110,13 +110,11 @@ namespace StrategyGame.Bll.Services
         {
             return Convert.ToInt64(Convert.ToDouble(await _context.KorallTermelos
                 .Include(x => x.Epulet).ThenInclude(x => x.Orszag)
-                .Where(x => x.Epulet.Orszag.Id == orszag.Id)
-                .Where(x=>x.Epulet.Felepult == true)
+                .Where(x => x.Epulet.Orszag.Id == orszag.Id && x.Epulet.Felepult)
                 .SumAsync(x => x.Ertek))
                 * (Convert.ToDouble(await _context.KorallNovelos
                 .Include(x => x.Fejlesztes).ThenInclude(x => x.Orszag)
-                .Where(x => x.Fejlesztes.Orszag.Id == orszag.Id)
-                .Where(x=>x.Fejlesztes.Kifejlesztve == true)
+                .Where(x => x.Fejlesztes.Orszag.Id == orszag.Id && x.Fejlesztes.Kifejlesztve)
                 .SumAsync(x => x.Ertek) / 100.0) + 1));
         }
         public async Task<long> GetGyongyTermeles(Orszag orszag)
@@ -132,7 +130,7 @@ namespace StrategyGame.Bll.Services
                 .Where(x=>x.Fejlesztes.Kifejlesztve == true)
                 .SumAsync(x => x.Ertek) / 100.0) + 1));
         }
-        private async Task<long> GetTamadasBonusz(Orszag orszag)
+        public async Task<long> GetTamadasBonusz(Orszag orszag)
         {
             return await _context.TamadasNovelos
                 .Include(x => x.Fejlesztes).ThenInclude(x => x.Orszag)
@@ -140,7 +138,7 @@ namespace StrategyGame.Bll.Services
                 .Where(x => x.Fejlesztes.Kifejlesztve == true)
                 .SumAsync(x => x.Ertek);
         }
-        private async Task<long> GetVedekezesBonusz(Orszag orszag)
+        public async Task<long> GetVedekezesBonusz(Orszag orszag)
         {
             return await _context.VedekezesNovelos
                 .Include(x => x.Fejlesztes).ThenInclude(x => x.Orszag)

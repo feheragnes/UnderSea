@@ -13,6 +13,6 @@ namespace StrategyGame.Model.Entities.Models
         public Orszag Celpont { get; set; }
         public Orszag Tulajdonos { get; set; }
         public HarcEredmenyTipus Kimenetel { get; set; }
-        public IList<Egyseg> Egysegs { get; set; } = new List<Egyseg>();
+        public List<Egyseg> Egysegs { get; set; } = new List<Egyseg>();
     }
 }
