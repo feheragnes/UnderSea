@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormControl
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { ToastrService } from 'ngx-toastr';
@@ -25,11 +30,25 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.registerForm = this.formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required],
-      confirmPassword: ['', Validators.required],
-      countryName: ['', Validators.required]
+    // this.registerForm = this.formBuilder.group({
+    //   email: ['', Validators.required, Validators.email],
+    //   password: ['', Validators.required],
+    //   confirmPassword: ['', Validators.required],
+    //   countryName: ['', Validators.required]
+    // });
+
+    this.registerForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(6),
+        Validators.pattern('^(?=.*d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$')
+      ]),
+      confirmPassword: new FormControl('', [
+        Validators.required,
+        Validators.minLength(6)
+      ]),
+      countryName: new FormControl('', [Validators.required])
     });
   }
 
@@ -41,6 +60,38 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     // stop here if form is invalid
     if (this.registerForm.invalid) {
+      if (this.registerForm.get('email').hasError('required')) {
+        this.toastr.error('Hiányzó email!');
+      }
+      if (this.registerForm.get('email').hasError('email')) {
+        this.toastr.error('Hibás email formátum!');
+      }
+      if (this.registerForm.get('password').hasError('required')) {
+        this.toastr.error('Hiányzó jelszó!');
+      }
+      if (this.registerForm.get('password').hasError('minlength')) {
+        this.toastr.error('Rövid jelszó!');
+      }
+      if (this.registerForm.get('password').hasError('pattern')) {
+        this.toastr.error('A jelszóban szerepeljen kis és nagybetű és szám! ');
+      }
+      if (this.registerForm.get('confirmPassword').hasError('required')) {
+        this.toastr.error('Hiányzó jelszó ismétlés!');
+      }
+      if (this.registerForm.get('confirmPassword').hasError('minlength')) {
+        this.toastr.error('Rövid jelszó ismétlés!');
+      }
+      if (this.registerForm.get('countryName').hasError('required')) {
+        this.toastr.error('Hiányzó országnév!');
+      }
+      return;
+    }
+
+    if (
+      this.registerForm.get('confirmPassword').value !==
+      this.registerForm.get('password').value
+    ) {
+      this.toastr.error('A két jelszó nem egyezik meg!');
       return;
     }
 

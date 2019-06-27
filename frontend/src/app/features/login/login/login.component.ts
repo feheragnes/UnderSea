@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormControl
+} from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
@@ -29,25 +34,35 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loginForm = this.formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required]
+    this.loginForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(6)
+      ])
     });
 
-    // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
-  // convenience getter for easy access to form fields
   get f() {
     return this.loginForm.controls;
   }
 
   onSubmit() {
-    this.submitted = true;
-
-    // stop here if form is invalid
     if (this.loginForm.invalid) {
+      if (this.loginForm.get('email').hasError('required')) {
+        this.toastr.error('Hiányzó email!');
+      }
+      if (this.loginForm.get('email').hasError('email')) {
+        this.toastr.error('Hibás email!');
+      }
+      if (this.loginForm.get('password').hasError('required')) {
+        this.toastr.error('Hiányzó jelszó!');
+      }
+      if (this.loginForm.get('password').hasError('minlength')) {
+        this.toastr.error('Rövid jelszó!');
+      }
       return;
     }
 
