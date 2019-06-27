@@ -25,7 +25,8 @@ export class ErrorInterceptor implements HttpInterceptor {
           this.authenticationService.logout();
           location.reload(true);
         }
-        return throwError(err);
+        const error = err.error || err.statusText;
+        return throwError(error);
       })
     );
   }

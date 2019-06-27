@@ -3,7 +3,7 @@
     <mat-toolbar>
       <div class="column1">
         <div class="data">
-          <span>4.kör</span>
+          <span>{{ turn }}.kör </span>
           <span>{{ orszagInfo.helyezes }}.hely</span>
         </div>
       </div>
@@ -18,7 +18,7 @@
             <span>{{ foka[0] ? foka[0].mennyiseg : 0 }}</span>
           </div>
           <div class="icontext">
-            <img src="assets\images\icon_csatacsiko.svg" />
+            <img class="icon" src="assets\images\icon_csatacsiko.svg" />
             <span>{{ csiko[0] ? csiko[0].mennyiseg : 0 }}</span>
           </div>
           <div class="icontext">
@@ -63,7 +63,7 @@
         <button mat-raised-button routerLink="army">Sereg</button>
         <mat-card class="card">
           <mat-card class="malecard">
-            <img src="assets\images\002-male.svg" />
+            <img src="assets\images\002-male.svg" (click)="nextTurn()" />
           </mat-card>
           <p>{{ orszagInfo.nev }}</p>
           <a class="profile" mat-button routerLink="">
@@ -76,7 +76,13 @@
         <h1>UNDERSEA</h1>
       </mat-sidenav>
       <mat-sidenav-content>
-        <div class="country"><app-country></app-country></div>
+        <div class="country">
+          <app-country
+            [aramlasIranyito]="aramlasiranyito[0].mennyiseg > 0"
+            [zatonyVar]="zatonyvar[0].mennyiseg > 0"
+            [szonarAgyu]="szonaragyu"
+          ></app-country>
+        </div>
         <div class="router">
           <router-outlet (activate)="onActivate($event)"></router-outlet>
         </div>

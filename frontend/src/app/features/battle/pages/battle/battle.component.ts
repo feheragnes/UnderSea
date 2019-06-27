@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Router } from '@angular/router';
 import { OrszagService } from '../../services/orszag.service';
+import { GlobalService } from '../../services/global.service';
+import { EpuletService } from '../../services/epulet.service';
+import { FejlesztesService } from '../../services/fejlesztes.service';
 
 @Component({
   selector: 'app-battle',
@@ -17,11 +20,15 @@ export class BattleComponent implements OnInit {
   public csiko;
   public aramlasiranyito;
   public zatonyvar;
+  public szonaragyu;
+  public turn;
 
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router,
-    private orszagService: OrszagService
+    private orszagService: OrszagService,
+    private globalService: GlobalService,
+    private fejlesztesService: FejlesztesService
   ) {}
 
   getOrszagInfo(): void {
@@ -48,6 +55,8 @@ export class BattleComponent implements OnInit {
 
   ngOnInit() {
     this.getOrszagInfo();
+    this.getTurn();
+    this.getFejlesztesInfo();
   }
 
   logout() {
@@ -60,5 +69,47 @@ export class BattleComponent implements OnInit {
       console.log('siker');
       this.getOrszagInfo();
     });
+  }
+
+  nextTurn() {
+    this.globalService.nextTurn().subscribe(
+      data => {
+        console.log(data);
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
+        this.getOrszagInfo();
+        this.getTurn();
+        this.getFejlesztesInfo();
+      }
+    );
+  }
+  getTurn() {
+    this.globalService.getAktualisKor().subscribe(
+      data => {
+        this.turn = data.kor;
+      },
+      err => console.error(err),
+      () => {
+        console.log('done loading turn');
+      }
+    );
+  }
+  getFejlesztesInfo() {
+    this.fejlesztesService.getFejlesztesInfo().subscribe(
+      data => {
+        data.forEach(element => {
+          if (element.tipus === 'SzonarAgyu') {
+            this.szonaragyu = element.kifejlesztve;
+          }
+        });
+      },
+      err => console.error(err),
+      () => {
+        console.log('done loading turn');
+      }
+    );
   }
 }

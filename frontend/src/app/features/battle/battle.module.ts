@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { BattleRoutingModule } from './battle-routing.module';
-import { BattleService } from './services/battle.service';
 import { BattleComponent } from './pages/battle/battle.component';
 import { HttpClientModule } from '@angular/common/http';
 import {
@@ -9,7 +8,6 @@ import {
   MatCardModule,
   MatChipsModule,
   MatExpansionModule,
-  MatFormFieldModule,
   MatIconModule,
   MatInputModule,
   MatListModule,
@@ -18,7 +16,8 @@ import {
   MatSidenavModule,
   MatSliderModule,
   MatToolbarModule,
-  MatGridListModule
+  MatGridListModule,
+  MatTooltipModule
 } from '@angular/material';
 import { BuildingsComponent } from './components/buildings/buildings.component';
 import { AttackComponent } from './components/attack/attack.component';
@@ -47,9 +46,10 @@ import { FormsModule } from '@angular/forms';
     MatGridListModule,
     MatButtonModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatTooltipModule
   ],
-  providers: [BattleService],
+  providers: [],
   declarations: [
     BattleComponent,
     BuildingsComponent,
