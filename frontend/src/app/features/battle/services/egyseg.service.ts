@@ -16,5 +16,8 @@ export class EgysegService {
     return this.http.get<any>(url);
   }
 
-  buyEgyseg() {}
+  buyEgyseg(parameter) {
+    console.log(parameter);
+    return this.http.post<any>(`${this.egysegUrl}/buyegysegs`, parameter);
+  }
 }

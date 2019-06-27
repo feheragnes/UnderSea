@@ -9,14 +9,14 @@ import { OrszagService } from '../../services/orszag.service';
   styleUrls: ['./battle.component.scss']
 })
 export class BattleComponent implements OnInit {
-  private orszagInfo;
-  private gyongy;
-  private korall;
-  private capa;
-  private foka;
-  private csiko;
-  private aramlasiranyito;
-  private zatonyvar;
+  public orszagInfo;
+  public gyongy;
+  public korall;
+  public capa;
+  public foka;
+  public csiko;
+  public aramlasiranyito;
+  public zatonyvar;
 
   constructor(
     private authenticationService: AuthenticationService,

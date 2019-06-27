@@ -66,5 +66,32 @@ export class ArmyComponent implements OnInit {
     );
   }
 
-  buyEgyseg() {}
+  buyEgyseg() {
+    const parameter = [
+      {
+        tipus: 'RohamFoka',
+        mennyiseg: this.fokaNumber
+      },
+      {
+        tipus: 'LezerCapa',
+        mennyiseg: this.capaNumber
+      },
+      {
+        tipus: 'CsataCsiko',
+        mennyiseg: this.csikoNumber
+      }
+    ];
+    this.egysegService.buyEgyseg(parameter).subscribe(
+      data => {
+        console.log(data);
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
+        this.stateChanged.emit(null);
+        console.log('bought army');
+      }
+    );
+  }
 }

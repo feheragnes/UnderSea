@@ -41,7 +41,7 @@
               class="slider"
               #capa
               min="0"
-              max="{{ this.capaInfo.mennyiseg }}"
+              max="{{ this.capaInfo ? this.capaInfo.mennyiseg : 0 }}"
               value="0"
               [(ngModel)]="capaNumber"
             />
@@ -60,7 +60,7 @@
               class="slider"
               #foka
               min="0"
-              max="{{ this.fokaInfo.mennyiseg }}"
+              max="{{ this.fokaInfo ? this.fokaInfo.mennyiseg : 0 }}"
               value="0"
               [(ngModel)]="fokaNumber"
             />
@@ -79,7 +79,7 @@
               class="slider"
               #csiko
               min="0"
-              max="{{ this.csikoInfo.mennyiseg }}"
+              max="{{ this.csikoInfo ? this.csikoInfo.mennyiseg : 0 }}"
               value="0"
               [(ngModel)]="csikoNumber"
             />

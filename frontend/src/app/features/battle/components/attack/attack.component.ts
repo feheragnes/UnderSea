@@ -7,16 +7,16 @@ import { TamadasService } from '../../services/tamadas.service';
   styleUrls: ['./attack.component.scss']
 })
 export class AttackComponent implements OnInit {
-  capaNumber = 0;
-  private fokaNumber = 0;
-  private csikoNumber = 0;
-  private tamadasInfo;
-  private countries;
-  private filteredCountries;
-  private selectedCountry;
-  fokaInfo;
-  capaInfo;
-  csikoInfo;
+  public capaNumber = 0;
+  public fokaNumber = 0;
+  public csikoNumber = 0;
+  public tamadasInfo;
+  public countries;
+  public filteredCountries;
+  public selectedCountry;
+  public fokaInfo;
+  public capaInfo;
+  public csikoInfo;
   @Output() stateChanged = new EventEmitter();
 
   constructor(private tamadasService: TamadasService) {}
