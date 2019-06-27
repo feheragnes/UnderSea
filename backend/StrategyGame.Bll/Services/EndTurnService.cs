@@ -27,24 +27,34 @@ namespace StrategyGame.Bll.Services
 
         public async Task DoFejleszteses()
         {
-            await _context.Fejleszteses.ForEachAsync(x => x.AktualisKor++);
-            await _context.Fejleszteses.Where(x => x.AktualisKor == x.SzuksegesKorok).ForEachAsync(x => x.Kifejlesztve = true);
+            await _context.Fejleszteses.ForEachAsync(x =>
+            {
+                if (++x.AktualisKor == x.SzuksegesKorok)
+                {
+                    x.Kifejlesztve = true;
+                }
+            });
             await _context.SaveChangesAsync();
         }
         public async Task DoEpulets()
         {
-            await _context.Epulets.ForEachAsync(x => x.AktualisKor++);
-            await _context.Epulets.Where(x => x.AktualisKor == x.SzuksegesKorok).ForEachAsync(x => x.Felepult = true);
+            await _context.Epulets.ForEachAsync(x =>
+            {
+                if (++x.AktualisKor == x.SzuksegesKorok)
+                {
+                    x.Felepult = true;
+                }
+            });
             await _context.SaveChangesAsync();
         }
         public async Task DoAdo()
         {
-            await _context.Orszags.ForEachAsync(async x => x.Gyongy += await _orszagService.GetGyongyTermeles(x));
+            await _context.Orszags.ForEachAsync(x => x.Gyongy +=  _orszagService.GetGyongyTermeles(x).Result);
             await _context.SaveChangesAsync();
         }
         public async Task DoKorall()
         {
-            await _context.Orszags.ForEachAsync(async x => x.Korall += await _orszagService.GetKorallTermeles(x));
+            await _context.Orszags.ForEachAsync(x => x.Korall +=  _orszagService.GetKorallTermeles(x).Result);
             await _context.SaveChangesAsync();
         }
         public async Task DoZsold()
