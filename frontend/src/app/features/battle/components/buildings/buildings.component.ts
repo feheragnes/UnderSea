@@ -1,6 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { EpuletService } from '../../services/epulet.service';
-import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-buildings',
@@ -10,12 +9,13 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 export class BuildingsComponent implements OnInit {
   @Output() stateChanged = new EventEmitter();
 
-  private activeCard;
-  private epuletInfo;
-  zatonyvarInfo;
-  aramlasiranyitoInfo;
+  public activeCard;
+  public epuletInfo;
+  public zatonyvarInfo;
+  public aramlasiranyitoInfo;
 
   constructor(private epuletService: EpuletService) {}
+
   ngOnInit() {
     this.getEpuletInfo();
   }

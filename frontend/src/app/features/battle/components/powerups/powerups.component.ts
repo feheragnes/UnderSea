@@ -7,15 +7,14 @@ import { FejlesztesService } from '../../services/fejlesztes.service';
   styleUrls: ['./powerups.component.scss']
 })
 export class PowerupsComponent implements OnInit {
-  isActive = true;
-  private activeCard;
-  private fejlesztesInfo;
-  traktorInfo;
-  kombajnInfo;
-  alkimiaInfo;
-  korallInfo;
-  szonarAgyuInfo;
-  vizalattiHarmuveszetInfo;
+  public activeCard;
+  public fejlesztesInfo;
+  public traktorInfo;
+  public kombajnInfo;
+  public alkimiaInfo;
+  public korallInfo;
+  public szonarAgyuInfo;
+  public vizalattiHarmuveszetInfo;
   @Output() stateChanged = new EventEmitter();
 
   constructor(private fejlesztesService: FejlesztesService) {}

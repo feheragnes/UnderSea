@@ -7,13 +7,13 @@ import { EgysegService } from '../../services/egyseg.service';
   styleUrls: ['./army.component.scss']
 })
 export class ArmyComponent implements OnInit {
-  private capaNumber = 0;
-  private fokaNumber = 0;
-  private csikoNumber = 0;
-  private egysegInfo;
-  capaInfo;
-  csikoInfo;
-  fokaInfo;
+  public capaNumber = 0;
+  public fokaNumber = 0;
+  public csikoNumber = 0;
+  public egysegInfo;
+  public capaInfo;
+  public csikoInfo;
+  public fokaInfo;
   @Output() stateChanged = new EventEmitter();
 
   constructor(private egysegService: EgysegService) {}
