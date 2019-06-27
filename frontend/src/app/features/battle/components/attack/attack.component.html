@@ -13,18 +13,22 @@
           (input)="search(searchBox.value)"
           #searchBox
         />
-        <mat-list role="list">
+        <div role="list" class="list">
           <div
             *ngFor="let country of filteredCountries"
             (click)="selectCountry(country)"
-            [class.active]="selectedCountry == country"
           >
             <hr />
-            <mat-list-item>
-              <h4>{{ country }}</h4>
-            </mat-list-item>
+            <div class="listItem">
+              <h5>{{ country }}</h5>
+              <img
+                *ngIf="selectedCountry == country"
+                class="check"
+                src="assets\images\check.svg"
+              />
+            </div>
           </div>
-        </mat-list>
+        </div>
       </div>
       <div class="column">
         <h4>2. Állítsd be, kiket küldesz harcba:</h4>
@@ -88,6 +92,14 @@
       </div>
     </div>
     <hr width="100%" />
-    <button mat-raised-button>Megtámadom!</button>
+    <button
+      mat-raised-button
+      [disabled]="
+        !selectedCountry ||
+        (fokaNumber === 0 && capaNumber === 0 && csikoNumber === 0)
+      "
+    >
+      Megtámadom!
+    </button>
   </div>
 </mat-card>

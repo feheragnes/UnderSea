@@ -10,18 +10,18 @@
       placeholder="Országnév"
       (input)="search(searchBox.value)"
     />
-    <mat-list role="list">
-      <div *ngFor="let country of filteredranglista; index as i">
+    <div role="list" class="list">
+      <div *ngFor="let country of filteredranglista">
         <hr width="770px" />
-        <mat-list-item>
+        <div class="listItem">
           <div class="country">
-            <h4>{{ i + 1 }}. {{ country.orszag }}</h4>
+            <h4>{{ country.helyezes }}. {{ country.orszag }}</h4>
           </div>
           <div class="points">
             <p>{{ country.pont }}</p>
           </div>
-        </mat-list-item>
+        </div>
       </div>
-    </mat-list>
+    </div>
   </div>
 </mat-card>
