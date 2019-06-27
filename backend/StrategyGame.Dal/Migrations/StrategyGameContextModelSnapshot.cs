@@ -360,72 +360,39 @@ namespace StrategyGame.Dal.Migrations
                     b.ToTable("Jateks");
                 });
 
-            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Novelok.AdoNovelo", b =>
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Novelok.AbstractNovelo", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("Ertek");
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
+                    b.Property<long>("Ertek");
 
                     b.Property<Guid>("FejlesztesId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FejlesztesId")
-                        .IsUnique();
+                    b.HasIndex("FejlesztesId");
 
-                    b.ToTable("AdoNovelos");
+                    b.ToTable("AbstractNovelo");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("AbstractNovelo");
                 });
 
-            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Novelok.KorallNovelo", b =>
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Novelok.NoveloInfo", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("Ertek");
+                    b.Property<long>("Ertek");
 
-                    b.Property<Guid>("FejlesztesId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FejlesztesId")
-                        .IsUnique();
-
-                    b.ToTable("KorallNovelos");
-                });
-
-            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Novelok.TamadasNovelo", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("Ertek");
-
-                    b.Property<Guid>("FejlesztesId");
+                    b.Property<int>("Tipus");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FejlesztesId")
-                        .IsUnique();
-
-                    b.ToTable("TamadasNovelos");
-                });
-
-            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Novelok.VedekezesNovelo", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("Ertek");
-
-                    b.Property<Guid>("FejlesztesId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FejlesztesId")
-                        .IsUnique();
-
-                    b.ToTable("VedekezesNovelos");
+                    b.ToTable("NoveloInfos");
                 });
 
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Orszag", b =>
@@ -543,10 +510,6 @@ namespace StrategyGame.Dal.Migrations
                 {
                     b.HasBaseType("StrategyGame.Model.Entities.Models.Fejlesztesek.Fejlesztes");
 
-                    b.Property<Guid?>("KorallId");
-
-                    b.HasIndex("KorallId");
-
                     b.HasDiscriminator().HasValue("IszapKombajn");
                 });
 
@@ -568,10 +531,6 @@ namespace StrategyGame.Dal.Migrations
                 {
                     b.HasBaseType("StrategyGame.Model.Entities.Models.Fejlesztesek.Fejlesztes");
 
-                    b.Property<Guid?>("TamadasId");
-
-                    b.HasIndex("TamadasId");
-
                     b.HasDiscriminator().HasValue("SzonarAgyu");
                 });
 
@@ -579,11 +538,35 @@ namespace StrategyGame.Dal.Migrations
                 {
                     b.HasBaseType("StrategyGame.Model.Entities.Models.Fejlesztesek.Fejlesztes");
 
-                    b.Property<Guid?>("VedekezesId");
-
-                    b.HasIndex("VedekezesId");
-
                     b.HasDiscriminator().HasValue("VizalattiHarcmuveszet");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Novelok.AdoNovelo", b =>
+                {
+                    b.HasBaseType("StrategyGame.Model.Entities.Models.Novelok.AbstractNovelo");
+
+                    b.HasDiscriminator().HasValue("AdoNovelo");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Novelok.KorallNovelo", b =>
+                {
+                    b.HasBaseType("StrategyGame.Model.Entities.Models.Novelok.AbstractNovelo");
+
+                    b.HasDiscriminator().HasValue("KorallNovelo");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Novelok.TamadasNovelo", b =>
+                {
+                    b.HasBaseType("StrategyGame.Model.Entities.Models.Novelok.AbstractNovelo");
+
+                    b.HasDiscriminator().HasValue("TamadasNovelo");
+                });
+
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Novelok.VedekezesNovelo", b =>
+                {
+                    b.HasBaseType("StrategyGame.Model.Entities.Models.Novelok.AbstractNovelo");
+
+                    b.HasDiscriminator().HasValue("VedekezesNovelo");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -670,35 +653,11 @@ namespace StrategyGame.Dal.Migrations
                         .HasForeignKey("OrszagId");
                 });
 
-            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Novelok.AdoNovelo", b =>
+            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Novelok.AbstractNovelo", b =>
                 {
-                    b.HasOne("StrategyGame.Model.Entities.Models.Fejlesztesek.Alkimia", "Fejlesztes")
-                        .WithOne("Gyöngy")
-                        .HasForeignKey("StrategyGame.Model.Entities.Models.Novelok.AdoNovelo", "FejlesztesId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Novelok.KorallNovelo", b =>
-                {
-                    b.HasOne("StrategyGame.Model.Entities.Models.Fejlesztesek.IszapTraktor", "Fejlesztes")
-                        .WithOne("Korall")
-                        .HasForeignKey("StrategyGame.Model.Entities.Models.Novelok.KorallNovelo", "FejlesztesId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Novelok.TamadasNovelo", b =>
-                {
-                    b.HasOne("StrategyGame.Model.Entities.Models.Fejlesztesek.VizalattiHarcmuveszet", "Fejlesztes")
-                        .WithOne("Tamadas")
-                        .HasForeignKey("StrategyGame.Model.Entities.Models.Novelok.TamadasNovelo", "FejlesztesId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Novelok.VedekezesNovelo", b =>
-                {
-                    b.HasOne("StrategyGame.Model.Entities.Models.Fejlesztesek.KorallFal", "Fejlesztes")
-                        .WithOne("Vedekezes")
-                        .HasForeignKey("StrategyGame.Model.Entities.Models.Novelok.VedekezesNovelo", "FejlesztesId")
+                    b.HasOne("StrategyGame.Model.Entities.Models.Fejlesztesek.Fejlesztes", "Fejlesztes")
+                        .WithMany("Novelo")
+                        .HasForeignKey("FejlesztesId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -724,27 +683,6 @@ namespace StrategyGame.Dal.Migrations
                         .WithOne("Nepesseg")
                         .HasForeignKey("StrategyGame.Model.Entities.Models.Termelok.NepessegTermelo", "EpuletId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Fejlesztesek.IszapKombajn", b =>
-                {
-                    b.HasOne("StrategyGame.Model.Entities.Models.Novelok.KorallNovelo", "Korall")
-                        .WithMany()
-                        .HasForeignKey("KorallId");
-                });
-
-            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Fejlesztesek.SzonarAgyu", b =>
-                {
-                    b.HasOne("StrategyGame.Model.Entities.Models.Novelok.TamadasNovelo", "Tamadas")
-                        .WithMany()
-                        .HasForeignKey("TamadasId");
-                });
-
-            modelBuilder.Entity("StrategyGame.Model.Entities.Models.Fejlesztesek.VizalattiHarcmuveszet", b =>
-                {
-                    b.HasOne("StrategyGame.Model.Entities.Models.Novelok.VedekezesNovelo", "Vedekezes")
-                        .WithMany()
-                        .HasForeignKey("VedekezesId");
                 });
 #pragma warning restore 612, 618
         }

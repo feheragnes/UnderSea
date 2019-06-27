@@ -7,11 +7,9 @@ namespace StrategyGame.Model.Entities.Models.Fejlesztesek
 {
     public class KorallFal : Fejlesztes
     {
-        public VedekezesNovelo Vedekezes { get; set; }
         public KorallFal() : base()
         {
-            Vedekezes = new VedekezesNovelo();
-            Vedekezes.Ertek = 20;
+            Novelo.Add(new VedekezesNovelo(20));
         }
     }
 }

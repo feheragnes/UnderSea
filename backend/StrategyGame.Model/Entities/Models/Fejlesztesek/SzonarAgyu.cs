@@ -7,11 +7,9 @@ namespace StrategyGame.Model.Entities.Models.Fejlesztesek
 {
     public class SzonarAgyu : Fejlesztes
     {
-        public TamadasNovelo Tamadas { get; set; }
         public SzonarAgyu() : base()
         {
-            Tamadas = new TamadasNovelo();
-            Tamadas.Ertek = 20;
+            Novelo.Add(new TamadasNovelo(20));
         }
     }
 }

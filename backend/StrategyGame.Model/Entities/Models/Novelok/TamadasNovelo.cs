@@ -6,9 +6,6 @@ namespace StrategyGame.Model.Entities.Models.Novelok
 {
     public class TamadasNovelo : AbstractNovelo
     {
-        public Guid Id { get; set; }
-
-        public int Ertek { get; set; }
-
+        public TamadasNovelo(long ertek) : base(ertek) { }
     }
 }

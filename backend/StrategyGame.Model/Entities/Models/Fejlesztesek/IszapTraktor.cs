@@ -7,11 +7,9 @@ namespace StrategyGame.Model.Entities.Models.Fejlesztesek
 {
     public class IszapTraktor : Fejlesztes
     {
-        public KorallNovelo Korall { get; set; }
         public IszapTraktor() : base()
         {
-            Korall = new KorallNovelo();
-            Korall.Ertek = 10;
+            Novelo.Add(new KorallNovelo(10));
         }
     }
 }

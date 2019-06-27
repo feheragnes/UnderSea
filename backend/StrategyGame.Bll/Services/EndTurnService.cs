@@ -29,23 +29,7 @@ namespace StrategyGame.Bll.Services
 
         public async Task SetOrszagScores()
         {
-            await _context.Orszags.Include(x=>x.Epulets).ForEachAsync(async x => 
-            {
-                long score = 0;
-                x.Epulets.Where(q => q.Felepult == true).ToList().ForEach(async e =>
-                  {
-                      var ep = _mapper.Map<EpuletDTO>(e);
-                      if (ep is INepesseg)
-                      {
-                          score += await (ep as INepesseg).GetNepesseg() + 1;
-                      }
-                  });
-                x.Fejleszteses.Where(q => q.Kifejlesztve == true).ToList().ForEach(f =>
-                  {
-                      score += 100;
-                  });
 
-            });
         }
     }
 }

@@ -7,6 +7,7 @@ using StrategyGame.Dal.Context;
 using StrategyGame.Model.Entities.Identity;
 using StrategyGame.Model.Entities.Models;
 using StrategyGame.Model.Entities.Models.Fejlesztesek;
+using StrategyGame.Model.Entities.Models.Novelok;
 using StrategyGame.Model.Enums;
 using System;
 using System.Collections.Generic;
@@ -36,7 +37,7 @@ namespace StrategyGame.Bll.Services.AAAServices
             Orszag currentOrszag = await _commonService.GetCurrentOrszag(userId);
             string fejlesztesTipus = Enum.GetName(typeof(FejlesztesTipus), fejlesztes.Tipus); ;
 
-            if (currentOrszag?.Fejleszteses.Where(x => x.Kifejlesztve == false)?.Count() !=0)
+            if (currentOrszag?.Fejleszteses.Where(x => x.Kifejlesztve == false)?.Count() != 0)
             {
                 throw new InvalidOperationException("Another PowerUp is under development");
             }
@@ -46,9 +47,7 @@ namespace StrategyGame.Bll.Services.AAAServices
             }
 
 
-            
-
-                switch (fejlesztes.Tipus)
+            switch (fejlesztes.Tipus)
             {
                 case FejlesztesTipus.Alkimia:
                     currentOrszag.Fejleszteses.Add(new Alkimia());

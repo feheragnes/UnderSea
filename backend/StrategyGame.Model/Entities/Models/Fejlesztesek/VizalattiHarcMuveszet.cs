@@ -7,16 +7,10 @@ namespace StrategyGame.Model.Entities.Models.Fejlesztesek
 {
     public class VizalattiHarcmuveszet : Fejlesztes
     {
-
-        public TamadasNovelo Tamadas { get; set; }
-        public VedekezesNovelo Vedekezes { get; set; }
-
         public VizalattiHarcmuveszet() : base()
         {
-            Tamadas = new TamadasNovelo();
-            Vedekezes = new VedekezesNovelo();
-            Tamadas.Ertek = 10;
-            Vedekezes.Ertek = 10;
+            Novelo.Add(new TamadasNovelo(10));
+            Novelo.Add(new VedekezesNovelo(10));
         }
     }
 }
