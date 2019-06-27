@@ -45,6 +45,8 @@ namespace StrategyGame.Api.Mappers
 
             CreateMap<SeregInfoDTO, TamadoSeregInfoViewModel>()
                 .ForMember(x => x.Tipus, opt => opt.MapFrom(y => Enum.GetName(typeof(EgysegTipus), y.Tipus)));
+            CreateMap<TamadoSeregInfoViewModel, SeregInfoDTO>()
+                .ForMember(x => x.Tipus, opt => opt.MapFrom(y => Enum.Parse<EgysegTipus>(y.Tipus)));
             CreateMap<TamadasDTO, TamadasViewModel>()
                 .ForMember(x => x.Orszag, opt => opt.MapFrom(y => y.EllensegesOrszagok))
                 .ForMember(x => x.Sereg, opt => opt.MapFrom(y => y.OtthoniEgysegek));
@@ -65,9 +67,10 @@ namespace StrategyGame.Api.Mappers
             //.ForMember(x => x.Ar, opt => opt.MapFrom(y => (Activator.CreateInstance(Type.GetType(y.Tipus)) as Egyseg).Ar));
 
             CreateMap<RanglistaDTO, RanglistaViewModel>().ReverseMap();
+
             CreateMap<TamadasInditasViewModel, BejovoTamadasDTO>()
                 .ForMember(x => x.CelpontNev, opt => opt.MapFrom(y => y.Orszag))
-                .ForMember(x => x.TamadoEgysegek, opt => opt.MapFrom(y => y.TamadoSereg)).ReverseMap();
+                .ForMember(x => x.TamadoEgysegek, opt => opt.MapFrom(y => y.TamadoEgysegek));
                 
 
         }

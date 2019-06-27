@@ -118,6 +118,12 @@ namespace StrategyGame.Bll.Services
                 });
         }
 
+        /// <summary>
+        /// AZONOS ORSZÁGRA IRÁNYULÓ TÁMADÁSOK ÖSSZEVONÁSA/LETILTÁSA !!!
+        /// </summary>
+        /// <param name="bejovoTamadasDTO"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public async Task MakeTamadas(BejovoTamadasDTO bejovoTamadasDTO, Guid userId)
         {
             var tamadoorszag = await _commonService.GetCurrentOrszag(userId);
@@ -151,6 +157,7 @@ namespace StrategyGame.Bll.Services
                 }
             });
             tamadoorszag.OtthoniCsapats.Add(tamadocsapat);
+            await _context.SaveChangesAsync();
         }
     }
 }

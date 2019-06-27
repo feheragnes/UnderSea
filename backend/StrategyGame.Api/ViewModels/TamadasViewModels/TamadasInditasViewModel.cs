@@ -9,6 +9,6 @@ namespace StrategyGame.Api.ViewModels.TamadasViewModels
     public class TamadasInditasViewModel
     {
         public string Orszag { get; set; }
-        public List<TamadoSeregInfoViewModel> TamadoSereg { get; set; }
+        public List<TamadoSeregInfoViewModel> TamadoEgysegek { get; set; }
     }
 }
