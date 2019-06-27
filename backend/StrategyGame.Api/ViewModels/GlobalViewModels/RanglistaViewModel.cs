@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace StrategyGame.Bll.DTOs
+namespace StrategyGame.Api.ViewModels.GlobalViewModels
 {
-    public class RanglistaDTO
+    public class RanglistaViewModel
     {
         public string Orszag { get; set; }
         public long Pont { get; set; }

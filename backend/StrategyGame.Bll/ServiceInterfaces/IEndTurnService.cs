@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StrategyGame.Bll.DTOInterfaces
+namespace StrategyGame.Bll.ServiceInterfaces
 {
-    interface IEndTurnService
+    public interface IEndTurnService
     {
         Task DoFejleszteses();
         Task SetOrszagScores();
+        Task NextTurn();
     }
 }

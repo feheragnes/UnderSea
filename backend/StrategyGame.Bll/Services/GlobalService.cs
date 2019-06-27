@@ -25,6 +25,7 @@ namespace StrategyGame.Bll.Services
             _commonService = commonService;
             _mapper = mapper;
         }
+
         public async Task<long> GetUserScore(Guid userId)
         {
             var orszag = await _commonService.GetCurrentOrszag(userId);
@@ -33,9 +34,11 @@ namespace StrategyGame.Bll.Services
         public async Task<IList<RanglistaDTO>> GetRanglista()
         {
             IList<RanglistaDTO> ranglista = new List<RanglistaDTO>();
+            var i = 1;
             await  _context.Orszags.OrderByDescending(x => x.Pont).ForEachAsync(x =>
             {
-               ranglista.Add(new RanglistaDTO { Orszag = x.Nev, Pont = x.Pont });
+               ranglista.Add(new RanglistaDTO { Orszag = x.Nev, Pont = x.Pont, Helyezes = i });
+                i++;
             });
             return ranglista;
         }

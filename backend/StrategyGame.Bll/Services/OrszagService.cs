@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using StrategyGame.Bll.DTOInterfaces;
+using StrategyGame.Bll.ServiceInterfaces;
 using StrategyGame.Bll.DTOs;
 using StrategyGame.Bll.DTOs.Egysegek;
 using StrategyGame.Bll.DTOs.Epuletek;

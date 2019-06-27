@@ -1,4 +1,4 @@
-﻿using StrategyGame.Bll.DTOInterfaces;
+﻿using StrategyGame.Bll.ServiceInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;

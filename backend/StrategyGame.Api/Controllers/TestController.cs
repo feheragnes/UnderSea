@@ -6,7 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using StrategyGame.Bll.DTOInterfaces;
+using StrategyGame.Bll.ServiceInterfaces;
 using StrategyGame.Bll.DTOs.Epuletek;
 using StrategyGame.Bll.DTOs.Fejlesztesek;
 using StrategyGame.Bll.Mappers;

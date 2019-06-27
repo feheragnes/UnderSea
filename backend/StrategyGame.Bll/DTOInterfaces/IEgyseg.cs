@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace StrategyGame.Bll.DTOInterfaces
+namespace StrategyGame.Bll.ServiceInterfaces
 {
     interface IEgyseg
     {

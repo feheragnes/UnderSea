@@ -27,6 +27,7 @@ using StrategyGame.Bll.Mappers;
 using StrategyGame.Bll.Services;
 using StrategyGame.Bll.ServiceInterfaces;
 using StrategyGame.Api.Mappers;
+using StrategyGame.Bll.ServiceInterfaces;
 
 namespace StrategyGame.Api
 {
@@ -122,6 +123,7 @@ namespace StrategyGame.Api
             services.AddScoped<IJWTService, JWTService>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IRegistrationService, RegistrationService>();
+            services.AddScoped<IEndTurnService,EndTurnService>();
             //services.AddAutoMapper(typeof(Startup));
             services.AddHangfireServer();
             services.AddSwaggerGen(c =>

@@ -4,6 +4,7 @@ using StrategyGame.Api.ViewModels.AAAViewModels;
 using StrategyGame.Api.ViewModels.EgysegViewModels;
 using StrategyGame.Api.ViewModels.EpuletViewModels;
 using StrategyGame.Api.ViewModels.FejlesztesViewModels;
+using StrategyGame.Api.ViewModels.GlobalViewModels;
 using StrategyGame.Api.ViewModels.OrszagViewModels;
 using StrategyGame.Api.ViewModels.TamadasViewModels;
 using StrategyGame.Bll.DTOs;
@@ -61,7 +62,9 @@ namespace StrategyGame.Api.Mappers
 
             CreateMap<EgysegVetelViewModel, SeregInfoDTO>()
                 .ForMember(x => x.Tipus, opt => opt.MapFrom(y => Enum.Parse<EgysegTipus>(y.Tipus)));
-                //.ForMember(x => x.Ar, opt => opt.MapFrom(y => (Activator.CreateInstance(Type.GetType(y.Tipus)) as Egyseg).Ar));
+            //.ForMember(x => x.Ar, opt => opt.MapFrom(y => (Activator.CreateInstance(Type.GetType(y.Tipus)) as Egyseg).Ar));
+
+            CreateMap<RanglistaDTO, RanglistaViewModel>().ReverseMap();
                 
 
         }
