@@ -51,7 +51,7 @@ namespace StrategyGame.Api.Controllers
             try
             {
                 await _egysegService.AddEgysegAsync(_mapper.Map<List<SeregInfoDTO>>(egysegs), UserId);
-                return Ok("Egysegek megveve!");
+                return Ok();
             }catch(Exception e)
             {
                 return BadRequest(e.Message);

@@ -88,7 +88,7 @@ namespace StrategyGame.Dal.Context
             }
             catch (Exception e)
             {
-                throw;
+                throw e;
             }
         }
     }

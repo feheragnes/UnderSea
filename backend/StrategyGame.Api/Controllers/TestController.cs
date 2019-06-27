@@ -11,6 +11,7 @@ using StrategyGame.Bll.DTOs.Epuletek;
 using StrategyGame.Bll.DTOs.Fejlesztesek;
 using StrategyGame.Bll.Mappers;
 using StrategyGame.Dal.Context;
+using StrategyGame.Model.Entities.Models;
 using StrategyGame.Model.Entities.Models.Epuletek;
 using StrategyGame.Model.Entities.Models.Fejlesztesek;
 
@@ -126,6 +127,15 @@ namespace StrategyGame.Api.Controllers
                 return Ok("Termelo vagyok");
             }
             return  Ok(_mapper.Map<IList<EpuletDTO>>(asd));
+        }
+        [HttpPost]
+        public async Task PostSzonar()
+        {
+            var orszag = new Orszag();
+            orszag.Fejleszteses.Add(new SzonarAgyu());
+            _context.Orszags.Add(orszag);
+            _context.SaveChanges();
+            
         }
 
         private bool FejlesztesExists(Guid id)
