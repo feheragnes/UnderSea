@@ -34,12 +34,24 @@ namespace StrategyGame.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAktualisKor()
         {
-            return Json(new {Kor = await _globalService.GetKor() });
+            try
+            {
+                return Json(new { Kor = await _globalService.GetKor() });
+            }catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
         [HttpGet]
         public async Task<ActionResult<List<RanglistaViewModel>>> GetRanglista()
         {
-            return _mapper.Map<List<RanglistaViewModel>>(await _globalService.GetRanglista());
+            try
+            {
+                return _mapper.Map<List<RanglistaViewModel>>(await _globalService.GetRanglista());
+            }catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpPost]

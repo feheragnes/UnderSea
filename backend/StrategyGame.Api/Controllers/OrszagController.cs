@@ -29,7 +29,13 @@ namespace StrategyGame.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<OrszagInfoViewModel>> GetOrszagInfos()
         {
-            return _mapper.Map<OrszagInfoViewModel>(await _orszagService.GetUserOrszagInfos(UserId));
+            try
+            {
+                return _mapper.Map<OrszagInfoViewModel>(await _orszagService.GetUserOrszagInfos(UserId));
+            }catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
     }

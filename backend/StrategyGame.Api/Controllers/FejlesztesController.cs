@@ -46,7 +46,13 @@ namespace StrategyGame.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<List<FejlesztesInfoViewModel>>> GetFejlesztesInfos()
         {
-            return _mapper.Map<List<FejlesztesInfoViewModel>>(await _fejlesztesService.GetFejlesztesInfoDTOs(UserId));
+            try
+            {
+                return _mapper.Map<List<FejlesztesInfoViewModel>>(await _fejlesztesService.GetFejlesztesInfoDTOs(UserId));
+            }catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpGet]

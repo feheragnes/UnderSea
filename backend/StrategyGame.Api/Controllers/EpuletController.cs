@@ -36,15 +36,27 @@ namespace StrategyGame.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<List<EpuletInfoViewModel>>> GetUserEpulets()
         {
-            Orszag currentOrszag = await _commonService.GetCurrentOrszag(UserId);
-           return _mapper.Map<List<EpuletInfoViewModel>> (await _epuletService.GetFelepultEpuletsFromOneUserAsync(currentOrszag));
+            try
+            {
+                Orszag currentOrszag = await _commonService.GetCurrentOrszag(UserId);
+                return _mapper.Map<List<EpuletInfoViewModel>>(await _epuletService.GetFelepultEpuletsFromOneUserAsync(currentOrszag));
+            }catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpPost]
         public async Task<IActionResult> BuyEpulets([FromBody]  List<EpuletInfoViewModel> epulets)
         {
-            await _epuletService.AddEpuletAsync(_mapper.Map<List<EpuletInfoDTO>> (epulets), UserId);
-            return Ok();
+            try
+            {
+                await _epuletService.AddEpuletAsync(_mapper.Map<List<EpuletInfoDTO>>(epulets), UserId);
+                return Ok();
+            }catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
 

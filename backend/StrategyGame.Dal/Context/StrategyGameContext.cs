@@ -76,6 +76,10 @@ namespace StrategyGame.Dal.Context
                 new EgysegInfo { Id = new Guid("00000000-0000-0000-0000-000000000002"), Tipus = EgysegTipus.CsataCsiko, Ar = 50, Ellatas = 1, Zsold = 1, Tamadas = 2, Vedekezes = 6 },
                 new EgysegInfo { Id = new Guid("00000000-0000-0000-0000-000000000003"), Tipus = EgysegTipus.LezerCapa, Ar = 100, Ellatas = 2, Zsold = 3, Tamadas = 5, Vedekezes = 5 }
                 );
+            builder.Entity<Jatek>().HasData
+                (
+                new Jatek { Id = new Guid("07610b41-4b35-4047-88b7-2f4df4eee3b1"), Korok = 0 }
+                );
 
         }
 

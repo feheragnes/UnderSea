@@ -80,6 +80,8 @@ namespace StrategyGame.Bll.Services
             await DoEpulets();
             await DoHarc();
             await SetOrszagScores();
+            (await _context.Jateks.FirstOrDefaultAsync()).Korok++;
+            await _context.SaveChangesAsync();
         }
         public async Task SetOrszagScores()
         {

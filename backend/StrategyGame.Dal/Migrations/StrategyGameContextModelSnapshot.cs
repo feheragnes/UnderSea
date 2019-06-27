@@ -358,6 +358,13 @@ namespace StrategyGame.Dal.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Jateks");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("07610b41-4b35-4047-88b7-2f4df4eee3b1"),
+                            Korok = 0L
+                        });
                 });
 
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Novelok.AbstractNovelo", b =>

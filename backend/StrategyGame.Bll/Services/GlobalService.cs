@@ -45,8 +45,7 @@ namespace StrategyGame.Bll.Services
 
         public async Task<long> GetKor()
         {
-            var jatek = await _context.Jateks.FirstOrDefaultAsync();
-            return jatek.Korok;
+            return (await _context.Jateks.FirstOrDefaultAsync()).Korok;
         }
     }
 }
