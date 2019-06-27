@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { EgysegService } from '../../services/egyseg.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-army',
@@ -16,7 +17,10 @@ export class ArmyComponent implements OnInit {
   public fokaInfo;
   @Output() stateChanged = new EventEmitter();
 
-  constructor(private egysegService: EgysegService) {}
+  constructor(
+    private egysegService: EgysegService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit() {
     this.getEgysegInfo();
@@ -86,9 +90,11 @@ export class ArmyComponent implements OnInit {
         console.log(data);
       },
       error => {
+        this.toastr.error(error, 'Nem tudtál sereget venni!');
         console.log(error);
       },
       () => {
+        this.toastr.success('Sikeres vásárlás!');
         this.stateChanged.emit(null);
         console.log('bought army');
       }

@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { EpuletService } from '../../services/epulet.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-buildings',
@@ -14,7 +15,10 @@ export class BuildingsComponent implements OnInit {
   public zatonyvarInfo;
   public aramlasiranyitoInfo;
 
-  constructor(private epuletService: EpuletService) {}
+  constructor(
+    private epuletService: EpuletService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit() {
     this.getEpuletInfo();
@@ -60,9 +64,11 @@ export class BuildingsComponent implements OnInit {
       },
       error => {
         console.log(error);
+        this.toastr.error(error, 'Nem sikerült építeni :(');
       },
       () => {
         this.stateChanged.emit(null);
+        this.toastr.success('5 kör múlva elkészül', 'Már épül is!');
         console.log('done building');
       }
     );

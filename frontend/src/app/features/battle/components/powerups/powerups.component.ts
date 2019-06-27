@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FejlesztesService } from '../../services/fejlesztes.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-powerups',
@@ -14,10 +15,14 @@ export class PowerupsComponent implements OnInit {
   public alkimiaInfo;
   public korallInfo;
   public szonarAgyuInfo;
-  public vizalattiHarmuveszetInfo;
+  public vizalattiHarcmuveszetInfo;
+  public isDisabled;
   @Output() stateChanged = new EventEmitter();
 
-  constructor(private fejlesztesService: FejlesztesService) {}
+  constructor(
+    private fejlesztesService: FejlesztesService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit() {
     this.getFejlesztesInfos();
@@ -48,13 +53,21 @@ export class PowerupsComponent implements OnInit {
           if (element.tipus === 'SzonarAgyu') {
             this.szonarAgyuInfo = element;
           }
-          if (element.tipus === 'VizalattiHarmuveszet') {
-            this.vizalattiHarmuveszetInfo = element;
+          if (element.tipus === 'VizalattiHarcmuveszet') {
+            this.vizalattiHarcmuveszetInfo = element;
           }
         });
       },
       err => console.error(err),
       () => {
+        this.isDisabled =
+          (this.alkimiaInfo && !this.alkimiaInfo.kifejlesztve) ||
+          (this.vizalattiHarcmuveszetInfo &&
+            !this.vizalattiHarcmuveszetInfo.kifejlesztve) ||
+          (this.szonarAgyuInfo && !this.szonarAgyuInfo.kifejlesztve) ||
+          (this.korallInfo && !this.korallInfo.kifejlesztve) ||
+          (this.kombajnInfo && !this.kombajnInfo.kifejlesztve) ||
+          (this.traktorInfo && !this.traktorInfo.kifejlesztve);
         console.log('done loading fejlesztesInfo');
       }
     );
@@ -76,7 +89,7 @@ export class PowerupsComponent implements OnInit {
         type = 'SzonarAgyu';
         break;
       case 'card5':
-        type = 'VizalattiHarmuveszet';
+        type = 'VizalattiHarcmuveszet';
         break;
       case 'card6':
         type = 'Alkimia';
@@ -87,10 +100,11 @@ export class PowerupsComponent implements OnInit {
         console.log(data);
       },
       error => {
+        this.toastr.error(error, 'Nem sikerült fejleszteni :(');
         console.log(error);
       },
       () => {
-        console.log('done building');
+        this.toastr.success('15 kör múlva elkészül', 'Fejlesztés folyamatban!');
         this.getFejlesztesInfos();
       }
     );

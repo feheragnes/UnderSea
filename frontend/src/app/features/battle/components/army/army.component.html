@@ -124,7 +124,12 @@
     </div>
 
     <hr width="100%" />
-    <button mat-raised-button class="confirmButton" (click)="buyEgyseg()">
+    <button
+      mat-raised-button
+      class="confirmButton"
+      (click)="buyEgyseg()"
+      [disabled]="csikoNumber === 0 && capaNumber === 0 && fokaNumber === 0"
+    >
       Megveszem
     </button>
   </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TamadasService } from '../../services/tamadas.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-attack',
@@ -19,7 +20,10 @@ export class AttackComponent implements OnInit {
   public csikoInfo;
   @Output() stateChanged = new EventEmitter();
 
-  constructor(private tamadasService: TamadasService) {}
+  constructor(
+    private tamadasService: TamadasService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit() {
     this.getTamadasInfos();

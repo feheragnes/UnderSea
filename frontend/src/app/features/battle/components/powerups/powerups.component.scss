@@ -44,6 +44,7 @@ mat-card-content {
   display: flex;
   flex-direction: column;
   box-shadow: 0px 0px 0px 0px transparent;
+  cursor: pointer;
 }
 
 h4 {
@@ -73,6 +74,10 @@ button {
   margin-top: 20px;
 }
 
+.button {
+  align-self: center;
+}
+
 .text {
   align-self: center;
 }
@@ -84,14 +89,22 @@ button {
 .state {
   color: white;
   justify-self: flex-start;
-  align-self: flex-start;
+  align-self: flex-end;
   font-size: 12px;
 }
 
 .powerup {
   justify-self: flex-end;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .bought {
   background-color: #9ffff0;
+}
+
+.done {
+  pointer-events: none;
 }

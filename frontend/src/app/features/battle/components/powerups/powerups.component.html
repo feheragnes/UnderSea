@@ -17,19 +17,23 @@
         (click)="setActive('card1')"
         class="smallcard"
         [class.active]="activeCard == 'card1'"
+        [class.done]="
+          (traktorInfo && traktorInfo.kifejlesztve) ||
+          (traktorInfo && !traktorInfo.kifejlesztve)
+        "
       >
         <mat-card-content>
           <div class="state" *ngIf="traktorInfo && traktorInfo.kifejlesztve">
-            kész
+            <img src="assets\images\check.svg" />
           </div>
           <div class="state" *ngIf="traktorInfo && !traktorInfo.kifejlesztve">
             még {{ 15 - traktorInfo.aktualisKor }} kör
           </div>
           <div class="powerup">
-            <img src="assets\images\undersea_game-09.png" />
+            <div><img src="assets\images\undersea_game-09.png" /></div>
             <div class="text">
               <h4>Iszaptraktor</h4>
-              <h5>növeli a krumpli termesztést 10%-kal</h5>
+              <h5>növeli a korall termesztést 10%-kal</h5>
             </div>
           </div>
         </mat-card-content>
@@ -39,16 +43,20 @@
         (click)="setActive('card2')"
         class="smallcard"
         [class.active]="activeCard == 'card2'"
+        [class.done]="
+          (kombajnInfo && kombajnInfo.kifejlesztve) ||
+          (kombajnInfo && !kombajnInfo.kifejlesztve)
+        "
       >
         <mat-card-content>
           <div class="state" *ngIf="kombajnInfo && kombajnInfo.kifejlesztve">
-            kész
+            <img src="assets\images\check.svg" />
           </div>
           <div class="state" *ngIf="kombajnInfo && !kombajnInfo.kifejlesztve">
             még {{ 15 - kombajnInfo.aktualisKor }} kör
           </div>
           <div class="powerup">
-            <img src="assets\images\undersea_game-10.png" />
+            <div><img src="assets\images\undersea_game-10.png" /></div>
             <div class="text">
               <h4>Iszapkombájn</h4>
               <h5>növeli a korall termesztést 15%-kal</h5>
@@ -61,16 +69,20 @@
         (click)="setActive('card3')"
         class="smallcard"
         [class.active]="activeCard == 'card3'"
+        [class.done]="
+          (korallInfo && korallInfo.kifejlesztve) ||
+          (korallInfo && !korallInfo.kifejlesztve)
+        "
       >
         <mat-card-content>
           <div class="state" *ngIf="korallInfo && korallInfo.kifejlesztve">
-            kész
+            <img src="assets\images\check.svg" />
           </div>
           <div class="state" *ngIf="korallInfo && !korallInfo.kifejlesztve">
             még {{ 15 - korallInfo.aktualisKor }} kör
           </div>
           <div class="powerup">
-            <img src="assets\images\korallfal.svg" />
+            <div><img src="assets\images\korallfal.svg" /></div>
             <div class="text">
               <h4>Korallfal</h4>
               <h5>növeli a védelmi pontokat 20%-kal</h5>
@@ -83,13 +95,17 @@
         (click)="setActive('card4')"
         class="smallcard"
         [class.active]="activeCard == 'card4'"
+        [class.done]="
+          (szonarAgyuInfo && szonarAgyuInfo.kifejlesztve) ||
+          (szonarAgyuInfo && !szonarAgyuInfo.kifejlesztve)
+        "
       >
         <mat-card-content>
           <div
             class="state"
             *ngIf="szonarAgyuInfo && szonarAgyuInfo.kifejlesztve"
           >
-            kész
+            <img src="assets\images\check.svg" />
           </div>
           <div
             class="state"
@@ -98,7 +114,8 @@
             még {{ 15 - szonarAgyuInfo.aktualisKor }} kör
           </div>
           <div class="powerup">
-            <img src="assets\images\undersea_game-03.png" />
+            <div><img src="assets\images\undersea_game-03.png" /></div>
+
             <div class="text">
               <h4>Szonárágyú</h4>
               <h5>növeli a támadópontokat 20%-kal</h5>
@@ -111,26 +128,33 @@
         (click)="setActive('card5')"
         class="smallcard"
         [class.active]="activeCard == 'card5'"
+        [class.done]="
+          (vizalattiHarcmuveszetInfo &&
+            vizalattiHarcmuveszetInfo.kifejlesztve) ||
+          (vizalattiHarcmuveszetInfo && !vizalattiHarcmuveszetInfo.kifejlesztve)
+        "
       >
         <mat-card-content>
           <div
             class="state"
             *ngIf="
-              vizalattiHarmuveszetInfo && vizalattiHarmuveszetInfo.kifejlesztve
+              vizalattiHarcmuveszetInfo &&
+              vizalattiHarcmuveszetInfo.kifejlesztve
             "
           >
-            kész
+            <img src="assets\images\check.svg" />
           </div>
           <div
             class="state"
             *ngIf="
-              vizalattiHarmuveszetInfo && !vizalattiHarmuveszetInfo.kifejlesztve
+              vizalattiHarcmuveszetInfo &&
+              !vizalattiHarcmuveszetInfo.kifejlesztve
             "
           >
-            még {{ 15 - vizalattiHarmuveszetInfo.aktualisKor }} kör
+            még {{ 15 - vizalattiHarcmuveszetInfo.aktualisKor }} kör
           </div>
           <div class="powerup">
-            <img src="assets\images\vizalatti harcmuveszetek.svg" />
+            <div><img src="assets\images\vizalatti harcmuveszetek.svg" /></div>
             <div class="text">
               <h4>Vízalatti harcművészetek</h4>
               <h5>növeli a védelmi és támadóerőt 10%-kal</h5>
@@ -143,16 +167,20 @@
         (click)="setActive('card6')"
         class="smallcard"
         [class.active]="activeCard == 'card6'"
+        [class.done]="
+          (alkimiaInfo && alkimiaInfo.kifejlesztve) ||
+          (alkimiaInfo && !alkimiaInfo.kifejlesztve)
+        "
       >
         <mat-card-content>
           <div class="state" *ngIf="alkimiaInfo && alkimiaInfo.kifejlesztve">
-            kész
+            <img src="assets\images\check.svg" />
           </div>
           <div class="state" *ngIf="alkimiaInfo && !alkimiaInfo.kifejlesztve">
             még {{ 15 - alkimiaInfo.aktualisKor }} kör
           </div>
           <div class="powerup">
-            <img src="assets\images\alkimia.svg" />
+            <div><img src="assets\images\alkimia.svg" /></div>
             <div class="text">
               <h4>Alkímia</h4>
               <h5>növeli a beszedett adót 30%-kal</h5>
@@ -162,6 +190,18 @@
       </mat-card>
     </div>
     <hr width="100%" />
-    <button mat-raised-button (click)="buyFejlesztes()">Megépítem</button>
+    <div
+      class="button"
+      matTooltip="Jelenleg készül fejlesztésed"
+      [matTooltipDisabled]="!isDisabled"
+    >
+      <button
+        mat-raised-button
+        (click)="buyFejlesztes()"
+        [disabled]="isDisabled"
+      >
+        Megépítem
+      </button>
+    </div>
   </div>
 </mat-card>
