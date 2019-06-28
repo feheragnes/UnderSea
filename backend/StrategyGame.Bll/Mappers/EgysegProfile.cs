@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using StrategyGame.Bll.DTOs;
 using StrategyGame.Bll.DTOs.Egysegek;
 using StrategyGame.Model.Entities.Models.Egysegek;
 using StrategyGame.Model.Enums;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace StrategyGame.Bll.Mappers
@@ -45,6 +47,10 @@ namespace StrategyGame.Bll.Mappers
                 .IncludeBase<Egyseg, EgysegInfoDTO>();
 
             CreateMap<EgysegInfo, EgysegInfoDTO>();
+
+            CreateMap<List<Egyseg>, SeregInfoDTO>()
+                .ForMember(x => x.Tipus, opt => opt.MapFrom(y => Enum.Parse<EgysegTipus>(y.FirstOrDefault().Discriminator)))
+                .ForMember(x => x.Mennyiseg, opt => opt.MapFrom(y => y.Count));
 
 
         }

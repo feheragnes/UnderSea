@@ -31,6 +31,28 @@ namespace StrategyGame.Bll.Services
             _commonService = commonService;
             _mapper = mapper;
         }
+        public List<SeregInfoDTO> GetSeregFromEgysegs(List<Egyseg> egysegs)
+        {
+            var seregList = new List<SeregInfoDTO>();
+            egysegs.GroupBy(x => x.Discriminator).ToList()?.ForEach(x =>
+              {
+                  seregList.Add(new SeregInfoDTO { Tipus = Enum.Parse<EgysegTipus>(x.Key), Mennyiseg = x.Count() });
+              });
+            return seregList;
+
+        }
+        public async Task<List<HarcDTO>> GetHarcStatus(Guid userId)
+        {
+            var orszag = await _commonService.GetCurrentOrszag(userId);
+            var harcok = new List<HarcDTO>();
+
+            orszag.OtthoniCsapats.Where(x => x.Kimenetel != HarcEredmenyTipus.Otthon).ToList()?.ForEach( x =>
+            {
+                harcok.Add(new HarcDTO { VedezoOrszag = new OrszagDTO { Nev = x.Celpont.Nev}, HarcEredmeny = x.Kimenetel, TamadoCsapat = GetSeregFromEgysegs(x.Egysegs)});
+            });
+            return harcok; 
+
+        }
         public async Task SetHarcEredmeny(CsapatDTO csapatDto)
         {
             csapatDto.Kimenetel = csapatDto.TamadoEro > csapatDto.VedekezoEro ? HarcEredmenyTipus.Tulajdonos : HarcEredmenyTipus.Celpont;

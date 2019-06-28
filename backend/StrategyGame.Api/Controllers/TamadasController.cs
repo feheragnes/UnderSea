@@ -73,9 +73,15 @@ namespace StrategyGame.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetHarcStatusz()
+        public async Task<ActionResult<List<HarcViewModel>>> GetHarcStatusz()
         {
-            return Ok("Not implemented");
+            try
+            {
+                return _mapper.Map<List<HarcViewModel>>(await _tamadasService.GetHarcStatus(UserId));
+            }catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
     }

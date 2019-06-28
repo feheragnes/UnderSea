@@ -39,7 +39,6 @@ namespace StrategyGame.Api.Mappers
                 .ReverseMap();
             CreateMap<HarcDTO, HarcViewModel>()
                 .ForMember(x => x.TamadoCsapat, opt => opt.MapFrom(y => y.TamadoCsapat))
-                .ForMember(x => x.VedekezoCsapat, opt => opt.MapFrom(y => y.VedekezoCsapat))
                 .ForMember(x => x.HarcEredmeny, opt => opt.MapFrom(y => Enum.GetName(typeof(HarcEredmenyTipus), y.HarcEredmeny)));
 
 
@@ -71,6 +70,11 @@ namespace StrategyGame.Api.Mappers
             CreateMap<TamadasInditasViewModel, BejovoTamadasDTO>()
                 .ForMember(x => x.CelpontNev, opt => opt.MapFrom(y => y.Orszag))
                 .ForMember(x => x.TamadoEgysegek, opt => opt.MapFrom(y => y.TamadoEgysegek));
+
+            CreateMap<HarcDTO, HarcViewModel>()
+                .ForMember(x => x.HarcEredmeny, opt => opt.MapFrom(y => Enum.GetName(typeof(HarcEredmenyTipus), y.HarcEredmeny)))
+                .ForMember(x => x.TamadoCsapat, opt => opt.MapFrom(y => y.TamadoCsapat))
+                .ForMember(x => x.VedekezoOrszag, opt => opt.MapFrom(y => y.VedezoOrszag.Nev));
                 
 
         }

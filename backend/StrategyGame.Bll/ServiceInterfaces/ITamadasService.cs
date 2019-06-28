@@ -9,5 +9,6 @@ namespace StrategyGame.Bll.ServiceInterfaces
     public interface ITamadasService
     {
         Task MakeTamadas(BejovoTamadasDTO bejovoTamadasDTO, Guid userId);
+        Task<List<HarcDTO>> GetHarcStatus(Guid userId);
     }
 }
