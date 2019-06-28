@@ -59,11 +59,43 @@ namespace StrategyGame.Bll.Services
         }
         public async Task DoZsold()
         {
-
+            await _context.Orszags.Include(x => x.OtthoniCsapats).ThenInclude(x => x.Egysegs).ForEachAsync(x =>
+                {
+                    var otthoniCsapat = x.OtthoniCsapats.SingleOrDefault(y => y.Kimenetel == HarcEredmenyTipus.Otthon);
+                    var osszKoltseg = otthoniCsapat.Egysegs.Sum(y => y.Zsold);
+                    if(osszKoltseg < x.Gyongy)
+                    {
+                        x.Gyongy -= osszKoltseg;
+                    }
+                    else
+                    {
+                        while(x.Gyongy < osszKoltseg)
+                        {
+                            osszKoltseg -= otthoniCsapat.Egysegs.FirstOrDefault()?.Zsold ?? 0 ;
+                            otthoniCsapat.Egysegs.Remove(otthoniCsapat.Egysegs.FirstOrDefault());
+                        }
+                    }
+                });
         }
         public async Task DoEtetes()
         {
-
+            await _context.Orszags.Include(x => x.OtthoniCsapats).ThenInclude(x => x.Egysegs).ForEachAsync(x =>
+            {
+                var otthoniCsapat = x.OtthoniCsapats.SingleOrDefault(y => y.Kimenetel == HarcEredmenyTipus.Otthon);
+                var osszKoltseg = otthoniCsapat.Egysegs.Sum(y => y.Ellatas);
+                if (osszKoltseg < x.Korall)
+                {
+                    x.Korall -= osszKoltseg;
+                }
+                else
+                {
+                    while (x.Korall < osszKoltseg)
+                    {
+                        osszKoltseg -= otthoniCsapat.Egysegs.FirstOrDefault()?.Ellatas ?? 0;
+                        otthoniCsapat.Egysegs.Remove(otthoniCsapat.Egysegs.FirstOrDefault());
+                    }
+                }
+            });
         }
         public async Task DoHarc()
         {

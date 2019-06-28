@@ -25,27 +25,6 @@ namespace StrategyGame.Bll.Services
         private readonly ICommonService _commonService;
 
 
-        /// <summary>
-        /// 
-        /// </summary>
-        //class EgysegAr
-        //{
-        //    public EgysegTipus Tipus { get; set; }
-
-        //    public long Ar { get; set; }
-        //}
-
-        //bool checkArak()
-        //{
-        //     + ContextBoundObject.EgysegAr(g tipus> == asd).Ar
-        //}
-        ///// <summary>
-        /// 
-        /// </summary>
-
-
-
-
         public EgysegService(StrategyGameContext context, IMapper mapper, ICommonService commonService)
         {
             _context = context;
