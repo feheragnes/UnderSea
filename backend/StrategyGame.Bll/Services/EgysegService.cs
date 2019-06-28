@@ -34,7 +34,7 @@ namespace StrategyGame.Bll.Services
         public async Task AddEgysegAsync(List<SeregInfoDTO> egysegek, Guid userId)
         {
             Orszag currentOrszag = await _commonService.GetCurrentOrszag(userId);
-            var otthoniEgysegek = currentOrszag.OtthoniCsapats.FirstOrDefault(T => T.Celpont == null);
+            var otthoniEgysegek = currentOrszag.OtthoniCsapats.FirstOrDefault(x=>x.Kimenetel == HarcEredmenyTipus.Otthon);
 
             long osszKoltseg = 0;
 
@@ -47,9 +47,9 @@ namespace StrategyGame.Bll.Services
                 throw new ArgumentException("You dont have enough Szallas");
             }
 
-            egysegek.ForEach(async x =>
+            egysegek.ForEach(x =>
             {
-                osszKoltseg += (await _context.EgysegInfos.SingleOrDefaultAsync(y=> y.Tipus == x.Tipus)).Ar*x.Mennyiseg;
+                osszKoltseg += _context.EgysegInfos.SingleOrDefault(y=> y.Tipus == x.Tipus).Ar*x.Mennyiseg;
             });
 
             if (osszKoltseg > currentOrszag.Gyongy)
