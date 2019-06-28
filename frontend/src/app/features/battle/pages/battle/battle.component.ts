@@ -37,14 +37,13 @@ export class BattleComponent implements OnInit {
         this.orszagInfo = data;
         this.gyongy = data.gyongy;
         this.korall = data.korall;
-        this.csiko = data.seregInfo.filter(x => x.tipus == 'CsataCsiko');
-        this.foka = data.seregInfo.filter(x => x.tipus == 'RohamFoka');
-        this.capa = data.seregInfo.filter(x => x.tipus == 'LezerCapa');
-        console.log(this.orszagInfo);
+        this.csiko = data.seregInfo.filter(x => x.tipus === 'CsataCsiko');
+        this.foka = data.seregInfo.filter(x => x.tipus === 'RohamFoka');
+        this.capa = data.seregInfo.filter(x => x.tipus === 'LezerCapa');
         this.aramlasiranyito = data.epuletInfo.filter(
-          x => x.tipus == 'AramlasIranyito'
+          x => x.tipus === 'AramlasIranyito'
         );
-        this.zatonyvar = data.epuletInfo.filter(x => x.tipus == 'ZatonyVar');
+        this.zatonyvar = data.epuletInfo.filter(x => x.tipus === 'ZatonyVar');
       },
       err => console.error(err),
       () => {
@@ -66,7 +65,6 @@ export class BattleComponent implements OnInit {
 
   onActivate(elementRef) {
     elementRef.stateChanged.subscribe(event => {
-      console.log('siker');
       this.getOrszagInfo();
     });
   }
@@ -108,7 +106,7 @@ export class BattleComponent implements OnInit {
       },
       err => console.error(err),
       () => {
-        console.log('done loading turn');
+        console.log('done loading fejlesztesInfo');
       }
     );
   }

@@ -3,49 +3,49 @@
     <mat-toolbar>
       <div class="column1">
         <div class="data">
-          <span>{{ turn }}.kör </span>
-          <span>{{ orszagInfo.helyezes }}.hely</span>
+          <h4>{{ turn }}.kör</h4>
+          <h4>{{ orszagInfo.helyezes }}.hely</h4>
         </div>
       </div>
       <div class="column2">
         <div class="icons">
           <div class="icontext">
             <img class="icon" src="assets\images\icon_harcicapa.svg" />
-            <span>{{ capa[0] ? capa[0].mennyiseg : 0 }}</span>
+            <h4>{{ capa[0] ? capa[0].mennyiseg : 0 }}</h4>
           </div>
           <div class="icontext">
             <img class="icon" src="assets\images\icon_rohamfoka.svg" />
-            <span>{{ foka[0] ? foka[0].mennyiseg : 0 }}</span>
+            <h4>{{ foka[0] ? foka[0].mennyiseg : 0 }}</h4>
           </div>
           <div class="icontext">
             <img class="icon" src="assets\images\icon_csatacsiko.svg" />
-            <span>{{ csiko[0] ? csiko[0].mennyiseg : 0 }}</span>
+            <h4>{{ csiko[0] ? csiko[0].mennyiseg : 0 }}</h4>
           </div>
           <div class="icontext">
             <img class="icon" src="assets\images\icon_gyongy.svg" />
             <div class="doubletext">
-              <span>{{ gyongy }}</span>
+              <h4>{{ gyongy }}</h4>
               <h5>{{ orszagInfo.gyongyTermeles }}/kör</h5>
             </div>
           </div>
           <div class="icontext">
             <img class="icon" src="assets\images\icon_korallfal.svg" />
             <div class="doubletext">
-              <span>{{ korall }}</span>
+              <h4>{{ korall }}</h4>
               <h5>{{ orszagInfo.korallTermeles }}/kör</h5>
             </div>
           </div>
           <div class="icontext">
             <img class="icon" src="assets\images\icon_zatonyvar.svg" />
             <div class="doubletext">
-              <span>{{ zatonyvar[0].mennyiseg }}</span>
+              <h4>{{ zatonyvar[0].mennyiseg }}</h4>
               <h5>{{ orszagInfo.epuloZatonyvar }} épül</h5>
             </div>
           </div>
           <div class="icontext">
             <img class="icon" src="assets\images\icon_aramlasiranyito.svg" />
             <div class="doubletext">
-              <span>{{ aramlasiranyito[0].mennyiseg }}</span>
+              <h4>{{ aramlasiranyito[0].mennyiseg }}</h4>
               <h5>{{ orszagInfo.epuloAramlasIranyito }} épül</h5>
             </div>
           </div>

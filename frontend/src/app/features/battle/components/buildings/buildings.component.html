@@ -38,9 +38,18 @@
       </div>
       <hr width="100%" />
     </mat-card-content>
-
-    <button mat-raised-button [disabled]="!activeCard" (click)="buyBuilding()">
-      Megépítem
-    </button>
+    <div
+      class="button"
+      matTooltip="Nem választottál!"
+      [matTooltipDisabled]="activeCard"
+    >
+      <button
+        mat-raised-button
+        [disabled]="!activeCard"
+        (click)="buyBuilding()"
+      >
+        Megépítem
+      </button>
+    </div>
   </div>
 </mat-card>

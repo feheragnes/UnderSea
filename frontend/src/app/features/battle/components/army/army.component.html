@@ -124,13 +124,19 @@
     </div>
 
     <hr width="100%" />
-    <button
-      mat-raised-button
-      class="confirmButton"
-      (click)="buyEgyseg()"
-      [disabled]="csikoNumber === 0 && capaNumber === 0 && fokaNumber === 0"
+    <div
+      class="button"
+      matTooltip="Válaszd ki hogy mennyit szeretnél venni!"
+      [matTooltipDisabled]="csikoNumber > 0 || capaNumber > 0 || fokaNumber > 0"
     >
-      Megveszem
-    </button>
+      <button
+        mat-raised-button
+        class="confirmButton"
+        (click)="buyEgyseg()"
+        [disabled]="csikoNumber === 0 && capaNumber === 0 && fokaNumber === 0"
+      >
+        Megveszem
+      </button>
+    </div>
   </div>
 </mat-card>

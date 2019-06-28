@@ -13,10 +13,10 @@
     </h4>
     <div class="cards">
       <mat-card
-        id="card1"
-        (click)="setActive('card1')"
+        id="traktor"
+        (click)="setActive('traktor')"
         class="smallcard"
-        [class.active]="activeCard == 'card1'"
+        [class.active]="activeCard == 'traktor'"
         [class.done]="
           (traktorInfo && traktorInfo.kifejlesztve) ||
           (traktorInfo && !traktorInfo.kifejlesztve)
@@ -39,10 +39,10 @@
         </mat-card-content>
       </mat-card>
       <mat-card
-        id="card2"
-        (click)="setActive('card2')"
+        id="kombajn"
+        (click)="setActive('kombajn')"
         class="smallcard"
-        [class.active]="activeCard == 'card2'"
+        [class.active]="activeCard == 'kombajn'"
         [class.done]="
           (kombajnInfo && kombajnInfo.kifejlesztve) ||
           (kombajnInfo && !kombajnInfo.kifejlesztve)
@@ -65,10 +65,10 @@
         </mat-card-content>
       </mat-card>
       <mat-card
-        id="card3"
-        (click)="setActive('card3')"
+        id="korallfal"
+        (click)="setActive('korallfal')"
         class="smallcard"
-        [class.active]="activeCard == 'card3'"
+        [class.active]="activeCard == 'korallfal'"
         [class.done]="
           (korallInfo && korallInfo.kifejlesztve) ||
           (korallInfo && !korallInfo.kifejlesztve)
@@ -91,10 +91,10 @@
         </mat-card-content>
       </mat-card>
       <mat-card
-        id="card4"
-        (click)="setActive('card4')"
+        id="szonaragyu"
+        (click)="setActive('szonaragyu')"
         class="smallcard"
-        [class.active]="activeCard == 'card4'"
+        [class.active]="activeCard == 'szonaragyu'"
         [class.done]="
           (szonarAgyuInfo && szonarAgyuInfo.kifejlesztve) ||
           (szonarAgyuInfo && !szonarAgyuInfo.kifejlesztve)
@@ -124,10 +124,10 @@
         </mat-card-content>
       </mat-card>
       <mat-card
-        id="card5"
-        (click)="setActive('card5')"
+        id="vizalatti"
+        (click)="setActive('vizalatti')"
         class="smallcard"
-        [class.active]="activeCard == 'card5'"
+        [class.active]="activeCard == 'vizalatti'"
         [class.done]="
           (vizalattiHarcmuveszetInfo &&
             vizalattiHarcmuveszetInfo.kifejlesztve) ||
@@ -163,10 +163,10 @@
         </mat-card-content>
       </mat-card>
       <mat-card
-        id="card6"
-        (click)="setActive('card6')"
+        id="alkimia"
+        (click)="setActive('alkimia')"
         class="smallcard"
-        [class.active]="activeCard == 'card6'"
+        [class.active]="activeCard == 'alkimia'"
         [class.done]="
           (alkimiaInfo && alkimiaInfo.kifejlesztve) ||
           (alkimiaInfo && !alkimiaInfo.kifejlesztve)
@@ -192,15 +192,34 @@
     <hr width="100%" />
     <div
       class="button"
-      matTooltip="Jelenleg készül fejlesztésed"
-      [matTooltipDisabled]="!isDisabled"
+      matTooltip="Már van folyamatban fejlesztésed!"
+      [matTooltipDisabled]="
+        !(
+          (this.alkimiaInfo && !this.alkimiaInfo.kifejlesztve) ||
+          (this.vizalattiHarcmuveszetInfo &&
+            !this.vizalattiHarcmuveszetInfo.kifejlesztve) ||
+          (this.szonarAgyuInfo && !this.szonarAgyuInfo.kifejlesztve) ||
+          (this.korallInfo && !this.korallInfo.kifejlesztve) ||
+          (this.kombajnInfo && !this.kombajnInfo.kifejlesztve) ||
+          (this.traktorInfo && !this.traktorInfo.kifejlesztve)
+        )
+      "
     >
       <button
         mat-raised-button
         (click)="buyFejlesztes()"
-        [disabled]="isDisabled"
+        [disabled]="
+          !activeCard ||
+          ((this.alkimiaInfo && !this.alkimiaInfo.kifejlesztve) ||
+            (this.vizalattiHarcmuveszetInfo &&
+              !this.vizalattiHarcmuveszetInfo.kifejlesztve) ||
+            (this.szonarAgyuInfo && !this.szonarAgyuInfo.kifejlesztve) ||
+            (this.korallInfo && !this.korallInfo.kifejlesztve) ||
+            (this.kombajnInfo && !this.kombajnInfo.kifejlesztve) ||
+            (this.traktorInfo && !this.traktorInfo.kifejlesztve))
+        "
       >
-        Megépítem
+        Kifejlesztés
       </button>
     </div>
   </div>
