@@ -30,13 +30,6 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.registerForm = this.formBuilder.group({
-    //   email: ['', Validators.required, Validators.email],
-    //   password: ['', Validators.required],
-    //   confirmPassword: ['', Validators.required],
-    //   countryName: ['', Validators.required]
-    // });
-
     this.registerForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
@@ -48,7 +41,10 @@ export class RegisterComponent implements OnInit {
         Validators.required,
         Validators.minLength(6)
       ]),
-      countryName: new FormControl('', [Validators.required])
+      countryName: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(12)
+      ])
     });
   }
 
@@ -83,6 +79,9 @@ export class RegisterComponent implements OnInit {
       }
       if (this.registerForm.get('countryName').hasError('required')) {
         this.toastr.error('Hiányzó országnév!');
+      }
+      if (this.registerForm.get('countryName').hasError('maxlength')) {
+        this.toastr.error('Túl hosszú országnév! (max 12 karakter)');
       }
       return;
     }
