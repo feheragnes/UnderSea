@@ -36,7 +36,6 @@ export class PowerupsComponent implements OnInit {
     this.fejlesztesService.getFejlesztesInfo().subscribe(
       data => {
         this.fejlesztesInfo = data;
-        console.log(this.fejlesztesInfo);
         data.forEach(element => {
           if (element.tipus === 'IszapTraktor') {
             this.traktorInfo = element;
@@ -60,14 +59,6 @@ export class PowerupsComponent implements OnInit {
       },
       err => console.error(err),
       () => {
-        this.isDisabled =
-          (this.alkimiaInfo && !this.alkimiaInfo.kifejlesztve) ||
-          (this.vizalattiHarcmuveszetInfo &&
-            !this.vizalattiHarcmuveszetInfo.kifejlesztve) ||
-          (this.szonarAgyuInfo && !this.szonarAgyuInfo.kifejlesztve) ||
-          (this.korallInfo && !this.korallInfo.kifejlesztve) ||
-          (this.kombajnInfo && !this.kombajnInfo.kifejlesztve) ||
-          (this.traktorInfo && !this.traktorInfo.kifejlesztve);
         console.log('done loading fejlesztesInfo');
       }
     );
@@ -76,22 +67,22 @@ export class PowerupsComponent implements OnInit {
   buyFejlesztes() {
     let type;
     switch (this.activeCard) {
-      case 'card1':
+      case 'traktor':
         type = 'IszapTraktor';
         break;
-      case 'card2':
+      case 'kombajn':
         type = 'IszapKombajn';
         break;
-      case 'card3':
+      case 'korallfal':
         type = 'KorallFal';
         break;
-      case 'card4':
+      case 'szonaragyu':
         type = 'SzonarAgyu';
         break;
-      case 'card5':
+      case 'vizalatti':
         type = 'VizalattiHarcmuveszet';
         break;
-      case 'card6':
+      case 'alkimia':
         type = 'Alkimia';
         break;
     }

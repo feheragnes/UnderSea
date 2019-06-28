@@ -50,7 +50,6 @@ export class ArmyComponent implements OnInit {
     this.egysegService.getEgysegInfo().subscribe(
       data => {
         this.egysegInfo = data;
-        console.log(this.egysegInfo);
         data.forEach(element => {
           if (element.tipus === 'RohamFoka') {
             this.fokaInfo = element;
@@ -95,6 +94,9 @@ export class ArmyComponent implements OnInit {
       },
       () => {
         this.toastr.success('Sikeres vásárlás!');
+        this.capaNumber = 0;
+        this.csikoNumber = 0;
+        this.fokaNumber = 0;
         this.stateChanged.emit(null);
         console.log('bought army');
       }

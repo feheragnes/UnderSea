@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { EpuletService } from '../../services/epulet.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -32,7 +32,6 @@ export class BuildingsComponent implements OnInit {
     this.epuletService.getEpuletInfo().subscribe(
       data => {
         this.epuletInfo = data;
-        console.log(this.epuletInfo);
         data.forEach(element => {
           if (element.tipus === 'AramlasIranyito') {
             this.aramlasiranyitoInfo = element;
