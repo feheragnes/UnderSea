@@ -7,12 +7,17 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TamadasService {
-  private fejlesztesUrl = environment.apiUrl + '/tamadas';
+  private tamadasUrl = environment.apiUrl + '/tamadas';
 
   constructor(private http: HttpClient) {}
 
   getTamadasInfo(): Observable<any> {
-    const url = `${this.fejlesztesUrl}/gettamadasinfos`;
+    const url = `${this.tamadasUrl}/gettamadasinfos`;
     return this.http.get<any>(url);
+  }
+
+  tamadas(parameter) {
+    console.log(parameter);
+    return this.http.post<any>(`${this.tamadasUrl}/posttamadas`, parameter);
   }
 }

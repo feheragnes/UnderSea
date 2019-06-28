@@ -46,7 +46,6 @@ export class AttackComponent implements OnInit {
             this.csikoInfo = element;
           }
         });
-        console.log(this.tamadasInfo);
       },
       err => console.error(err),
       () => {
@@ -65,5 +64,48 @@ export class AttackComponent implements OnInit {
 
   selectCountry(country: string) {
     this.selectedCountry = country;
+  }
+
+  attack() {
+    const parameter = {
+      orszag: this.selectedCountry,
+      tamadoEgysegek: [
+        {
+          tipus: 'RohamFoka',
+          mennyiseg: this.fokaNumber
+        },
+        {
+          tipus: 'LezerCapa',
+          mennyiseg: this.capaNumber
+        },
+        {
+          tipus: 'CsataCsiko',
+          mennyiseg: this.csikoNumber
+        }
+      ]
+    };
+
+    this.tamadasService.tamadas(parameter).subscribe(
+      data => {
+        console.log(data);
+      },
+      error => {
+        this.toastr.error(error, 'Nem sikerült támadni :(');
+        console.log(error);
+        this.capaNumber = 0;
+        this.csikoNumber = 0;
+        this.fokaNumber = 0;
+        this.selectedCountry = null;
+      },
+      () => {
+        this.stateChanged.emit(null);
+        this.toastr.success('A kör végén lesz eredmény', 'Harc folyamatban!');
+        this.getTamadasInfos();
+        this.capaNumber = 0;
+        this.csikoNumber = 0;
+        this.fokaNumber = 0;
+        this.selectedCountry = null;
+      }
+    );
   }
 }

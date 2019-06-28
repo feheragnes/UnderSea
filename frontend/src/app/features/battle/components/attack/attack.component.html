@@ -48,6 +48,8 @@
               max="{{ capaInfo ? capaInfo.mennyiseg : 0 }}"
               value="0"
               [(ngModel)]="capaNumber"
+              matTooltip="Nincs lézercápád :("
+              [matTooltipDisabled]="capaInfo && capaInfo.mennyiseg > 0"
             />
           </div>
         </div>
@@ -67,6 +69,8 @@
               max="{{ this.fokaInfo ? fokaInfo.mennyiseg : 0 }}"
               value="0"
               [(ngModel)]="fokaNumber"
+              matTooltip="Nincs rohamfókád :("
+              [matTooltipDisabled]="fokaInfo && fokaInfo.mennyiseg > 0"
             />
           </div>
         </div>
@@ -86,20 +90,31 @@
               max="{{ csikoInfo ? csikoInfo.mennyiseg : 0 }}"
               value="0"
               [(ngModel)]="csikoNumber"
+              matTooltip="Nincs csatacsikód :("
+              [matTooltipDisabled]="csikoInfo && csikoInfo.mennyiseg > 0"
             />
           </div>
         </div>
       </div>
     </div>
     <hr width="100%" />
-    <button
-      mat-raised-button
-      [disabled]="
-        !selectedCountry ||
-        (fokaNumber === 0 && capaNumber === 0 && csikoNumber === 0)
+    <div
+      class="button"
+      matTooltip="Válassz ellenfelet és sereget!"
+      [matTooltipDisabled]="
+        selectCountry && (fokaNumber > 0 || capaNumber > 0 || csikoNumber > 0)
       "
     >
-      Megtámadom!
-    </button>
+      <button
+        mat-raised-button
+        [disabled]="
+          !selectedCountry ||
+          (fokaNumber === 0 && capaNumber === 0 && csikoNumber === 0)
+        "
+        (click)="attack()"
+      >
+        Megtámadom!
+      </button>
+    </div>
   </div>
 </mat-card>
