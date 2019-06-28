@@ -62,7 +62,6 @@ namespace StrategyGame.Bll.Services
                 csapatDto.Tulajdonos.Gyongy -= csapatDto.Tulajdonos.Gyongy / 2;
             }
         }
-
         public async Task<CsapatDTO> SetTamadas(CsapatDTO csapatDto)
         {
             await SetHarcEredmeny(csapatDto);
@@ -117,13 +116,6 @@ namespace StrategyGame.Bll.Services
                     });
                 });
         }
-
-        /// <summary>
-        /// AZONOS ORSZÁGRA IRÁNYULÓ TÁMADÁSOK ÖSSZEVONÁSA/LETILTÁSA !!!
-        /// </summary>
-        /// <param name="bejovoTamadasDTO"></param>
-        /// <param name="userId"></param>
-        /// <returns></returns>
         public async Task MakeTamadas(BejovoTamadasDTO bejovoTamadasDTO, Guid userId)
         {
             var tamadoorszag = await _commonService.GetCurrentOrszag(userId);
@@ -157,7 +149,7 @@ namespace StrategyGame.Bll.Services
                     }
                     if (x.Tipus == EgysegTipus.LezerCapa)
                     {
-                        if (x.Mennyiseg > csapat0.Egysegs.Where(y => Enum.Parse<EgysegTipus>(y.Discriminator) == x.Tipus).Count())
+                        if (egysegszam > csapat0.Egysegs.Where(y => Enum.Parse<EgysegTipus>(y.Discriminator) == x.Tipus).Count())
                         {
                             throw new ArgumentException($"Nincs elég {x.Tipus} egységed!");
                         }
@@ -167,7 +159,7 @@ namespace StrategyGame.Bll.Services
                     }
                     if (x.Tipus == EgysegTipus.RohamFoka)
                     {
-                        if (x.Mennyiseg > csapat0.Egysegs.Where(y => Enum.Parse<EgysegTipus>(y.Discriminator) == x.Tipus).Count())
+                        if (egysegszam > csapat0.Egysegs.Where(y => Enum.Parse<EgysegTipus>(y.Discriminator) == x.Tipus).Count())
                         {
                             throw new ArgumentException($"Nincs elég {x.Tipus} egységed!");
                         }
