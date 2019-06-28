@@ -1,51 +1,26 @@
-<mat-card class="maincard">
+<mat-card class="maincard" *ngIf="done">
   <mat-card-header>
     <p>Harcok</p>
   </mat-card-header>
   <div class="card">
-    <mat-list role="list">
-      <hr width="100%" />
-      <mat-list-item>
-        <div class="opponent">
-          <h4>Atlantisz</h4>
-        </div>
-        <div class="data">
-          <p>6 Lézercápa</p>
-          <p>5 Rohamfóka</p>
-          <p>32 Csatacsikó</p>
-        </div>
-        <div class="result">
-          <p>Nyert</p>
-        </div>
-      </mat-list-item>
-      <hr width="100%" />
-      <mat-list-item>
-        <div class="opponent">
-          <h4>Atlantisz</h4>
-        </div>
-        <div class="data">
-          <p>6 Lézercápa</p>
-          <p>5 Rohamfóka</p>
-          <p>32 Csatacsikó</p>
-        </div>
-        <div class="result">
-          <p>Nyert</p>
-        </div>
-      </mat-list-item>
-      <hr width="100%" />
-      <mat-list-item>
-        <div class="opponent">
-          <h4>Atlantisz</h4>
-        </div>
-        <div class="data">
-          <p>6 Lézercápa</p>
-          <p>5 Rohamfóka</p>
-          <p>32 Csatacsikó</p>
-        </div>
-        <div class="result">
-          <p>Nyert</p>
-        </div>
-      </mat-list-item>
+    <mat-list role="list" class="list">
+      <div *ngFor="let fight of fights">
+        <hr width="100%" />
+        <mat-list-item>
+          <div class="opponent">
+            <h4>{{ fight.vedekezoOrszag }}</h4>
+          </div>
+          <div class="data">
+            <p>{{ fight.army.capa }} Lézercápa</p>
+            <p>{{ fight.army.foka }} Rohamfóka</p>
+            <p>{{ fight.army.csiko }} Csatacsikó</p>
+          </div>
+          <div class="result">
+            <p class="resulttext">{{ fight.harcEredmeny }}</p>
+          </div>
+        </mat-list-item>
+      </div>
     </mat-list>
   </div>
 </mat-card>
+<mat-spinner *ngIf="!done"></mat-spinner>

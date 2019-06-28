@@ -1,13 +1,13 @@
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Router } from "@angular/router";
-import { BehaviorSubject, Observable } from "rxjs";
-import { User } from "../features/battle/models/user";
-import { environment } from "src/environments/environment";
-import { map } from "rxjs/operators";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { User } from '../features/battle/models/user';
+import { environment } from 'src/environments/environment';
+import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<User>;
@@ -15,7 +15,7 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(
-      JSON.parse(localStorage.getItem("currentUser"))
+      JSON.parse(localStorage.getItem('currentUser'))
     );
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -34,7 +34,7 @@ export class AuthenticationService {
           // login successful if there's a jwt token in the response
           if (user && user.token) {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem("currentUser", JSON.stringify(user));
+            localStorage.setItem('currentUser', JSON.stringify(user));
             this.currentUserSubject.next(user);
           }
 
@@ -59,7 +59,7 @@ export class AuthenticationService {
 
   logout() {
     // remove user from local storage to log user out
-    localStorage.removeItem("currentUser");
+    localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
   }
 }

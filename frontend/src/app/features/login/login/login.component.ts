@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  FormControl
-} from '@angular/forms';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
@@ -21,7 +16,6 @@ export class LoginComponent implements OnInit {
   returnUrl: string;
 
   constructor(
-    private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,

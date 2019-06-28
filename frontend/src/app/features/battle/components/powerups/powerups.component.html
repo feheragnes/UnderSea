@@ -1,4 +1,4 @@
-<mat-card class="maincard">
+<mat-card class="maincard" *ngIf="fejlesztesInfo">
   <mat-card-header>
     <p>Fejlesztések</p>
   </mat-card-header>
@@ -224,3 +224,4 @@
     </div>
   </div>
 </mat-card>
+<mat-spinner *ngIf="!fejlesztesInfo"></mat-spinner>

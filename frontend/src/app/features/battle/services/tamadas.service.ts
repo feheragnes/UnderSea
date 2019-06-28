@@ -20,4 +20,9 @@ export class TamadasService {
     console.log(parameter);
     return this.http.post<any>(`${this.tamadasUrl}/posttamadas`, parameter);
   }
+
+  getHarcStatusz(): Observable<any> {
+    const url = `${this.tamadasUrl}/getharcstatusz`;
+    return this.http.get<any>(url);
+  }
 }

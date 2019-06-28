@@ -30,6 +30,9 @@ export class AttackComponent implements OnInit {
   }
 
   getTamadasInfos() {
+    this.capaInfo = null;
+    this.csikoInfo = null;
+    this.fokaInfo = null;
     this.tamadasService.getTamadasInfo().subscribe(
       data => {
         this.tamadasInfo = data;
@@ -90,21 +93,22 @@ export class AttackComponent implements OnInit {
         console.log(data);
       },
       error => {
-        this.toastr.error(error, 'Nem sikerült támadni :(');
         console.log(error);
+        this.toastr.error(error, 'Nem sikerült támadni :(');
         this.capaNumber = 0;
         this.csikoNumber = 0;
         this.fokaNumber = 0;
         this.selectedCountry = null;
       },
       () => {
-        this.stateChanged.emit(null);
+        console.log('attacked');
         this.toastr.success('A kör végén lesz eredmény', 'Harc folyamatban!');
-        this.getTamadasInfos();
+        this.stateChanged.emit(null);
         this.capaNumber = 0;
         this.csikoNumber = 0;
         this.fokaNumber = 0;
         this.selectedCountry = null;
+        this.getTamadasInfos();
       }
     );
   }

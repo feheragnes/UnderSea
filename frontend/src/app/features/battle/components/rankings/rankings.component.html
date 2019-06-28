@@ -1,4 +1,4 @@
-<mat-card class="maincard">
+<mat-card class="maincard" *ngIf="filteredranglista">
   <mat-card-header>
     <p>Ranglista</p>
   </mat-card-header>
@@ -25,3 +25,4 @@
     </div>
   </div>
 </mat-card>
+<mat-spinner *ngIf="!filteredranglista"></mat-spinner>

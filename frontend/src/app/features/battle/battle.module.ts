@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { BattleRoutingModule } from './battle-routing.module';
 import { BattleComponent } from './pages/battle/battle.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -27,10 +26,10 @@ import { RankingsComponent } from './components/rankings/rankings.component';
 import { ArmyComponent } from './components/army/army.component';
 import { CountryComponent } from './components/country/country.component';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   imports: [
-    SharedModule,
     BattleRoutingModule,
     MatCardModule,
     MatChipsModule,
@@ -47,7 +46,8 @@ import { FormsModule } from '@angular/forms';
     MatButtonModule,
     HttpClientModule,
     FormsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    CommonModule
   ],
   providers: [],
   declarations: [

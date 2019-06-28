@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  FormControl
-} from '@angular/forms';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { ToastrService } from 'ngx-toastr';
@@ -18,7 +13,6 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder,
     private router: Router,
     private authenticationService: AuthenticationService,
     private toastr: ToastrService
@@ -48,13 +42,11 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  // convenience getter for easy access to form fields
   get f() {
     return this.registerForm.controls;
   }
 
   onSubmit() {
-    // stop here if form is invalid
     if (this.registerForm.invalid) {
       if (this.registerForm.get('email').hasError('required')) {
         this.toastr.error('Hiányzó email!');

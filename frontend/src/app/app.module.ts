@@ -1,9 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CoreModule } from './core/core.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
@@ -28,7 +27,7 @@ import { RegisterComponent } from './features/login/register/register.component'
 import { JwtInterceptor } from './jwt.interceptor';
 import { ErrorInterceptor } from './error.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthGuard } from './core/guards/auth.guard';
+import { AuthGuard } from './guards/auth.guard';
 
 import { ToastrModule } from 'ngx-toastr';
 
@@ -36,8 +35,8 @@ import { ToastrModule } from 'ngx-toastr';
   declarations: [AppComponent, LoginComponent, RegisterComponent],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
-    CoreModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 3000,

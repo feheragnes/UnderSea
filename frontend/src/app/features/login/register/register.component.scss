@@ -21,16 +21,12 @@ mat-card-content {
   flex-direction: column;
   align-items: center;
 }
-mat-card-actions {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
 .login {
   color: #9ffff0;
   font-size: 18px;
 }
+
 .form-rounded {
   border-radius: 2rem;
   width: 366px;
@@ -43,6 +39,7 @@ mat-card-actions {
   padding-left: 20px;
   font-size: 16px;
 }
+
 .form-rounded::placeholder {
   color: #1c3e76;
 }
@@ -61,6 +58,7 @@ mat-card-actions {
 p {
   font-size: 32px;
 }
+
 h1 {
   font-size: 93px;
   color: #9ffff0;
@@ -70,6 +68,7 @@ h1 {
 input:focus {
   outline: none;
 }
+
 form {
   display: flex;
   flex-direction: column;
