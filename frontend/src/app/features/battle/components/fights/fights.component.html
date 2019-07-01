@@ -11,9 +11,11 @@
             <h4>{{ fight.vedekezoOrszag }}</h4>
           </div>
           <div class="data">
-            <p>{{ fight.army.capa }} Lézercápa</p>
-            <p>{{ fight.army.foka }} Rohamfóka</p>
-            <p>{{ fight.army.csiko }} Csatacsikó</p>
+            <p>{{ fight.capaInfo ? fight.capaInfo.mennyiseg : 0 }} Lézercápa</p>
+            <p>{{ fight.fokaInfo ? fight.fokaInfo.mennyiseg : 0 }} Rohamfóka</p>
+            <p>
+              {{ fight.csikoInfo ? fight.csikoInfo.mennyiseg : 0 }} Csatacsikó
+            </p>
           </div>
           <div class="result">
             <p class="resulttext">{{ fight.harcEredmeny }}</p>

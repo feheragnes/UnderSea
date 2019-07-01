@@ -18,13 +18,10 @@ export class FejlesztesService {
   }
 
   buyFejlesztes(type: string) {
-    const parameter = {
+    const parameter: Fejlesztes = {
       tipus: type
     };
     console.log(parameter);
-    return this.http.post<any>(
-      `${this.fejlesztesUrl}/buyfejlesztes`,
-      parameter
-    );
+    return this.http.post(`${this.fejlesztesUrl}/buyfejlesztes`, parameter);
   }
 }

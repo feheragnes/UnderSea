@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Egyseg } from '../models/egyseg';
+import { SeregInfo } from '../models/orszag';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class EgysegService {
     return this.http.get<Egyseg[]>(url);
   }
 
-  buyEgyseg(parameter) {
+  buyEgyseg(parameter: SeregInfo[]) {
     console.log(parameter);
     return this.http.post(`${this.egysegUrl}/buyegysegs`, parameter);
   }

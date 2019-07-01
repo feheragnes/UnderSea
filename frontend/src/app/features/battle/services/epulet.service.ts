@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Epulet } from '../models/epulet';
+import { EpuletInfo } from '../models/orszag';
 
 @Injectable({
   providedIn: 'root'
@@ -18,12 +19,11 @@ export class EpuletService {
   }
 
   buyEpulet(type: string) {
-    const parameter = {
+    const parameter: EpuletInfo = {
       tipus: type,
       ar: 1,
       mennyiseg: 1
     };
-    console.log(parameter);
-    return this.http.post<any>(`${this.epuletUrl}/buyepulets`, [parameter]);
+    return this.http.post(`${this.epuletUrl}/buyepulets`, [parameter]);
   }
 }

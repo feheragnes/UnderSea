@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { EgysegService } from '../../services/egyseg.service';
 import { ToastrService } from 'ngx-toastr';
 import { Egyseg, EgysegType } from '../../models/egyseg';
+import { SeregInfo } from '../../models/orszag';
 
 @Component({
   selector: 'app-army',
@@ -13,9 +14,9 @@ export class ArmyComponent implements OnInit {
   public fokaNumber = 0;
   public csikoNumber = 0;
   public egysegInfo: Egyseg[];
-  public capaInfo;
-  public csikoInfo;
-  public fokaInfo;
+  public capaInfo: Egyseg;
+  public csikoInfo: Egyseg;
+  public fokaInfo: Egyseg;
   @Output() stateChanged = new EventEmitter();
 
   constructor(
@@ -71,7 +72,7 @@ export class ArmyComponent implements OnInit {
   }
 
   buyEgyseg() {
-    const parameter = [
+    const parameter: SeregInfo[] = [
       {
         tipus: EgysegType.foka,
         mennyiseg: this.fokaNumber

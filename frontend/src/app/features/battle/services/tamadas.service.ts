@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { TamadasInfo } from '../models/tamadas';
+import { TamadasInfo, Tamadas } from '../models/tamadas';
+import { Harc } from '../models/harc';
 
 @Injectable({
   providedIn: 'root'
@@ -17,13 +18,12 @@ export class TamadasService {
     return this.http.get<TamadasInfo>(url);
   }
 
-  tamadas(parameter) {
-    console.log(parameter);
-    return this.http.post<any>(`${this.tamadasUrl}/posttamadas`, parameter);
+  tamadas(parameter: Tamadas) {
+    return this.http.post(`${this.tamadasUrl}/posttamadas`, parameter);
   }
 
-  getHarcStatusz(): Observable<any> {
+  getHarcStatusz(): Observable<Harc[]> {
     const url = `${this.tamadasUrl}/getharcstatusz`;
-    return this.http.get<any>(url);
+    return this.http.get<Harc[]>(url);
   }
 }

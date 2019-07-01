@@ -1,8 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TamadasService } from '../../services/tamadas.service';
-import { Army } from '../../models/army';
-import { Fight } from '../../models/fight';
+import { Harceredmeny, Harc } from '../../models/harc';
 import { EgysegType } from '../../models/egyseg';
+import { SeregInfo } from '../../models/orszag';
 
 @Component({
   selector: 'app-fights',
@@ -11,41 +11,47 @@ import { EgysegType } from '../../models/egyseg';
 })
 export class FightsComponent implements OnInit {
   @Output() stateChanged = new EventEmitter();
-  public fights: Array<Fight>;
+  public fights: Harc[];
   public done = false;
 
   constructor(private tamadasService: TamadasService) {}
 
   ngOnInit() {
     this.getHarcStatusz();
-    this.fights = new Array<Fight>();
   }
 
   getHarcStatusz() {
     this.tamadasService.getHarcStatusz().subscribe(
       data => {
-        data.forEach(element => {
-          let capaNumber = 0;
-          let csikoNumber = 0;
-          let fokaNumber = 0;
+        this.fights = data;
+        this.fights.forEach(element => {
           element.tamadoCsapat.forEach(csapat => {
             if (csapat.tipus === EgysegType.foka) {
-              fokaNumber = csapat.mennyiseg;
+              element.fokaInfo = csapat;
             }
             if (csapat.tipus === EgysegType.capa) {
-              capaNumber = csapat.mennyiseg;
+              element.capaInfo = csapat;
             }
             if (csapat.tipus === EgysegType.csiko) {
-              csikoNumber = csapat.mennyiseg;
+              element.csikoInfo = csapat;
             }
           });
-          const army = new Army(capaNumber, csikoNumber, fokaNumber);
-          console.log(army);
-          this.fights.push(
-            new Fight(element.vedekezoOrszag, element.harcEredmeny, army)
-          );
+          switch (element.harcEredmeny) {
+            case Harceredmeny.gyozelem:
+              element.harcEredmeny = 'Győzelem!';
+              break;
+            case Harceredmeny.dontetlen:
+              element.harcEredmeny = 'Döntetlen';
+              break;
+            case Harceredmeny.folyamatban:
+              element.harcEredmeny = 'Folyamatban...';
+              break;
+            case Harceredmeny.vereseg:
+              element.harcEredmeny = 'Vereség :(';
+              break;
+          }
         });
-        console.log(this.fights);
+        this.fights.reverse();
       },
       err => console.error(err),
       () => {

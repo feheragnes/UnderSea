@@ -3,7 +3,7 @@ import { TamadasService } from '../../services/tamadas.service';
 import { ToastrService } from 'ngx-toastr';
 import { EgysegType } from '../../models/egyseg';
 import { SeregInfo } from '../../models/orszag';
-import { TamadasInfo } from '../../models/tamadas';
+import { TamadasInfo, Tamadas } from '../../models/tamadas';
 
 @Component({
   selector: 'app-attack',
@@ -73,7 +73,7 @@ export class AttackComponent implements OnInit {
   }
 
   attack() {
-    const parameter = {
+    let parameter: Tamadas = {
       orszag: this.selectedCountry,
       tamadoEgysegek: [
         {
@@ -90,6 +90,7 @@ export class AttackComponent implements OnInit {
         }
       ]
     };
+    console.log(parameter);
 
     this.tamadasService.tamadas(parameter).subscribe(
       data => {

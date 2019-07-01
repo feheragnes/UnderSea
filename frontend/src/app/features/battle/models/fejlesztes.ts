@@ -1,7 +1,7 @@
 export interface Fejlesztes {
   tipus: string;
-  kifejlesztve: boolean;
-  aktualisKor: number;
+  kifejlesztve?: boolean;
+  aktualisKor?: number;
 }
 
 export enum FejlesztesType {

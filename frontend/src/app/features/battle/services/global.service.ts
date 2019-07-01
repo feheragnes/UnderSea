@@ -18,9 +18,9 @@ export class GlobalService {
     return this.http.get<RanglistaElem[]>(url);
   }
 
-  nextTurn(): Observable<any> {
+  nextTurn() {
     const url = `${this.globalUrl}/nextturn`;
-    return this.http.post<any>(url, '');
+    return this.http.post(url, '');
   }
 
   getAktualisKor(): Observable<Turn> {
