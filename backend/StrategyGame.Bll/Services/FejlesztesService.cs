@@ -39,11 +39,11 @@ namespace StrategyGame.Bll.Services.AAAServices
 
             if (currentOrszag?.Fejleszteses.Where(x => x.Kifejlesztve == false)?.Count() != 0)
             {
-                throw new InvalidOperationException("Another PowerUp is under development");
+                throw new InvalidOperationException("Már van folyamatban lévő fejlesztésed");
             }
             if (currentOrszag?.Fejleszteses.Where(x => x.GetType().Name == fejlesztesTipus)?.Count() != 0)
             {
-                throw new InvalidOperationException("You already have the chosen PowerUp");
+                throw new InvalidOperationException("Ezt már kifejlesztetted");
             }
 
 

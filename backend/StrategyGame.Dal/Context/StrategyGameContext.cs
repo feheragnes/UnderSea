@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
 using StrategyGame.Dal.EntityTypeConfigurations;
@@ -19,9 +20,12 @@ namespace StrategyGame.Dal.Context
 {
     public class StrategyGameContext : IdentityDbContext<StrategyGameUser, StrategyGameRole, Guid>
     {
+        public readonly UserManager<StrategyGameUser> _userManager;
+
         public StrategyGameContext(DbContextOptions<StrategyGameContext> options)
             : base(options)
         {
+           
         }
 
         public DbSet<Jatek> Jateks { get; set; }
@@ -43,6 +47,7 @@ namespace StrategyGame.Dal.Context
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+
             base.OnModelCreating(builder);
             builder.Entity<AramlasIranyito>().HasBaseType<Epulet>();
             builder.Entity<ZatonyVar>().HasBaseType<Epulet>();
@@ -81,6 +86,9 @@ namespace StrategyGame.Dal.Context
                 (
                 new Jatek { Id = Guid.NewGuid(), Korok = 0 }
                 );
+
+
+      
 
         }
 

@@ -266,7 +266,7 @@ namespace StrategyGame.Dal.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("66d53b80-e41f-4ca1-97fe-428f08c1bbd5"),
+                            Id = new Guid("6bd18fd0-ec3a-4c70-99eb-41a5605f9554"),
                             Ar = 50L,
                             Ellatas = 1L,
                             Tamadas = 6L,
@@ -276,7 +276,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("0ec0c201-eca0-4394-aa6d-9dcec53d5747"),
+                            Id = new Guid("f7b64272-ce42-49e6-8498-65f3b56759d2"),
                             Ar = 50L,
                             Ellatas = 1L,
                             Tamadas = 2L,
@@ -286,7 +286,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1603668f-ce6c-4a10-a56c-e00537d28506"),
+                            Id = new Guid("17326fd3-878c-456a-8b03-be305f94ab51"),
                             Ar = 100L,
                             Ellatas = 2L,
                             Tamadas = 5L,
@@ -362,7 +362,7 @@ namespace StrategyGame.Dal.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e7d008d8-8994-4e3c-b6a8-658429a823dc"),
+                            Id = new Guid("d7722365-4b71-405b-84ff-098df9ebef61"),
                             Korok = 0L
                         });
                 });

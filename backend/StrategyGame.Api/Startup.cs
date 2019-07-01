@@ -45,7 +45,7 @@ namespace StrategyGame.Api
         public void ConfigureServices(IServiceCollection services)
         {
 
-  
+
             services.AddHangfire(configuration => configuration
        .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
        .UseSimpleAssemblyNameTypeSerializer()
@@ -121,13 +121,14 @@ namespace StrategyGame.Api
             services.AddScoped<IJWTService, JWTService>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IRegistrationService, RegistrationService>();
-            services.AddScoped<IEndTurnService,EndTurnService>();
+            services.AddScoped<IEndTurnService, EndTurnService>();
+            services.AddScoped<IInitService, InitService>();
             services.AddHangfireServer();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v0.1", new Info { Title = "UnderSeaApi", Version = "v0.1" });
             });
-            
+
             services.AddCors(options =>
             {
                 options.AddPolicy(MyAllowSpecificOrigins,
@@ -155,9 +156,9 @@ namespace StrategyGame.Api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IBackgroundJobClient backgroundJobs, StrategyGameContext ctx, IEndTurnService endTurnService)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IBackgroundJobClient backgroundJobs, StrategyGameContext ctx, IEndTurnService endTurnService, IInitService initService)
         {
-            
+
 
             if (env.IsDevelopment())
             {
@@ -172,6 +173,7 @@ namespace StrategyGame.Api
             });
 
 
+
             JobStorage.Current = new SqlServerStorage(Configuration.GetConnectionString("StrategyGameContextConnection"));
 
             RecurringJob.AddOrUpdate(
@@ -181,6 +183,7 @@ namespace StrategyGame.Api
             app.UseAuthentication();
             app.UseMvc();
 
+         
 
             //ctx.Database.EnsureCreated();
         }

@@ -25,14 +25,16 @@ namespace StrategyGame.Api.Controllers
         private readonly IOrszagService _orszagService;
         private readonly ICommonService _commonService;
         private readonly IEgysegService _egysegService;
+        private readonly IInitService _initService;
         private readonly IMapper _mapper;
 
 
-        public EgysegController(IEgysegService egysegService, IOrszagService orszagService,ICommonService commonService,UserManager<StrategyGameUser> userManager, IMapper mapper):base(userManager)
+        public EgysegController(IEgysegService egysegService,IInitService initService, IOrszagService orszagService,ICommonService commonService,UserManager<StrategyGameUser> userManager, IMapper mapper):base(userManager)
         {
             _egysegService = egysegService;
             _orszagService = orszagService;
             _commonService = commonService;
+            _initService = initService;
             _mapper = mapper;
         }
 
