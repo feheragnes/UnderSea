@@ -10,6 +10,7 @@ using AutoMapper;
 using StrategyGame.Bll.DTOs.Epuletek;
 using StrategyGame.Model.Enums;
 using StrategyGame.Model.Entities.Models;
+using StrategyGame.Model.Entities.Models.Egysegek;
 
 namespace StrategyGame.Bll.Services
 {
@@ -132,9 +133,26 @@ namespace StrategyGame.Bll.Services
             }
             else
             {
+                csapat.Kimenetel = HarcEredmenyTipus.Dontetlen;
+                for (int i = 0; i < Convert.ToInt64(csapat.Egysegs.Count * 0.05); i++)
+                {
+                    csapat.Egysegs.Remove(csapat.Egysegs.FirstOrDefault());
+                }
+                var ellenseg = csapat.Celpont.OtthoniCsapats.FirstOrDefault(x => x.Kimenetel == HarcEredmenyTipus.Otthon);
+                for (int i = 0; i < Convert.ToInt64(ellenseg.Egysegs.Count * 0.05); i++)
+                {
+                    ellenseg.Egysegs.Remove(ellenseg.Egysegs.FirstOrDefault());
+                }
 
             }
+            var egysegs = new List<Egyseg>();
+            csapat.Egysegs.ToList().ForEach(x =>
+            {
+                egysegs.Add((Egyseg)Activator.CreateInstance(x.GetType()));
+
+            });
             csapat.Tulajdonos.OtthoniCsapats.FirstOrDefault(x => x.Kimenetel == HarcEredmenyTipus.Otthon).Egysegs.AddRange(csapat.Egysegs);
+            csapat.Egysegs.AddRange(egysegs);
             _context.SaveChanges();
         }
         public async Task DoHarc()
