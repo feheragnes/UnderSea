@@ -39,7 +39,7 @@ import { ToastrModule } from 'ngx-toastr';
     AppRoutingModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
-      timeOut: 3000,
+      timeOut: 6000,
       positionClass: 'toast-bottom-right',
       preventDuplicates: true
     }),
