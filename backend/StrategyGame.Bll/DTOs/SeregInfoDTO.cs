@@ -1,9 +1,4 @@
-﻿
-using StrategyGame.Bll.DTOs.Egysegek;
-using StrategyGame.Model.Enums;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using StrategyGame.Model.Enums;
 
 namespace StrategyGame.Bll.DTOs
 {
@@ -18,7 +13,7 @@ namespace StrategyGame.Bll.DTOs
             Mennyiseg = m;
             Tipus = tipus;
 
-            if(tipus == EgysegTipus.CsataCsiko)
+            if (tipus == EgysegTipus.CsataCsiko)
             {
                 Ar = 50;
                 Tamadas = 2;

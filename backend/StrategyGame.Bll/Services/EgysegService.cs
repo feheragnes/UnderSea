@@ -1,19 +1,15 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using StrategyGame.Bll.DTOs;
 using StrategyGame.Bll.DTOs.Egysegek;
 using StrategyGame.Bll.ServiceInterfaces;
 using StrategyGame.Dal.Context;
-using StrategyGame.Model.Entities.Identity;
 using StrategyGame.Model.Entities.Models;
 using StrategyGame.Model.Entities.Models.Egysegek;
 using StrategyGame.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace StrategyGame.Bll.Services
@@ -34,14 +30,14 @@ namespace StrategyGame.Bll.Services
         public async Task AddEgysegAsync(List<SeregInfoDTO> egysegek, Guid userId)
         {
             Orszag currentOrszag = await _commonService.GetCurrentOrszag(userId);
-            var otthoniEgysegek = currentOrszag.OtthoniCsapats.FirstOrDefault(x=>x.Kimenetel == HarcEredmenyTipus.Otthon);
+            var otthoniEgysegek = currentOrszag.OtthoniCsapats.FirstOrDefault(x => x.Kimenetel == HarcEredmenyTipus.Otthon);
 
             long osszKoltseg = 0;
 
-            if(_context.EgysegTermelos
-                .Include(x=>x.Epulet).ThenInclude(x=>x.Orszag)
-                .Where(x=>x.Epulet.Orszag.Id == currentOrszag.Id)
-                .Where(x=>x.Epulet.Felepult == true).Sum(x=>x.Ertek) < 
+            if (_context.EgysegTermelos
+                .Include(x => x.Epulet).ThenInclude(x => x.Orszag)
+                .Where(x => x.Epulet.Orszag.Id == currentOrszag.Id)
+                .Where(x => x.Epulet.Felepult == true).Sum(x => x.Ertek) <
                 (await GetAllEgysegsFromOneUserAsync(userId)).Count + egysegek.Sum(x => x.Mennyiseg))
             {
                 throw new ArgumentException(Resources.ErrorMessage.NotEnoughHousing);
@@ -49,18 +45,20 @@ namespace StrategyGame.Bll.Services
 
             egysegek.ForEach(x =>
             {
-                osszKoltseg += _context.EgysegInfos.SingleOrDefault(y=> y.Tipus == x.Tipus).Ar*x.Mennyiseg;
+                osszKoltseg += _context.EgysegInfos.SingleOrDefault(y => y.Tipus == x.Tipus).Ar * x.Mennyiseg;
             });
 
             if (osszKoltseg > currentOrszag.Gyongy)
+            {
                 throw new ArgumentException(Resources.ErrorMessage.NotEnoughPearl);
+            }
 
             var rohamFokaInfos = await _context.EgysegInfos.SingleOrDefaultAsync(x => x.Tipus == EgysegTipus.RohamFoka);
             var csataCsikoInfos = await _context.EgysegInfos.SingleOrDefaultAsync(x => x.Tipus == EgysegTipus.CsataCsiko);
             var lezerCapaInfos = await _context.EgysegInfos.SingleOrDefaultAsync(x => x.Tipus == EgysegTipus.LezerCapa);
             egysegek.ForEach(async x =>
             {
-                if(x.Tipus == EgysegTipus.RohamFoka)
+                if (x.Tipus == EgysegTipus.RohamFoka)
                 {
                     for (int i = 0; i < x.Mennyiseg; i++)
                     {
@@ -139,23 +137,23 @@ namespace StrategyGame.Bll.Services
             {
                 var otthoniEgysegek = currentOrszag.OtthoniCsapats?.SingleOrDefault(T => T.Celpont == null)?.Egysegs.GroupBy(e => e.Discriminator);
 
-            var seregInfoList = new List<SeregInfoDTO>();
+                var seregInfoList = new List<SeregInfoDTO>();
 
-            if (otthoniEgysegek != null)
-            {
-                foreach (var egysegek in otthoniEgysegek)
+                if (otthoniEgysegek != null)
                 {
-                    var egysegekDTO = _mapper.Map<List<EgysegDTO>>(egysegek.ToList());
-                    seregInfoList.Add(new SeregInfoDTO()
+                    foreach (var egysegek in otthoniEgysegek)
                     {
-                        Ar = egysegekDTO.Sum(e => e.Ar),
-                        Mennyiseg = egysegekDTO.Count,
-                        Tamadas = egysegekDTO.Sum(e => e.Tamadas),
-                        Vedekezes = egysegek.Sum(e => e.Vedekezes),
-                        Tipus = Enum.Parse<EgysegTipus>(egysegek.Key)
-                    });
+                        var egysegekDTO = _mapper.Map<List<EgysegDTO>>(egysegek.ToList());
+                        seregInfoList.Add(new SeregInfoDTO()
+                        {
+                            Ar = egysegekDTO.Sum(e => e.Ar),
+                            Mennyiseg = egysegekDTO.Count,
+                            Tamadas = egysegekDTO.Sum(e => e.Tamadas),
+                            Vedekezes = egysegek.Sum(e => e.Vedekezes),
+                            Tipus = Enum.Parse<EgysegTipus>(egysegek.Key)
+                        });
+                    }
                 }
-            }
                 return seregInfoList;
             }
             catch (Exception e)

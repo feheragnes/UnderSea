@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StrategyGame.Api.ViewModels.FejlesztesViewModels;
 using StrategyGame.Bll.DTOs;
-using StrategyGame.Bll.DTOs.Fejlesztesek;
 using StrategyGame.Bll.ServiceInterfaces;
 using StrategyGame.Model.Entities.Identity;
 using StrategyGame.Model.Entities.Models;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace StrategyGame.Api.Controllers
 {
@@ -24,9 +21,9 @@ namespace StrategyGame.Api.Controllers
         private readonly ICommonService _commonService;
         private readonly IMapper _mapper;
 
-        public FejlesztesController(IFejlesztesService fejlesztesService, 
-            IOrszagService orszagService, 
-            ICommonService commonService, 
+        public FejlesztesController(IFejlesztesService fejlesztesService,
+            IOrszagService orszagService,
+            ICommonService commonService,
             IMapper mapper,
             UserManager<StrategyGameUser> userManager) : base(userManager)
         {
@@ -49,7 +46,8 @@ namespace StrategyGame.Api.Controllers
             try
             {
                 return _mapper.Map<List<FejlesztesInfoViewModel>>(await _fejlesztesService.GetFejlesztesInfoDTOs(UserId));
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
@@ -57,10 +55,10 @@ namespace StrategyGame.Api.Controllers
 
         [HttpGet]
         public async Task<ActionResult<long>> GetActiveFejlesztesNumber()
-            {
+        {
             Orszag currentOrszag = await _commonService.GetCurrentOrszag(UserId);
             return await _fejlesztesService.GetActiveFejlesztesCount(currentOrszag);
-            }
+        }
 
 
         [HttpPost]
@@ -70,13 +68,14 @@ namespace StrategyGame.Api.Controllers
             {
                 await _fejlesztesService.AddFejlesztesAsync(_mapper.Map<FejlesztesInfoDTO>(fejlesztes), UserId);
                 return Ok();
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
         }
 
-        
+
 
     }
 }

@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using StrategyGame.Api.ViewModels.GlobalViewModels;
 using StrategyGame.Bll.ServiceInterfaces;
 using StrategyGame.Model.Entities.Identity;
-using StrategyGame.Api.ViewModels.GlobalViewModels;
-using AutoMapper;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace StrategyGame.Api.Controllers
 {
@@ -18,7 +18,7 @@ namespace StrategyGame.Api.Controllers
         private readonly IEndTurnService _endTurnService;
         private readonly IMapper _mapper;
 
-        public GlobalController(IGlobalService globalSevice, 
+        public GlobalController(IGlobalService globalSevice,
                                 IEndTurnService endTurnService,
                                 IMapper mapper,
                                 UserManager<StrategyGameUser> userManager) : base(userManager)
@@ -33,7 +33,8 @@ namespace StrategyGame.Api.Controllers
             try
             {
                 return Json(new { Kor = await _globalService.GetKor() });
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
@@ -44,7 +45,8 @@ namespace StrategyGame.Api.Controllers
             try
             {
                 return _mapper.Map<List<RanglistaViewModel>>(await _globalService.GetRanglista());
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
@@ -57,7 +59,8 @@ namespace StrategyGame.Api.Controllers
             {
                 await _endTurnService.NextTurn();
                 return Ok();
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }

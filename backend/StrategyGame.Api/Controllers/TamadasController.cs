@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
 using StrategyGame.Api.ViewModels.TamadasViewModels;
 using StrategyGame.Bll.DTOs;
 using StrategyGame.Bll.ServiceInterfaces;
-using StrategyGame.Dal.Context;
 using StrategyGame.Model.Entities.Identity;
 using StrategyGame.Model.Entities.Models;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace StrategyGame.Api.Controllers
 {
@@ -26,12 +22,12 @@ namespace StrategyGame.Api.Controllers
         private readonly IMapper _mapper;
         private readonly IEgysegService _egysegService;
 
-        public TamadasController(IEgysegService egysegService, 
-            IOrszagService orszagService, 
-            ICommonService commonService, 
+        public TamadasController(IEgysegService egysegService,
+            IOrszagService orszagService,
+            ICommonService commonService,
             ITamadasService tamadasService,
             IMapper mapper,
-            UserManager<StrategyGameUser> userManager):base(userManager)
+            UserManager<StrategyGameUser> userManager) : base(userManager)
         {
             _egysegService = egysegService;
             _orszagService = orszagService;
@@ -53,12 +49,13 @@ namespace StrategyGame.Api.Controllers
             try
             {
                 return _mapper.Map<TamadasViewModel>(await _orszagService.GetTamadasDTO(UserId));
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> PostTamadas([FromBody]TamadasInditasViewModel tamadasInditasViewModel)
         {
@@ -66,7 +63,8 @@ namespace StrategyGame.Api.Controllers
             {
                 await _tamadasService.MakeTamadas(_mapper.Map<BejovoTamadasDTO>(tamadasInditasViewModel), UserId);
                 return Ok();
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
@@ -78,7 +76,8 @@ namespace StrategyGame.Api.Controllers
             try
             {
                 return _mapper.Map<List<HarcViewModel>>(await _tamadasService.GetHarcStatus(UserId));
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }

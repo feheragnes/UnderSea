@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace StrategyGame.Bll.DTOs
+﻿namespace StrategyGame.Bll.DTOs
 {
     public class RanglistaDTO
     {

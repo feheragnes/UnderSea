@@ -1,23 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using Hangfire;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 using StrategyGame.Api.ViewModels.AAAViewModels;
 using StrategyGame.Bll.DTOs.AAADTOs;
 using StrategyGame.Bll.ServiceInterfaces.AAAServiceInterfaces;
-using StrategyGame.Model.Entities.Identity;
+using System;
+using System.Threading.Tasks;
 
 namespace StrategyGame.Api.Controllers
 {
@@ -47,7 +34,8 @@ namespace StrategyGame.Api.Controllers
             try
             {
                 return Json(new { Token = await _loginService.Login(_mapper.Map<LoginDTO>(model)) });
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
@@ -60,14 +48,15 @@ namespace StrategyGame.Api.Controllers
             string token;
             try
             {
-            token = await _registrationService.Register(_mapper.Map<RegistrationDTO>(model));
-            }catch(Exception e)
+                token = await _registrationService.Register(_mapper.Map<RegistrationDTO>(model));
+            }
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
             return Json(new { Token = token });
         }
 
-        }
-
     }
+
+}

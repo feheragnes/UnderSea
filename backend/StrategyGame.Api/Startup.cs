@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using Hangfire;
+using Hangfire.SqlServer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,23 +9,20 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using StrategyGame.Api.Mappers;
+using StrategyGame.Bll.Hubs;
+using StrategyGame.Bll.Mappers;
+using StrategyGame.Bll.ServiceInterfaces;
+using StrategyGame.Bll.ServiceInterfaces.AAAServiceInterfaces;
+using StrategyGame.Bll.Services;
+using StrategyGame.Bll.Services.AAAServices;
 using StrategyGame.Dal.Context;
 using StrategyGame.Model.Entities.Identity;
-using Hangfire;
-using Hangfire.SqlServer;
-using AutoMapper;
-using StrategyGame.Bll.ServiceInterfaces.AAAServiceInterfaces;
-using StrategyGame.Bll.Services.AAAServices;
 using Swashbuckle.AspNetCore.Swagger;
-using StrategyGame.Bll.Mappers;
-using StrategyGame.Bll.Services;
-using StrategyGame.Bll.ServiceInterfaces;
-using StrategyGame.Api.Mappers;
-using StrategyGame.Bll.ServiceInterfaces;
-using StrategyGame.Bll.Hubs;
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
 
 namespace StrategyGame.Api
 {
@@ -40,13 +34,14 @@ namespace StrategyGame.Api
         }
 
         public IConfiguration Configuration { get; }
-        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+        private readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
 
-  
+
             services.AddHangfire(configuration => configuration
        .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
        .UseSimpleAssemblyNameTypeSerializer()
@@ -122,7 +117,7 @@ namespace StrategyGame.Api
             services.AddScoped<IJWTService, JWTService>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IRegistrationService, RegistrationService>();
-            services.AddScoped<IEndTurnService,EndTurnService>();
+            services.AddScoped<IEndTurnService, EndTurnService>();
             services.AddHangfireServer();
             services.AddSwaggerGen(c =>
             {
@@ -160,7 +155,7 @@ namespace StrategyGame.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IBackgroundJobClient backgroundJobs, StrategyGameContext ctx, IEndTurnService endTurnService)
         {
-            
+
 
             if (env.IsDevelopment())
             {

@@ -7,12 +7,10 @@ using StrategyGame.Dal.Context;
 using StrategyGame.Model.Entities.Identity;
 using StrategyGame.Model.Entities.Models;
 using StrategyGame.Model.Entities.Models.Fejlesztesek;
-using StrategyGame.Model.Entities.Models.Novelok;
 using StrategyGame.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace StrategyGame.Bll.Services.AAAServices

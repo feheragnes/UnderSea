@@ -12,9 +12,6 @@ using StrategyGame.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
-using System.Security.Principal;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace StrategyGame.Bll.Services
@@ -47,7 +44,7 @@ namespace StrategyGame.Bll.Services
         public async Task<List<EpuletInfoDTO>> GetAllEpuletsFromOneUserAsync(Guid userId)
         {
             Orszag currentOrszag = await _commonService.GetCurrentOrszag(userId);
-            return _mapper.Map<List<EpuletInfoDTO>> ( currentOrszag.Epulets.ToList());
+            return _mapper.Map<List<EpuletInfoDTO>>(currentOrszag.Epulets.ToList());
         }
 
 
@@ -61,9 +58,14 @@ namespace StrategyGame.Bll.Services
             felepultEpulets.ForEach(x =>
             {
                 if (x is AramlasIranyito)
+                {
                     aramlasIranyitoMennyiseg++;
+                }
+
                 if (x is ZatonyVar)
+                {
                     zatonyvarMennyiseg++;
+                }
             });
 
             List<EpuletInfoDTO> felepultDtoList = new List<EpuletInfoDTO>();
@@ -88,7 +90,9 @@ namespace StrategyGame.Bll.Services
             currentEpulets.ForEach(x =>
             {
                 if (x.Felepult == false)
+                {
                     throw new InvalidOperationException(Resources.ErrorMessage.AnotherConstruction);
+                }
             });
 
             long osszKoltseg = 0;
@@ -113,9 +117,9 @@ namespace StrategyGame.Bll.Services
             });
 
             if (osszKoltseg > currentOrszag.Gyongy)
+            {
                 throw new ArgumentException(Resources.ErrorMessage.NotEnoughPearl);
-
-            (currentOrszag.Epulets as List<Epulet>).AddRange(epuletsToBuy);
+            } (currentOrszag.Epulets as List<Epulet>).AddRange(epuletsToBuy);
             currentOrszag.Gyongy -= osszKoltseg;
 
             _context.SaveChanges();

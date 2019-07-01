@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using StrategyGame.Bll.ServiceInterfaces;
 using StrategyGame.Bll.DTOs.Epuletek;
 using StrategyGame.Bll.DTOs.Fejlesztesek;
-using StrategyGame.Bll.Mappers;
+using StrategyGame.Bll.ServiceInterfaces;
 using StrategyGame.Dal.Context;
 using StrategyGame.Model.Entities.Models;
 using StrategyGame.Model.Entities.Models.Epuletek;
 using StrategyGame.Model.Entities.Models.Fejlesztesek;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace StrategyGame.Api.Controllers
 {
@@ -24,7 +22,7 @@ namespace StrategyGame.Api.Controllers
         private readonly StrategyGameContext _context;
         private readonly IMapper _mapper;
 
-        public TestController(StrategyGameContext context,IMapper mapper)
+        public TestController(StrategyGameContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -122,11 +120,11 @@ namespace StrategyGame.Api.Controllers
             var asd = _context.Epulets.Add(new AramlasIranyito());
             _context.SaveChanges();
             var ep = _mapper.Map<EpuletDTO>(_context.Epulets.FirstOrDefault());
-            if(ep is ITermelo)
+            if (ep is ITermelo)
             {
                 return Ok("Termelo vagyok");
             }
-            return  Ok(_mapper.Map<IList<EpuletDTO>>(asd));
+            return Ok(_mapper.Map<IList<EpuletDTO>>(asd));
         }
         [HttpPost]
         public async Task PostSzonar()
@@ -135,7 +133,7 @@ namespace StrategyGame.Api.Controllers
             orszag.Fejleszteses.Add(new SzonarAgyu());
             _context.Orszags.Add(orszag);
             _context.SaveChanges();
-            
+
         }
 
         private bool FejlesztesExists(Guid id)

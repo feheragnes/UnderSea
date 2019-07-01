@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Migrations;
 using StrategyGame.Dal.EntityTypeConfigurations;
 using StrategyGame.Model.Entities.Identity;
 using StrategyGame.Model.Entities.Models;
@@ -11,9 +10,7 @@ using StrategyGame.Model.Entities.Models.Novelok;
 using StrategyGame.Model.Entities.Models.Termelok;
 using StrategyGame.Model.Enums;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace StrategyGame.Dal.Context
 {

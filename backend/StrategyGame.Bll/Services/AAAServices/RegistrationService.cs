@@ -1,17 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using StrategyGame.Bll.DTOs.AAADTOs;
+using StrategyGame.Bll.ServiceInterfaces;
+using StrategyGame.Bll.ServiceInterfaces.AAAServiceInterfaces;
+using StrategyGame.Dal.Context;
 using StrategyGame.Model.Entities.Identity;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-using StrategyGame.Bll.Services.AAAServices;
-using StrategyGame.Bll.ServiceInterfaces.AAAServiceInterfaces;
-using Microsoft.Extensions.Configuration;
-using StrategyGame.Model.Entities.Models;
-using StrategyGame.Dal.Context;
-using Microsoft.EntityFrameworkCore;
-using StrategyGame.Bll.ServiceInterfaces;
 
 namespace StrategyGame.Bll.Services.AAAServices
 {
@@ -54,7 +48,8 @@ namespace StrategyGame.Bll.Services.AAAServices
                 try
                 {
                     await _orszagService.MakeOrszagUserConnection(user, model.CountryName);
-                } catch(Exception e)
+                }
+                catch (Exception e)
                 {
                     await _userManager.DeleteAsync(user);
                     throw e;

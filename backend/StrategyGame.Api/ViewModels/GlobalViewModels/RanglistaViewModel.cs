@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace StrategyGame.Api.ViewModels.GlobalViewModels
+﻿namespace StrategyGame.Api.ViewModels.GlobalViewModels
 {
     public class RanglistaViewModel
     {

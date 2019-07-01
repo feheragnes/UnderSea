@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
 using StrategyGame.Api.ViewModels.EgysegViewModels;
 using StrategyGame.Bll.DTOs;
-using StrategyGame.Bll.DTOs.Egysegek;
 using StrategyGame.Bll.ServiceInterfaces;
 using StrategyGame.Model.Entities.Identity;
 using StrategyGame.Model.Entities.Models;
-using StrategyGame.Model.Entities.Models.Egysegek;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace StrategyGame.Api.Controllers
 {
@@ -28,7 +22,7 @@ namespace StrategyGame.Api.Controllers
         private readonly IMapper _mapper;
 
 
-        public EgysegController(IEgysegService egysegService, IOrszagService orszagService,ICommonService commonService,UserManager<StrategyGameUser> userManager, IMapper mapper):base(userManager)
+        public EgysegController(IEgysegService egysegService, IOrszagService orszagService, ICommonService commonService, UserManager<StrategyGameUser> userManager, IMapper mapper) : base(userManager)
         {
             _egysegService = egysegService;
             _orszagService = orszagService;
@@ -43,7 +37,7 @@ namespace StrategyGame.Api.Controllers
             return await _egysegService.GetOtthoniEgysegsFromOneUserAsync(currentOrszag);
         }
 
-    
+
 
         [HttpPost]
         public async Task<IActionResult> BuyEgysegs([FromBody] List<EgysegVetelViewModel> egysegs)
@@ -52,7 +46,8 @@ namespace StrategyGame.Api.Controllers
             {
                 await _egysegService.AddEgysegAsync(_mapper.Map<List<SeregInfoDTO>>(egysegs), UserId);
                 return Ok();
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
@@ -63,7 +58,8 @@ namespace StrategyGame.Api.Controllers
             try
             {
                 return _mapper.Map<List<EgysegInfoViewModel>>(await _egysegService.GetEgysegInfoDTOs(UserId));
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }

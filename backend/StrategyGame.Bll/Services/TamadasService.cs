@@ -9,7 +9,6 @@ using StrategyGame.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace StrategyGame.Bll.Services
@@ -46,11 +45,11 @@ namespace StrategyGame.Bll.Services
             var orszag = await _commonService.GetCurrentOrszag(userId);
             var harcok = new List<HarcDTO>();
 
-            orszag.OtthoniCsapats.Where(x => x.Kimenetel != HarcEredmenyTipus.Otthon).ToList()?.ForEach( x =>
-            {
-                harcok.Add(new HarcDTO { VedezoOrszag = new OrszagDTO { Nev = x.Celpont.Nev}, HarcEredmeny = x.Kimenetel, TamadoCsapat = GetSeregFromEgysegs(x.Egysegs)});
-            });
-            return harcok; 
+            orszag.OtthoniCsapats.Where(x => x.Kimenetel != HarcEredmenyTipus.Otthon).ToList()?.ForEach(x =>
+           {
+               harcok.Add(new HarcDTO { VedezoOrszag = new OrszagDTO { Nev = x.Celpont.Nev }, HarcEredmeny = x.Kimenetel, TamadoCsapat = GetSeregFromEgysegs(x.Egysegs) });
+           });
+            return harcok;
 
         }
         public async Task SetHarcEredmeny(CsapatDTO csapatDto)
@@ -106,11 +105,19 @@ namespace StrategyGame.Bll.Services
                 for (int i = 0; i < x.Mennyiseg; i++)
                 {
                     if (x.Tipus == EgysegTipus.CsataCsiko)
+                    {
                         tamadocsapat.Egysegs.Add(new CsataCsiko());
+                    }
+
                     if (x.Tipus == EgysegTipus.LezerCapa)
+                    {
                         tamadocsapat.Egysegs.Add(new LezerCapa());
+                    }
+
                     if (x.Tipus == EgysegTipus.RohamFoka)
+                    {
                         tamadocsapat.Egysegs.Add(new RohamFoka());
+                    }
                 }
             });
             vedekezocsapat.Egysegs.Clear();
@@ -119,11 +126,19 @@ namespace StrategyGame.Bll.Services
                 for (int i = 0; i < x.Mennyiseg; i++)
                 {
                     if (x.Tipus == EgysegTipus.CsataCsiko)
+                    {
                         vedekezocsapat.Egysegs.Add(new CsataCsiko());
+                    }
+
                     if (x.Tipus == EgysegTipus.LezerCapa)
+                    {
                         vedekezocsapat.Egysegs.Add(new LezerCapa());
+                    }
+
                     if (x.Tipus == EgysegTipus.RohamFoka)
+                    {
                         vedekezocsapat.Egysegs.Add(new RohamFoka());
+                    }
                 }
             });
             await _context.SaveChangesAsync();
@@ -134,25 +149,25 @@ namespace StrategyGame.Bll.Services
                 {
                     ((x.OtthoniCsapats as List<Csapat>).Where(y => y.Celpont != null) as List<Csapat>).ForEach(async y =>
                   {
-                        await SetTamadasModel(await SetTamadas(_mapper.Map<CsapatDTO>(y)));
-                    });
+                      await SetTamadasModel(await SetTamadas(_mapper.Map<CsapatDTO>(y)));
+                  });
                 });
         }
         public async Task MakeTamadas(BejovoTamadasDTO bejovoTamadasDTO, Guid userId)
         {
             var tamadoorszag = await _commonService.GetCurrentOrszag(userId);
             bejovoTamadasDTO.TamadoNev = tamadoorszag.Nev;
-            if (tamadoorszag.OtthoniCsapats.Where(x=>x.Celpont?.Nev == bejovoTamadasDTO.CelpontNev && x.Kimenetel == HarcEredmenyTipus.Folyamatban).Count() > 0)
+            if (tamadoorszag.OtthoniCsapats.Where(x => x.Celpont?.Nev == bejovoTamadasDTO.CelpontNev && x.Kimenetel == HarcEredmenyTipus.Folyamatban).Count() > 0)
             {
                 throw new ArgumentException(Resources.ErrorMessage.AlreadyAttackedCountry);
             }
             var csapat0 = tamadoorszag.OtthoniCsapats.SingleOrDefault(x => x.Celpont == null);
-             var tamadocsapat = new Csapat()
-                {
-                    Celpont = _context.Orszags.SingleOrDefault(x => x.Nev == bejovoTamadasDTO.CelpontNev),
-                    Kimenetel = HarcEredmenyTipus.Folyamatban,
-                    Tulajdonos = tamadoorszag
-                };
+            var tamadocsapat = new Csapat()
+            {
+                Celpont = _context.Orszags.SingleOrDefault(x => x.Nev == bejovoTamadasDTO.CelpontNev),
+                Kimenetel = HarcEredmenyTipus.Folyamatban,
+                Tulajdonos = tamadoorszag
+            };
             bejovoTamadasDTO.TamadoEgysegek.ForEach(x =>
             {
                 var egysegszam = x.Mennyiseg;
@@ -161,7 +176,7 @@ namespace StrategyGame.Bll.Services
                     if (x.Tipus == EgysegTipus.CsataCsiko)
                     {
 
-                        if (egysegszam > csapat0.Egysegs.Where(y=> Enum.Parse<EgysegTipus>(y.Discriminator) == x.Tipus).Count())
+                        if (egysegszam > csapat0.Egysegs.Where(y => Enum.Parse<EgysegTipus>(y.Discriminator) == x.Tipus).Count())
                         {
                             throw new ArgumentException(Resources.ErrorMessage.NotEnougCsataCsiko);
                         }

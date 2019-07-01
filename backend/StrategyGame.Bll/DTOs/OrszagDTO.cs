@@ -1,8 +1,5 @@
-﻿using StrategyGame.Bll.DTOs.Fejlesztesek;
-using StrategyGame.Bll.DTOs.Epuletek;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace StrategyGame.Bll.DTOs
 {
@@ -25,6 +22,6 @@ namespace StrategyGame.Bll.DTOs
         public IList<SeregInfoDTO> SeregInfoDTOs { get; set; }
         public IList<EpuletInfoDTO> EpuletInfoDTOs { get; set; }
 
-        
+
     }
 }

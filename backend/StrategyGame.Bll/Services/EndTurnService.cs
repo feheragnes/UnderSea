@@ -1,18 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
+using StrategyGame.Bll.Hubs;
 using StrategyGame.Bll.ServiceInterfaces;
 using StrategyGame.Dal.Context;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using System.Linq;
-using AutoMapper;
-using StrategyGame.Bll.DTOs.Epuletek;
-using StrategyGame.Model.Enums;
 using StrategyGame.Model.Entities.Models;
 using StrategyGame.Model.Entities.Models.Egysegek;
-using Microsoft.AspNetCore.SignalR;
-using StrategyGame.Bll.Hubs;
+using StrategyGame.Model.Enums;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace StrategyGame.Bll.Services
 {

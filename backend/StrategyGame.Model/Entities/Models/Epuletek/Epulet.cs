@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace StrategyGame.Model.Entities.Models.Epuletek
 {
-    public abstract class Epulet 
+    public abstract class Epulet
     {
         public Epulet()
         {
@@ -15,7 +12,7 @@ namespace StrategyGame.Model.Entities.Models.Epuletek
         public Guid Id { get; set; }
 
         public long Ar { get; set; }
-             
+
         public long SzuksegesKorok { get; set; }
 
         public long AktualisKor { get; set; }
@@ -26,5 +23,5 @@ namespace StrategyGame.Model.Entities.Models.Epuletek
         //public Guid? OrszagId { get; set; }
 
     }
-   
- }
+
+}

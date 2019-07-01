@@ -1,24 +1,16 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using StrategyGame.Bll.ServiceInterfaces;
 using StrategyGame.Bll.DTOs;
-using StrategyGame.Bll.DTOs.Egysegek;
-using StrategyGame.Bll.DTOs.Epuletek;
-using StrategyGame.Bll.DTOs.Fejlesztesek;
 using StrategyGame.Bll.ServiceInterfaces;
 using StrategyGame.Dal.Context;
 using StrategyGame.Model.Entities.Identity;
 using StrategyGame.Model.Entities.Models;
-using StrategyGame.Model.Entities.Models.Egysegek;
 using StrategyGame.Model.Entities.Models.Epuletek;
-using StrategyGame.Model.Entities.Models.Fejlesztesek;
 using StrategyGame.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace StrategyGame.Bll.Services
@@ -122,12 +114,12 @@ namespace StrategyGame.Bll.Services
             return Convert.ToInt64(Convert.ToDouble(await _context.NepessegTermelos
                  .Include(x => x.Epulet).ThenInclude(x => x.Orszag)
                  .Where(x => x.Epulet.Orszag.Id == orszag.Id)
-                 .Where(x=>x.Epulet.Felepult == true)
+                 .Where(x => x.Epulet.Felepult == true)
                  .SumAsync(x => x.Ertek) * 1)
                 * (Convert.ToDouble(await _context.AdoNovelos
                 .Include(x => x.Fejlesztes).ThenInclude(x => x.Orszag)
                 .Where(x => x.Fejlesztes.Orszag.Id == orszag.Id)
-                .Where(x=>x.Fejlesztes.Kifejlesztve == true)
+                .Where(x => x.Fejlesztes.Kifejlesztve == true)
                 .SumAsync(x => x.Ertek) / 100.0) + 1));
         }
         public async Task<long> GetTamadasBonusz(Orszag orszag)

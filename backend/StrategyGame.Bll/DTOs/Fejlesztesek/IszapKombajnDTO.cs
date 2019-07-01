@@ -1,12 +1,10 @@
 ﻿using StrategyGame.Bll.ServiceInterfaces;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace StrategyGame.Bll.DTOs.Fejlesztesek
 {
-    class IszapKombajnDTO : FejlesztesDTO, ITermelo
+    internal class IszapKombajnDTO : FejlesztesDTO, ITermelo
     {
         public Task Increase()
         {
@@ -16,9 +14,9 @@ namespace StrategyGame.Bll.DTOs.Fejlesztesek
 
         public async Task<OrszagDTO> SetTermeles(OrszagDTO orszag)
         {
-                var tmp = (double)orszag.KorallTermeles;
-              //  tmp *= Noveles / 100;
-                orszag.KorallTermeles = Convert.ToInt64(Math.Round(tmp));
+            var tmp = (double)orszag.KorallTermeles;
+            //  tmp *= Noveles / 100;
+            orszag.KorallTermeles = Convert.ToInt64(Math.Round(tmp));
             return orszag;
         }
     }

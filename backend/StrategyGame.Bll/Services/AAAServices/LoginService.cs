@@ -3,9 +3,7 @@ using StrategyGame.Bll.DTOs.AAADTOs;
 using StrategyGame.Bll.ServiceInterfaces.AAAServiceInterfaces;
 using StrategyGame.Model.Entities.Identity;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace StrategyGame.Bll.Services.AAAServices

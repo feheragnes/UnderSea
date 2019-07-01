@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace StrategyGame.Model.Enums
+﻿namespace StrategyGame.Model.Enums
 {
-    public enum  HarcEredmenyTipus
+    public enum HarcEredmenyTipus
     {
         Gyozelem,
         Vereseg,

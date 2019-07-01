@@ -1,8 +1,7 @@
-﻿using System;
+﻿using StrategyGame.Bll.DTOs;
+using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-using StrategyGame.Bll.DTOs;
 
 namespace StrategyGame.Bll.ServiceInterfaces
 {

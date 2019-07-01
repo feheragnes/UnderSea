@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
 using StrategyGame.Bll.DTOs;
 using StrategyGame.Model.Entities.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace StrategyGame.Bll.Mappers
 {
@@ -21,7 +18,7 @@ namespace StrategyGame.Bll.Mappers
                   //.ForMember(e => e.Fejleszteses, opt => opt.MapFrom(e => e.Fejleszteses))
                   .ReverseMap();
 
-         
+
         }
 
     }

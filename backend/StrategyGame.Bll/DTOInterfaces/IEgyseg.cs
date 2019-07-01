@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace StrategyGame.Bll.ServiceInterfaces
+﻿namespace StrategyGame.Bll.ServiceInterfaces
 {
-    interface IEgyseg
+    internal interface IEgyseg
     {
     }
 }
