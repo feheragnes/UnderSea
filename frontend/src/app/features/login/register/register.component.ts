@@ -64,10 +64,7 @@ export class RegisterComponent implements OnInit {
         this.toastr.error('A jelszóban szerepeljen kis és nagybetű és szám! ');
       }
       if (this.registerForm.get('confirmPassword').hasError('required')) {
-        this.toastr.error('Hiányzó jelszó ismétlés!');
-      }
-      if (this.registerForm.get('confirmPassword').hasError('minlength')) {
-        this.toastr.error('Rövid jelszó ismétlés!');
+        this.toastr.error('Hiányzó jelszó megerősítés!');
       }
       if (this.registerForm.get('countryName').hasError('required')) {
         this.toastr.error('Hiányzó országnév!');
