@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace StrategyGame.Api.ViewModels.EpuletViewModels
+﻿namespace StrategyGame.Api.ViewModels.EpuletViewModels
 {
     public class EpuletInfoViewModel
     {

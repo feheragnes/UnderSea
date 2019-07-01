@@ -1,7 +1,5 @@
 ﻿using StrategyGame.Bll.ServiceInterfaces;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace StrategyGame.Bll.DTOs.Epuletek
@@ -23,8 +21,8 @@ namespace StrategyGame.Bll.DTOs.Epuletek
 
         public async Task<OrszagDTO> SetTermeles(OrszagDTO orszag)
         {
-                orszag.KorallTermeles += Korall;
-                orszag.GyongyTermeles += Nepesseg * 50;
+            orszag.KorallTermeles += Korall;
+            orszag.GyongyTermeles += Nepesseg * 50;
             return orszag;
         }
     }

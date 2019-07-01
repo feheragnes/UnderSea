@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using Hangfire;
+using Hangfire.SqlServer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,22 +9,20 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using StrategyGame.Api.Mappers;
+using StrategyGame.Bll.Hubs;
+using StrategyGame.Bll.Mappers;
+using StrategyGame.Bll.ServiceInterfaces;
+using StrategyGame.Bll.ServiceInterfaces.AAAServiceInterfaces;
+using StrategyGame.Bll.Services;
+using StrategyGame.Bll.Services.AAAServices;
 using StrategyGame.Dal.Context;
 using StrategyGame.Model.Entities.Identity;
-using Hangfire;
-using Hangfire.SqlServer;
-using AutoMapper;
-using StrategyGame.Bll.ServiceInterfaces.AAAServiceInterfaces;
-using StrategyGame.Bll.Services.AAAServices;
 using Swashbuckle.AspNetCore.Swagger;
-using StrategyGame.Bll.Mappers;
-using StrategyGame.Bll.Services;
-using StrategyGame.Bll.ServiceInterfaces;
-using StrategyGame.Api.Mappers;
-using StrategyGame.Bll.ServiceInterfaces;
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
 
 namespace StrategyGame.Api
 {
@@ -39,7 +34,8 @@ namespace StrategyGame.Api
         }
 
         public IConfiguration Configuration { get; }
-        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+        private readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -123,20 +119,23 @@ namespace StrategyGame.Api
             services.AddScoped<IRegistrationService, RegistrationService>();
             services.AddScoped<IEndTurnService, EndTurnService>();
             services.AddScoped<IInitService, InitService>();
+
             services.AddHangfireServer();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v0.1", new Info { Title = "UnderSeaApi", Version = "v0.1" });
             });
 
-            services.AddCors(options =>
+
+            services.AddCors();
+            /*services.AddCors(options =>
             {
                 options.AddPolicy(MyAllowSpecificOrigins,
                 builder =>
                 {
                     builder.WithOrigins("localhost:4200").AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader();
                 });
-            });
+            });*/
             services.AddRouting(opt => opt.LowercaseUrls = true);
             services.AddMvc();
             var mappingConfig = new MapperConfiguration(mc =>
@@ -153,6 +152,7 @@ namespace StrategyGame.Api
             });
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -164,7 +164,11 @@ namespace StrategyGame.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseCors(MyAllowSpecificOrigins);
+            app.UseCors(builder =>
+            {
+                builder.WithOrigins("http://localhost:4200")
+                .AllowAnyHeader().AllowAnyMethod().AllowCredentials();
+            });
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -172,6 +176,10 @@ namespace StrategyGame.Api
                 c.RoutePrefix = string.Empty;
             });
 
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<NextTurnHub>("/notify");
+            });
 
 
             JobStorage.Current = new SqlServerStorage(Configuration.GetConnectionString("StrategyGameContextConnection"));

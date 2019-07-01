@@ -1,10 +1,7 @@
-﻿using StrategyGame.Model.Entities.Identity;
-using StrategyGame.Model.Entities.Models.Epuletek;
+﻿using StrategyGame.Model.Entities.Models.Epuletek;
 using StrategyGame.Model.Entities.Models.Fejlesztesek;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace StrategyGame.Model.Entities.Models
 {
@@ -25,6 +22,6 @@ namespace StrategyGame.Model.Entities.Models
 
         public IList<Fejlesztes> Fejleszteses { get; set; } = new List<Fejlesztes>();
 
-    
+
     }
 }

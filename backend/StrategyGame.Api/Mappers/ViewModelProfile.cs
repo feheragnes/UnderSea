@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using StrategyGame.Api.ViewModels;
 using StrategyGame.Api.ViewModels.AAAViewModels;
 using StrategyGame.Api.ViewModels.EgysegViewModels;
 using StrategyGame.Api.ViewModels.EpuletViewModels;
@@ -10,12 +9,8 @@ using StrategyGame.Api.ViewModels.TamadasViewModels;
 using StrategyGame.Bll.DTOs;
 using StrategyGame.Bll.DTOs.AAADTOs;
 using StrategyGame.Bll.DTOs.Egysegek;
-using StrategyGame.Model.Entities.Models.Egysegek;
 using StrategyGame.Model.Enums;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StrategyGame.Api.Mappers
 {
@@ -75,7 +70,7 @@ namespace StrategyGame.Api.Mappers
                 .ForMember(x => x.HarcEredmeny, opt => opt.MapFrom(y => Enum.GetName(typeof(HarcEredmenyTipus), y.HarcEredmeny)))
                 .ForMember(x => x.TamadoCsapat, opt => opt.MapFrom(y => y.TamadoCsapat))
                 .ForMember(x => x.VedekezoOrszag, opt => opt.MapFrom(y => y.VedezoOrszag.Nev));
-                
+
 
         }
     }

@@ -1,16 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
+using StrategyGame.Bll.Hubs;
 using StrategyGame.Bll.ServiceInterfaces;
 using StrategyGame.Dal.Context;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using System.Linq;
-using AutoMapper;
-using StrategyGame.Bll.DTOs.Epuletek;
-using StrategyGame.Model.Enums;
 using StrategyGame.Model.Entities.Models;
 using StrategyGame.Model.Entities.Models.Egysegek;
+using StrategyGame.Model.Enums;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace StrategyGame.Bll.Services
 {
@@ -19,12 +19,14 @@ namespace StrategyGame.Bll.Services
         private readonly StrategyGameContext _context;
         private readonly IMapper _mapper;
         private readonly IOrszagService _orszagService;
+        private readonly IHubContext<NextTurnHub> _hubContext;
 
-        public EndTurnService(StrategyGameContext context, IMapper mapper, IOrszagService orszagService)
+        public EndTurnService(StrategyGameContext context, IMapper mapper, IOrszagService orszagService, IHubContext<NextTurnHub> hubContext)
         {
             _context = context;
             _mapper = mapper;
             _orszagService = orszagService;
+            _hubContext = hubContext;
         }
 
         public async Task DoFejleszteses()
@@ -51,12 +53,12 @@ namespace StrategyGame.Bll.Services
         }
         public async Task DoAdo()
         {
-            await _context.Orszags.ForEachAsync(x => x.Gyongy +=  _orszagService.GetGyongyTermeles(x).Result);
+            await _context.Orszags.ForEachAsync(x => x.Gyongy += _orszagService.GetGyongyTermeles(x).Result);
             await _context.SaveChangesAsync();
         }
         public async Task DoKorall()
         {
-            await _context.Orszags.ForEachAsync(x => x.Korall +=  _orszagService.GetKorallTermeles(x).Result);
+            await _context.Orszags.ForEachAsync(x => x.Korall += _orszagService.GetKorallTermeles(x).Result);
             await _context.SaveChangesAsync();
         }
         public async Task DoZsold()
@@ -65,15 +67,15 @@ namespace StrategyGame.Bll.Services
                 {
                     var otthoniCsapat = x.OtthoniCsapats.SingleOrDefault(y => y.Kimenetel == HarcEredmenyTipus.Otthon);
                     var osszKoltseg = otthoniCsapat.Egysegs.Sum(y => y.Zsold);
-                    if(osszKoltseg < x.Gyongy)
+                    if (osszKoltseg < x.Gyongy)
                     {
                         x.Gyongy -= osszKoltseg;
                     }
                     else
                     {
-                        while(x.Gyongy < osszKoltseg)
+                        while (x.Gyongy < osszKoltseg)
                         {
-                            osszKoltseg -= otthoniCsapat.Egysegs.FirstOrDefault()?.Zsold ?? 0 ;
+                            osszKoltseg -= otthoniCsapat.Egysegs.FirstOrDefault()?.Zsold ?? 0;
                             otthoniCsapat.Egysegs.Remove(otthoniCsapat.Egysegs.FirstOrDefault());
                         }
                     }
@@ -102,14 +104,14 @@ namespace StrategyGame.Bll.Services
         private double GetRandom()
         {
             var rand = new Random();
-            return (rand.Next(0,5)/100)+1;
+            return (rand.Next(0, 5) / 100) + 1;
         }
-        private void  DoHarcEredmeny(Csapat csapat)
+        private void DoHarcEredmeny(Csapat csapat)
         {
-            var tamadas = csapat.Egysegs.Sum(x => x.Tamadas)*GetRandom();
+            var tamadas = csapat.Egysegs.Sum(x => x.Tamadas) * GetRandom() + _orszagService.GetTamadasBonusz(csapat.Tulajdonos).Result;
             var vedekezes = (csapat.Celpont.OtthoniCsapats
                 .FirstOrDefault(y => y.Kimenetel == HarcEredmenyTipus.Otthon)
-                .Egysegs?.Sum(y => y.Vedekezes) ?? 0)*GetRandom();
+                .Egysegs?.Sum(y => y.Vedekezes) ?? 0) * GetRandom() + _orszagService.GetVedekezesBonusz(csapat.Celpont).Result;
             if (tamadas > vedekezes)
             {
                 csapat.Kimenetel = HarcEredmenyTipus.Gyozelem;
@@ -123,7 +125,7 @@ namespace StrategyGame.Bll.Services
                     ellenseg.Egysegs.Remove(ellenseg.Egysegs.FirstOrDefault());
                 }
             }
-            else if(tamadas < vedekezes)
+            else if (tamadas < vedekezes)
             {
                 csapat.Kimenetel = HarcEredmenyTipus.Vereseg;
                 for (int i = 0; i < Convert.ToInt64(csapat.Egysegs.Count * 0.1); i++)
@@ -161,14 +163,14 @@ namespace StrategyGame.Bll.Services
                 .Include(x => x.OtthoniCsapats).ThenInclude(x => x.Egysegs)
                 .Include(x => x.OtthoniCsapats).ThenInclude(x => x.Celpont)
                 .ThenInclude(x => x.OtthoniCsapats).ThenInclude(x => x.Egysegs)
-                .Include(x=>x.OtthoniCsapats).ThenInclude(x=>x.Tulajdonos).ThenInclude(x=>x.OtthoniCsapats).ThenInclude(x=>x.Egysegs)
+                .Include(x => x.OtthoniCsapats).ThenInclude(x => x.Tulajdonos).ThenInclude(x => x.OtthoniCsapats).ThenInclude(x => x.Egysegs)
                 .ForEachAsync(x =>
-                {
-                    foreach(var csapat in x.OtthoniCsapats.Where(y=>y.Kimenetel == HarcEredmenyTipus.Folyamatban))
-                    {
+               {
+                   foreach (var csapat in x.OtthoniCsapats.Where(y => y.Kimenetel == HarcEredmenyTipus.Folyamatban))
+                   {
                        DoHarcEredmeny(csapat);
-                    }
-                });
+                   }
+               });
 
         }
 
@@ -184,24 +186,26 @@ namespace StrategyGame.Bll.Services
             await SetOrszagScores();
             (await _context.Jateks.FirstOrDefaultAsync()).Korok++;
             await _context.SaveChangesAsync();
+            await _hubContext.Clients.All.SendAsync("NextTurn");
+
         }
         public async Task SetOrszagScores()
         {
-            await _context.Orszags.Include(x=>x.Epulets).Include(x=>x.OtthoniCsapats).ThenInclude(x=>x.Egysegs).Include(x=>x.Fejleszteses).ForEachAsync(async x =>
-            {
-                x.Pont = 0;
-                x.Pont += await _context.NepessegTermelos
-                .Include(y => y.Epulet).ThenInclude(y => y.Orszag)
-                .Where(y => y.Epulet.Felepult == true)
-                .Where(y => y.Epulet.Orszag.Id == x.Id)
-                .SumAsync(y => y.Ertek) 
-                + x.Epulets.Where(y=>y.Felepult==true).Count() * 50
-                + x.OtthoniCsapats.Where(y=>y.Celpont == null).SingleOrDefault()
-                .Egysegs.Where(y=>y.Discriminator == Enum.GetName(typeof(EgysegTipus),EgysegTipus.LezerCapa)).Count() *10
-                + x.OtthoniCsapats.Where(y => y.Celpont == null).SingleOrDefault()
-                .Egysegs.Where(y => y.Discriminator != Enum.GetName(typeof(EgysegTipus), EgysegTipus.LezerCapa)).Count() * 5
-                + x.Fejleszteses.Count *100;               
-            });
+            await _context.Orszags.Include(x => x.Epulets).Include(x => x.OtthoniCsapats).ThenInclude(x => x.Egysegs).Include(x => x.Fejleszteses).ForEachAsync(async x =>
+                    {
+                        x.Pont = 0;
+                        x.Pont += await _context.NepessegTermelos
+                        .Include(y => y.Epulet).ThenInclude(y => y.Orszag)
+                        .Where(y => y.Epulet.Felepult == true)
+                        .Where(y => y.Epulet.Orszag.Id == x.Id)
+                        .SumAsync(y => y.Ertek)
+                        + x.Epulets.Where(y => y.Felepult == true).Count() * 50
+                        + x.OtthoniCsapats.Where(y => y.Celpont == null).SingleOrDefault()
+                        .Egysegs.Where(y => y.Discriminator == Enum.GetName(typeof(EgysegTipus), EgysegTipus.LezerCapa)).Count() * 10
+                        + x.OtthoniCsapats.Where(y => y.Celpont == null).SingleOrDefault()
+                        .Egysegs.Where(y => y.Discriminator != Enum.GetName(typeof(EgysegTipus), EgysegTipus.LezerCapa)).Count() * 5
+                        + x.Fejleszteses.Where(y => y.Kifejlesztve == true).Count() * 100;
+                    });
             await _context.SaveChangesAsync();
         }
     }

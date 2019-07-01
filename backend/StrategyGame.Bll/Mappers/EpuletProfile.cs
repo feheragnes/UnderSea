@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
 using StrategyGame.Bll.DTOs.Epuletek;
 using StrategyGame.Model.Entities.Models.Epuletek;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace StrategyGame.Bll.Mappers
 {

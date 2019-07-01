@@ -1,11 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using StrategyGame.Bll.ServiceInterfaces;
 using StrategyGame.Dal.Context;
 using StrategyGame.Model.Entities.Models;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace StrategyGame.Bll.Services
@@ -27,13 +24,13 @@ namespace StrategyGame.Bll.Services
                                   .ThenInclude(x => x.Epulets)
                                   .Include(x => x.Orszag)
                                   .ThenInclude(x => x.OtthoniCsapats)
-                                  .ThenInclude(x=>x.Egysegs)
-                                  .Include(x=>x.Orszag)
-                                  .ThenInclude(x=>x.OtthoniCsapats)
-                                  .ThenInclude(x=>x.Celpont)
+                                  .ThenInclude(x => x.Egysegs)
+                                  .Include(x => x.Orszag)
+                                  .ThenInclude(x => x.OtthoniCsapats)
+                                  .ThenInclude(x => x.Celpont)
                                   .Include(x => x.Orszag)
                                   .ThenInclude(x => x.TamadoCsapats)
-                                  .ThenInclude(x=>x.Egysegs)
+                                  .ThenInclude(x => x.Egysegs)
                                   .FirstOrDefaultAsync(x => x.Id == userId))
                                   .Orszag;
 

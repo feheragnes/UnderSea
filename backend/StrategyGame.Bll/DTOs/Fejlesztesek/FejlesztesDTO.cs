@@ -1,7 +1,4 @@
-﻿using StrategyGame.Bll.ServiceInterfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 using System.Threading.Tasks;
 
 namespace StrategyGame.Bll.DTOs.Fejlesztesek

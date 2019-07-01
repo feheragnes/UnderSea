@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StrategyGame.Api.ViewModels.OrszagViewModels;
-using StrategyGame.Bll.DTOs;
 using StrategyGame.Bll.ServiceInterfaces;
 using StrategyGame.Model.Entities.Identity;
+using System;
+using System.Threading.Tasks;
 
 namespace StrategyGame.Api.Controllers
 {
@@ -21,7 +16,7 @@ namespace StrategyGame.Api.Controllers
         private readonly IOrszagService _orszagService;
         private readonly IMapper _mapper;
 
-        public OrszagController(IOrszagService orszagService,UserManager<StrategyGameUser> userManager, IMapper mapper):base(userManager)
+        public OrszagController(IOrszagService orszagService, UserManager<StrategyGameUser> userManager, IMapper mapper) : base(userManager)
         {
             _orszagService = orszagService;
             _mapper = mapper;
@@ -32,7 +27,8 @@ namespace StrategyGame.Api.Controllers
             try
             {
                 return _mapper.Map<OrszagInfoViewModel>(await _orszagService.GetUserOrszagInfos(UserId));
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }

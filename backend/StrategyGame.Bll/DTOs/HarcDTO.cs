@@ -1,10 +1,5 @@
-﻿
-using StrategyGame.Bll.DTOs.Egysegek;
-using StrategyGame.Model.Entities.Models;
-using StrategyGame.Model.Enums;
-using System;
+﻿using StrategyGame.Model.Enums;
 using System.Collections.Generic;
-using System.Text;
 
 namespace StrategyGame.Bll.DTOs
 {

@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using StrategyGame.Api.ViewModels.EpuletViewModels;
 using StrategyGame.Bll.DTOs;
 using StrategyGame.Bll.ServiceInterfaces;
 using StrategyGame.Model.Entities.Identity;
-using Newtonsoft.Json.Linq;
-using StrategyGame.Model.Entities.Models.Epuletek;
 using StrategyGame.Model.Entities.Models;
-using StrategyGame.Api.ViewModels.EpuletViewModels;
-using AutoMapper;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace StrategyGame.Api.Controllers
 {
@@ -25,7 +22,7 @@ namespace StrategyGame.Api.Controllers
         private readonly ICommonService _commonService;
         private readonly IMapper _mapper;
 
-        public EpuletController(IEpuletService epuletService, IOrszagService orszagService,ICommonService commonService,UserManager<StrategyGameUser> userManager, IMapper mapper):base(userManager)
+        public EpuletController(IEpuletService epuletService, IOrszagService orszagService, ICommonService commonService, UserManager<StrategyGameUser> userManager, IMapper mapper) : base(userManager)
         {
             _epuletService = epuletService;
             _orszagService = orszagService;
@@ -40,7 +37,8 @@ namespace StrategyGame.Api.Controllers
             {
                 Orszag currentOrszag = await _commonService.GetCurrentOrszag(UserId);
                 return _mapper.Map<List<EpuletInfoViewModel>>(await _epuletService.GetFelepultEpuletsFromOneUserAsync(currentOrszag));
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
@@ -53,7 +51,8 @@ namespace StrategyGame.Api.Controllers
             {
                 await _epuletService.AddEpuletAsync(_mapper.Map<List<EpuletInfoDTO>>(epulets), UserId);
                 return Ok();
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
@@ -64,7 +63,7 @@ namespace StrategyGame.Api.Controllers
         public async Task<ActionResult<List<EpuletInfoViewModel>>> GetEpuletInfos()
         {
 
-            return  _mapper.Map < List < EpuletInfoViewModel >> (await _epuletService.GetAllEpuletsFromOneUserAsync(UserId));
+            return _mapper.Map<List<EpuletInfoViewModel>>(await _epuletService.GetAllEpuletsFromOneUserAsync(UserId));
         }
     }
 }

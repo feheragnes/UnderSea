@@ -6,7 +6,6 @@ using StrategyGame.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace StrategyGame.Bll.Mappers
 {
@@ -14,7 +13,7 @@ namespace StrategyGame.Bll.Mappers
     {
         public EgysegProfile()
         {
-         
+
 
             CreateMap<Egyseg, EgysegDTO>()
                 .ForMember(e => e.Ar, opt => opt.MapFrom(e => e.Ar))

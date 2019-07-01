@@ -7,12 +7,10 @@ using StrategyGame.Dal.Context;
 using StrategyGame.Model.Entities.Identity;
 using StrategyGame.Model.Entities.Models;
 using StrategyGame.Model.Entities.Models.Fejlesztesek;
-using StrategyGame.Model.Entities.Models.Novelok;
 using StrategyGame.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace StrategyGame.Bll.Services.AAAServices
@@ -39,11 +37,11 @@ namespace StrategyGame.Bll.Services.AAAServices
 
             if (currentOrszag?.Fejleszteses.Where(x => x.Kifejlesztve == false)?.Count() != 0)
             {
-                throw new InvalidOperationException("Már van folyamatban lévő fejlesztésed");
+                throw new InvalidOperationException(Resources.ErrorMessage.AnotherResearch);
             }
             if (currentOrszag?.Fejleszteses.Where(x => x.GetType().Name == fejlesztesTipus)?.Count() != 0)
             {
-                throw new InvalidOperationException("Ezt már kifejlesztetted");
+                throw new InvalidOperationException(Resources.ErrorMessage.AlreadyResearched);
             }
 
 
@@ -68,7 +66,7 @@ namespace StrategyGame.Bll.Services.AAAServices
                     currentOrszag.Fejleszteses.Add(new VizalattiHarcmuveszet());
                     break;
                 default:
-                    throw new ArgumentException("Invalid fejlesztes type");
+                    throw new ArgumentException(Resources.ErrorMessage.InvalidResearch);
             }
 
             _context.SaveChanges();
