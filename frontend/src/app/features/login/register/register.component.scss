@@ -27,6 +27,10 @@ mat-card-content {
   font-size: 18px;
 }
 
+.form-rounded {
+  width: 366px;
+}
+
 .register {
   color: #001234;
   background: linear-gradient(to right, #0fcfde 0%, #9ffff0 100%);
@@ -53,5 +57,4 @@ form {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
 }
