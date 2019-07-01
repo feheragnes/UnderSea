@@ -128,15 +128,16 @@ namespace StrategyGame.Api
             {
                 c.SwaggerDoc("v0.1", new Info { Title = "UnderSeaApi", Version = "v0.1" });
             });
-            
-            services.AddCors(options =>
+
+            services.AddCors();
+            /*services.AddCors(options =>
             {
                 options.AddPolicy(MyAllowSpecificOrigins,
                 builder =>
                 {
                     builder.WithOrigins("localhost:4200").AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader();
                 });
-            });
+            });*/
             services.AddRouting(opt => opt.LowercaseUrls = true);
             services.AddMvc();
             var mappingConfig = new MapperConfiguration(mc =>
@@ -165,7 +166,11 @@ namespace StrategyGame.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseCors(MyAllowSpecificOrigins);
+            app.UseCors(builder =>
+            {
+                builder.WithOrigins("http://localhost:4200")
+                .AllowAnyHeader().AllowAnyMethod().AllowCredentials();
+            });
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
