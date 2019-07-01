@@ -9,6 +9,7 @@ using System.Linq;
 using AutoMapper;
 using StrategyGame.Bll.DTOs.Epuletek;
 using StrategyGame.Model.Enums;
+using StrategyGame.Model.Entities.Models;
 
 namespace StrategyGame.Bll.Services
 {
@@ -97,8 +98,59 @@ namespace StrategyGame.Bll.Services
                 }
             });
         }
+        private double GetRandom()
+        {
+            var rand = new Random();
+            return (rand.Next(0,5)/100)+1;
+        }
+        private void  DoHarcEredmeny(Csapat csapat)
+        {
+            var tamadas = csapat.Egysegs.Sum(x => x.Tamadas)*GetRandom();
+            var vedekezes = (csapat.Celpont.OtthoniCsapats
+                .FirstOrDefault(y => y.Kimenetel == HarcEredmenyTipus.Otthon)
+                .Egysegs?.Sum(y => y.Vedekezes) ?? 0)*GetRandom();
+            if (tamadas > vedekezes)
+            {
+                csapat.Kimenetel = HarcEredmenyTipus.Gyozelem;
+                csapat.Tulajdonos.Gyongy += csapat.Celpont.Gyongy / 2;
+                csapat.Tulajdonos.Korall += csapat.Celpont.Korall / 2;
+                csapat.Celpont.Gyongy -= csapat.Celpont.Gyongy / 2;
+                csapat.Celpont.Korall -= csapat.Celpont.Korall / 2;
+                var ellenseg = csapat.Celpont.OtthoniCsapats.FirstOrDefault(x => x.Kimenetel == HarcEredmenyTipus.Otthon);
+                for (int i = 0; i < Convert.ToInt64(ellenseg.Egysegs.Count * 0.1); i++)
+                {
+                    ellenseg.Egysegs.Remove(ellenseg.Egysegs.FirstOrDefault());
+                }
+            }
+            else if(tamadas < vedekezes)
+            {
+                csapat.Kimenetel = HarcEredmenyTipus.Vereseg;
+                for (int i = 0; i < Convert.ToInt64(csapat.Egysegs.Count * 0.1); i++)
+                {
+                    csapat.Egysegs.Remove(csapat.Egysegs.FirstOrDefault());
+                }
+            }
+            else
+            {
+
+            }
+            csapat.Tulajdonos.OtthoniCsapats.FirstOrDefault(x => x.Kimenetel == HarcEredmenyTipus.Otthon).Egysegs.AddRange(csapat.Egysegs);
+            _context.SaveChanges();
+        }
         public async Task DoHarc()
         {
+            await _context.Orszags
+                .Include(x => x.OtthoniCsapats).ThenInclude(x => x.Egysegs)
+                .Include(x => x.OtthoniCsapats).ThenInclude(x => x.Celpont)
+                .ThenInclude(x => x.OtthoniCsapats).ThenInclude(x => x.Egysegs)
+                .Include(x=>x.OtthoniCsapats).ThenInclude(x=>x.Tulajdonos).ThenInclude(x=>x.OtthoniCsapats).ThenInclude(x=>x.Egysegs)
+                .ForEachAsync(x =>
+                {
+                    foreach(var csapat in x.OtthoniCsapats.Where(y=>y.Kimenetel == HarcEredmenyTipus.Folyamatban))
+                    {
+                       DoHarcEredmeny(csapat);
+                    }
+                });
 
         }
 

@@ -165,8 +165,8 @@ namespace StrategyGame.Bll.Services
                         {
                             throw new ArgumentException($"Nincs elég {x.Tipus} egységed!");
                         }
+                        tamadocsapat.Egysegs.Add(csapat0.Egysegs.FirstOrDefault(y => y.Discriminator == Enum.GetName(typeof(EgysegTipus), EgysegTipus.CsataCsiko)));
                         csapat0.Egysegs.Remove(csapat0.Egysegs.FirstOrDefault(y => y.Discriminator == Enum.GetName(typeof(EgysegTipus), EgysegTipus.CsataCsiko)));
-                        tamadocsapat.Egysegs.Add(new CsataCsiko());
                         egysegszam--;
                     }
                     if (x.Tipus == EgysegTipus.LezerCapa)
@@ -175,8 +175,8 @@ namespace StrategyGame.Bll.Services
                         {
                             throw new ArgumentException($"Nincs elég {x.Tipus} egységed!");
                         }
+                        tamadocsapat.Egysegs.Add(csapat0.Egysegs.FirstOrDefault(y => y.Discriminator == Enum.GetName(typeof(EgysegTipus), EgysegTipus.LezerCapa)));
                         csapat0.Egysegs.Remove(csapat0.Egysegs.FirstOrDefault(y => y.Discriminator == Enum.GetName(typeof(EgysegTipus), EgysegTipus.LezerCapa)));
-                        tamadocsapat.Egysegs.Add(new LezerCapa());
                         egysegszam--;
                     }
                     if (x.Tipus == EgysegTipus.RohamFoka)
@@ -185,8 +185,8 @@ namespace StrategyGame.Bll.Services
                         {
                             throw new ArgumentException($"Nincs elég {x.Tipus} egységed!");
                         }
+                        tamadocsapat.Egysegs.Add(csapat0.Egysegs.FirstOrDefault(y => y.Discriminator == Enum.GetName(typeof(EgysegTipus), EgysegTipus.RohamFoka)));
                         csapat0.Egysegs.Remove(csapat0.Egysegs.FirstOrDefault(y => y.Discriminator == Enum.GetName(typeof(EgysegTipus), EgysegTipus.RohamFoka)));
-                        tamadocsapat.Egysegs.Add(new RohamFoka());
                         egysegszam--;
                     }
                 }
