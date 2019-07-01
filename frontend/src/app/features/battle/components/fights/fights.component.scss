@@ -100,18 +100,6 @@ mat-list * {
   width: 100%;
 }
 
-.list::-webkit-scrollbar {
-  width: 0.5em;
-}
-.list::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.25);
-  border-radius: 10px;
-}
-.list::-webkit-scrollbar-thumb {
-  background-color: #9ffff0;
-  outline: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 10px;
-}
 mat-spinner {
   margin-left: auto;
   margin-right: auto;
