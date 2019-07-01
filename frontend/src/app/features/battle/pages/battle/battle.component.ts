@@ -38,7 +38,6 @@ export class BattleComponent implements OnInit {
   ngOnInit() {
     this.getOrszagInfo();
     this.getTurn();
-    this.getFejlesztesInfo();
   }
 
   getOrszagInfo(): void {
@@ -86,7 +85,6 @@ export class BattleComponent implements OnInit {
       () => {
         this.getOrszagInfo();
         this.getTurn();
-        this.getFejlesztesInfo();
       }
     );
   }
@@ -98,22 +96,6 @@ export class BattleComponent implements OnInit {
       err => console.error(err),
       () => {
         console.log('done loading turn');
-      }
-    );
-  }
-
-  getFejlesztesInfo() {
-    this.fejlesztesService.getFejlesztesInfo().subscribe(
-      data => {
-        data.forEach(element => {
-          if (element.tipus === FejlesztesType.szonarAgyu) {
-            this.szonarAgyu = element.kifejlesztve;
-          }
-        });
-      },
-      err => console.error(err),
-      () => {
-        console.log('done loading fejlesztesInfo');
       }
     );
   }

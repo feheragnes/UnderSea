@@ -4,22 +4,53 @@
   background-color: transparent;
 }
 
-.pic1 {
+.aramlasiranyito {
   position: fixed;
   top: 500px;
   left: 800px;
   z-index: 3;
 }
 
-.pic2 {
+.szonaragyu {
   position: fixed;
   z-index: 2;
   top: 110px;
   left: 850px;
 }
-.pic3 {
+.zatonyvar {
   position: fixed;
   z-index: 1;
   top: 290px;
   left: 640px;
+}
+
+.korall {
+  position: fixed;
+  z-index: 4;
+  top: 625px;
+  left: 700px;
+}
+.traktor {
+  position: fixed;
+  z-index: 1;
+  top: 400px;
+  left: 400px;
+}
+.kombajn {
+  position: fixed;
+  z-index: 1;
+  top: 290px;
+  left: 640px;
+}
+.vizalatti {
+  position: fixed;
+  z-index: 1;
+  bottom: 15px;
+  right: 400px;
+}
+.alkimia {
+  position: fixed;
+  z-index: 5;
+  top: 420px;
+  right: 400px;
 }
