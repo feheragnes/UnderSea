@@ -11,6 +11,8 @@ using StrategyGame.Bll.DTOs.Epuletek;
 using StrategyGame.Model.Enums;
 using StrategyGame.Model.Entities.Models;
 using StrategyGame.Model.Entities.Models.Egysegek;
+using Microsoft.AspNetCore.SignalR;
+using StrategyGame.Bll.Hubs;
 
 namespace StrategyGame.Bll.Services
 {
@@ -19,12 +21,14 @@ namespace StrategyGame.Bll.Services
         private readonly StrategyGameContext _context;
         private readonly IMapper _mapper;
         private readonly IOrszagService _orszagService;
+        private readonly IHubContext<NextTurnHub> _hubContext;
 
-        public EndTurnService(StrategyGameContext context, IMapper mapper, IOrszagService orszagService)
+        public EndTurnService(StrategyGameContext context, IMapper mapper, IOrszagService orszagService, IHubContext<NextTurnHub> hubContext)
         {
             _context = context;
             _mapper = mapper;
             _orszagService = orszagService;
+            _hubContext = hubContext;
         }
 
         public async Task DoFejleszteses()
@@ -184,6 +188,8 @@ namespace StrategyGame.Bll.Services
             await SetOrszagScores();
             (await _context.Jateks.FirstOrDefaultAsync()).Korok++;
             await _context.SaveChangesAsync();
+            await _hubContext.Clients.All.SendAsync("NextTurn");
+            
         }
         public async Task SetOrszagScores()
         {

@@ -28,6 +28,7 @@ using StrategyGame.Bll.Services;
 using StrategyGame.Bll.ServiceInterfaces;
 using StrategyGame.Api.Mappers;
 using StrategyGame.Bll.ServiceInterfaces;
+using StrategyGame.Bll.Hubs;
 
 namespace StrategyGame.Api
 {
@@ -152,6 +153,7 @@ namespace StrategyGame.Api
             });
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -171,6 +173,10 @@ namespace StrategyGame.Api
                 c.RoutePrefix = string.Empty;
             });
 
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<NextTurnHub>("/notify");
+            });
 
             JobStorage.Current = new SqlServerStorage(Configuration.GetConnectionString("StrategyGameContextConnection"));
 
