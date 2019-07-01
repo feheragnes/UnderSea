@@ -16,22 +16,6 @@ mat-card-header {
   color: #1c3e76;
 }
 
-.form-rounded {
-  border-radius: 2rem;
-  width: 366px;
-  height: 40px;
-  margin-bottom: 19px;
-  background-color: rgba(255, 255, 255, 0.39);
-  border: rgba(255, 255, 255, 0.39);
-  color: #1c3e76;
-  padding: 2px;
-  padding-left: 20px;
-  font-size: 16px;
-}
-.form-rounded::placeholder {
-  color: #1c3e76;
-}
-
 .login {
   color: #001234;
   font-size: 18px;
@@ -56,10 +40,6 @@ h1 {
   font-size: 93px;
   color: #9ffff0;
   text-align: center;
-}
-
-input:focus {
-  outline: none;
 }
 
 form {

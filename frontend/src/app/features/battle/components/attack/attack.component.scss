@@ -69,22 +69,6 @@ button {
   flex-direction: row;
 }
 
-.form-rounded {
-  border-radius: 2rem;
-  height: 40px;
-  width: 95%;
-  margin-bottom: 19px;
-  background-color: rgba(255, 255, 255, 0.39);
-  border: rgba(255, 255, 255, 0.39);
-  color: #1c3e76;
-  padding: 2px;
-  padding-left: 20px;
-  font-size: 16px;
-}
-.form-rounded::placeholder {
-  color: #1c3e76;
-}
-
 .icon {
   background-color: #9ffff0;
   border-style: solid;
@@ -130,10 +114,6 @@ button {
   border-radius: 50%;
   background: #9ffff0;
   cursor: pointer;
-}
-
-input:focus {
-  outline: none;
 }
 
 hr {

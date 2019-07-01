@@ -27,23 +27,6 @@ mat-card-content {
   font-size: 18px;
 }
 
-.form-rounded {
-  border-radius: 2rem;
-  width: 366px;
-  height: 40px;
-  margin-bottom: 19px;
-  background-color: rgba(255, 255, 255, 0.39);
-  border: rgba(255, 255, 255, 0.39);
-  color: #1c3e76;
-  padding: 2px;
-  padding-left: 20px;
-  font-size: 16px;
-}
-
-.form-rounded::placeholder {
-  color: #1c3e76;
-}
-
 .register {
   color: #001234;
   background: linear-gradient(to right, #0fcfde 0%, #9ffff0 100%);
@@ -65,13 +48,10 @@ h1 {
   text-align: center;
 }
 
-input:focus {
-  outline: none;
-}
-
 form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
