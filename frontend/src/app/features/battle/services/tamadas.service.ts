@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { TamadasInfo } from '../models/tamadas';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,9 @@ export class TamadasService {
 
   constructor(private http: HttpClient) {}
 
-  getTamadasInfo(): Observable<any> {
+  getTamadasInfo(): Observable<TamadasInfo> {
     const url = `${this.tamadasUrl}/gettamadasinfos`;
-    return this.http.get<any>(url);
+    return this.http.get<TamadasInfo>(url);
   }
 
   tamadas(parameter) {

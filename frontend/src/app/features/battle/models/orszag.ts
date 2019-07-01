@@ -6,18 +6,20 @@ export interface Orszag {
   helyezes: number;
   korallTermeles: number;
   gyongyTermeles: number;
-  seregInfo: [
-    {
-      mennyiseg: number;
-      ar: number;
-      tipus: string;
-    }
-  ];
-  epuletInfo: [
-    {
-      tipus: string;
-      ar: number;
-      mennyiseg: number;
-    }
-  ];
+  seregInfo: SeregInfo[];
+  epuletInfo: EpuletInfo[];
+  epuloAramlasIranyito: number;
+  epuloZatonyvar: number;
+}
+
+export interface SeregInfo {
+  mennyiseg: number;
+  ar?: number;
+  tipus: string;
+}
+
+export interface EpuletInfo {
+  tipus: string;
+  ar: number;
+  mennyiseg: number;
 }

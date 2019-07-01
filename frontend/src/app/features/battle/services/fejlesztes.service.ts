@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Fejlesztes } from '../models/fejlesztes';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,9 @@ export class FejlesztesService {
 
   constructor(private http: HttpClient) {}
 
-  getFejlesztesInfo(): Observable<any> {
+  getFejlesztesInfo(): Observable<Fejlesztes[]> {
     const url = `${this.fejlesztesUrl}/getfejlesztesinfos`;
-    return this.http.get<any>(url);
+    return this.http.get<Fejlesztes[]>(url);
   }
 
   buyFejlesztes(type: string) {

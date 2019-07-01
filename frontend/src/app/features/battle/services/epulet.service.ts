@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Epulet } from '../models/epulet';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,9 @@ export class EpuletService {
 
   constructor(private http: HttpClient) {}
 
-  getEpuletInfo(): Observable<any> {
+  getEpuletInfo(): Observable<Epulet[]> {
     const url = `${this.epuletUrl}/getuserepulets`;
-    return this.http.get<any>(url);
+    return this.http.get<Epulet[]>(url);
   }
 
   buyEpulet(type: string) {

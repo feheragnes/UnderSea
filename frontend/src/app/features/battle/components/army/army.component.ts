@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { EgysegService } from '../../services/egyseg.service';
 import { ToastrService } from 'ngx-toastr';
+import { Egyseg, EgysegType } from '../../models/egyseg';
 
 @Component({
   selector: 'app-army',
@@ -11,7 +12,7 @@ export class ArmyComponent implements OnInit {
   public capaNumber = 0;
   public fokaNumber = 0;
   public csikoNumber = 0;
-  public egysegInfo;
+  public egysegInfo: Egyseg[];
   public capaInfo;
   public csikoInfo;
   public fokaInfo;
@@ -51,13 +52,13 @@ export class ArmyComponent implements OnInit {
       data => {
         this.egysegInfo = data;
         data.forEach(element => {
-          if (element.tipus === 'RohamFoka') {
+          if (element.tipus === EgysegType.foka) {
             this.fokaInfo = element;
           }
-          if (element.tipus === 'LezerCapa') {
+          if (element.tipus === EgysegType.capa) {
             this.capaInfo = element;
           }
-          if (element.tipus === 'CsataCsiko') {
+          if (element.tipus === EgysegType.csiko) {
             this.csikoInfo = element;
           }
         });
@@ -72,15 +73,15 @@ export class ArmyComponent implements OnInit {
   buyEgyseg() {
     const parameter = [
       {
-        tipus: 'RohamFoka',
+        tipus: EgysegType.foka,
         mennyiseg: this.fokaNumber
       },
       {
-        tipus: 'LezerCapa',
+        tipus: EgysegType.capa,
         mennyiseg: this.capaNumber
       },
       {
-        tipus: 'CsataCsiko',
+        tipus: EgysegType.csiko,
         mennyiseg: this.csikoNumber
       }
     ];

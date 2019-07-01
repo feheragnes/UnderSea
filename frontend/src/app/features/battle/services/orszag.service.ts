@@ -1,14 +1,14 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { Orszag } from "../models/orszag";
-import { environment } from "src/environments/environment";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Orszag } from '../models/orszag';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class OrszagService {
-  private orszagUrl = environment.apiUrl + "/orszag";
+  private orszagUrl = environment.apiUrl + '/orszag';
 
   constructor(private http: HttpClient) {}
 

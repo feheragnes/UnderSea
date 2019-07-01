@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { GlobalService } from '../../services/global.service';
+import { RanglistaElem } from '../../models/ranglistaElem';
 
 @Component({
   selector: 'app-rankings',
@@ -7,8 +8,8 @@ import { GlobalService } from '../../services/global.service';
   styleUrls: ['./rankings.component.scss']
 })
 export class RankingsComponent implements OnInit {
-  private ranglista;
-  public filteredranglista;
+  private ranglista: RanglistaElem[];
+  public filteredranglista: RanglistaElem[];
 
   @Output() stateChanged = new EventEmitter();
 

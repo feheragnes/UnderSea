@@ -5,6 +5,10 @@ import { OrszagService } from '../../services/orszag.service';
 import { GlobalService } from '../../services/global.service';
 import { EpuletService } from '../../services/epulet.service';
 import { FejlesztesService } from '../../services/fejlesztes.service';
+import { FejlesztesType } from '../../models/fejlesztes';
+import { EgysegType } from '../../models/egyseg';
+import { EpuletType } from '../../models/epulet';
+import { Orszag, SeregInfo, EpuletInfo } from '../../models/orszag';
 
 @Component({
   selector: 'app-battle',
@@ -12,16 +16,16 @@ import { FejlesztesService } from '../../services/fejlesztes.service';
   styleUrls: ['./battle.component.scss']
 })
 export class BattleComponent implements OnInit {
-  public orszagInfo;
-  public gyongy;
-  public korall;
-  public capa;
-  public foka;
-  public csiko;
-  public aramlasiranyito;
-  public zatonyvar;
-  public szonaragyu;
-  public turn;
+  public orszagInfo: Orszag;
+  public gyongy: number;
+  public korall: number;
+  public capaInfo: SeregInfo;
+  public fokaInfo: SeregInfo;
+  public csikoInfo: SeregInfo;
+  public aramlasIranyitoInfo: EpuletInfo;
+  public zatonyVarInfo: EpuletInfo;
+  public szonarAgyu: boolean;
+  public turn: number;
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -31,31 +35,33 @@ export class BattleComponent implements OnInit {
     private fejlesztesService: FejlesztesService
   ) {}
 
+  ngOnInit() {
+    this.getOrszagInfo();
+    this.getTurn();
+    this.getFejlesztesInfo();
+  }
+
   getOrszagInfo(): void {
     this.orszagService.getOrszagInfo().subscribe(
       data => {
         this.orszagInfo = data;
         this.gyongy = data.gyongy;
         this.korall = data.korall;
-        this.csiko = data.seregInfo.filter(x => x.tipus === 'CsataCsiko');
-        this.foka = data.seregInfo.filter(x => x.tipus === 'RohamFoka');
-        this.capa = data.seregInfo.filter(x => x.tipus === 'LezerCapa');
-        this.aramlasiranyito = data.epuletInfo.filter(
-          x => x.tipus === 'AramlasIranyito'
+        this.csikoInfo = data.seregInfo.find(x => x.tipus === EgysegType.csiko);
+        this.fokaInfo = data.seregInfo.find(x => x.tipus === EgysegType.foka);
+        this.capaInfo = data.seregInfo.find(x => x.tipus === EgysegType.capa);
+        this.aramlasIranyitoInfo = data.epuletInfo.find(
+          x => x.tipus === EpuletType.aramlasIranyito
         );
-        this.zatonyvar = data.epuletInfo.filter(x => x.tipus === 'ZatonyVar');
+        this.zatonyVarInfo = data.epuletInfo.find(
+          x => x.tipus === EpuletType.zatonyVar
+        );
       },
       err => console.error(err),
       () => {
         console.log('done loading orszagInfo');
       }
     );
-  }
-
-  ngOnInit() {
-    this.getOrszagInfo();
-    this.getTurn();
-    this.getFejlesztesInfo();
   }
 
   logout() {
@@ -95,12 +101,13 @@ export class BattleComponent implements OnInit {
       }
     );
   }
+
   getFejlesztesInfo() {
     this.fejlesztesService.getFejlesztesInfo().subscribe(
       data => {
         data.forEach(element => {
-          if (element.tipus === 'SzonarAgyu') {
-            this.szonaragyu = element.kifejlesztve;
+          if (element.tipus === FejlesztesType.szonarAgyu) {
+            this.szonarAgyu = element.kifejlesztve;
           }
         });
       },

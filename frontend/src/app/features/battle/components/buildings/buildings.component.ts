@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { EpuletService } from '../../services/epulet.service';
 import { ToastrService } from 'ngx-toastr';
+import { Epulet, EpuletType } from '../../models/epulet';
 
 @Component({
   selector: 'app-buildings',
@@ -10,10 +11,10 @@ import { ToastrService } from 'ngx-toastr';
 export class BuildingsComponent implements OnInit {
   @Output() stateChanged = new EventEmitter();
 
-  public activeCard;
-  public epuletInfo;
-  public zatonyvarInfo;
-  public aramlasiranyitoInfo;
+  public activeCard: string;
+  public epuletInfo: Epulet[];
+  public zatonyvarInfo: Epulet;
+  public aramlasiranyitoInfo: Epulet;
 
   constructor(
     private epuletService: EpuletService,
@@ -33,10 +34,10 @@ export class BuildingsComponent implements OnInit {
       data => {
         this.epuletInfo = data;
         data.forEach(element => {
-          if (element.tipus === 'AramlasIranyito') {
+          if (element.tipus === EpuletType.aramlasIranyito) {
             this.aramlasiranyitoInfo = element;
           }
-          if (element.tipus === 'ZatonyVar') {
+          if (element.tipus === EpuletType.zatonyVar) {
             this.zatonyvarInfo = element;
           }
         });
@@ -51,10 +52,10 @@ export class BuildingsComponent implements OnInit {
   buyBuilding() {
     let type;
     if (this.activeCard === 'card1') {
-      type = 'ZatonyVar';
+      type = EpuletType.zatonyVar;
     }
     if (this.activeCard === 'card2') {
-      type = 'AramlasIranyito';
+      type = EpuletType.aramlasIranyito;
     }
 
     this.epuletService.buyEpulet(type).subscribe(

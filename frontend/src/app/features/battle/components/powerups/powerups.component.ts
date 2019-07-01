@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FejlesztesService } from '../../services/fejlesztes.service';
 import { ToastrService } from 'ngx-toastr';
+import { Fejlesztes, FejlesztesType } from '../../models/fejlesztes';
 
 @Component({
   selector: 'app-powerups',
@@ -8,15 +9,15 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./powerups.component.scss']
 })
 export class PowerupsComponent implements OnInit {
-  public activeCard;
-  public fejlesztesInfo;
-  public traktorInfo;
-  public kombajnInfo;
-  public alkimiaInfo;
-  public korallInfo;
-  public szonarAgyuInfo;
-  public vizalattiHarcmuveszetInfo;
-  public isDisabled;
+  public activeCard: string;
+  public fejlesztesInfo: Fejlesztes[];
+  public traktorInfo: Fejlesztes;
+  public kombajnInfo: Fejlesztes;
+  public alkimiaInfo: Fejlesztes;
+  public korallInfo: Fejlesztes;
+  public szonarAgyuInfo: Fejlesztes;
+  public vizalattiHarcmuveszetInfo: Fejlesztes;
+  public isDisabled: boolean;
   @Output() stateChanged = new EventEmitter();
 
   constructor(
@@ -37,22 +38,22 @@ export class PowerupsComponent implements OnInit {
       data => {
         this.fejlesztesInfo = data;
         data.forEach(element => {
-          if (element.tipus === 'IszapTraktor') {
+          if (element.tipus === FejlesztesType.traktor) {
             this.traktorInfo = element;
           }
-          if (element.tipus === 'IszapKombajn') {
+          if (element.tipus === FejlesztesType.kombajn) {
             this.kombajnInfo = element;
           }
-          if (element.tipus === 'Alkimia') {
+          if (element.tipus === FejlesztesType.alkimia) {
             this.alkimiaInfo = element;
           }
-          if (element.tipus === 'KorallFal') {
+          if (element.tipus === FejlesztesType.korall) {
             this.korallInfo = element;
           }
-          if (element.tipus === 'SzonarAgyu') {
+          if (element.tipus === FejlesztesType.szonarAgyu) {
             this.szonarAgyuInfo = element;
           }
-          if (element.tipus === 'VizalattiHarcmuveszet') {
+          if (element.tipus === FejlesztesType.vizalatti) {
             this.vizalattiHarcmuveszetInfo = element;
           }
         });
@@ -68,22 +69,22 @@ export class PowerupsComponent implements OnInit {
     let type;
     switch (this.activeCard) {
       case 'traktor':
-        type = 'IszapTraktor';
+        type = FejlesztesType.traktor;
         break;
       case 'kombajn':
-        type = 'IszapKombajn';
+        type = FejlesztesType.kombajn;
         break;
       case 'korallfal':
-        type = 'KorallFal';
+        type = FejlesztesType.korall;
         break;
       case 'szonaragyu':
-        type = 'SzonarAgyu';
+        type = FejlesztesType.szonarAgyu;
         break;
       case 'vizalatti':
-        type = 'VizalattiHarcmuveszet';
+        type = FejlesztesType.vizalatti;
         break;
       case 'alkimia':
-        type = 'Alkimia';
+        type = FejlesztesType.alkimia;
         break;
     }
     this.fejlesztesService.buyFejlesztes(type).subscribe(

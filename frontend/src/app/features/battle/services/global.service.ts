@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { RanglistaElem } from '../models/ranglistaElem';
+import { Turn } from '../models/turn';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +13,9 @@ export class GlobalService {
 
   constructor(private http: HttpClient) {}
 
-  getRanglista(): Observable<any> {
+  getRanglista(): Observable<RanglistaElem[]> {
     const url = `${this.globalUrl}/getranglista`;
-    return this.http.get<any>(url);
+    return this.http.get<RanglistaElem[]>(url);
   }
 
   nextTurn(): Observable<any> {
@@ -21,8 +23,8 @@ export class GlobalService {
     return this.http.post<any>(url, '');
   }
 
-  getAktualisKor() {
+  getAktualisKor(): Observable<Turn> {
     const url = `${this.globalUrl}/getaktualiskor`;
-    return this.http.get<any>(url);
+    return this.http.get<Turn>(url);
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TamadasService } from '../../services/tamadas.service';
 import { Army } from '../../models/army';
 import { Fight } from '../../models/fight';
+import { EgysegType } from '../../models/egyseg';
 
 @Component({
   selector: 'app-fights',
@@ -28,13 +29,13 @@ export class FightsComponent implements OnInit {
           let csikoNumber = 0;
           let fokaNumber = 0;
           element.tamadoCsapat.forEach(csapat => {
-            if (csapat.tipus === 'RohamFoka') {
+            if (csapat.tipus === EgysegType.foka) {
               fokaNumber = csapat.mennyiseg;
             }
-            if (csapat.tipus === 'LezerCapa') {
+            if (csapat.tipus === EgysegType.capa) {
               capaNumber = csapat.mennyiseg;
             }
-            if (csapat.tipus === 'CsataCsiko') {
+            if (csapat.tipus === EgysegType.csiko) {
               csikoNumber = csapat.mennyiseg;
             }
           });

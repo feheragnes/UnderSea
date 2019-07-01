@@ -1,6 +1,9 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TamadasService } from '../../services/tamadas.service';
 import { ToastrService } from 'ngx-toastr';
+import { EgysegType } from '../../models/egyseg';
+import { SeregInfo } from '../../models/orszag';
+import { TamadasInfo } from '../../models/tamadas';
 
 @Component({
   selector: 'app-attack',
@@ -11,13 +14,13 @@ export class AttackComponent implements OnInit {
   public capaNumber = 0;
   public fokaNumber = 0;
   public csikoNumber = 0;
-  public tamadasInfo;
-  public countries;
-  public filteredCountries;
-  public selectedCountry;
-  public fokaInfo;
-  public capaInfo;
-  public csikoInfo;
+  public tamadasInfo: TamadasInfo;
+  public countries: string[];
+  public filteredCountries: string[];
+  public selectedCountry: string;
+  public fokaInfo: SeregInfo;
+  public capaInfo: SeregInfo;
+  public csikoInfo: SeregInfo;
   @Output() stateChanged = new EventEmitter();
 
   constructor(
@@ -39,13 +42,13 @@ export class AttackComponent implements OnInit {
         this.countries = data.orszag;
         this.filteredCountries = data.orszag;
         data.sereg.forEach(element => {
-          if (element.tipus === 'RohamFoka') {
+          if (element.tipus === EgysegType.foka) {
             this.fokaInfo = element;
           }
-          if (element.tipus === 'LezerCapa') {
+          if (element.tipus === EgysegType.capa) {
             this.capaInfo = element;
           }
-          if (element.tipus === 'CsataCsiko') {
+          if (element.tipus === EgysegType.csiko) {
             this.csikoInfo = element;
           }
         });
@@ -74,15 +77,15 @@ export class AttackComponent implements OnInit {
       orszag: this.selectedCountry,
       tamadoEgysegek: [
         {
-          tipus: 'RohamFoka',
+          tipus: EgysegType.foka,
           mennyiseg: this.fokaNumber
         },
         {
-          tipus: 'LezerCapa',
+          tipus: EgysegType.capa,
           mennyiseg: this.capaNumber
         },
         {
-          tipus: 'CsataCsiko',
+          tipus: EgysegType.csiko,
           mennyiseg: this.csikoNumber
         }
       ]

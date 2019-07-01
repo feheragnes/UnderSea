@@ -11,15 +11,15 @@
         <div class="icons">
           <div class="icontext">
             <img class="icon" src="assets\images\icon_harcicapa.svg" />
-            <h4>{{ capa[0] ? capa[0].mennyiseg : 0 }}</h4>
+            <h4>{{ capaInfo ? capaInfo.mennyiseg : 0 }}</h4>
           </div>
           <div class="icontext">
             <img class="icon" src="assets\images\icon_rohamfoka.svg" />
-            <h4>{{ foka[0] ? foka[0].mennyiseg : 0 }}</h4>
+            <h4>{{ fokaInfo ? fokaInfo.mennyiseg : 0 }}</h4>
           </div>
           <div class="icontext">
             <img class="icon" src="assets\images\icon_csatacsiko.svg" />
-            <h4>{{ csiko[0] ? csiko[0].mennyiseg : 0 }}</h4>
+            <h4>{{ csikoInfo ? csikoInfo.mennyiseg : 0 }}</h4>
           </div>
           <div class="icontext">
             <img class="icon" src="assets\images\icon_gyongy.svg" />
@@ -38,14 +38,14 @@
           <div class="icontext">
             <img class="icon" src="assets\images\icon_zatonyvar.svg" />
             <div class="doubletext">
-              <h4>{{ zatonyvar[0].mennyiseg }}</h4>
+              <h4>{{ zatonyVarInfo.mennyiseg }}</h4>
               <h5>{{ orszagInfo.epuloZatonyvar }} épül</h5>
             </div>
           </div>
           <div class="icontext">
             <img class="icon" src="assets\images\icon_aramlasiranyito.svg" />
             <div class="doubletext">
-              <h4>{{ aramlasiranyito[0].mennyiseg }}</h4>
+              <h4>{{ aramlasIranyitoInfo.mennyiseg }}</h4>
               <h5>{{ orszagInfo.epuloAramlasIranyito }} épül</h5>
             </div>
           </div>
@@ -78,9 +78,9 @@
       <mat-sidenav-content>
         <div class="country">
           <app-country
-            [aramlasIranyito]="aramlasiranyito[0].mennyiseg > 0"
-            [zatonyVar]="zatonyvar[0].mennyiseg > 0"
-            [szonarAgyu]="szonaragyu"
+            [aramlasIranyito]="aramlasIranyitoInfo.mennyiseg > 0"
+            [zatonyVar]="zatonyVarInfo.mennyiseg > 0"
+            [szonarAgyu]="szonarAgyu"
           ></app-country>
         </div>
         <div class="router">
