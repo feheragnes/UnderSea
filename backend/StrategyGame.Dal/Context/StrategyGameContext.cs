@@ -12,6 +12,7 @@ using StrategyGame.Model.Entities.Models.Termelok;
 using StrategyGame.Model.Enums;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace StrategyGame.Dal.Context
@@ -72,13 +73,13 @@ namespace StrategyGame.Dal.Context
             builder.ApplyConfiguration(new CsapatConfiguration());
             builder.Entity<EgysegInfo>().HasData
                 (
-                new EgysegInfo { Id = new Guid("00000000-0000-0000-0000-000000000001"), Tipus = EgysegTipus.RohamFoka, Ar = 50, Ellatas = 1, Zsold = 1, Tamadas = 6, Vedekezes = 2 },
-                new EgysegInfo { Id = new Guid("00000000-0000-0000-0000-000000000002"), Tipus = EgysegTipus.CsataCsiko, Ar = 50, Ellatas = 1, Zsold = 1, Tamadas = 2, Vedekezes = 6 },
-                new EgysegInfo { Id = new Guid("00000000-0000-0000-0000-000000000003"), Tipus = EgysegTipus.LezerCapa, Ar = 100, Ellatas = 2, Zsold = 3, Tamadas = 5, Vedekezes = 5 }
+                new EgysegInfo { Id = Guid.NewGuid(), Tipus = EgysegTipus.RohamFoka, Ar = 50, Ellatas = 1, Zsold = 1, Tamadas = 6, Vedekezes = 2 },
+                new EgysegInfo { Id = Guid.NewGuid(), Tipus = EgysegTipus.CsataCsiko, Ar = 50, Ellatas = 1, Zsold = 1, Tamadas = 2, Vedekezes = 6 },
+                new EgysegInfo { Id = Guid.NewGuid(), Tipus = EgysegTipus.LezerCapa, Ar = 100, Ellatas = 2, Zsold = 3, Tamadas = 5, Vedekezes = 5 }
                 );
             builder.Entity<Jatek>().HasData
                 (
-                new Jatek { Id = new Guid("07610b41-4b35-4047-88b7-2f4df4eee3b1"), Korok = 0 }
+                new Jatek { Id = Guid.NewGuid(), Korok = 0 }
                 );
 
         }
@@ -91,7 +92,9 @@ namespace StrategyGame.Dal.Context
             }
             catch (DbUpdateConcurrencyException e)
             {
-                throw new Exception("Concurrency error");
+                e.Entries.Single().Reload();
+                SaveChanges();
+                return 1;
             }
             catch (Exception e)
             {

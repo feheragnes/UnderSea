@@ -58,12 +58,11 @@ namespace StrategyGame.Bll.Services
             long aramlasIranyitoMennyiseg = 0;
             long zatonyvarMennyiseg = 0;
 
-            //TODO: refactor typeof
             felepultEpulets.ForEach(x =>
             {
-                if (x.GetType() == typeof(AramlasIranyito))
+                if (x is AramlasIranyito)
                     aramlasIranyitoMennyiseg++;
-                if (x.GetType() == typeof(ZatonyVar))
+                if (x is ZatonyVar)
                     zatonyvarMennyiseg++;
             });
 

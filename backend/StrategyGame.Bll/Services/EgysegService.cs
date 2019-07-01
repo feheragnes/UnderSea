@@ -182,21 +182,6 @@ namespace StrategyGame.Bll.Services
             return egysegInfoDtos;
         }
 
-        public async Task SaveChangesAsync()
-        {
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException e)
-            {
-                throw new Exception("Concurrency error");
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
-        }
     }
 }
 ;

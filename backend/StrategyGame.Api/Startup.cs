@@ -33,12 +33,12 @@ namespace StrategyGame.Api
 {
     public class Startup
     {
+        public readonly IEndTurnService _endTurnService;
 
-
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IEndTurnService endTurnService)
         {
-
             Configuration = configuration;
+            _endTurnService = endTurnService;
         }
 
         public IConfiguration Configuration { get; }
@@ -125,7 +125,6 @@ namespace StrategyGame.Api
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IRegistrationService, RegistrationService>();
             services.AddScoped<IEndTurnService,EndTurnService>();
-            //services.AddAutoMapper(typeof(Startup));
             services.AddHangfireServer();
             services.AddSwaggerGen(c =>
             {
@@ -174,6 +173,12 @@ namespace StrategyGame.Api
                 c.SwaggerEndpoint("./swagger/v0.1/swagger.json", "UnderSea API v0.1");
                 c.RoutePrefix = string.Empty;
             });
+   
+
+            RecurringJob.AddOrUpdate(
+            () => _endTurnService.NextTurn(),
+            Cron.Minutely);
+
             app.UseAuthentication();
             app.UseMvc();
 
