@@ -28,15 +28,23 @@ namespace StrategyGame.Bll.Services.AAAServices
         }
         public async Task<string> Login(LoginDTO model)
         {
-            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
-
-            if (result.Succeeded)
+            try
             {
-                var appUser = _userManager.Users.SingleOrDefault(r => r.Email == model.Email);
-                return await _jwtService.GenerateJwtToken(model.Email, appUser);
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
+
+
+                if (result.Succeeded)
+                {
+                    var appUser = _userManager.Users.SingleOrDefault(r => r.Email == model.Email);
+                    return await _jwtService.GenerateJwtToken(model.Email, appUser);
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
             }
 
-            throw new ApplicationException("INVALID_LOGIN_ATTEMPT");
+            throw new ApplicationException(Resources.ErrorMessage.LoginFailed);
         }
     }
 }

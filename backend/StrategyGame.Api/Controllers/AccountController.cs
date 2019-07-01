@@ -44,7 +44,14 @@ namespace StrategyGame.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginViewModel model)
         {
-            return Json(new { Token = await _loginService.Login(_mapper.Map<LoginDTO>(model)) });
+            try
+            {
+                return Json(new { Token = await _loginService.Login(_mapper.Map<LoginDTO>(model)) });
+            }catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+
         }
 
         [HttpPost]

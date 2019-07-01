@@ -73,7 +73,7 @@ namespace StrategyGame.Bll.Services
                 await _context.Orszags.AddAsync(orszag);
                 return orszag;
             }
-            throw new ArgumentException("Country already exists");
+            throw new ArgumentException(Resources.ErrorMessage.AlreadyExistCountry);
         }
 
         public async Task<OrszagDTO> GetUserOrszagInfos(Guid userId)

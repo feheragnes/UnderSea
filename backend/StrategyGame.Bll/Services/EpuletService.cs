@@ -88,7 +88,7 @@ namespace StrategyGame.Bll.Services
             currentEpulets.ForEach(x =>
             {
                 if (x.Felepult == false)
-                    throw new InvalidOperationException("Another building is under construction");
+                    throw new InvalidOperationException(Resources.ErrorMessage.AnotherConstruction);
             });
 
             long osszKoltseg = 0;
@@ -113,7 +113,7 @@ namespace StrategyGame.Bll.Services
             });
 
             if (osszKoltseg > currentOrszag.Gyongy)
-                throw new ArgumentException("You don't have enough Gyöngy");
+                throw new ArgumentException(Resources.ErrorMessage.NotEnoughPearl);
 
             (currentOrszag.Epulets as List<Epulet>).AddRange(epuletsToBuy);
             currentOrszag.Gyongy -= osszKoltseg;

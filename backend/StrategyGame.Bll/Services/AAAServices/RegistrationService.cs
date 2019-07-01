@@ -63,7 +63,7 @@ namespace StrategyGame.Bll.Services.AAAServices
                 return await _jwtService.GenerateJwtToken(model.Email, user);
             }
 
-            throw new ApplicationException("UNKNOWN_ERROR");
+            throw new ApplicationException(Resources.ErrorMessage.RegistrationFailed);
         }
 
 

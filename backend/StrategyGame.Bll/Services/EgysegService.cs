@@ -44,7 +44,7 @@ namespace StrategyGame.Bll.Services
                 .Where(x=>x.Epulet.Felepult == true).Sum(x=>x.Ertek) < 
                 (await GetAllEgysegsFromOneUserAsync(userId)).Count + egysegek.Sum(x => x.Mennyiseg))
             {
-                throw new ArgumentException("You dont have enough Szallas");
+                throw new ArgumentException(Resources.ErrorMessage.NotEnoughHousing);
             }
 
             egysegek.ForEach(x =>
@@ -53,7 +53,7 @@ namespace StrategyGame.Bll.Services
             });
 
             if (osszKoltseg > currentOrszag.Gyongy)
-                throw new ArgumentException("You don't have enough Gyöngy");
+                throw new ArgumentException(Resources.ErrorMessage.NotEnoughPearl);
 
             var rohamFokaInfos = await _context.EgysegInfos.SingleOrDefaultAsync(x => x.Tipus == EgysegTipus.RohamFoka);
             var csataCsikoInfos = await _context.EgysegInfos.SingleOrDefaultAsync(x => x.Tipus == EgysegTipus.CsataCsiko);

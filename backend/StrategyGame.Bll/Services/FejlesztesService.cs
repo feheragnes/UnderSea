@@ -39,11 +39,11 @@ namespace StrategyGame.Bll.Services.AAAServices
 
             if (currentOrszag?.Fejleszteses.Where(x => x.Kifejlesztve == false)?.Count() != 0)
             {
-                throw new InvalidOperationException("Another PowerUp is under development");
+                throw new InvalidOperationException(Resources.ErrorMessage.AnotherResearch);
             }
             if (currentOrszag?.Fejleszteses.Where(x => x.GetType().Name == fejlesztesTipus)?.Count() != 0)
             {
-                throw new InvalidOperationException("You already have the chosen PowerUp");
+                throw new InvalidOperationException(Resources.ErrorMessage.AlreadyResearched);
             }
 
 
@@ -68,7 +68,7 @@ namespace StrategyGame.Bll.Services.AAAServices
                     currentOrszag.Fejleszteses.Add(new VizalattiHarcmuveszet());
                     break;
                 default:
-                    throw new ArgumentException("Invalid fejlesztes type");
+                    throw new ArgumentException(Resources.ErrorMessage.InvalidResearch);
             }
 
             _context.SaveChanges();

@@ -144,7 +144,7 @@ namespace StrategyGame.Bll.Services
             bejovoTamadasDTO.TamadoNev = tamadoorszag.Nev;
             if (tamadoorszag.OtthoniCsapats.Where(x=>x.Celpont?.Nev == bejovoTamadasDTO.CelpontNev && x.Kimenetel == HarcEredmenyTipus.Folyamatban).Count() > 0)
             {
-                throw new ArgumentException($"{bejovoTamadasDTO.CelpontNev} országot már támadtad ebben a körben!");
+                throw new ArgumentException(Resources.ErrorMessage.AlreadyAttackedCountry);
             }
             var csapat0 = tamadoorszag.OtthoniCsapats.SingleOrDefault(x => x.Celpont == null);
              var tamadocsapat = new Csapat()
@@ -163,7 +163,7 @@ namespace StrategyGame.Bll.Services
 
                         if (egysegszam > csapat0.Egysegs.Where(y=> Enum.Parse<EgysegTipus>(y.Discriminator) == x.Tipus).Count())
                         {
-                            throw new ArgumentException($"Nincs elég {x.Tipus} egységed!");
+                            throw new ArgumentException(Resources.ErrorMessage.NotEnougCsataCsiko);
                         }
                         tamadocsapat.Egysegs.Add(csapat0.Egysegs.FirstOrDefault(y => y.Discriminator == Enum.GetName(typeof(EgysegTipus), EgysegTipus.CsataCsiko)));
                         csapat0.Egysegs.Remove(csapat0.Egysegs.FirstOrDefault(y => y.Discriminator == Enum.GetName(typeof(EgysegTipus), EgysegTipus.CsataCsiko)));
@@ -173,7 +173,7 @@ namespace StrategyGame.Bll.Services
                     {
                         if (egysegszam > csapat0.Egysegs.Where(y => Enum.Parse<EgysegTipus>(y.Discriminator) == x.Tipus).Count())
                         {
-                            throw new ArgumentException($"Nincs elég {x.Tipus} egységed!");
+                            throw new ArgumentException(Resources.ErrorMessage.NotEnougLezerCapa);
                         }
                         tamadocsapat.Egysegs.Add(csapat0.Egysegs.FirstOrDefault(y => y.Discriminator == Enum.GetName(typeof(EgysegTipus), EgysegTipus.LezerCapa)));
                         csapat0.Egysegs.Remove(csapat0.Egysegs.FirstOrDefault(y => y.Discriminator == Enum.GetName(typeof(EgysegTipus), EgysegTipus.LezerCapa)));
@@ -183,7 +183,7 @@ namespace StrategyGame.Bll.Services
                     {
                         if (egysegszam > csapat0.Egysegs.Where(y => Enum.Parse<EgysegTipus>(y.Discriminator) == x.Tipus).Count())
                         {
-                            throw new ArgumentException($"Nincs elég {x.Tipus} egységed!");
+                            throw new ArgumentException(Resources.ErrorMessage.NotEnougRohamFoka);
                         }
                         tamadocsapat.Egysegs.Add(csapat0.Egysegs.FirstOrDefault(y => y.Discriminator == Enum.GetName(typeof(EgysegTipus), EgysegTipus.RohamFoka)));
                         csapat0.Egysegs.Remove(csapat0.Egysegs.FirstOrDefault(y => y.Discriminator == Enum.GetName(typeof(EgysegTipus), EgysegTipus.RohamFoka)));
