@@ -33,12 +33,9 @@ namespace StrategyGame.Api
 {
     public class Startup
     {
-        public readonly IEndTurnService _endTurnService;
-
-        public Startup(IConfiguration configuration, IEndTurnService endTurnService)
+        public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            _endTurnService = endTurnService;
         }
 
         public IConfiguration Configuration { get; }
@@ -158,9 +155,9 @@ namespace StrategyGame.Api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, StrategyGameContext ctx)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IBackgroundJobClient backgroundJobs, StrategyGameContext ctx, IEndTurnService endTurnService)
         {
-
+            
 
             if (env.IsDevelopment())
             {
@@ -173,11 +170,13 @@ namespace StrategyGame.Api
                 c.SwaggerEndpoint("./swagger/v0.1/swagger.json", "UnderSea API v0.1");
                 c.RoutePrefix = string.Empty;
             });
-   
+
+
+            JobStorage.Current = new SqlServerStorage(Configuration.GetConnectionString("StrategyGameContextConnection"));
 
             RecurringJob.AddOrUpdate(
-            () => _endTurnService.NextTurn(),
-            Cron.Minutely);
+                    () => endTurnService.NextTurn(),
+                    Cron.Minutely);
 
             app.UseAuthentication();
             app.UseMvc();
