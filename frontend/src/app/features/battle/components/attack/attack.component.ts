@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { EgysegType } from '../../models/egyseg';
 import { SeregInfo } from '../../models/orszag';
 import { TamadasInfo, Tamadas } from '../../models/tamadas';
+import { LevelNumbers } from '../../models/levelNumbers';
 
 @Component({
   selector: 'app-attack',
@@ -11,16 +12,19 @@ import { TamadasInfo, Tamadas } from '../../models/tamadas';
   styleUrls: ['./attack.component.scss']
 })
 export class AttackComponent implements OnInit {
-  public capaNumber = 0;
-  public fokaNumber = 0;
-  public csikoNumber = 0;
+  public capaNumber: LevelNumbers;
+  public fokaNumber: LevelNumbers;
+  public csikoNumber: LevelNumbers;
   public tamadasInfo: TamadasInfo;
   public countries: string[];
   public filteredCountries: string[];
   public selectedCountry: string;
-  public fokaInfo: SeregInfo;
-  public capaInfo: SeregInfo;
-  public csikoInfo: SeregInfo;
+  public fokaInfo: SeregInfo[];
+  public capaInfo: SeregInfo[];
+  public csikoInfo: SeregInfo[];
+  public fokaInfoNumbers: LevelNumbers;
+  public capaInfoNumbers: LevelNumbers;
+  public csikoInfoNumbers: LevelNumbers;
   @Output() stateChanged = new EventEmitter();
 
   constructor(
@@ -30,28 +34,56 @@ export class AttackComponent implements OnInit {
 
   ngOnInit() {
     this.getTamadasInfos();
+    this.setLevelNumbersToZero();
   }
 
   getTamadasInfos() {
     this.capaInfo = null;
     this.csikoInfo = null;
     this.fokaInfo = null;
+    this.capaInfoNumbers = { level1: 0, level2: 0, level3: 0 };
+    this.csikoInfoNumbers = { level1: 0, level2: 0, level3: 0 };
+    this.fokaInfoNumbers = { level1: 0, level2: 0, level3: 0 };
     this.tamadasService.getTamadasInfo().subscribe(
       data => {
         this.tamadasInfo = data;
         this.countries = data.orszag;
         this.filteredCountries = data.orszag;
-        data.sereg.forEach(element => {
-          if (element.tipus === EgysegType.foka) {
-            this.fokaInfo = element;
-          }
-          if (element.tipus === EgysegType.capa) {
-            this.capaInfo = element;
-          }
-          if (element.tipus === EgysegType.csiko) {
-            this.csikoInfo = element;
+        this.fokaInfo = data.sereg.filter(x => x.tipus === EgysegType.foka);
+        this.fokaInfo.forEach(element => {
+          if (element.szint === 1) {
+            this.fokaInfoNumbers.level1 = element.mennyiseg;
+          } else if (element.szint === 2) {
+            this.fokaInfoNumbers.level2 = element.mennyiseg;
+          } else if (element.szint === 3) {
+            this.fokaInfoNumbers.level3 = element.mennyiseg;
           }
         });
+        this.capaInfo = data.sereg.filter(x => x.tipus === EgysegType.capa);
+        this.capaInfo.forEach(element => {
+          if (element.szint === 1) {
+            this.capaInfoNumbers.level1 = element.mennyiseg;
+          } else if (element.szint === 2) {
+            this.capaInfoNumbers.level2 = element.mennyiseg;
+          } else if (element.szint === 3) {
+            this.capaInfoNumbers.level3 = element.mennyiseg;
+          }
+        });
+        this.csikoInfo = data.sereg.filter(x => x.tipus === EgysegType.csiko);
+        this.csikoInfo.forEach(element => {
+          if (element.szint === 1) {
+            this.csikoInfoNumbers.level1 = element.mennyiseg;
+          } else if (element.szint === 2) {
+            this.csikoInfoNumbers.level2 = element.mennyiseg;
+          } else if (element.szint === 3) {
+            this.csikoInfoNumbers.level3 = element.mennyiseg;
+          }
+        });
+        console.log(
+          this.capaInfoNumbers,
+          this.csikoInfoNumbers,
+          this.fokaInfoNumbers
+        );
       },
       err => console.error(err),
       () => {
@@ -73,20 +105,53 @@ export class AttackComponent implements OnInit {
   }
 
   attack() {
-    let parameter: Tamadas = {
+    const parameter: Tamadas = {
       orszag: this.selectedCountry,
       tamadoEgysegek: [
         {
           tipus: EgysegType.foka,
-          mennyiseg: this.fokaNumber
+          mennyiseg: this.fokaNumber.level1,
+          szint: 1
         },
         {
           tipus: EgysegType.capa,
-          mennyiseg: this.capaNumber
+          mennyiseg: this.capaNumber.level1,
+          szint: 1
         },
         {
           tipus: EgysegType.csiko,
-          mennyiseg: this.csikoNumber
+          mennyiseg: this.csikoNumber.level1,
+          szint: 1
+        },
+        {
+          tipus: EgysegType.foka,
+          mennyiseg: this.fokaNumber.level2,
+          szint: 2
+        },
+        {
+          tipus: EgysegType.capa,
+          mennyiseg: this.capaNumber.level2,
+          szint: 2
+        },
+        {
+          tipus: EgysegType.csiko,
+          mennyiseg: this.csikoNumber.level2,
+          szint: 2
+        },
+        {
+          tipus: EgysegType.foka,
+          mennyiseg: this.fokaNumber.level3,
+          szint: 3
+        },
+        {
+          tipus: EgysegType.capa,
+          mennyiseg: this.capaNumber.level3,
+          szint: 3
+        },
+        {
+          tipus: EgysegType.csiko,
+          mennyiseg: this.csikoNumber.level3,
+          szint: 3
         }
       ]
     };
@@ -99,21 +164,23 @@ export class AttackComponent implements OnInit {
       error => {
         console.log(error);
         this.toastr.error(error, 'Nem sikerült támadni :(');
-        this.capaNumber = 0;
-        this.csikoNumber = 0;
-        this.fokaNumber = 0;
+        this.setLevelNumbersToZero();
         this.selectedCountry = null;
       },
       () => {
         console.log('attacked');
         this.toastr.success('A kör végén lesz eredmény', 'Harc folyamatban!');
         this.stateChanged.emit(null);
-        this.capaNumber = 0;
-        this.csikoNumber = 0;
-        this.fokaNumber = 0;
+        this.setLevelNumbersToZero();
         this.selectedCountry = null;
         this.getTamadasInfos();
       }
     );
+  }
+
+  setLevelNumbersToZero() {
+    this.capaNumber = { level1: 0, level2: 0, level3: 0 };
+    this.csikoNumber = { level1: 0, level2: 0, level3: 0 };
+    this.fokaNumber = { level1: 0, level2: 0, level3: 0 };
   }
 }

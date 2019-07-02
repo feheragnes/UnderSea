@@ -16,6 +16,7 @@ export interface SeregInfo {
   mennyiseg: number;
   ar?: number;
   tipus: string;
+  szint?: number;
 }
 
 export interface EpuletInfo {

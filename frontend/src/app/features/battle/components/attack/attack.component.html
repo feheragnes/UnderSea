@@ -33,8 +33,8 @@
       <div class="column">
         <h4>2. Állítsd be, kiket küldesz harcba:</h4>
         <h5 matTooltip="Lv. 1 / Lv. 2 / Lv. 3">
-          Lézercápa: {{ capaNumber }} / {{ capaNumber }} /
-          {{ capaNumber }} példány
+          Lézercápa: {{ capaNumber.level1 }} / {{ capaNumber.level2 }} /
+          {{ capaNumber.level3 }} példány
         </h5>
         <div class="smallrow">
           <div class="smallcolumn">
@@ -48,39 +48,39 @@
               class="slider"
               #capa
               min="0"
-              max="{{ capaInfo ? capaInfo.mennyiseg : 0 }}"
+              max="{{ capaInfoNumbers.level1 }}"
               value="0"
-              [(ngModel)]="capaNumber"
+              [(ngModel)]="capaNumber.level1"
               matTooltip="Nincs lv. 1 lézercápád :("
-              [matTooltipDisabled]="capaInfo && capaInfo.mennyiseg > 0"
+              [matTooltipDisabled]="capaInfoNumbers.level1 > 0"
             />
             <input
               type="range"
               class="slider"
               #capa
               min="0"
-              max="{{ capaInfo ? capaInfo.mennyiseg : 0 }}"
+              max="{{ capaInfoNumbers.level2 }}"
               value="0"
-              [(ngModel)]="capaNumber"
+              [(ngModel)]="capaNumber.level2"
               matTooltip="Nincs lv. 2 lézercápád :("
-              [matTooltipDisabled]="capaInfo && capaInfo.mennyiseg > 0"
+              [matTooltipDisabled]="capaInfoNumbers.level2 > 0"
             />
             <input
               type="range"
               class="slider"
               #capa
               min="0"
-              max="{{ capaInfo ? capaInfo.mennyiseg : 0 }}"
+              max="{{ capaInfoNumbers.level3 }}"
               value="0"
-              [(ngModel)]="capaNumber"
+              [(ngModel)]="capaNumber.level3"
               matTooltip="Nincs lv. 3 lézercápád :("
-              [matTooltipDisabled]="capaInfo && capaInfo.mennyiseg > 0"
+              [matTooltipDisabled]="capaInfoNumbers.level3 > 0"
             />
           </div>
         </div>
         <h5 matTooltip="Lv. 1 / Lv. 2 / Lv. 3">
-          Rohamfóka: {{ fokaNumber }} / {{ fokaNumber }} /
-          {{ fokaNumber }} példány
+          Rohamfóka: {{ fokaNumber.level1 }} / {{ fokaNumber.level2 }} /
+          {{ fokaNumber.level3 }} példány
         </h5>
         <div class="smallrow">
           <div class="smallcolumn">
@@ -94,39 +94,39 @@
               class="slider"
               #foka
               min="0"
-              max="{{ this.fokaInfo ? fokaInfo.mennyiseg : 0 }}"
+              max="{{ fokaInfoNumbers.level1 }}"
               value="0"
-              [(ngModel)]="fokaNumber"
+              [(ngModel)]="fokaNumber.level1"
               matTooltip="Nincs lv. 1 rohamfókád :("
-              [matTooltipDisabled]="fokaInfo && fokaInfo.mennyiseg > 0"
+              [matTooltipDisabled]="fokaInfoNumbers.level1 > 0"
             />
             <input
               type="range"
               class="slider"
               #foka
               min="0"
-              max="{{ this.fokaInfo ? fokaInfo.mennyiseg : 0 }}"
+              max="{{ fokaInfoNumbers.level2 }}"
               value="0"
-              [(ngModel)]="fokaNumber"
+              [(ngModel)]="fokaNumber.level2"
               matTooltip="Nincs lv. 2 rohamfókád :("
-              [matTooltipDisabled]="fokaInfo && fokaInfo.mennyiseg > 0"
+              [matTooltipDisabled]="fokaInfoNumbers.level2 > 0"
             />
             <input
               type="range"
               class="slider"
               #foka
               min="0"
-              max="{{ this.fokaInfo ? fokaInfo.mennyiseg : 0 }}"
+              max="{{ fokaInfoNumbers.level3 }}"
               value="0"
-              [(ngModel)]="fokaNumber"
+              [(ngModel)]="fokaNumber.level3"
               matTooltip="Nincs lv. 3 rohamfókád :("
-              [matTooltipDisabled]="fokaInfo && fokaInfo.mennyiseg > 0"
+              [matTooltipDisabled]="fokaInfoNumbers.level3 > 0"
             />
           </div>
         </div>
         <h5 matTooltip="Lv. 1 / Lv. 2 / Lv. 3">
-          Csatacsikó: {{ csikoNumber }} / {{ csikoNumber }} /
-          {{ csikoNumber }} példány
+          Csatacsikó: {{ csikoNumber.level1 }} / {{ csikoNumber.level2 }} /
+          {{ csikoNumber.level3 }} példány
         </h5>
         <div class="smallrow">
           <div class="smallcolumn">
@@ -140,33 +140,33 @@
               class="slider"
               #csiko
               min="0"
-              max="{{ csikoInfo ? csikoInfo.mennyiseg : 0 }}"
+              max="{{ csikoInfoNumbers.level1 }}"
               value="0"
-              [(ngModel)]="csikoNumber"
+              [(ngModel)]="csikoNumber.level1"
               matTooltip="Nincs lv. 1 csatacsikód :("
-              [matTooltipDisabled]="csikoInfo && csikoInfo.mennyiseg > 0"
+              [matTooltipDisabled]="csikoInfoNumbers.level1 > 0"
             />
             <input
               type="range"
               class="slider"
               #csiko
               min="0"
-              max="{{ csikoInfo ? csikoInfo.mennyiseg : 0 }}"
+              max="{{ csikoInfoNumbers.level2 }}"
               value="0"
-              [(ngModel)]="csikoNumber"
+              [(ngModel)]="csikoNumber.level2"
               matTooltip="Nincs lv. 2 csatacsikód :("
-              [matTooltipDisabled]="csikoInfo && csikoInfo.mennyiseg > 0"
+              [matTooltipDisabled]="csikoInfoNumbers.level2 > 0"
             />
             <input
               type="range"
               class="slider"
               #csiko
               min="0"
-              max="{{ csikoInfo ? csikoInfo.mennyiseg : 0 }}"
+              max="{{ csikoInfoNumbers.level3 }}"
               value="0"
-              [(ngModel)]="csikoNumber"
+              [(ngModel)]="csikoNumber.level3"
               matTooltip="Nincs lv. 3 csatacsikód :("
-              [matTooltipDisabled]="csikoInfo && csikoInfo.mennyiseg > 0"
+              [matTooltipDisabled]="csikoInfoNumbers.level3 > 0"
             />
           </div>
         </div>
@@ -177,14 +177,31 @@
       class="button"
       matTooltip="Válassz ellenfelet és sereget!"
       [matTooltipDisabled]="
-        selectCountry && (fokaNumber > 0 || capaNumber > 0 || csikoNumber > 0)
+        selectCountry &&
+        (fokaNumber.level1 > 0 ||
+          capaNumber.level1 > 0 ||
+          csikoNumber.level1 > 0 ||
+          fokaNumber.level2 > 0 ||
+          capaNumber.level2 > 0 ||
+          csikoNumber.level2 > 0 ||
+          fokaNumber.level3 > 0 ||
+          capaNumber.level3 > 0 ||
+          csikoNumber.level3 > 0)
       "
     >
       <button
         mat-raised-button
         [disabled]="
           !selectedCountry ||
-          (fokaNumber === 0 && capaNumber === 0 && csikoNumber === 0)
+          (fokaNumber.level1 === 0 &&
+            fokaNumber.level2 === 0 &&
+            fokaNumber.level3 === 0 &&
+            capaNumber.level1 === 0 &&
+            capaNumber.level2 === 0 &&
+            capaNumber.level3 === 0 &&
+            csikoNumber.level1 === 0 &&
+            csikoNumber.level2 === 0 &&
+            csikoNumber.level3 === 0)
         "
         (click)="attack()"
       >
