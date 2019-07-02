@@ -19,7 +19,6 @@ namespace StrategyGame.Api.Controllers
         private readonly IOrszagService _orszagService;
         private readonly ICommonService _commonService;
         private readonly IEgysegService _egysegService;
-        private readonly IInitService _initService;
         private readonly IMapper _mapper;
 
 
@@ -29,7 +28,6 @@ namespace StrategyGame.Api.Controllers
             _egysegService = egysegService;
             _orszagService = orszagService;
             _commonService = commonService;
-            _initService = initService;
             _mapper = mapper;
         }
 
