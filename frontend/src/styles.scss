@@ -48,6 +48,7 @@ html {
   padding-left: 20px;
   font-size: 16px;
 }
+
 .form-rounded::placeholder {
   color: #1c3e76;
 }
@@ -67,4 +68,71 @@ input:focus {
   background-color: #9ffff0;
   outline: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 10px;
+}
+
+mat-spinner {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+}
+
+.maincard {
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  background-color: #03255f;
+}
+
+.card {
+  margin-left: 48px;
+  margin-right: 48px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.smallcard {
+  background-color: transparent;
+  cursor: pointer;
+  text-align: center;
+}
+
+mat-card-header {
+  font-size: 32px;
+}
+
+hr {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+mat-list * {
+  color: white;
+}
+
+button {
+  color: #001234;
+  width: 192px;
+  height: 50px;
+  background: linear-gradient(to right, #0fcfde 0%, #9ffff0 100%);
+}
+
+.button {
+  align-self: center;
+}
+
+.active {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.icon {
+  background-color: #9ffff0;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #428dff;
 }

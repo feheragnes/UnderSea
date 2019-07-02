@@ -1,21 +1,14 @@
 .maincard {
   width: 869px;
   height: 748px;
-  margin-left: auto;
-  margin-right: auto;
-  color: white;
-  background-color: #03255f;
   border-radius: 2rem;
 }
 
 .card {
-  margin-left: 48px;
-  margin-right: 48px;
-  display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+
 .data {
   display: flex;
   flex-direction: row;
@@ -31,9 +24,6 @@
   display: flex;
   flex-direction: column;
 }
-mat-card-header {
-  font-size: 32px;
-}
 
 h4 {
   font-size: 16px;
@@ -48,32 +38,29 @@ h5 {
   color: white;
 }
 
-hr {
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  margin-top: 20px;
-}
 button {
-  color: #001234;
-  font-size: 18px;
-  width: 192px;
-  height: 50px;
   border-radius: 2rem;
-  background: linear-gradient(to right, #0fcfde 0%, #9ffff0 100%);
   margin-top: 20px;
+  font-size: 18px;
 }
+
 .smallrow {
   margin-bottom: 20px;
-  margin-top: 20px;
-  height: 60px;
+  margin-top: 0px;
+  height: 75px;
   display: flex;
   flex-direction: row;
+  align-items: center;
+}
+
+.smallcolumn {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 .icon {
-  background-color: #9ffff0;
-  border-style: solid;
-  border-width: 2px;
-  border-color: #428dff;
   width: 59px;
   height: 59px;
   padding: 0px;
@@ -117,13 +104,8 @@ button {
 }
 
 hr {
-  border: 1px solid rgba(255, 255, 255, 0.25);
   margin: 0px;
   padding: 0px;
-}
-
-.active {
-  background-color: rgba(255, 255, 255, 0.25);
 }
 
 .listItem {
@@ -140,12 +122,6 @@ hr {
 .list {
   overflow: auto;
   flex: 1;
-}
-
-mat-spinner {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 100px;
 }
 
 .form-rounded {

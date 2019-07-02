@@ -10,6 +10,10 @@ mat-toolbar {
   align-items: flex-start;
   height: 84px;
 }
+::ng-deep .mat-tooltip {
+  white-space: pre-line;
+  background: #428dff;
+}
 
 .border {
   margin-left: 21px;
@@ -34,13 +38,9 @@ mat-sidenav-content {
 }
 
 button {
-  color: #001234;
   font-size: 29px;
-  width: 192px;
-  height: 50px;
   margin-bottom: 22px;
   border-radius: 2rem;
-  background: linear-gradient(to right, #0fcfde 0%, #9ffff0 100%);
 }
 
 .card {
@@ -50,6 +50,7 @@ button {
   height: 269px;
   padding: 0px;
   border-radius: 2rem;
+  margin: 0px;
   margin-bottom: 92px;
   display: flex;
   flex-direction: column;
@@ -78,10 +79,11 @@ button {
   align-items: center;
 }
 
-.icon {
+.iconToolbar {
   align-self: center;
   margin-right: 10px;
 }
+
 .card * {
   font-size: 21px;
   margin-bottom: 0px;
@@ -120,12 +122,19 @@ h1 {
 .doubletext {
   display: flex;
   flex-direction: column;
-  height: 58px;
+  justify-content: center;
 }
 
 h5 {
   font-family: baloo;
   font-size: 20px;
+}
+p {
+  font-family: baloo;
+  font-size: 18px;
+  padding: 0;
+  margin: 0;
+  line-height: 20px;
 }
 
 .country {
@@ -140,10 +149,9 @@ h5 {
 }
 h4 {
   font-family: baloo;
-  font-size: 28px;
+  font-size: 24px;
 }
+
 mat-spinner {
-  margin-left: auto;
-  margin-right: auto;
   margin-top: 300px;
 }

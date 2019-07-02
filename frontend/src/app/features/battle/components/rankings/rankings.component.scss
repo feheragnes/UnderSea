@@ -1,35 +1,19 @@
 .maincard {
   width: 869px;
   height: 748px;
-  margin-left: auto;
-  margin-right: auto;
-  color: white;
-  background-color: #03255f;
   border-radius: 2rem;
 }
+
 .card {
-  margin-left: 48px;
-  margin-right: 48px;
   width: 770px;
   height: 590px;
-  display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-mat-card-header {
-  font-size: 32px;
-}
-
 hr {
-  border: 1px solid rgba(255, 255, 255, 0.25);
   margin: 0px;
   padding: 0px;
-}
-
-mat-list * {
-  color: white;
 }
 
 .points {
@@ -54,10 +38,4 @@ mat-list * {
 .list {
   overflow: auto;
   flex: 1;
-}
-
-mat-spinner {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 100px;
 }

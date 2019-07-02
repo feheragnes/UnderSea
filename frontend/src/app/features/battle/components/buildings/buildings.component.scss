@@ -1,14 +1,7 @@
 .maincard {
   width: 869px;
   height: 645px;
-  margin-left: auto;
-  margin-right: auto;
-  color: white;
-  background-color: #03255f;
   border-radius: 2rem;
-}
-mat-card-header {
-  font-size: 32px;
 }
 
 .carddata {
@@ -20,17 +13,13 @@ mat-card-header {
 }
 
 .smallcard {
-  background-color: 'transparent';
   width: 296px;
   height: 315px;
-  background-color: transparent;
-  text-align: center;
-  border-radius: 2rem;
-  box-shadow: 0px 0px 0px 0px transparent;
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
+  box-shadow: 0px 0px 0px 0px transparent;
+  border-radius: 2rem;
 }
 
 h4 {
@@ -50,39 +39,18 @@ h4:first {
 }
 
 hr {
-  border: 1px solid rgba(255, 255, 255, 0.25);
   margin-top: 20px;
 }
 
 button {
-  color: #001234;
-  font-size: 18px;
-  width: 192px;
-  height: 50px;
   border-radius: 2rem;
-  background: linear-gradient(to right, #0fcfde 0%, #9ffff0 100%);
   align-self: center;
   margin-top: 20px;
+  font-size: 18px;
 }
 
 .cards {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
   margin-top: 20px;
-}
-
-.active {
-  background-color: rgba(255, 255, 255, 0.25);
-}
-.button {
-  align-self: center;
-}
-mat-spinner {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 100px;
 }
 
 .text {

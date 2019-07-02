@@ -1,31 +1,14 @@
 .maincard {
   width: 869px;
   height: 829px;
-  margin-left: auto;
-  margin-right: auto;
-  color: white;
-  background-color: #03255f;
   border-radius: 2rem;
-}
-.card {
-  margin-left: 40px;
-  margin-right: 40px;
-  display: flex;
-  flex-direction: column;
 }
 
 .cards {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
   margin-top: 20px;
   height: 520px;
 }
 
-mat-card-header {
-  font-size: 32px;
-}
 mat-card-content {
   height: 100%;
   display: flex;
@@ -34,17 +17,15 @@ mat-card-content {
   align-items: center;
   padding: 10px;
 }
+
 .smallcard {
   width: 236px;
   height: 231px;
-  background-color: transparent;
-  text-align: center;
-  border-radius: 2rem;
   padding: 0px;
   display: flex;
   flex-direction: column;
   box-shadow: 0px 0px 0px 0px transparent;
-  cursor: pointer;
+  border-radius: 2rem;
 }
 
 h4 {
@@ -53,37 +34,23 @@ h4 {
   color: white;
   font-weight: bold;
 }
+
 h5 {
   font-size: 12px;
   margin-top: 8px;
   margin-bottom: 0px;
   color: white;
 }
-hr {
-  border: 1px solid rgba(255, 255, 255, 0.25);
-}
 
 button {
-  color: #001234;
   font-size: 18px;
-  width: 192px;
-  height: 50px;
   border-radius: 2rem;
-  background: linear-gradient(to right, #0fcfde 0%, #9ffff0 100%);
   align-self: center;
   margin-top: 20px;
 }
 
-.button {
-  align-self: center;
-}
-
 .text {
   align-self: center;
-}
-
-.active {
-  background-color: rgba(255, 255, 255, 0.25);
 }
 
 .state {
@@ -107,9 +74,4 @@ button {
 
 .done {
   pointer-events: none;
-}
-mat-spinner {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 100px;
 }
