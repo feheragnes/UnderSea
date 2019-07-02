@@ -1,70 +1,150 @@
 <h1 mat-dialog-title>
-  Ellenfél: {{ data.vedekezoOrszag }}
+  {{ data.tamadoOrszag }} vs {{ data.vedekezoOrszag }}
   <mat-chip-list>
-    <mat-chip>{{ data.harcEredmeny }}</mat-chip>
+    <mat-chip [disableRipple]="true">{{ data.harcEredmeny }}</mat-chip>
   </mat-chip-list>
 </h1>
 <div mat-dialog-content>
-  <ul>
-    <li
-      *ngIf="
-        data.capaInfoNumbers.level1 > 0 ||
-        data.capaInfoNumbers.level2 > 0 ||
-        data.capaInfoNumbers.level3 > 0
-      "
+  <div class="row">
+    <div class="column">
+      <h4>Támadó sereg</h4>
+      <ul>
+        <li
+          *ngIf="
+            data.capaInfoTamadoNumbers.level1 > 0 ||
+            data.capaInfoTamadoNumbers.level2 > 0 ||
+            data.capaInfoTamadoNumbers.level3 > 0
+          "
+        >
+          Lézercápa:
+        </li>
+        <ul>
+          <li *ngIf="data.capaInfoTamadoNumbers.level1 > 0">
+            Lv. 1: {{ data.capaInfoTamadoNumbers.level1 }} db
+          </li>
+          <li *ngIf="data.capaInfoTamadoNumbers.level2 > 0">
+            Lv. 2: {{ data.capaInfoTamadoNumbers.level2 }} db
+          </li>
+          <li *ngIf="data.capaInfoTamadoNumbers.level3 > 0">
+            Lv. 3: {{ data.capaInfoTamadoNumbers.level3 }} db
+          </li>
+        </ul>
+        <li
+          *ngIf="
+            data.fokaInfoTamadoNumbers.level1 > 0 ||
+            data.fokaInfoTamadoNumbers.level2 > 0 ||
+            data.fokaInfoTamadoNumbers.level3 > 0
+          "
+        >
+          Rohamfóka:
+        </li>
+        <ul>
+          <li *ngIf="data.fokaInfoTamadoNumbers.level1 > 0">
+            Lv. 1: {{ data.fokaInfoTamadoNumbers.level1 }} db
+          </li>
+          <li *ngIf="data.fokaInfoTamadoNumbers.level2 > 0">
+            Lv. 2: {{ data.fokaInfoTamadoNumbers.level2 }} db
+          </li>
+          <li *ngIf="data.fokaInfoTamadoNumbers.level3 > 0">
+            Lv. 3: {{ data.fokaInfoTamadoNumbers.level3 }} db
+          </li>
+        </ul>
+        <li
+          *ngIf="
+            data.csikoInfoTamadoNumbers.level1 > 0 ||
+            data.csikoInfoTamadoNumbers.level2 > 0 ||
+            data.csikoInfoTamadoNumbers.level3 > 0
+          "
+        >
+          Csatacsikó:
+        </li>
+        <ul>
+          <li *ngIf="data.csikoInfoTamadoNumbers.level1 > 0">
+            Lv. 1: {{ data.csikoInfoTamadoNumbers.level1 }} db
+          </li>
+          <li *ngIf="data.csikoInfoTamadoNumbers.level2 > 0">
+            Lv. 3: {{ data.csikoInfoTamadoNumbers.level2 }} db
+          </li>
+          <li *ngIf="data.csikoInfoTamadoNumbers.level3 > 0">
+            Lv. 3: {{ data.csikoInfoTamadoNumbers.level3 }} db
+          </li>
+        </ul>
+      </ul>
+    </div>
+    <div class="column">
+      <h4>Védekező sereg</h4>
+      <ul>
+        <li
+          *ngIf="
+            data.capaInfoVedoNumbers.level1 > 0 ||
+            data.capaInfoVedoNumbers.level2 > 0 ||
+            data.capaInfoVedoNumbers.level3 > 0
+          "
+        >
+          Lézercápa:
+        </li>
+        <ul>
+          <li *ngIf="data.capaInfoVedoNumbers.level1 > 0">
+            Lv. 1: {{ data.capaInfoVedoNumbers.level1 }} db
+          </li>
+          <li *ngIf="data.capaInfoVedoNumbers.level2 > 0">
+            Lv. 2: {{ data.capaInfoVedoNumbers.level2 }} db
+          </li>
+          <li *ngIf="data.capaInfoVedoNumbers.level3 > 0">
+            Lv. 3: {{ data.capaInfoVedoNumbers.level3 }} db
+          </li>
+        </ul>
+        <li
+          *ngIf="
+            data.fokaInfoVedoNumbers.level1 > 0 ||
+            data.fokaInfoVedoNumbers.level2 > 0 ||
+            data.fokaInfoVedoNumbers.level3 > 0
+          "
+        >
+          Rohamfóka:
+        </li>
+        <ul>
+          <li *ngIf="data.fokaInfoVedoNumbers.level1 > 0">
+            Lv. 1: {{ data.fokaInfoVedoNumbers.level1 }} db
+          </li>
+          <li *ngIf="data.fokaInfoVedoNumbers.level2 > 0">
+            Lv. 2: {{ data.fokaInfoVedoNumbers.level2 }} db
+          </li>
+          <li *ngIf="data.fokaInfoVedoNumbers.level3 > 0">
+            Lv. 3: {{ data.fokaInfoVedoNumbers.level3 }} db
+          </li>
+        </ul>
+        <li
+          *ngIf="
+            data.csikoInfoVedoNumbers.level1 > 0 ||
+            data.csikoInfoVedoNumbers.level2 > 0 ||
+            data.csikoInfoVedoNumbers.level3 > 0
+          "
+        >
+          Csatacsikó:
+        </li>
+        <ul>
+          <li *ngIf="data.csikoInfoVedoNumbers.level1 > 0">
+            Lv. 1: {{ data.csikoInfoVedoNumbers.level1 }} db
+          </li>
+          <li *ngIf="data.csikoInfoVedoNumbers.level2 > 0">
+            Lv. 3: {{ data.csikoInfoVedoNumbers.level2 }} db
+          </li>
+          <li *ngIf="data.csikoInfoVedoNumbers.level3 > 0">
+            Lv. 3: {{ data.csikoInfoVedoNumbers.level3 }} db
+          </li>
+        </ul>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="row" *ngIf="data.raboltGyongy > 0 || data.raboltKorall > 0">
+  <mat-chip-list>
+    <mat-chip [disableRipple]="true"
+      >Szerzett gyöngy: {{ data.raboltGyongy }}</mat-chip
     >
-      Lézercápa:
-    </li>
-    <ul>
-      <li *ngIf="data.capaInfoNumbers.level1 > 0">
-        Lv. 1: {{ data.capaInfoNumbers.level1 }} db
-      </li>
-      <li *ngIf="data.capaInfoNumbers.level2 > 0">
-        Lv. 2: {{ data.capaInfoNumbers.level2 }} db
-      </li>
-      <li *ngIf="data.capaInfoNumbers.level3 > 0">
-        Lv. 3: {{ data.capaInfoNumbers.level3 }} db
-      </li>
-    </ul>
-    <li
-      *ngIf="
-        data.fokaInfoNumbers.level1 > 0 ||
-        data.fokaInfoNumbers.level2 > 0 ||
-        data.fokaInfoNumbers.level3 > 0
-      "
+    <mat-chip [disableRipple]="true" [selectable]="false"
+      >Szerzett korall: {{ data.raboltKorall }}</mat-chip
     >
-      Rohamfóka:
-    </li>
-    <ul>
-      <li *ngIf="data.fokaInfoNumbers.level1 > 0">
-        Lv. 1: {{ data.fokaInfoNumbers.level1 }} db
-      </li>
-      <li *ngIf="data.fokaInfoNumbers.level2 > 0">
-        Lv. 2: {{ data.fokaInfoNumbers.level2 }} db
-      </li>
-      <li *ngIf="data.fokaInfoNumbers.level3 > 0">
-        Lv. 3: {{ data.fokaInfoNumbers.level3 }} db
-      </li>
-    </ul>
-    <li
-      *ngIf="
-        data.csikoInfoNumbers.level1 > 0 ||
-        data.csikoInfoNumbers.level2 > 0 ||
-        data.csikoInfoNumbers.level3 > 0
-      "
-    >
-      Csatacsikó:
-    </li>
-    <ul>
-      <li *ngIf="data.csikoInfoNumbers.level1 > 0">
-        Lv. 1: {{ data.csikoInfoNumbers.level1 }} db
-      </li>
-      <li *ngIf="data.csikoInfoNumbers.level2 > 0">
-        Lv. 3: {{ data.csikoInfoNumbers.level2 }} db
-      </li>
-      <li *ngIf="data.csikoInfoNumbers.level3 > 0">
-        Lv. 3: {{ data.csikoInfoNumbers.level3 }} db
-      </li>
-    </ul>
-  </ul>
+  </mat-chip-list>
 </div>

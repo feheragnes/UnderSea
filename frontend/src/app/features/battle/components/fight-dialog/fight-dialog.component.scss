@@ -10,10 +10,24 @@
   background: #9ffff0;
   color: #001234;
   border-radius: 2rem;
-  width: 400px;
+  width: 500px;
 }
 
 ::ng-deep .mat-chip.mat-standard-chip {
   background-color: #03255f;
   color: white;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+h4 {
+  margin: 0;
+}
+
+ul {
+  margin-top: 8px;
 }
