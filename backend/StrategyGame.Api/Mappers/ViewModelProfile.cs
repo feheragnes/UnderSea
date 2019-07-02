@@ -69,7 +69,9 @@ namespace StrategyGame.Api.Mappers
             CreateMap<HarcDTO, HarcViewModel>()
                 .ForMember(x => x.HarcEredmeny, opt => opt.MapFrom(y => Enum.GetName(typeof(HarcEredmenyTipus), y.HarcEredmeny)))
                 .ForMember(x => x.TamadoCsapat, opt => opt.MapFrom(y => y.TamadoCsapat))
-                .ForMember(x => x.VedekezoOrszag, opt => opt.MapFrom(y => y.VedezoOrszag.Nev));
+                .ForMember(x => x.VedekezoCsapat, opt => opt.MapFrom(y => y.VedekezoCsapat))
+                .ForMember(x => x.VedekezoOrszag, opt => opt.MapFrom(y => y.VedezoOrszag.Nev))
+                .ForMember(x => x.TamadoOrszag, opt => opt.MapFrom(y => y.TamadoOrszag.Nev));
 
 
         }

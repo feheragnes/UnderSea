@@ -202,6 +202,10 @@ namespace StrategyGame.Dal.Migrations
 
                     b.Property<int>("Kimenetel");
 
+                    b.Property<long>("RaboltGyongy");
+
+                    b.Property<long>("RaboltKorall");
+
                     b.Property<Guid?>("TulajdonosId");
 
                     b.HasKey("Id");
@@ -248,10 +252,16 @@ namespace StrategyGame.Dal.Migrations
 
                     b.Property<Guid?>("CsapatId");
 
+                    b.Property<Guid?>("CsapatId1");
+
+                    b.Property<long>("CsatakSzama");
+
                     b.Property<string>("Discriminator")
                         .IsRequired();
 
                     b.Property<long>("Ellatas");
+
+                    b.Property<long>("Szint");
 
                     b.Property<long>("Tamadas");
 
@@ -262,6 +272,8 @@ namespace StrategyGame.Dal.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CsapatId");
+
+                    b.HasIndex("CsapatId1");
 
                     b.ToTable("Egysegs");
 
@@ -275,7 +287,11 @@ namespace StrategyGame.Dal.Migrations
 
                     b.Property<long>("Ar");
 
+                    b.Property<long>("CsatakSzama");
+
                     b.Property<long>("Ellatas");
+
+                    b.Property<long>("Szint");
 
                     b.Property<long>("Tamadas");
 
@@ -293,8 +309,11 @@ namespace StrategyGame.Dal.Migrations
                         new
                         {
                             Id = new Guid("c9893104-6c1c-4a4f-b488-9f31841e2d4d"),
+
                             Ar = 50L,
+                            CsatakSzama = 0L,
                             Ellatas = 1L,
+                            Szint = 1L,
                             Tamadas = 6L,
                             Tipus = 0,
                             Vedekezes = 2L,
@@ -302,9 +321,13 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
+
                             Id = new Guid("edd65b57-8475-45a8-89e9-a84e7f763ad4"),
+
                             Ar = 50L,
+                            CsatakSzama = 0L,
                             Ellatas = 1L,
+                            Szint = 1L,
                             Tamadas = 2L,
                             Tipus = 1,
                             Vedekezes = 6L,
@@ -312,12 +335,88 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
+
                             Id = new Guid("81d30f92-332b-4a1d-8113-641118797687"),
+
                             Ar = 100L,
+                            CsatakSzama = 0L,
                             Ellatas = 2L,
+                            Szint = 1L,
                             Tamadas = 5L,
                             Tipus = 2,
                             Vedekezes = 5L,
+                            Zsold = 3L
+                        },
+                        new
+                        {
+                            Id = new Guid("13058588-db52-4006-b007-8aab8b74bb81"),
+                            Ar = 50L,
+                            CsatakSzama = 3L,
+                            Ellatas = 1L,
+                            Szint = 2L,
+                            Tamadas = 8L,
+                            Tipus = 0,
+                            Vedekezes = 3L,
+                            Zsold = 1L
+                        },
+                        new
+                        {
+                            Id = new Guid("510bcd33-0e1f-4326-ad4f-5a9f01927e15"),
+                            Ar = 50L,
+                            CsatakSzama = 3L,
+                            Ellatas = 1L,
+                            Szint = 2L,
+                            Tamadas = 3L,
+                            Tipus = 1,
+                            Vedekezes = 8L,
+                            Zsold = 1L
+                        },
+                        new
+                        {
+                            Id = new Guid("c88d53eb-fba3-4bd7-8bb6-af085f2e449d"),
+                            Ar = 100L,
+                            CsatakSzama = 3L,
+                            Ellatas = 2L,
+                            Szint = 2L,
+                            Tamadas = 7L,
+                            Tipus = 2,
+                            Vedekezes = 7L,
+                            Zsold = 3L
+                        },
+                        new
+                        {
+                            Id = new Guid("79559465-e0d1-4c3e-bd28-ecc52b2d8322"),
+                            Ar = 50L,
+                            CsatakSzama = 8L,
+                            Ellatas = 1L,
+                            Szint = 3L,
+                            Tamadas = 10L,
+                            Tipus = 0,
+                            Vedekezes = 5L,
+                            Zsold = 1L
+                        },
+                        new
+                        {
+                            Id = new Guid("ffb34572-ccdf-4af9-9775-fa691ff625e9"),
+                            Ar = 50L,
+                            CsatakSzama = 8L,
+                            Ellatas = 1L,
+                            Szint = 3L,
+                            Tamadas = 5L,
+                            Tipus = 1,
+                            Vedekezes = 10L,
+                            Zsold = 1L
+                        },
+                        new
+                        {
+                            Id = new Guid("77c97232-4782-42df-b746-97ed6cec4820"),
+                            Ar = 100L,
+                            CsatakSzama = 8L,
+                            Ellatas = 2L,
+                            Szint = 3L,
+                            Tamadas = 10L,
+                            Tipus = 2,
+                            Vedekezes = 10L,
                             Zsold = 3L
                         });
                 });
@@ -389,6 +488,7 @@ namespace StrategyGame.Dal.Migrations
                         new
                         {
                             Id = new Guid("f965ae34-a384-44e7-bac8-73b689a55ff0"),
+
                             Korok = 0L
                         });
                 });
@@ -1082,6 +1182,10 @@ namespace StrategyGame.Dal.Migrations
                     b.HasOne("StrategyGame.Model.Entities.Models.Csapat")
                         .WithMany("Egysegs")
                         .HasForeignKey("CsapatId");
+
+                    b.HasOne("StrategyGame.Model.Entities.Models.Csapat")
+                        .WithMany("VedekezoEgysegs")
+                        .HasForeignKey("CsapatId1");
                 });
 
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Epuletek.Epulet", b =>

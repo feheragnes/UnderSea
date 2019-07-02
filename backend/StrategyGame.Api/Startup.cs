@@ -187,7 +187,7 @@ namespace StrategyGame.Api
 
             RecurringJob.AddOrUpdate(
                     () => endTurnService.NextTurn(),
-                    Cron.Minutely);
+                    Cron.Hourly);
 
             app.UseAuthentication();
             app.UseMvc();
