@@ -144,30 +144,35 @@ namespace StrategyGame.Bll.Services
                 csapat.RaboltGyongy = csapat.Celpont.Gyongy / 2;
                 csapat.RaboltKorall = csapat.Celpont.Korall / 2;
                 var ellenseg = csapat.Celpont.OtthoniCsapats.FirstOrDefault(x => x.Kimenetel == HarcEredmenyTipus.Otthon);
-                for (int i = 0; i < Convert.ToInt64(ellenseg.Egysegs.Count * 0.1); i++)
+                var ellensegCount = Math.Ceiling(ellenseg.Egysegs.Count / 10.0);
+                for (int i = 0; i < Convert.ToInt64(ellensegCount) ; i++)
                 {
-                    ellenseg.Egysegs.Remove(ellenseg.Egysegs.FirstOrDefault());
+                    ellenseg.Egysegs.Remove(ellenseg.Egysegs.ElementAt(new Random().Next(ellenseg.Egysegs.Count)));
                 }
             }
             else if (tamadas < vedekezes)
             {
                 csapat.Kimenetel = HarcEredmenyTipus.Vereseg;
-                for (int i = 0; i < Convert.ToInt64(csapat.Egysegs.Count * 0.1); i++)
+                var csapatCount = Math.Ceiling(csapat.Egysegs.Count / 10.0);
+                for (int i = 0; i < Convert.ToInt64(csapatCount) ; i++)
                 {
-                    csapat.Egysegs.Remove(csapat.Egysegs.FirstOrDefault());
+                    csapat.Egysegs.Remove(csapat.Egysegs.ElementAt(new Random().Next(csapat.Egysegs.Count)));
                 }
             }
             else
             {
+
                 csapat.Kimenetel = HarcEredmenyTipus.Dontetlen;
-                for (int i = 0; i < Convert.ToInt64(csapat.Egysegs.Count * 0.05); i++)
+                var csapatCount = Math.Ceiling(csapat.Egysegs.Count / 5.0);
+                for (int i = 0; i < Convert.ToInt64(csapatCount); i++)
                 {
-                    csapat.Egysegs.Remove(csapat.Egysegs.FirstOrDefault());
+                    csapat.Egysegs.Remove(csapat.Egysegs.ElementAt(new Random().Next(csapat.Egysegs.Count)));
                 }
                 var ellenseg = csapat.Celpont.OtthoniCsapats.FirstOrDefault(x => x.Kimenetel == HarcEredmenyTipus.Otthon);
-                for (int i = 0; i < Convert.ToInt64(ellenseg.Egysegs.Count * 0.05); i++)
+                var ellensegCount = Math.Ceiling(ellenseg.Egysegs.Count / 5.0);
+                for (int i = 0; i < Convert.ToInt64(ellensegCount); i++)
                 {
-                    ellenseg.Egysegs.Remove(ellenseg.Egysegs.FirstOrDefault());
+                    ellenseg.Egysegs.Remove(ellenseg.Egysegs.ElementAt(new Random().Next(ellenseg.Egysegs.Count)));
                 }
 
             }
