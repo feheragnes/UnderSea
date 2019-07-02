@@ -90,6 +90,7 @@ namespace StrategyGame.Bll.Services
             currentEpulets.ForEach(x =>
             {
                 if (x.Felepult == false)
+
                 {
                     throw new InvalidOperationException(Resources.ErrorMessage.AnotherConstruction);
                 }

@@ -56,7 +56,6 @@ namespace StrategyGame.Bll.Services
         }
         public async Task<Orszag> InitOrszag(string orszagNev)
         {
-
             var orszag = new Orszag { Nev = orszagNev, Korall = 0, Gyongy = 1000 };
             orszag.Epulets.Add(new AramlasIranyito() { Felepult = true });
             orszag.OtthoniCsapats.Add(new Csapat() { Kimenetel = HarcEredmenyTipus.Otthon });

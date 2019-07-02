@@ -23,6 +23,7 @@ namespace StrategyGame.Api.Controllers
 
 
         public EgysegController(IEgysegService egysegService, IOrszagService orszagService, ICommonService commonService, UserManager<StrategyGameUser> userManager, IMapper mapper) : base(userManager)
+
         {
             _egysegService = egysegService;
             _orszagService = orszagService;
