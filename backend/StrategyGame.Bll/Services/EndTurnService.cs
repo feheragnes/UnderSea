@@ -147,7 +147,7 @@ namespace StrategyGame.Bll.Services
                 var ellensegCount = Math.Ceiling(ellenseg.Egysegs.Count / 10.0);
                 for (int i = 0; i < Convert.ToInt64(ellensegCount) ; i++)
                 {
-                    ellenseg.Egysegs.Remove(ellenseg.Egysegs.FirstOrDefault());
+                    ellenseg.Egysegs.Remove(ellenseg.Egysegs.ElementAt(new Random().Next(ellenseg.Egysegs.Count)));
                 }
             }
             else if (tamadas < vedekezes)
@@ -156,7 +156,7 @@ namespace StrategyGame.Bll.Services
                 var csapatCount = Math.Ceiling(csapat.Egysegs.Count / 10.0);
                 for (int i = 0; i < Convert.ToInt64(csapatCount) ; i++)
                 {
-                    csapat.Egysegs.Remove(csapat.Egysegs.FirstOrDefault());
+                    csapat.Egysegs.Remove(csapat.Egysegs.ElementAt(new Random().Next(csapat.Egysegs.Count)));
                 }
             }
             else
@@ -166,13 +166,13 @@ namespace StrategyGame.Bll.Services
                 var csapatCount = Math.Ceiling(csapat.Egysegs.Count / 5.0);
                 for (int i = 0; i < Convert.ToInt64(csapatCount); i++)
                 {
-                    csapat.Egysegs.Remove(csapat.Egysegs.FirstOrDefault());
+                    csapat.Egysegs.Remove(csapat.Egysegs.ElementAt(new Random().Next(csapat.Egysegs.Count)));
                 }
                 var ellenseg = csapat.Celpont.OtthoniCsapats.FirstOrDefault(x => x.Kimenetel == HarcEredmenyTipus.Otthon);
                 var ellensegCount = Math.Ceiling(ellenseg.Egysegs.Count / 5.0);
                 for (int i = 0; i < Convert.ToInt64(ellensegCount); i++)
                 {
-                    ellenseg.Egysegs.Remove(ellenseg.Egysegs.FirstOrDefault());
+                    ellenseg.Egysegs.Remove(ellenseg.Egysegs.ElementAt(new Random().Next(ellenseg.Egysegs.Count)));
                 }
 
             }
