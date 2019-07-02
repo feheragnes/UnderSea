@@ -5,6 +5,8 @@ using StrategyGame.Bll.DTOs.Egysegek;
 using StrategyGame.Bll.ServiceInterfaces;
 using StrategyGame.Dal.Context;
 using StrategyGame.Model.Entities.Identity;
+using StrategyGame.Model.Entities.Models;
+using StrategyGame.Model.Entities.Models.Epuletek;
 using StrategyGame.Model.Enums;
 using System;
 using System.Collections.Generic;
@@ -42,34 +44,29 @@ namespace StrategyGame.Bll.Services
             {
                 var user = new StrategyGameUser
                 {
-                    UserName = ("TesztUser" + i + "@asd.com"),
-                    Email = ("TesztUser" + i + "@asd.com")
+                    UserName = ($"TesztUser{i}@asd.com"),
+                    Email = ($"TesztUser{i}@asd.com")
                 };
-
-                users.Add(user);
 
                  await _userManager.CreateAsync(user, "Asd123");
                 
             }
 
             var rnd = new Random();
-            var epulets = new List<EpuletInfoDTO>();
-            var egysegs = new List<SeregInfoDTO>();
 
             for (int i = 0; i < 5; i++)
             {
-                 await _orszagService.MakeOrszagUserConnection(users[i], ("TesztOrszag" + i));
+               var user = await _userManager.Users.FirstOrDefaultAsync(x => x.NormalizedEmail.Equals($"TesztUser{i}@asd.com"));
 
-               var user = await _userManager.Users.FirstOrDefaultAsync(x => x.NormalizedEmail.Equals("TesztUser" + i + "@asd.com"));
 
-                epulets.Add(new EpuletInfoDTO() { Ar = 0, Mennyiseg = rnd.Next(0, 5), Tipus = Model.Enums.EpuletTipus.AramlasIranyito });
-                epulets.Add(new EpuletInfoDTO() { Ar = 0, Mennyiseg = rnd.Next(0, 5), Tipus = Model.Enums.EpuletTipus.ZatonyVar });
-                await _epuletService.AddEpuletAsync(epulets, user.Id);
+                var orszag = new Orszag { Nev = $"Tesztorszag{i}", Korall = rnd.Next(100,2000), Gyongy = rnd.Next(1000,5000) };
+                orszag.Epulets.Add(new AramlasIranyito() { Felepult = true });
 
-                egysegs.Add(new SeregInfoDTO(rnd.Next(0, 20), EgysegTipus.CsataCsiko));
-                egysegs.Add(new SeregInfoDTO(rnd.Next(0, 20), EgysegTipus.RohamFoka));
-                egysegs.Add(new SeregInfoDTO(rnd.Next(0, 20), EgysegTipus.LezerCapa));
-                await _egysegService.AddEgysegAsync(egysegs, user.Id);
+                orszag.OtthoniCsapats.Add(new Csapat() { Kimenetel = HarcEredmenyTipus.Otthon });
+                    await _context.Orszags.AddAsync(orszag);
+
+
+                   
             }
 
 

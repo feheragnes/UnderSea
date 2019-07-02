@@ -215,6 +215,32 @@ namespace StrategyGame.Dal.Migrations
                     b.HasIndex("TulajdonosId");
 
                     b.ToTable("Csapats");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000005"),
+                            Kimenetel = 4,
+                            TulajdonosId = new Guid("00000000-0000-0000-0000-000000000001")
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000006"),
+                            Kimenetel = 4,
+                            TulajdonosId = new Guid("00000000-0000-0000-0000-000000000002")
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000007"),
+                            Kimenetel = 4,
+                            TulajdonosId = new Guid("00000000-0000-0000-0000-000000000003")
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000008"),
+                            Kimenetel = 4,
+                            TulajdonosId = new Guid("00000000-0000-0000-0000-000000000004")
+                        });
                 });
 
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Egysegek.Egyseg", b =>
@@ -282,7 +308,8 @@ namespace StrategyGame.Dal.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("89175602-1a83-41f8-b9ec-4f505fefe1ef"),
+                            Id = new Guid("c9893104-6c1c-4a4f-b488-9f31841e2d4d"),
+
                             Ar = 50L,
                             CsatakSzama = 0L,
                             Ellatas = 1L,
@@ -294,7 +321,9 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f24dc464-0424-46ba-8a01-2af67073c9b5"),
+
+                            Id = new Guid("edd65b57-8475-45a8-89e9-a84e7f763ad4"),
+
                             Ar = 50L,
                             CsatakSzama = 0L,
                             Ellatas = 1L,
@@ -306,7 +335,9 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5cc0746d-be12-4e18-b82c-f7c2ee469089"),
+
+                            Id = new Guid("81d30f92-332b-4a1d-8113-641118797687"),
+
                             Ar = 100L,
                             CsatakSzama = 0L,
                             Ellatas = 2L,
@@ -456,7 +487,8 @@ namespace StrategyGame.Dal.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e93e31d5-ca43-48b6-bcc0-38d25ea8b0e2"),
+                            Id = new Guid("f965ae34-a384-44e7-bac8-73b689a55ff0"),
+
                             Korok = 0L
                         });
                 });
@@ -512,6 +544,40 @@ namespace StrategyGame.Dal.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Orszags");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000001"),
+                            Gyongy = 2241L,
+                            Korall = 567L,
+                            Nev = "Tesztorszag0",
+                            Pont = 0L
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000002"),
+                            Gyongy = 3809L,
+                            Korall = 163L,
+                            Nev = "Tesztorszag1",
+                            Pont = 0L
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000003"),
+                            Gyongy = 1128L,
+                            Korall = 779L,
+                            Nev = "Tesztorszag2",
+                            Pont = 0L
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000004"),
+                            Gyongy = 4173L,
+                            Korall = 734L,
+                            Nev = "Tesztorszag3",
+                            Pont = 0L
+                        });
                 });
 
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Termelok.EgysegTermelo", b =>
@@ -584,6 +650,308 @@ namespace StrategyGame.Dal.Migrations
                     b.HasBaseType("StrategyGame.Model.Entities.Models.Egysegek.Egyseg");
 
                     b.HasDiscriminator().HasValue("RohamFoka");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("c2dfc472-b9c5-4dfe-93e1-07cd9d0f3174"),
+                            Ar = 50L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000005"),
+                            Ellatas = 1L,
+                            Tamadas = 6L,
+                            Vedekezes = 2L,
+                            Zsold = 1L
+                        },
+                        new
+                        {
+                            Id = new Guid("4eaf542e-9f66-4be3-b17f-19585e681fa0"),
+                            Ar = 50L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000005"),
+                            Ellatas = 1L,
+                            Tamadas = 2L,
+                            Vedekezes = 6L,
+                            Zsold = 1L
+                        },
+                        new
+                        {
+                            Id = new Guid("4ee88441-625a-47e3-93ff-82563eff85f3"),
+                            Ar = 100L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000005"),
+                            Ellatas = 2L,
+                            Tamadas = 5L,
+                            Vedekezes = 5L,
+                            Zsold = 3L
+                        },
+                        new
+                        {
+                            Id = new Guid("3abc5214-571a-4524-a5d1-6a72098a5c51"),
+                            Ar = 50L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000005"),
+                            Ellatas = 1L,
+                            Tamadas = 6L,
+                            Vedekezes = 2L,
+                            Zsold = 1L
+                        },
+                        new
+                        {
+                            Id = new Guid("3094720b-2855-4c82-a6fe-bd6c37ea5102"),
+                            Ar = 50L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000005"),
+                            Ellatas = 1L,
+                            Tamadas = 2L,
+                            Vedekezes = 6L,
+                            Zsold = 1L
+                        },
+                        new
+                        {
+                            Id = new Guid("310c40f5-53fa-475a-98b8-9e0d1ecaa19a"),
+                            Ar = 100L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000005"),
+                            Ellatas = 2L,
+                            Tamadas = 5L,
+                            Vedekezes = 5L,
+                            Zsold = 3L
+                        },
+                        new
+                        {
+                            Id = new Guid("1b65cb78-cac3-4332-883e-3370472dce36"),
+                            Ar = 50L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000005"),
+                            Ellatas = 1L,
+                            Tamadas = 6L,
+                            Vedekezes = 2L,
+                            Zsold = 1L
+                        },
+                        new
+                        {
+                            Id = new Guid("f871fe35-e107-491a-a4ed-0871c6d10ee6"),
+                            Ar = 50L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000005"),
+                            Ellatas = 1L,
+                            Tamadas = 2L,
+                            Vedekezes = 6L,
+                            Zsold = 1L
+                        },
+                        new
+                        {
+                            Id = new Guid("4a25bfbd-655d-43c5-9c23-4707dee73703"),
+                            Ar = 100L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000005"),
+                            Ellatas = 2L,
+                            Tamadas = 5L,
+                            Vedekezes = 5L,
+                            Zsold = 3L
+                        },
+                        new
+                        {
+                            Id = new Guid("6e9ca517-3d59-4795-ace6-5d6693de50fe"),
+                            Ar = 50L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000005"),
+                            Ellatas = 1L,
+                            Tamadas = 6L,
+                            Vedekezes = 2L,
+                            Zsold = 1L
+                        },
+                        new
+                        {
+                            Id = new Guid("62614c2b-8afc-44e2-b8b8-a4f2d4875abc"),
+                            Ar = 50L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000005"),
+                            Ellatas = 1L,
+                            Tamadas = 2L,
+                            Vedekezes = 6L,
+                            Zsold = 1L
+                        },
+                        new
+                        {
+                            Id = new Guid("7a01fe57-0065-4aed-ba9b-81bd6ad03fa9"),
+                            Ar = 100L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000005"),
+                            Ellatas = 2L,
+                            Tamadas = 5L,
+                            Vedekezes = 5L,
+                            Zsold = 3L
+                        },
+                        new
+                        {
+                            Id = new Guid("1f2e0041-a818-40cd-ba5f-22fc4711c1fe"),
+                            Ar = 50L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000005"),
+                            Ellatas = 1L,
+                            Tamadas = 6L,
+                            Vedekezes = 2L,
+                            Zsold = 1L
+                        },
+                        new
+                        {
+                            Id = new Guid("f194484c-1db9-4634-8fe5-fe1066af78d6"),
+                            Ar = 50L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000005"),
+                            Ellatas = 1L,
+                            Tamadas = 2L,
+                            Vedekezes = 6L,
+                            Zsold = 1L
+                        },
+                        new
+                        {
+                            Id = new Guid("a143aa84-2d00-4e74-ab4a-f0bc2f2522f4"),
+                            Ar = 100L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000005"),
+                            Ellatas = 2L,
+                            Tamadas = 5L,
+                            Vedekezes = 5L,
+                            Zsold = 3L
+                        },
+                        new
+                        {
+                            Id = new Guid("71c16842-3361-43e8-ae7e-ece2e568d7ce"),
+                            Ar = 50L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000005"),
+                            Ellatas = 1L,
+                            Tamadas = 6L,
+                            Vedekezes = 2L,
+                            Zsold = 1L
+                        },
+                        new
+                        {
+                            Id = new Guid("fd9c1f2d-4596-4d2c-b74c-330dd0ab8dd2"),
+                            Ar = 50L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000005"),
+                            Ellatas = 1L,
+                            Tamadas = 2L,
+                            Vedekezes = 6L,
+                            Zsold = 1L
+                        },
+                        new
+                        {
+                            Id = new Guid("6e548e25-9fbd-42e7-9e3a-5e6c25b969aa"),
+                            Ar = 100L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000005"),
+                            Ellatas = 2L,
+                            Tamadas = 5L,
+                            Vedekezes = 5L,
+                            Zsold = 3L
+                        },
+                        new
+                        {
+                            Id = new Guid("0a8890e9-1c4a-48ec-856a-520430071ec1"),
+                            Ar = 50L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000006"),
+                            Ellatas = 1L,
+                            Tamadas = 6L,
+                            Vedekezes = 2L,
+                            Zsold = 1L
+                        },
+                        new
+                        {
+                            Id = new Guid("bdf4f649-7110-485d-88ab-dab6aaa74c2f"),
+                            Ar = 50L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000006"),
+                            Ellatas = 1L,
+                            Tamadas = 2L,
+                            Vedekezes = 6L,
+                            Zsold = 1L
+                        },
+                        new
+                        {
+                            Id = new Guid("ffab57b0-1670-45e5-bef3-872be0986c4c"),
+                            Ar = 100L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000006"),
+                            Ellatas = 2L,
+                            Tamadas = 5L,
+                            Vedekezes = 5L,
+                            Zsold = 3L
+                        },
+                        new
+                        {
+                            Id = new Guid("13c962ca-2b40-49d3-a3b8-e641acc820b7"),
+                            Ar = 50L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000007"),
+                            Ellatas = 1L,
+                            Tamadas = 6L,
+                            Vedekezes = 2L,
+                            Zsold = 1L
+                        },
+                        new
+                        {
+                            Id = new Guid("3083273c-f920-4551-be02-eb18712e622b"),
+                            Ar = 50L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000007"),
+                            Ellatas = 1L,
+                            Tamadas = 2L,
+                            Vedekezes = 6L,
+                            Zsold = 1L
+                        },
+                        new
+                        {
+                            Id = new Guid("6d8392fd-1fd9-4725-9895-70e7e601d666"),
+                            Ar = 100L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000007"),
+                            Ellatas = 2L,
+                            Tamadas = 5L,
+                            Vedekezes = 5L,
+                            Zsold = 3L
+                        },
+                        new
+                        {
+                            Id = new Guid("fdd0ca37-868e-4bd7-aab8-c4e5e96930f2"),
+                            Ar = 50L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000008"),
+                            Ellatas = 1L,
+                            Tamadas = 6L,
+                            Vedekezes = 2L,
+                            Zsold = 1L
+                        },
+                        new
+                        {
+                            Id = new Guid("799366a0-1fec-4f71-b290-47a12758017b"),
+                            Ar = 50L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000008"),
+                            Ellatas = 1L,
+                            Tamadas = 2L,
+                            Vedekezes = 6L,
+                            Zsold = 1L
+                        },
+                        new
+                        {
+                            Id = new Guid("0ee22fe0-5e60-416c-ae87-9a339d5e8567"),
+                            Ar = 100L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000008"),
+                            Ellatas = 2L,
+                            Tamadas = 5L,
+                            Vedekezes = 5L,
+                            Zsold = 3L
+                        },
+                        new
+                        {
+                            Id = new Guid("0d926640-1db5-404a-ab99-178e97aad40c"),
+                            Ar = 50L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000008"),
+                            Ellatas = 1L,
+                            Tamadas = 6L,
+                            Vedekezes = 2L,
+                            Zsold = 1L
+                        },
+                        new
+                        {
+                            Id = new Guid("ce0542cb-e87b-42e9-bd7c-72b101b8e239"),
+                            Ar = 50L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000008"),
+                            Ellatas = 1L,
+                            Tamadas = 2L,
+                            Vedekezes = 6L,
+                            Zsold = 1L
+                        },
+                        new
+                        {
+                            Id = new Guid("172167d7-c129-4923-bff0-ec846ccf0fc8"),
+                            Ar = 100L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000008"),
+                            Ellatas = 2L,
+                            Tamadas = 5L,
+                            Vedekezes = 5L,
+                            Zsold = 3L
+                        });
                 });
 
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Epuletek.AramlasIranyito", b =>
@@ -591,6 +959,44 @@ namespace StrategyGame.Dal.Migrations
                     b.HasBaseType("StrategyGame.Model.Entities.Models.Epuletek.Epulet");
 
                     b.HasDiscriminator().HasValue("AramlasIranyito");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("6f4e41ab-18e1-4da3-a291-506752401fed"),
+                            AktualisKor = 15L,
+                            Ar = 1000L,
+                            Felepult = true,
+                            OrszagId = new Guid("00000000-0000-0000-0000-000000000001"),
+                            SzuksegesKorok = 15L
+                        },
+                        new
+                        {
+                            Id = new Guid("57482327-2acf-419a-bfac-c3f4a3ce1c90"),
+                            AktualisKor = 15L,
+                            Ar = 1000L,
+                            Felepult = true,
+                            OrszagId = new Guid("00000000-0000-0000-0000-000000000002"),
+                            SzuksegesKorok = 15L
+                        },
+                        new
+                        {
+                            Id = new Guid("dc22916f-487c-4c88-ba1d-fcb077f9d8a8"),
+                            AktualisKor = 15L,
+                            Ar = 1000L,
+                            Felepult = true,
+                            OrszagId = new Guid("00000000-0000-0000-0000-000000000003"),
+                            SzuksegesKorok = 15L
+                        },
+                        new
+                        {
+                            Id = new Guid("b929b4be-01ca-40b7-912f-380c5e610d61"),
+                            AktualisKor = 15L,
+                            Ar = 1000L,
+                            Felepult = true,
+                            OrszagId = new Guid("00000000-0000-0000-0000-000000000004"),
+                            SzuksegesKorok = 15L
+                        });
                 });
 
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Epuletek.ZatonyVar", b =>
@@ -598,6 +1004,44 @@ namespace StrategyGame.Dal.Migrations
                     b.HasBaseType("StrategyGame.Model.Entities.Models.Epuletek.Epulet");
 
                     b.HasDiscriminator().HasValue("ZatonyVar");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("94e8224c-4259-440b-bfc2-7cb3d56021fb"),
+                            AktualisKor = 15L,
+                            Ar = 1000L,
+                            Felepult = true,
+                            OrszagId = new Guid("00000000-0000-0000-0000-000000000001"),
+                            SzuksegesKorok = 15L
+                        },
+                        new
+                        {
+                            Id = new Guid("5022a471-5b97-4c6d-b2fd-c831c89b2e3c"),
+                            AktualisKor = 15L,
+                            Ar = 1000L,
+                            Felepult = true,
+                            OrszagId = new Guid("00000000-0000-0000-0000-000000000002"),
+                            SzuksegesKorok = 15L
+                        },
+                        new
+                        {
+                            Id = new Guid("f63c9e49-833e-40f0-9cc2-75233dee8d4b"),
+                            AktualisKor = 15L,
+                            Ar = 1000L,
+                            Felepult = true,
+                            OrszagId = new Guid("00000000-0000-0000-0000-000000000003"),
+                            SzuksegesKorok = 15L
+                        },
+                        new
+                        {
+                            Id = new Guid("0f2af25e-3c3b-4109-b455-6c76a4239a3f"),
+                            AktualisKor = 15L,
+                            Ar = 1000L,
+                            Felepult = true,
+                            OrszagId = new Guid("00000000-0000-0000-0000-000000000004"),
+                            SzuksegesKorok = 15L
+                        });
                 });
 
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Fejlesztesek.Alkimia", b =>
