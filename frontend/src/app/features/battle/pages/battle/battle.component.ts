@@ -23,6 +23,7 @@ export class BattleComponent implements OnInit {
   public zatonyVarInfo: EpuletInfo;
   public szonarAgyu: boolean;
   public turn: number;
+  public levels = ['Lv. 1', 'Lv. 2', 'Lv. 3'];
 
   constructor(
     private authenticationService: AuthenticationService,
