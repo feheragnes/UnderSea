@@ -35,34 +35,65 @@ export class FightsComponent implements OnInit {
     this.tamadasService.getHarcStatusz().subscribe(
       data => {
         this.fights = data;
-        this.fights.forEach(element => {
-          element.tamadoCsapat.forEach(csapat => {
-            if (csapat.tipus === EgysegType.foka) {
-              element.fokaInfo = csapat;
-            }
-            if (csapat.tipus === EgysegType.capa) {
-              element.capaInfo = csapat;
-            }
-            if (csapat.tipus === EgysegType.csiko) {
-              element.csikoInfo = csapat;
+        console.log(this.fights);
+        this.fights.forEach(fight => {
+          fight.capaInfoNumbers = { level1: 0, level2: 0, level3: 0 };
+          fight.csikoInfoNumbers = { level1: 0, level2: 0, level3: 0 };
+          fight.fokaInfoNumbers = { level1: 0, level2: 0, level3: 0 };
+          fight.fokaInfo = fight.tamadoCsapat.filter(
+            x => x.tipus === EgysegType.foka
+          );
+          fight.fokaInfo.forEach(element => {
+            if (element.szint === 1) {
+              fight.fokaInfoNumbers.level1 = element.mennyiseg;
+            } else if (element.szint === 2) {
+              fight.fokaInfoNumbers.level2 = element.mennyiseg;
+            } else if (element.szint === 3) {
+              fight.fokaInfoNumbers.level3 = element.mennyiseg;
             }
           });
-          switch (element.harcEredmeny) {
+          fight.capaInfo = fight.tamadoCsapat.filter(
+            x => x.tipus === EgysegType.capa
+          );
+          fight.capaInfo.forEach(element => {
+            if (element.szint === 1) {
+              fight.capaInfoNumbers.level1 = element.mennyiseg;
+            } else if (element.szint === 2) {
+              fight.capaInfoNumbers.level2 = element.mennyiseg;
+            } else if (element.szint === 3) {
+              fight.capaInfoNumbers.level3 = element.mennyiseg;
+            }
+          });
+          fight.csikoInfo = fight.tamadoCsapat.filter(
+            x => x.tipus === EgysegType.csiko
+          );
+          fight.csikoInfo.forEach(element => {
+            if (element.szint === 1) {
+              fight.csikoInfoNumbers.level1 = element.mennyiseg;
+            } else if (element.szint === 2) {
+              fight.csikoInfoNumbers.level2 = element.mennyiseg;
+            } else if (element.szint === 3) {
+              fight.csikoInfoNumbers.level3 = element.mennyiseg;
+            }
+          });
+
+          switch (fight.harcEredmeny) {
             case Harceredmeny.gyozelem:
-              element.harcEredmeny = 'Győzelem!';
+              fight.harcEredmeny = 'Győzelem!';
               break;
             case Harceredmeny.dontetlen:
-              element.harcEredmeny = 'Döntetlen';
+              fight.harcEredmeny = 'Döntetlen';
               break;
             case Harceredmeny.folyamatban:
-              element.harcEredmeny = 'Folyamatban...';
+              fight.harcEredmeny = 'Folyamatban...';
               break;
             case Harceredmeny.vereseg:
-              element.harcEredmeny = 'Vereség :(';
+              fight.harcEredmeny = 'Vereség :(';
               break;
           }
         });
         this.fights.reverse();
+        console.log(this.fights);
       },
       err => console.error(err),
       () => {

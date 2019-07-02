@@ -11,10 +11,29 @@
             <h4>{{ fight.vedekezoOrszag }}</h4>
           </div>
           <div class="data">
-            <p>{{ fight.capaInfo ? fight.capaInfo.mennyiseg : 0 }} Lézercápa</p>
-            <p>{{ fight.fokaInfo ? fight.fokaInfo.mennyiseg : 0 }} Rohamfóka</p>
             <p>
-              {{ fight.csikoInfo ? fight.csikoInfo.mennyiseg : 0 }} Csatacsikó
+              {{
+                fight.capaInfoNumbers.level1 +
+                  fight.capaInfoNumbers.level2 +
+                  fight.capaInfoNumbers.level3
+              }}
+              Lézercápa
+            </p>
+            <p>
+              {{
+                fight.fokaInfoNumbers.level1 +
+                  fight.fokaInfoNumbers.level2 +
+                  fight.fokaInfoNumbers.level3
+              }}
+              Rohamfóka
+            </p>
+            <p>
+              {{
+                fight.csikoInfoNumbers.level1 +
+                  fight.csikoInfoNumbers.level2 +
+                  fight.csikoInfoNumbers.level3
+              }}
+              Csatacsikó
             </p>
           </div>
           <div class="result">

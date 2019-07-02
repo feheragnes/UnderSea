@@ -1,11 +1,16 @@
 .mat-dialog-title {
   font-family: baloo;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
 }
 
 ::ng-deep .mat-dialog-container {
   background: #9ffff0;
   color: #001234;
   border-radius: 2rem;
+  width: 400px;
 }
 
 ::ng-deep .mat-chip.mat-standard-chip {

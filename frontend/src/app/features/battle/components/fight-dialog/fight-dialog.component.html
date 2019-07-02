@@ -1,13 +1,70 @@
 <h1 mat-dialog-title>
   Ellenfél: {{ data.vedekezoOrszag }}
-  <mat-chip-list aria-label="Fish selection">
+  <mat-chip-list>
     <mat-chip>{{ data.harcEredmeny }}</mat-chip>
   </mat-chip-list>
 </h1>
 <div mat-dialog-content>
   <ul>
-    <li>{{ data.capaInfo ? data.capaInfo.mennyiseg : 0 }} Lézercápa</li>
-    <li>{{ data.fokaInfo ? data.fokaInfo.mennyiseg : 0 }} Rohamfóka</li>
-    <li>{{ data.csikoInfo ? data.csikoInfo.mennyiseg : 0 }} Csatacsikó</li>
+    <li
+      *ngIf="
+        data.capaInfoNumbers.level1 > 0 ||
+        data.capaInfoNumbers.level2 > 0 ||
+        data.capaInfoNumbers.level3 > 0
+      "
+    >
+      Lézercápa:
+    </li>
+    <ul>
+      <li *ngIf="data.capaInfoNumbers.level1 > 0">
+        Lv. 1: {{ data.capaInfoNumbers.level1 }} db
+      </li>
+      <li *ngIf="data.capaInfoNumbers.level2 > 0">
+        Lv. 2: {{ data.capaInfoNumbers.level2 }} db
+      </li>
+      <li *ngIf="data.capaInfoNumbers.level3 > 0">
+        Lv. 3: {{ data.capaInfoNumbers.level3 }} db
+      </li>
+    </ul>
+    <li
+      *ngIf="
+        data.fokaInfoNumbers.level1 > 0 ||
+        data.fokaInfoNumbers.level2 > 0 ||
+        data.fokaInfoNumbers.level3 > 0
+      "
+    >
+      Rohamfóka:
+    </li>
+    <ul>
+      <li *ngIf="data.fokaInfoNumbers.level1 > 0">
+        Lv. 1: {{ data.fokaInfoNumbers.level1 }} db
+      </li>
+      <li *ngIf="data.fokaInfoNumbers.level2 > 0">
+        Lv. 2: {{ data.fokaInfoNumbers.level2 }} db
+      </li>
+      <li *ngIf="data.fokaInfoNumbers.level3 > 0">
+        Lv. 3: {{ data.fokaInfoNumbers.level3 }} db
+      </li>
+    </ul>
+    <li
+      *ngIf="
+        data.csikoInfoNumbers.level1 > 0 ||
+        data.csikoInfoNumbers.level2 > 0 ||
+        data.csikoInfoNumbers.level3 > 0
+      "
+    >
+      Csatacsikó:
+    </li>
+    <ul>
+      <li *ngIf="data.csikoInfoNumbers.level1 > 0">
+        Lv. 1: {{ data.csikoInfoNumbers.level1 }} db
+      </li>
+      <li *ngIf="data.csikoInfoNumbers.level2 > 0">
+        Lv. 3: {{ data.csikoInfoNumbers.level2 }} db
+      </li>
+      <li *ngIf="data.csikoInfoNumbers.level3 > 0">
+        Lv. 3: {{ data.csikoInfoNumbers.level3 }} db
+      </li>
+    </ul>
   </ul>
 </div>
