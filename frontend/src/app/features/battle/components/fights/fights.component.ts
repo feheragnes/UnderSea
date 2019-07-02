@@ -2,7 +2,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TamadasService } from '../../services/tamadas.service';
 import { Harceredmeny, Harc } from '../../models/harc';
 import { EgysegType } from '../../models/egyseg';
-import { SeregInfo } from '../../models/orszag';
+import { FightDialogComponent } from '../fight-dialog/fight-dialog.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-fights',
@@ -14,10 +15,20 @@ export class FightsComponent implements OnInit {
   public fights: Harc[];
   public done = false;
 
-  constructor(private tamadasService: TamadasService) {}
+  constructor(
+    private tamadasService: TamadasService,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.getHarcStatusz();
+  }
+
+  openDialog(fight: Harc) {
+    console.log('dialog');
+    this.dialog.open(FightDialogComponent, {
+      data: fight
+    });
   }
 
   getHarcStatusz() {

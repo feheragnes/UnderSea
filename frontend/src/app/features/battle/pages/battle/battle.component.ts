@@ -3,9 +3,6 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Router } from '@angular/router';
 import { OrszagService } from '../../services/orszag.service';
 import { GlobalService } from '../../services/global.service';
-import { EpuletService } from '../../services/epulet.service';
-import { FejlesztesService } from '../../services/fejlesztes.service';
-import { FejlesztesType } from '../../models/fejlesztes';
 import { EgysegType } from '../../models/egyseg';
 import { EpuletType } from '../../models/epulet';
 import { Orszag, SeregInfo, EpuletInfo } from '../../models/orszag';
@@ -31,8 +28,7 @@ export class BattleComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private router: Router,
     private orszagService: OrszagService,
-    private globalService: GlobalService,
-    private fejlesztesService: FejlesztesService
+    private globalService: GlobalService
   ) {}
 
   ngOnInit() {

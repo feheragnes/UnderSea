@@ -32,6 +32,10 @@
       </div>
       <div class="column">
         <h4>2. Állítsd be, kiket küldesz harcba:</h4>
+        <h5 matTooltip="Lv. 1 / Lv. 2 / Lv. 3">
+          Lézercápa: {{ capaNumber }} / {{ capaNumber }} /
+          {{ capaNumber }} példány
+        </h5>
         <div class="smallrow">
           <div class="smallcolumn">
             <mat-card class="icon">
@@ -39,7 +43,6 @@
             </mat-card>
           </div>
           <div class="smallcolumn">
-            <h5>Lézercápa: {{ capaNumber }} példány</h5>
             <input
               type="range"
               class="slider"
@@ -48,11 +51,37 @@
               max="{{ capaInfo ? capaInfo.mennyiseg : 0 }}"
               value="0"
               [(ngModel)]="capaNumber"
-              matTooltip="Nincs lézercápád :("
+              matTooltip="Nincs lv. 1 lézercápád :("
+              [matTooltipDisabled]="capaInfo && capaInfo.mennyiseg > 0"
+            />
+            <input
+              type="range"
+              class="slider"
+              #capa
+              min="0"
+              max="{{ capaInfo ? capaInfo.mennyiseg : 0 }}"
+              value="0"
+              [(ngModel)]="capaNumber"
+              matTooltip="Nincs lv. 2 lézercápád :("
+              [matTooltipDisabled]="capaInfo && capaInfo.mennyiseg > 0"
+            />
+            <input
+              type="range"
+              class="slider"
+              #capa
+              min="0"
+              max="{{ capaInfo ? capaInfo.mennyiseg : 0 }}"
+              value="0"
+              [(ngModel)]="capaNumber"
+              matTooltip="Nincs lv. 3 lézercápád :("
               [matTooltipDisabled]="capaInfo && capaInfo.mennyiseg > 0"
             />
           </div>
         </div>
+        <h5 matTooltip="Lv. 1 / Lv. 2 / Lv. 3">
+          Rohamfóka: {{ fokaNumber }} / {{ fokaNumber }} /
+          {{ fokaNumber }} példány
+        </h5>
         <div class="smallrow">
           <div class="smallcolumn">
             <mat-card class="icon">
@@ -60,7 +89,6 @@
             </mat-card>
           </div>
           <div class="smallcolumn">
-            <h5>Rohamfóka: {{ fokaNumber }} példány</h5>
             <input
               type="range"
               class="slider"
@@ -69,11 +97,37 @@
               max="{{ this.fokaInfo ? fokaInfo.mennyiseg : 0 }}"
               value="0"
               [(ngModel)]="fokaNumber"
-              matTooltip="Nincs rohamfókád :("
+              matTooltip="Nincs lv. 1 rohamfókád :("
+              [matTooltipDisabled]="fokaInfo && fokaInfo.mennyiseg > 0"
+            />
+            <input
+              type="range"
+              class="slider"
+              #foka
+              min="0"
+              max="{{ this.fokaInfo ? fokaInfo.mennyiseg : 0 }}"
+              value="0"
+              [(ngModel)]="fokaNumber"
+              matTooltip="Nincs lv. 2 rohamfókád :("
+              [matTooltipDisabled]="fokaInfo && fokaInfo.mennyiseg > 0"
+            />
+            <input
+              type="range"
+              class="slider"
+              #foka
+              min="0"
+              max="{{ this.fokaInfo ? fokaInfo.mennyiseg : 0 }}"
+              value="0"
+              [(ngModel)]="fokaNumber"
+              matTooltip="Nincs lv. 3 rohamfókád :("
               [matTooltipDisabled]="fokaInfo && fokaInfo.mennyiseg > 0"
             />
           </div>
         </div>
+        <h5 matTooltip="Lv. 1 / Lv. 2 / Lv. 3">
+          Csatacsikó: {{ csikoNumber }} / {{ csikoNumber }} /
+          {{ csikoNumber }} példány
+        </h5>
         <div class="smallrow">
           <div class="smallcolumn">
             <mat-card class="icon">
@@ -81,7 +135,6 @@
             </mat-card>
           </div>
           <div class="smallcolumn">
-            <h5>Csatacsikó: {{ csikoNumber }} példány</h5>
             <input
               type="range"
               class="slider"
@@ -90,7 +143,29 @@
               max="{{ csikoInfo ? csikoInfo.mennyiseg : 0 }}"
               value="0"
               [(ngModel)]="csikoNumber"
-              matTooltip="Nincs csatacsikód :("
+              matTooltip="Nincs lv. 1 csatacsikód :("
+              [matTooltipDisabled]="csikoInfo && csikoInfo.mennyiseg > 0"
+            />
+            <input
+              type="range"
+              class="slider"
+              #csiko
+              min="0"
+              max="{{ csikoInfo ? csikoInfo.mennyiseg : 0 }}"
+              value="0"
+              [(ngModel)]="csikoNumber"
+              matTooltip="Nincs lv. 2 csatacsikód :("
+              [matTooltipDisabled]="csikoInfo && csikoInfo.mennyiseg > 0"
+            />
+            <input
+              type="range"
+              class="slider"
+              #csiko
+              min="0"
+              max="{{ csikoInfo ? csikoInfo.mennyiseg : 0 }}"
+              value="0"
+              [(ngModel)]="csikoNumber"
+              matTooltip="Nincs lv. 3 csatacsikód :("
               [matTooltipDisabled]="csikoInfo && csikoInfo.mennyiseg > 0"
             />
           </div>

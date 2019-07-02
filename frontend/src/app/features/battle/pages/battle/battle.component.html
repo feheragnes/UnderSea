@@ -10,40 +10,73 @@
       <div class="column2">
         <div class="icons">
           <div class="icontext">
-            <img class="icon" src="assets\images\icon_harcicapa.svg" />
-            <h4>{{ capaInfo ? capaInfo.mennyiseg : 0 }}</h4>
+            <img class="iconToolbar" src="assets\images\icon_harcicapa.svg" />
+            <div
+              class="doubletext"
+              matTooltipClass="mat-tooltip"
+              matTooltip="{{ levels.join('\n') }}"
+            >
+              <p>
+                {{ capaInfo ? capaInfo.mennyiseg : 0 }}
+              </p>
+              <p>
+                {{ capaInfo ? capaInfo.mennyiseg : 0 }}
+              </p>
+              <p>
+                {{ capaInfo ? capaInfo.mennyiseg : 0 }}
+              </p>
+            </div>
           </div>
           <div class="icontext">
-            <img class="icon" src="assets\images\icon_rohamfoka.svg" />
-            <h4>{{ fokaInfo ? fokaInfo.mennyiseg : 0 }}</h4>
+            <img class="iconToolbar" src="assets\images\icon_rohamfoka.svg" />
+            <div
+              class="doubletext"
+              matTooltipClass="mat-tooltip"
+              matTooltip="{{ levels.join('\n') }}"
+            >
+              <p>{{ fokaInfo ? fokaInfo.mennyiseg : 0 }}</p>
+              <p>{{ fokaInfo ? fokaInfo.mennyiseg : 0 }}</p>
+              <p>{{ fokaInfo ? fokaInfo.mennyiseg : 0 }}</p>
+            </div>
           </div>
           <div class="icontext">
-            <img class="icon" src="assets\images\icon_csatacsiko.svg" />
-            <h4>{{ csikoInfo ? csikoInfo.mennyiseg : 0 }}</h4>
+            <img class="iconToolbar" src="assets\images\icon_csatacsiko.svg" />
+            <div
+              class="doubletext"
+              matTooltipClass="mat-tooltip"
+              matTooltip="{{ levels.join('\n') }}"
+            >
+              <p>{{ csikoInfo ? csikoInfo.mennyiseg : 0 }}</p>
+              <p>{{ csikoInfo ? csikoInfo.mennyiseg : 0 }}</p>
+              <p>{{ csikoInfo ? csikoInfo.mennyiseg : 0 }}</p>
+            </div>
           </div>
           <div class="icontext">
-            <img class="icon" src="assets\images\icon_gyongy.svg" />
+            <img class="iconToolbar" src="assets\images\icon_gyongy.svg" />
             <div class="doubletext">
               <h4>{{ gyongy }}</h4>
               <h5>{{ orszagInfo.gyongyTermeles }}/kör</h5>
             </div>
           </div>
           <div class="icontext">
-            <img class="icon" src="assets\images\icon_korallfal.svg" />
+            <img class="iconToolbar" src="assets\images\icon_korallfal.svg" />
             <div class="doubletext">
               <h4>{{ korall }}</h4>
               <h5>{{ orszagInfo.korallTermeles }}/kör</h5>
             </div>
           </div>
           <div class="icontext">
-            <img class="icon" src="assets\images\icon_zatonyvar.svg" />
+            <img class="iconToolbar" src="assets\images\icon_zatonyvar.svg" />
             <div class="doubletext">
               <h4>{{ zatonyVarInfo.mennyiseg }}</h4>
               <h5>{{ orszagInfo.epuloZatonyvar }} épül</h5>
             </div>
           </div>
           <div class="icontext">
-            <img class="icon" src="assets\images\icon_aramlasiranyito.svg" />
+            <img
+              class="iconToolbar"
+              src="assets\images\icon_aramlasiranyito.svg"
+            />
             <div class="doubletext">
               <h4>{{ aramlasIranyitoInfo.mennyiseg }}</h4>
               <h5>{{ orszagInfo.epuloAramlasIranyito }} épül</h5>

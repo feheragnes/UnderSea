@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>
+  Ellenfél: {{ data.vedekezoOrszag }}
+  <mat-chip-list aria-label="Fish selection">
+    <mat-chip>{{ data.harcEredmeny }}</mat-chip>
+  </mat-chip-list>
+</h1>
+<div mat-dialog-content>
+  <ul>
+    <li>{{ data.capaInfo ? data.capaInfo.mennyiseg : 0 }} Lézercápa</li>
+    <li>{{ data.fokaInfo ? data.fokaInfo.mennyiseg : 0 }} Rohamfóka</li>
+    <li>{{ data.csikoInfo ? data.csikoInfo.mennyiseg : 0 }} Csatacsikó</li>
+  </ul>
+</div>

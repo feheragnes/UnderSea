@@ -1,0 +1,14 @@
+.mat-dialog-title {
+  font-family: baloo;
+}
+
+::ng-deep .mat-dialog-container {
+  background: #9ffff0;
+  color: #001234;
+  border-radius: 2rem;
+}
+
+::ng-deep .mat-chip.mat-standard-chip {
+  background-color: #03255f;
+  color: white;
+}

@@ -16,7 +16,8 @@ import {
   MatSliderModule,
   MatToolbarModule,
   MatGridListModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatDialogModule
 } from '@angular/material';
 import { BuildingsComponent } from './components/buildings/buildings.component';
 import { AttackComponent } from './components/attack/attack.component';
@@ -27,6 +28,7 @@ import { ArmyComponent } from './components/army/army.component';
 import { CountryComponent } from './components/country/country.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { FightDialogComponent } from './components/fight-dialog/fight-dialog.component';
 
 @NgModule({
   imports: [
@@ -47,7 +49,8 @@ import { CommonModule } from '@angular/common';
     HttpClientModule,
     FormsModule,
     MatTooltipModule,
-    CommonModule
+    CommonModule,
+    MatDialogModule
   ],
   providers: [],
   declarations: [
@@ -58,7 +61,9 @@ import { CommonModule } from '@angular/common';
     FightsComponent,
     RankingsComponent,
     ArmyComponent,
-    CountryComponent
-  ]
+    CountryComponent,
+    FightDialogComponent
+  ],
+  entryComponents: [FightDialogComponent]
 })
 export class BattleModule {}
