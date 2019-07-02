@@ -32,6 +32,9 @@ namespace StrategyGame.Dal.Extensons
                         Vedekezes = long.Parse("2"),
                         Ellatas = long.Parse("1"),
                         Zsold = long.Parse("1"),
+                        CsatakSzama = long.Parse("0"),
+                        Szint = long.Parse("1"),
+                        
                         CsapatId = new Guid($"00000000-0000-0000-0000-00000000000{i + 5}"),
                     }
                     );
@@ -45,6 +48,8 @@ namespace StrategyGame.Dal.Extensons
                         Vedekezes = long.Parse("6"),
                         Ellatas = long.Parse("1"),
                         Zsold = long.Parse("1"),
+                        CsatakSzama = long.Parse("0"),
+                        Szint = long.Parse("1"),
                         CsapatId = new Guid($"00000000-0000-0000-0000-00000000000{i + 5}"),
                     }
                     );
@@ -58,6 +63,8 @@ namespace StrategyGame.Dal.Extensons
                         Vedekezes = long.Parse("5"),
                         Ellatas = long.Parse("2"),
                         Zsold = long.Parse("3"),
+                        CsatakSzama = long.Parse("0"),
+                        Szint = long.Parse("1"),
                         CsapatId = new Guid($"00000000-0000-0000-0000-00000000000{i + 5}"),
                     }
                     );
@@ -103,6 +110,8 @@ namespace StrategyGame.Dal.Extensons
                         Id = new Guid($"00000000-0000-0000-0000-00000000000{i + 5}"),
                         Kimenetel = HarcEredmenyTipus.Otthon,
                         TulajdonosId = new Guid($"00000000-0000-0000-0000-00000000000{i + 1}"),
+                        RaboltGyongy = long.Parse("0"),
+                        RaboltKorall = long.Parse("0")
                     });
 
             }
