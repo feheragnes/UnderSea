@@ -152,6 +152,7 @@ namespace StrategyGame.Bll.Services
             {
                 var egyseg = (Egyseg)Activator.CreateInstance(x.GetType());
                 egyseg.Szint = x.Szint;
+                egyseg.CsatakSzama = x.CsatakSzama;
                 egysegs.Add(egyseg);
                 x.CsatakSzama++;
 
