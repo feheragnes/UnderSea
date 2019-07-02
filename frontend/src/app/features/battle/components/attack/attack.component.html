@@ -32,142 +32,186 @@
       </div>
       <div class="column">
         <h4>2. Állítsd be, kiket küldesz harcba:</h4>
-        <h5 matTooltip="Lv. 1 / Lv. 2 / Lv. 3">
-          Lézercápa: {{ capaNumber.level1 }} / {{ capaNumber.level2 }} /
-          {{ capaNumber.level3 }} példány
-        </h5>
-        <div class="smallrow">
-          <div class="smallcolumn">
-            <mat-card class="icon">
-              <img src="assets\images\007-shark.svg" />
-            </mat-card>
-          </div>
-          <div class="smallcolumn">
-            <input
-              type="range"
-              class="slider"
-              #capa
-              min="0"
-              max="{{ capaInfoNumbers.level1 }}"
-              value="0"
-              [(ngModel)]="capaNumber.level1"
-              matTooltip="Nincs lv. 1 lézercápád :("
-              [matTooltipDisabled]="capaInfoNumbers.level1 > 0"
-            />
-            <input
-              type="range"
-              class="slider"
-              #capa
-              min="0"
-              max="{{ capaInfoNumbers.level2 }}"
-              value="0"
-              [(ngModel)]="capaNumber.level2"
-              matTooltip="Nincs lv. 2 lézercápád :("
-              [matTooltipDisabled]="capaInfoNumbers.level2 > 0"
-            />
-            <input
-              type="range"
-              class="slider"
-              #capa
-              min="0"
-              max="{{ capaInfoNumbers.level3 }}"
-              value="0"
-              [(ngModel)]="capaNumber.level3"
-              matTooltip="Nincs lv. 3 lézercápád :("
-              [matTooltipDisabled]="capaInfoNumbers.level3 > 0"
-            />
+        <div
+          *ngIf="
+            capaInfoNumbers.level1 === 0 &&
+            capaInfoNumbers.level2 === 0 &&
+            capaInfoNumbers.level3 === 0
+          "
+        >
+          <h5 class="noarmy">
+            Nincs sereged :(
+          </h5>
+        </div>
+        <div
+          *ngIf="
+            capaInfoNumbers.level1 > 0 ||
+            capaInfoNumbers.level2 > 0 ||
+            capaInfoNumbers.level3 > 0
+          "
+        >
+          <h5 matTooltip="Lv. 1 / Lv. 2 / Lv. 3">
+            Lézercápa: {{ capaNumber.level1 }} / {{ capaNumber.level2 }} /
+            {{ capaNumber.level3 }} példány
+          </h5>
+          <div class="smallrow">
+            <div class="smallcolumn">
+              <mat-card class="icon">
+                <img src="assets\images\007-shark.svg" />
+              </mat-card>
+            </div>
+            <div class="smallcolumn">
+              <div class="slidertext" *ngIf="capaInfoNumbers.level1 > 0">
+                <p class="leveltext">Lv.1:</p>
+                <input
+                  type="range"
+                  class="slider"
+                  #capa
+                  min="0"
+                  max="{{ capaInfoNumbers.level1 }}"
+                  value="0"
+                  [(ngModel)]="capaNumber.level1"
+                />
+              </div>
+              <div class="slidertext" *ngIf="capaInfoNumbers.level2 > 0">
+                <p class="leveltext">Lv.2:</p>
+                <input
+                  type="range"
+                  class="slider"
+                  #capa
+                  min="0"
+                  max="{{ capaInfoNumbers.level2 }}"
+                  value="0"
+                  [(ngModel)]="capaNumber.level2"
+                />
+              </div>
+              <div class="slidertext" *ngIf="capaInfoNumbers.level3 > 0">
+                <p class="leveltext">Lv.3:</p>
+                <input
+                  type="range"
+                  class="slider"
+                  #capa
+                  min="0"
+                  max="{{ capaInfoNumbers.level3 }}"
+                  value="0"
+                  [(ngModel)]="capaNumber.level3"
+                />
+              </div>
+            </div>
           </div>
         </div>
-        <h5 matTooltip="Lv. 1 / Lv. 2 / Lv. 3">
-          Rohamfóka: {{ fokaNumber.level1 }} / {{ fokaNumber.level2 }} /
-          {{ fokaNumber.level3 }} példány
-        </h5>
-        <div class="smallrow">
-          <div class="smallcolumn">
-            <mat-card class="icon">
-              <img src="assets\images\025-seal.svg" />
-            </mat-card>
-          </div>
-          <div class="smallcolumn">
-            <input
-              type="range"
-              class="slider"
-              #foka
-              min="0"
-              max="{{ fokaInfoNumbers.level1 }}"
-              value="0"
-              [(ngModel)]="fokaNumber.level1"
-              matTooltip="Nincs lv. 1 rohamfókád :("
-              [matTooltipDisabled]="fokaInfoNumbers.level1 > 0"
-            />
-            <input
-              type="range"
-              class="slider"
-              #foka
-              min="0"
-              max="{{ fokaInfoNumbers.level2 }}"
-              value="0"
-              [(ngModel)]="fokaNumber.level2"
-              matTooltip="Nincs lv. 2 rohamfókád :("
-              [matTooltipDisabled]="fokaInfoNumbers.level2 > 0"
-            />
-            <input
-              type="range"
-              class="slider"
-              #foka
-              min="0"
-              max="{{ fokaInfoNumbers.level3 }}"
-              value="0"
-              [(ngModel)]="fokaNumber.level3"
-              matTooltip="Nincs lv. 3 rohamfókád :("
-              [matTooltipDisabled]="fokaInfoNumbers.level3 > 0"
-            />
+        <div
+          *ngIf="
+            fokaInfoNumbers.level1 > 0 ||
+            fokaInfoNumbers.level2 > 0 ||
+            fokaInfoNumbers.level3 > 0
+          "
+        >
+          <h5 matTooltip="Lv. 1 / Lv. 2 / Lv. 3">
+            Rohamfóka: {{ fokaNumber.level1 }} / {{ fokaNumber.level2 }} /
+            {{ fokaNumber.level3 }} példány
+          </h5>
+          <div class="smallrow">
+            <div class="smallcolumn">
+              <mat-card class="icon">
+                <img src="assets\images\025-seal.svg" />
+              </mat-card>
+            </div>
+            <div class="smallcolumn">
+              <div class="slidertext" *ngIf="fokaInfoNumbers.level1 > 0">
+                <p class="leveltext">Lv.1:</p>
+                <input
+                  type="range"
+                  class="slider"
+                  #foka
+                  min="0"
+                  max="{{ fokaInfoNumbers.level1 }}"
+                  value="0"
+                  [(ngModel)]="fokaNumber.level1"
+                />
+              </div>
+              <div class="slidertext" *ngIf="fokaInfoNumbers.level2 > 0">
+                <p class="leveltext">Lv.2:</p>
+                <input
+                  type="range"
+                  class="slider"
+                  #foka
+                  min="0"
+                  max="{{ fokaInfoNumbers.level2 }}"
+                  value="0"
+                  [(ngModel)]="fokaNumber.level2"
+                />
+              </div>
+              <div class="slidertext" *ngIf="fokaInfoNumbers.level3 > 0">
+                <p class="leveltext">Lv.3:</p>
+                <input
+                  type="range"
+                  class="slider"
+                  #foka
+                  min="0"
+                  max="{{ fokaInfoNumbers.level3 }}"
+                  value="0"
+                  [(ngModel)]="fokaNumber.level3"
+                />
+              </div>
+            </div>
           </div>
         </div>
-        <h5 matTooltip="Lv. 1 / Lv. 2 / Lv. 3">
-          Csatacsikó: {{ csikoNumber.level1 }} / {{ csikoNumber.level2 }} /
-          {{ csikoNumber.level3 }} példány
-        </h5>
-        <div class="smallrow">
-          <div class="smallcolumn">
-            <mat-card class="icon">
-              <img src="assets\images\013-seahorse.svg" />
-            </mat-card>
-          </div>
-          <div class="smallcolumn">
-            <input
-              type="range"
-              class="slider"
-              #csiko
-              min="0"
-              max="{{ csikoInfoNumbers.level1 }}"
-              value="0"
-              [(ngModel)]="csikoNumber.level1"
-              matTooltip="Nincs lv. 1 csatacsikód :("
-              [matTooltipDisabled]="csikoInfoNumbers.level1 > 0"
-            />
-            <input
-              type="range"
-              class="slider"
-              #csiko
-              min="0"
-              max="{{ csikoInfoNumbers.level2 }}"
-              value="0"
-              [(ngModel)]="csikoNumber.level2"
-              matTooltip="Nincs lv. 2 csatacsikód :("
-              [matTooltipDisabled]="csikoInfoNumbers.level2 > 0"
-            />
-            <input
-              type="range"
-              class="slider"
-              #csiko
-              min="0"
-              max="{{ csikoInfoNumbers.level3 }}"
-              value="0"
-              [(ngModel)]="csikoNumber.level3"
-              matTooltip="Nincs lv. 3 csatacsikód :("
-              [matTooltipDisabled]="csikoInfoNumbers.level3 > 0"
-            />
+        <div
+          *ngIf="
+            csikoInfoNumbers.level1 > 0 ||
+            csikoInfoNumbers.level2 > 0 ||
+            csikoInfoNumbers.level3 > 0
+          "
+        >
+          <h5 matTooltip="Lv. 1 / Lv. 2 / Lv. 3">
+            Csatacsikó: {{ csikoNumber.level1 }} / {{ csikoNumber.level2 }} /
+            {{ csikoNumber.level3 }} példány
+          </h5>
+          <div class="smallrow">
+            <div class="smallcolumn">
+              <mat-card class="icon">
+                <img src="assets\images\013-seahorse.svg" />
+              </mat-card>
+            </div>
+            <div class="smallcolumn">
+              <div class="slidertext" *ngIf="csikoInfoNumbers.level1 > 0">
+                <p class="leveltext">Lv.1:</p>
+                <input
+                  type="range"
+                  class="slider"
+                  #csiko
+                  min="0"
+                  max="{{ csikoInfoNumbers.level1 }}"
+                  value="0"
+                  [(ngModel)]="csikoNumber.level1"
+                />
+              </div>
+              <div class="slidertext" *ngIf="csikoInfoNumbers.level2 > 0">
+                <p class="leveltext">Lv.2:</p>
+                <input
+                  type="range"
+                  class="slider"
+                  #csiko
+                  min="0"
+                  max="{{ csikoInfoNumbers.level2 }}"
+                  value="0"
+                  [(ngModel)]="csikoNumber.level2"
+                />
+              </div>
+              <div class="slidertext" *ngIf="csikoInfoNumbers.level3 > 0">
+                <p class="leveltext">Lv.3:</p>
+                <input
+                  type="range"
+                  class="slider"
+                  #csiko
+                  min="0"
+                  max="{{ csikoInfoNumbers.level3 }}"
+                  value="0"
+                  [(ngModel)]="csikoNumber.level3"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>

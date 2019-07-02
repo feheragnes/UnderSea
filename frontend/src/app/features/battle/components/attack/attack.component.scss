@@ -18,6 +18,7 @@
   height: 500px;
   margin-bottom: 20px;
 }
+
 .column {
   width: 45%;
   height: 500px;
@@ -126,4 +127,21 @@ hr {
 
 .form-rounded {
   width: 95%;
+}
+
+.slidertext {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  height: auto;
+}
+
+.leveltext {
+  margin: 0;
+  margin-right: 5px;
+}
+
+.noarmy {
+  text-align: center;
 }
