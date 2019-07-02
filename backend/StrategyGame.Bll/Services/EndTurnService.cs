@@ -151,6 +151,7 @@ namespace StrategyGame.Bll.Services
             csapat.Egysegs.ToList().ForEach(x =>
             {
                 egysegs.Add((Egyseg)Activator.CreateInstance(x.GetType()));
+                x.CsatakSzama++;
 
             });
             csapat.Tulajdonos.OtthoniCsapats.FirstOrDefault(x => x.Kimenetel == HarcEredmenyTipus.Otthon).Egysegs.AddRange(csapat.Egysegs);
@@ -174,6 +175,17 @@ namespace StrategyGame.Bll.Services
 
         }
 
+        public async Task DoLevelUp()
+        {
+            await _context.Egysegs.ForEachAsync(x =>
+            {
+                var egyseginfo = _context.EgysegInfos.Where(y => y.Tipus.ToString() == x.Discriminator);
+                x.Szint = egyseginfo.SingleOrDefault(y => y.CsatakSzama == x.CsatakSzama)?.Szint ?? x.Szint;
+                x.Tamadas = egyseginfo.SingleOrDefault(y => y.CsatakSzama == x.CsatakSzama)?.Tamadas ?? x.Tamadas;
+                x.Vedekezes = egyseginfo.SingleOrDefault(y => y.CsatakSzama == x.CsatakSzama)?.Vedekezes ?? x.Vedekezes;
+            });
+            await _context.SaveChangesAsync();
+        }
         public async Task NextTurn()
         {
             await DoAdo();
@@ -183,6 +195,7 @@ namespace StrategyGame.Bll.Services
             await DoFejleszteses();
             await DoEpulets();
             await DoHarc();
+            await DoLevelUp();
             await SetOrszagScores();
             (await _context.Jateks.FirstOrDefaultAsync()).Korok++;
             await _context.SaveChangesAsync();

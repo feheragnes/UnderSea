@@ -78,12 +78,12 @@ namespace StrategyGame.Dal.Context
                 new EgysegInfo { Id = Guid.NewGuid(), Tipus = EgysegTipus.RohamFoka, Ar = 50, Ellatas = 1, Zsold = 1, Tamadas = 6, Vedekezes = 2, CsatakSzama = 0, Szint= 1 },
                 new EgysegInfo { Id = Guid.NewGuid(), Tipus = EgysegTipus.CsataCsiko, Ar = 50, Ellatas = 1, Zsold = 1, Tamadas = 2, Vedekezes = 6, CsatakSzama = 0, Szint = 1 },
                 new EgysegInfo { Id = Guid.NewGuid(), Tipus = EgysegTipus.LezerCapa, Ar = 100, Ellatas = 2, Zsold = 3, Tamadas = 5, Vedekezes = 5, CsatakSzama = 0, Szint = 1 },
-                new EgysegInfo { Id = Guid.NewGuid(), Tipus = EgysegTipus.RohamFoka, Ar = 50, Ellatas = 1, Zsold = 1, Tamadas = 6, Vedekezes = 2, CsatakSzama = 3, Szint = 2 },
-                new EgysegInfo { Id = Guid.NewGuid(), Tipus = EgysegTipus.CsataCsiko, Ar = 50, Ellatas = 1, Zsold = 1, Tamadas = 2, Vedekezes = 6, CsatakSzama = 3, Szint = 2 },
-                new EgysegInfo { Id = Guid.NewGuid(), Tipus = EgysegTipus.LezerCapa, Ar = 100, Ellatas = 2, Zsold = 3, Tamadas = 5, Vedekezes = 5, CsatakSzama = 3, Szint = 2 },
-                new EgysegInfo { Id = Guid.NewGuid(), Tipus = EgysegTipus.RohamFoka, Ar = 50, Ellatas = 1, Zsold = 1, Tamadas = 6, Vedekezes = 2, CsatakSzama = 8, Szint = 3 },
-                new EgysegInfo { Id = Guid.NewGuid(), Tipus = EgysegTipus.CsataCsiko, Ar = 50, Ellatas = 1, Zsold = 1, Tamadas = 2, Vedekezes = 6, CsatakSzama = 8, Szint = 3 },
-                new EgysegInfo { Id = Guid.NewGuid(), Tipus = EgysegTipus.LezerCapa, Ar = 100, Ellatas = 2, Zsold = 3, Tamadas = 5, Vedekezes = 5, CsatakSzama = 8, Szint = 3 }
+                new EgysegInfo { Id = Guid.NewGuid(), Tipus = EgysegTipus.RohamFoka, Ar = 50, Ellatas = 1, Zsold = 1, Tamadas = 8, Vedekezes = 3, CsatakSzama = 3, Szint = 2 },
+                new EgysegInfo { Id = Guid.NewGuid(), Tipus = EgysegTipus.CsataCsiko, Ar = 50, Ellatas = 1, Zsold = 1, Tamadas = 3, Vedekezes = 8, CsatakSzama = 3, Szint = 2 },
+                new EgysegInfo { Id = Guid.NewGuid(), Tipus = EgysegTipus.LezerCapa, Ar = 100, Ellatas = 2, Zsold = 3, Tamadas = 7, Vedekezes = 7, CsatakSzama = 3, Szint = 2 },
+                new EgysegInfo { Id = Guid.NewGuid(), Tipus = EgysegTipus.RohamFoka, Ar = 50, Ellatas = 1, Zsold = 1, Tamadas = 10, Vedekezes = 5, CsatakSzama = 8, Szint = 3 },
+                new EgysegInfo { Id = Guid.NewGuid(), Tipus = EgysegTipus.CsataCsiko, Ar = 50, Ellatas = 1, Zsold = 1, Tamadas = 5, Vedekezes = 10, CsatakSzama = 8, Szint = 3 },
+                new EgysegInfo { Id = Guid.NewGuid(), Tipus = EgysegTipus.LezerCapa, Ar = 100, Ellatas = 2, Zsold = 3, Tamadas = 10, Vedekezes = 10, CsatakSzama = 8, Szint = 3 }
 
                 );
             builder.Entity<Jatek>().HasData
