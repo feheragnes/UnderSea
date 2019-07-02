@@ -17,6 +17,7 @@ using StrategyGame.Bll.ServiceInterfaces;
 using StrategyGame.Bll.ServiceInterfaces.AAAServiceInterfaces;
 using StrategyGame.Bll.Services;
 using StrategyGame.Bll.Services.AAAServices;
+using StrategyGame.Dal;
 using StrategyGame.Dal.Context;
 using StrategyGame.Model.Entities.Identity;
 using Swashbuckle.AspNetCore.Swagger;
@@ -156,7 +157,7 @@ namespace StrategyGame.Api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IBackgroundJobClient backgroundJobs, StrategyGameContext ctx, IEndTurnService endTurnService, IInitService initService)
+        public void Configure(IApplicationBuilder app, StrategyGameContext context, IHostingEnvironment env, UserManager<StrategyGameUser> userManager, IBackgroundJobClient backgroundJobs, StrategyGameContext ctx, IEndTurnService endTurnService, IInitService initService)
         {
 
 
@@ -191,9 +192,8 @@ namespace StrategyGame.Api
             app.UseAuthentication();
             app.UseMvc();
 
-         
-
-            //ctx.Database.EnsureCreated();
+            ApplicationDbInitializer.SeedUsers(userManager, context);
+        
         }
     }
 }

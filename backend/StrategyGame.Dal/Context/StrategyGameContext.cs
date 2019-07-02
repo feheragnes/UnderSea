@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using StrategyGame.Dal.EntityTypeConfigurations;
+using StrategyGame.Dal.Extensons;
 using StrategyGame.Model.Entities.Identity;
 using StrategyGame.Model.Entities.Models;
 using StrategyGame.Model.Entities.Models.Egysegek;
@@ -17,12 +18,12 @@ namespace StrategyGame.Dal.Context
 {
     public class StrategyGameContext : IdentityDbContext<StrategyGameUser, StrategyGameRole, Guid>
     {
-        public readonly UserManager<StrategyGameUser> _userManager;
+    
 
-        public StrategyGameContext(DbContextOptions<StrategyGameContext> options)
+        public StrategyGameContext(DbContextOptions<StrategyGameContext> options )
             : base(options)
         {
-           
+            
         }
 
         public DbSet<Jatek> Jateks { get; set; }
@@ -84,10 +85,10 @@ namespace StrategyGame.Dal.Context
                 new Jatek { Id = Guid.NewGuid(), Korok = 0 }
                 );
 
-
-      
-
+            builder.Seed();
         }
+
+
 
         public override int SaveChanges()
         {
