@@ -45,7 +45,7 @@ namespace StrategyGame.Bll.Services
 
             egysegek.ForEach(x =>
             {
-                osszKoltseg += _context.EgysegInfos.SingleOrDefault(y => y.Tipus == x.Tipus).Ar * x.Mennyiseg;
+                osszKoltseg += _context.EgysegInfos.SingleOrDefault(y => y.Tipus == x.Tipus && y.Szint == 1)?.Ar ?? 0 * x.Mennyiseg;
             });
 
             if (osszKoltseg > currentOrszag.Gyongy)
@@ -53,9 +53,9 @@ namespace StrategyGame.Bll.Services
                 throw new ArgumentException(Resources.ErrorMessage.NotEnoughPearl);
             }
 
-            var rohamFokaInfos = await _context.EgysegInfos.SingleOrDefaultAsync(x => x.Tipus == EgysegTipus.RohamFoka);
-            var csataCsikoInfos = await _context.EgysegInfos.SingleOrDefaultAsync(x => x.Tipus == EgysegTipus.CsataCsiko);
-            var lezerCapaInfos = await _context.EgysegInfos.SingleOrDefaultAsync(x => x.Tipus == EgysegTipus.LezerCapa);
+            var rohamFokaInfos = await _context.EgysegInfos.SingleOrDefaultAsync(x => x.Tipus == EgysegTipus.RohamFoka && x.Szint == 1);
+            var csataCsikoInfos = await _context.EgysegInfos.SingleOrDefaultAsync(x => x.Tipus == EgysegTipus.CsataCsiko && x.Szint == 1);
+            var lezerCapaInfos = await _context.EgysegInfos.SingleOrDefaultAsync(x => x.Tipus == EgysegTipus.LezerCapa && x.Szint == 1);
             egysegek.ForEach(async x =>
             {
                 if (x.Tipus == EgysegTipus.RohamFoka)
@@ -68,7 +68,10 @@ namespace StrategyGame.Bll.Services
                             Tamadas = rohamFokaInfos.Tamadas,
                             Vedekezes = rohamFokaInfos.Vedekezes,
                             Ellatas = rohamFokaInfos.Ellatas,
-                            Zsold = rohamFokaInfos.Zsold
+                            Zsold = rohamFokaInfos.Zsold,
+                            CsatakSzama = rohamFokaInfos.CsatakSzama,
+                            Szint = rohamFokaInfos.Szint
+
                         });
                     }
 
@@ -83,7 +86,9 @@ namespace StrategyGame.Bll.Services
                             Tamadas = csataCsikoInfos.Tamadas,
                             Vedekezes = csataCsikoInfos.Vedekezes,
                             Ellatas = csataCsikoInfos.Ellatas,
-                            Zsold = csataCsikoInfos.Zsold
+                            Zsold = csataCsikoInfos.Zsold,
+                            CsatakSzama = csataCsikoInfos.CsatakSzama,
+                            Szint = csataCsikoInfos.Szint
                         });
                     }
 
@@ -98,7 +103,9 @@ namespace StrategyGame.Bll.Services
                             Tamadas = lezerCapaInfos.Tamadas,
                             Vedekezes = lezerCapaInfos.Vedekezes,
                             Ellatas = lezerCapaInfos.Ellatas,
-                            Zsold = lezerCapaInfos.Zsold
+                            Zsold = lezerCapaInfos.Zsold,
+                            CsatakSzama = lezerCapaInfos.CsatakSzama,
+                            Szint = lezerCapaInfos.Szint
                         });
                     }
 
@@ -135,7 +142,7 @@ namespace StrategyGame.Bll.Services
         {
             try
             {
-                var otthoniEgysegek = currentOrszag.OtthoniCsapats?.SingleOrDefault(T => T.Celpont == null)?.Egysegs.GroupBy(e => e.Discriminator);
+                var otthoniEgysegek = currentOrszag.OtthoniCsapats?.SingleOrDefault(T => T.Celpont == null)?.Egysegs.GroupBy(e => new { e.Discriminator, e.Szint }).GroupBy(x=>x.Key.Szint);
 
                 var seregInfoList = new List<SeregInfoDTO>();
 
@@ -143,15 +150,17 @@ namespace StrategyGame.Bll.Services
                 {
                     foreach (var egysegek in otthoniEgysegek)
                     {
-                        var egysegekDTO = _mapper.Map<List<EgysegDTO>>(egysegek.ToList());
-                        seregInfoList.Add(new SeregInfoDTO()
-                        {
-                            Ar = egysegekDTO.Sum(e => e.Ar),
-                            Mennyiseg = egysegekDTO.Count,
-                            Tamadas = egysegekDTO.Sum(e => e.Tamadas),
-                            Vedekezes = egysegek.Sum(e => e.Vedekezes),
-                            Tipus = Enum.Parse<EgysegTipus>(egysegek.Key)
-                        });
+                        foreach (var szint in egysegek) {
+                            seregInfoList.Add(new SeregInfoDTO()
+                            {
+                                Ar = szint.Sum(e => e.Ar),
+                                Mennyiseg = szint.Count(),
+                                Tamadas = szint.Sum(e => e.Tamadas),
+                                Vedekezes = szint.Sum(e => e.Vedekezes),
+                                Tipus = Enum.Parse<EgysegTipus>(szint.FirstOrDefault().Discriminator),
+                                Szint = szint.Key.Szint
+                            });
+                        }
                     }
                 }
                 return seregInfoList;

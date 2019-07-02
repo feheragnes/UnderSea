@@ -15,6 +15,8 @@ namespace StrategyGame.Model.Entities.Models.Egysegek
         public long Zsold { get; set; }
         public string Discriminator { get; set; }
         public long Ellatas { get; set; }
+        public long CsatakSzama { get; set; }
+        public long Szint { get; set; }
     }
 
 
