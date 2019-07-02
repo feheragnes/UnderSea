@@ -150,7 +150,9 @@ namespace StrategyGame.Bll.Services
             var egysegs = new List<Egyseg>();
             csapat.Egysegs.ToList().ForEach(x =>
             {
-                egysegs.Add((Egyseg)Activator.CreateInstance(x.GetType()));
+                var egyseg = (Egyseg)Activator.CreateInstance(x.GetType());
+                egyseg.Szint = x.Szint;
+                egysegs.Add(egyseg);
                 x.CsatakSzama++;
 
             });
