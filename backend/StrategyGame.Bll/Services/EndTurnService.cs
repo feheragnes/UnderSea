@@ -112,6 +112,28 @@ namespace StrategyGame.Bll.Services
             var vedekezes = (csapat.Celpont.OtthoniCsapats
                 .FirstOrDefault(y => y.Kimenetel == HarcEredmenyTipus.Otthon)
                 .Egysegs?.Sum(y => y.Vedekezes) ?? 0) * GetRandom() + _orszagService.GetVedekezesBonusz(csapat.Celpont).Result;
+
+            var tamadoEgysegs = new List<Egyseg>();
+            csapat.Egysegs.ToList().ForEach(x =>
+            {
+                var egyseg = (Egyseg)Activator.CreateInstance(x.GetType());
+                egyseg.Szint = x.Szint;
+                egyseg.CsatakSzama = x.CsatakSzama;
+                tamadoEgysegs.Add(egyseg);
+                x.CsatakSzama++;
+
+            });
+            var vedekezoEgysegs = new List<Egyseg>();
+            csapat.Celpont.OtthoniCsapats.FirstOrDefault(x=>x.Kimenetel == HarcEredmenyTipus.Otthon).Egysegs.ToList().ForEach(x =>
+            {
+                var egyseg = (Egyseg)Activator.CreateInstance(x.GetType());
+                egyseg.Szint = x.Szint;
+                egyseg.CsatakSzama = x.CsatakSzama;
+                vedekezoEgysegs.Add(egyseg);
+                x.CsatakSzama++;
+
+            });
+
             if (tamadas > vedekezes)
             {
                 csapat.Kimenetel = HarcEredmenyTipus.Gyozelem;
@@ -119,6 +141,8 @@ namespace StrategyGame.Bll.Services
                 csapat.Tulajdonos.Korall += csapat.Celpont.Korall / 2;
                 csapat.Celpont.Gyongy -= csapat.Celpont.Gyongy / 2;
                 csapat.Celpont.Korall -= csapat.Celpont.Korall / 2;
+                csapat.RaboltGyongy = csapat.Celpont.Gyongy / 2;
+                csapat.RaboltKorall = csapat.Celpont.Korall / 2;
                 var ellenseg = csapat.Celpont.OtthoniCsapats.FirstOrDefault(x => x.Kimenetel == HarcEredmenyTipus.Otthon);
                 for (int i = 0; i < Convert.ToInt64(ellenseg.Egysegs.Count * 0.1); i++)
                 {
@@ -147,18 +171,11 @@ namespace StrategyGame.Bll.Services
                 }
 
             }
-            var egysegs = new List<Egyseg>();
-            csapat.Egysegs.ToList().ForEach(x =>
-            {
-                var egyseg = (Egyseg)Activator.CreateInstance(x.GetType());
-                egyseg.Szint = x.Szint;
-                egyseg.CsatakSzama = x.CsatakSzama;
-                egysegs.Add(egyseg);
-                x.CsatakSzama++;
 
-            });
+
             csapat.Tulajdonos.OtthoniCsapats.FirstOrDefault(x => x.Kimenetel == HarcEredmenyTipus.Otthon).Egysegs.AddRange(csapat.Egysegs);
-            csapat.Egysegs.AddRange(egysegs);
+            csapat.Egysegs.AddRange(tamadoEgysegs);
+            csapat.VedekezoEgysegs.AddRange(vedekezoEgysegs);
             _context.SaveChanges();
         }
         public async Task DoHarc()

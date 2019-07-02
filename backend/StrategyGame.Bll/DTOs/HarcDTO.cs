@@ -10,6 +10,8 @@ namespace StrategyGame.Bll.DTOs
         public List<SeregInfoDTO> TamadoCsapat { get; set; }
         public List<SeregInfoDTO> VedekezoCsapat { get; set; }
         public HarcEredmenyTipus HarcEredmeny { get; set; }
+        public long RaboltGyongy { get; set; }
+        public long RaboltKorall { get; set; }
 
     }
 }

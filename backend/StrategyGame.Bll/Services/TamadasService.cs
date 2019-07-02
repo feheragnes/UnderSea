@@ -71,7 +71,16 @@ namespace StrategyGame.Bll.Services
 
             orszag.OtthoniCsapats.Where(x => x.Kimenetel != HarcEredmenyTipus.Otthon).ToList()?.ForEach(x =>
            {
-               harcok.Add(new HarcDTO { VedezoOrszag = new OrszagDTO { Nev = x.Celpont.Nev }, HarcEredmeny = x.Kimenetel, TamadoCsapat = GetSeregFromEgysegs(x.Egysegs) });
+               harcok.Add(new HarcDTO
+               {
+                   VedezoOrszag = new OrszagDTO { Nev = x.Celpont.Nev },
+                   HarcEredmeny = x.Kimenetel,
+                   TamadoCsapat = GetSeregFromEgysegs(x.Egysegs),
+                   VedekezoCsapat = GetSeregFromEgysegs(x.VedekezoEgysegs),
+                   TamadoOrszag = new OrszagDTO { Nev = x.Tulajdonos.Nev },
+                   RaboltKorall = x.RaboltKorall,
+                   RaboltGyongy = x.RaboltGyongy
+               });
            });
             return harcok;
 
