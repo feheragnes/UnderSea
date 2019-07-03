@@ -8,6 +8,7 @@ namespace StrategyGame.Api.ViewModels.Felfedezes
     public class FelfedezesInditasViewModel
     {
         public string Orszag { get; set; }
-        public long Mennyiseg { get; set; }
+        public List<KikuldottFelfedezoInfoViewModel> TamadoFelfedezok { get; set; }
+
     }
 }

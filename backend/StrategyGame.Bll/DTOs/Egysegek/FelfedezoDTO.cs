@@ -5,7 +5,7 @@ using System.Text;
 
 namespace StrategyGame.Bll.DTOs.Egysegek
 {
-    class FelfedezoDTO : EgysegDTO, IEgyseg
+    public class FelfedezoDTO : EgysegDTO, IEgyseg
     {
         public long Ertek { get; set; } = 5;
         public long KemkedesiKepesseg{ get; set; } = 5;

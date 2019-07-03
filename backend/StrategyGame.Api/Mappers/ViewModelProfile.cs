@@ -3,6 +3,7 @@ using StrategyGame.Api.ViewModels.AAAViewModels;
 using StrategyGame.Api.ViewModels.EgysegViewModels;
 using StrategyGame.Api.ViewModels.EpuletViewModels;
 using StrategyGame.Api.ViewModels.FejlesztesViewModels;
+using StrategyGame.Api.ViewModels.Felfedezes;
 using StrategyGame.Api.ViewModels.GlobalViewModels;
 using StrategyGame.Api.ViewModels.OrszagViewModels;
 using StrategyGame.Api.ViewModels.TamadasViewModels;
@@ -73,6 +74,20 @@ namespace StrategyGame.Api.Mappers
                 .ForMember(x => x.VedekezoOrszag, opt => opt.MapFrom(y => y.VedezoOrszag.Nev))
                 .ForMember(x => x.TamadoOrszag, opt => opt.MapFrom(y => y.TamadoOrszag.Nev));
 
+
+            CreateMap<FelfedezesEredmenyViewModel, FelfedezesDTO>()
+                .ForMember(x => x.VedekezoOrszag, opt => opt.MapFrom(y => y.Orszag))
+                .ForMember(x => x.VedekezoGyongy, opt => opt.MapFrom(y => y.Gyongy))
+                .ForMember(x => x.VedekezoKorall, opt => opt.MapFrom(y => y.Korall))
+                .ForMember(x => x.VedekezoCsapat, opt => opt.MapFrom(y => y.VedekezoSereg))
+                .ForMember(x => x.FelfedezesEredmeny, opt => opt.MapFrom(y => y.Eredmeny));
+
+            CreateMap<FelfedezesInditasViewModel, BejovoFelfedezesDTO>()
+                .ForMember(x => x.CelpontNev, opt => opt.MapFrom(y => y.Orszag))
+                .ForMember(x => x.TamadoFelfedezok, opt => opt.MapFrom(y => y.TamadoFelfedezok));
+
+
+                
 
         }
     }

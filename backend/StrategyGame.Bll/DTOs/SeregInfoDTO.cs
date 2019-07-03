@@ -8,7 +8,6 @@ namespace StrategyGame.Bll.DTOs
         {
 
         }
-   
 
         public EgysegTipus Tipus { get; set; }
         public long Mennyiseg { get; set; }

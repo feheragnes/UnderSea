@@ -1,4 +1,5 @@
 ﻿using StrategyGame.Api.ViewModels.EgysegViewModels;
+using StrategyGame.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,7 @@ namespace StrategyGame.Api.ViewModels.Felfedezes
         public long Korall { get; set; }
         public long Gyongy { get; set; }
         public List<SeregInfoViewModel> VedekezoSereg { get; set; }
+
+        public FelfedezesEredmenyTipus Eredmeny { get; set; }
     }
 }
