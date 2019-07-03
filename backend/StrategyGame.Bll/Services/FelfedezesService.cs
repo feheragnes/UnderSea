@@ -37,7 +37,7 @@ namespace StrategyGame.Bll.Services
         {
             var otthoniFelfedezok = currentOrszag.OtthoniCsapats?.SingleOrDefault(T => T.Celpont == null)?.Egysegs.FindAll(x => x.Discriminator.Equals("Felfedezo")).ToList();
 
-            SeregInfoDTO seregInfo = new SeregInfoDTO
+            SeregInfoDTO seregInfo = new SeregInfoDTO()
             {
                 Tipus= Model.Enums.EgysegTipus.Felfedezo,
                 Ar = 50,
