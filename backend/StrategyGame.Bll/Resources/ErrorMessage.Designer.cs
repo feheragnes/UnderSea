@@ -142,6 +142,15 @@ namespace StrategyGame.Bll.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nincs elég felfedeződ!.
+        /// </summary>
+        internal static string NotEnoughFelfedezo {
+            get {
+                return ResourceManager.GetString("NotEnoughFelfedezo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nincs elég szállásod!.
         /// </summary>
         internal static string NotEnoughHousing {

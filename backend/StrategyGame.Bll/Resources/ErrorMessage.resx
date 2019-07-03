@@ -159,4 +159,7 @@
   <data name="RegistrationFailed" xml:space="preserve">
     <value>Nem sikerült a regisztráció!</value>
   </data>
+  <data name="NotEnoughFelfedezo" xml:space="preserve">
+    <value>Nincs elég felfedeződ!</value>
+  </data>
 </root>
