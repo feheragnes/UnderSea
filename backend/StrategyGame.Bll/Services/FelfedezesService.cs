@@ -46,7 +46,7 @@ namespace StrategyGame.Bll.Services
         public async Task<List<FelfedezesDTO>> GetFinishedFelfedezeses(Guid userId)
         {
             var currentOrszag = await _commonService.GetCurrentOrszag(userId);
-            var debug = _mapper.Map<List<FelfedezesDTO>>(currentOrszag.Fejleszteses.ToList());
+            var debug = _mapper.Map<List<FelfedezesDTO>>(currentOrszag.Felfedezeses);
             return debug;
         }
 
