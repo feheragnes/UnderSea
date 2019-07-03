@@ -84,12 +84,13 @@ namespace StrategyGame.Api.Mappers
                 .ForMember(x => x.FelfedezesEredmeny, opt => opt.MapFrom(y => Enum.Parse<FelfedezesEredmenyTipus>(y.Eredmeny)));
 
             CreateMap<FelfedezesDTO, FelfedezesEredmenyViewModel>()
-                .ForMember(x => x.Orszag, opt => opt.MapFrom(y => y.VedekezoOrszag.Nev))
+                .ForMember(x => x.Orszag, opt => opt.MapFrom(y => y.VedekezoOrszag))
                 .ForMember(x => x.VedekezoEro, opt => opt.MapFrom(y => y.VedekezoEro))
                 .ForMember(x => x.Gyongy, opt => opt.MapFrom(y => y.VedekezoGyongy))
                 .ForMember(x => x.Korall, opt => opt.MapFrom(y => y.VedekezoKorall))
                 .ForMember(x => x.Idopont, opt => opt.MapFrom(y => y.Idopont))
                 .ForMember(x => x.Eredmeny, opt => opt.MapFrom(y => y.FelfedezesEredmeny.ToString()));
+
 
 
             CreateMap<FelfedezesInditasViewModel, BejovoFelfedezesDTO>()
