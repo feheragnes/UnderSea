@@ -9,6 +9,6 @@ namespace StrategyGame.Api.ViewModels.Felfedezes
     public class FelfedezesViewModel
     {
         public List<string> Orszag { get; set; }
-        public List<TamadoSeregInfoViewModel> Sereg { get; set; }
+        public List<TamadoSeregInfoViewModel> Felfedezok { get; set; }
     }
 }

@@ -15,7 +15,5 @@ namespace StrategyGame.Bll.DTOs
         public long Tamadas { get; set; }
         public long Vedekezes { get; set; }
         public long Szint { get; set; }
-        public long CsatakSzama { get; set; }
-
     }
 }

@@ -42,8 +42,7 @@ namespace StrategyGame.Api.Controllers
         public async Task<IActionResult> GetUserFelfedezos()
         {
             Orszag userOrszag = await _commonService.GetCurrentOrszag(UserId);
-            return Ok("Not implemented");
-            // TODO: return Ok( _kemkedesService.GetOtthoniKemekFromOneUserAsync(userOrszag));
+            return Ok(await _felfedezesService.GetOtthoniFelfedezokFromOneUserAsync(userOrszag));
         }
 
         [HttpGet]

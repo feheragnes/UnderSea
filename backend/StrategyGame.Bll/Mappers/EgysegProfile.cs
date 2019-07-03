@@ -35,7 +35,7 @@ namespace StrategyGame.Bll.Mappers
                 .IncludeBase<Egyseg, EgysegDTO>()
                 .ReverseMap();
 
-            CreateMap<Felfedezo, RohamFokaDTO>()
+            CreateMap<Felfedezo, FelfedezoDTO>()
     .IncludeBase<Egyseg, EgysegDTO>()
     .ReverseMap();
 

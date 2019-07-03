@@ -21,6 +21,7 @@ namespace StrategyGame.Dal.Extensons
             for (int i = 0; i < 4; i++)
             {
                 List<Egyseg> egysegs = new List<Egyseg>();
+
                 for (int j = 0; j < rnd.Next(0, 15); j++)
                 {
                     modelBuilder.Entity<RohamFoka>().HasData(
@@ -34,40 +35,64 @@ namespace StrategyGame.Dal.Extensons
                         Zsold = 1L,
                         CsatakSzama = 0L,
                         Szint = 1L,
-                        
+
                         CsapatId = new Guid($"00000000-0000-0000-0000-00000000000{i + 5}"),
                     }
                     );
-
+                }
+                for (int j = 0; j < rnd.Next(0, 15); j++)
+                {
                     modelBuilder.Entity<CsataCsiko>().HasData(
-                    new
-                    {
-                        Id = Guid.NewGuid(),
-                        Ar = 50L,
-                        Tamadas = 2L,
-                        Vedekezes = 6L,
-                        Ellatas = 1L,
-                        Zsold = 1L,
-                        CsatakSzama = 0L,
-                        Szint = 1L,
-                        CsapatId = new Guid($"00000000-0000-0000-0000-00000000000{i + 5}"),
-                    }
-                    );
+                            new
+                            {
+                                Id = Guid.NewGuid(),
+                                Ar = 50L,
+                                Tamadas = 2L,
+                                Vedekezes = 6L,
+                                Ellatas = 1L,
+                                Zsold = 1L,
+                                CsatakSzama = 0L,
+                                Szint = 1L,
+                                CsapatId = new Guid($"00000000-0000-0000-0000-00000000000{i + 5}"),
+                            }
+                            );
+                }
 
+                for (int j = 0; j < rnd.Next(0, 15); j++)
+                {
                     modelBuilder.Entity<LezerCapa>().HasData(
-                    new
-                    {
-                        Id = Guid.NewGuid(),
-                        Ar = 100L,
-                        Tamadas = 5L,
-                        Vedekezes = 5L,
-                        Ellatas = 2L,
-                        Zsold = 3L,
-                        CsatakSzama = 0L,
-                        Szint = 1L,
-                        CsapatId = new Guid($"00000000-0000-0000-0000-00000000000{i + 5}"),
-                    }
-                    );
+                            new
+                            {
+                                Id = Guid.NewGuid(),
+                                Ar = 100L,
+                                Tamadas = 5L,
+                                Vedekezes = 5L,
+                                Ellatas = 2L,
+                                Zsold = 3L,
+                                CsatakSzama = 0L,
+                                Szint = 1L,
+                                CsapatId = new Guid($"00000000-0000-0000-0000-00000000000{i + 5}"),
+                            }
+                            );
+                }
+
+                for (int j = 0; j < rnd.Next(0, 15); j++)
+                {
+                    modelBuilder.Entity<Felfedezo>().HasData(
+                           new
+                           {
+                               Id = Guid.NewGuid(),
+                               Ar = 50L,
+                               Tamadas = 0L,
+                               Vedekezes = 0L,
+                               Ellatas = 1L,
+                               Zsold = 1L,
+                               CsatakSzama = 0L,
+                               Szint = 1L,
+                               KemkedesiKepesseg = 5L,
+                               CsapatId = new Guid($"00000000-0000-0000-0000-00000000000{i + 5}"),
+                           }
+                           );
                 }
 
                 modelBuilder.Entity<Orszag>().HasData(
@@ -90,7 +115,6 @@ namespace StrategyGame.Dal.Extensons
                         AktualisKor = 15L,
                         SzuksegesKorok = 15L
                     });
-
 
 
                 modelBuilder.Entity<ZatonyVar>().HasData(
