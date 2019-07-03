@@ -4,6 +4,7 @@
     {
         RohamFoka,
         CsataCsiko,
-        LezerCapa
+        LezerCapa,
+        Felfedezo
     }
 }
