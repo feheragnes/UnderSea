@@ -20,8 +20,6 @@ namespace StrategyGame.Dal.Extensons
 
             for (int i = 0; i < 4; i++)
             {
-                List<Egyseg> egysegs = new List<Egyseg>();
-
                 for (int j = 0; j < rnd.Next(0, 15); j++)
                 {
                     modelBuilder.Entity<RohamFoka>().HasData(
@@ -35,7 +33,6 @@ namespace StrategyGame.Dal.Extensons
                         Zsold = 1L,
                         CsatakSzama = 0L,
                         Szint = 1L,
-
                         CsapatId = new Guid($"00000000-0000-0000-0000-00000000000{i + 5}"),
                     }
                     );
@@ -90,11 +87,12 @@ namespace StrategyGame.Dal.Extensons
                                CsatakSzama = 0L,
                                Szint = 1L,
                                KemkedesiKepesseg = 5L,
+                               Felfedezett = false,
                                CsapatId = new Guid($"00000000-0000-0000-0000-00000000000{i + 5}"),
                            }
                            );
                 }
-
+            
                 modelBuilder.Entity<Orszag>().HasData(
                      new Orszag
                      {
@@ -137,7 +135,6 @@ namespace StrategyGame.Dal.Extensons
                         RaboltGyongy = 0L,
                         RaboltKorall = 0L
                     });
-
             }
         }
     }

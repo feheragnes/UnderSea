@@ -22,9 +22,7 @@ namespace StrategyGame.Dal
                         Email = ($"asd{i}@asd.com"),
                         Orszag = context.Orszags.Find(new Guid($"00000000-0000-0000-0000-00000000000{i + 1}"))
                     };
-
                     IdentityResult result = userManager.CreateAsync(user, "Asd123").Result;
-
                 }
             }
           
