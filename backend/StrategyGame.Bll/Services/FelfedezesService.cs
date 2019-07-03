@@ -92,7 +92,8 @@ namespace StrategyGame.Bll.Services
                     VedekezoEro = celpontOrszag.OtthoniCsapats.SingleOrDefault(x => x.Kimenetel == HarcEredmenyTipus.Otthon).Egysegs.Sum(x => x.Vedekezes),
                     VedekezoGyongy = celpontOrszag.Gyongy,
                     VedekezoKorall = celpontOrszag.Korall,
-                    Felfedezos = bejovoFelfedezes.TamadoFelfedezok
+                    Felfedezos = bejovoFelfedezes.TamadoFelfedezok,
+                    Idopont = DateTime.Now
 
                 };
                 tulajdonosOrszag.Felfedezeses.Add(_mapper.Map<Felfedezes>(felfedezesDTO));
@@ -106,7 +107,8 @@ namespace StrategyGame.Bll.Services
                     FelfedezesEredmeny = FelfedezesEredmenyTipus.Sikertelen,
                     TamadoOrszag = new OrszagDTO { Nev = tulajdonosOrszag.Nev },
                     VedekezoOrszag = celpontOrszag.Nev,
-                    Felfedezos = bejovoFelfedezes.TamadoFelfedezok
+                    Felfedezos = bejovoFelfedezes.TamadoFelfedezok,
+                    Idopont = DateTime.Now
                 };
                 tulajdonosOrszag.Felfedezeses.Add(_mapper.Map<Felfedezes>(felfedezesDTO));
                 tamadoFelfedezok.ToList().ForEach(y =>
