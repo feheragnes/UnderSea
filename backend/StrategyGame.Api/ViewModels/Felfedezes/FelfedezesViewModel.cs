@@ -8,6 +8,6 @@ namespace StrategyGame.Api.ViewModels.Felfedezes
     public class FelfedezesViewModel
     {
         public List<string> Orszag { get; set; }
-        public string Mennyiseg { get; set; }
+        public long Mennyiseg { get; set; }
     }
 }

@@ -21,6 +21,7 @@ namespace StrategyGame.Model.Entities.Models
         public IList<Csapat> TamadoCsapats { get; set; } = new List<Csapat>();
 
         public IList<Fejlesztes> Fejleszteses { get; set; } = new List<Fejlesztes>();
+        public IList<Felfedezes> Felfedezeses { get; set; } = new List<Felfedezes>();
 
 
     }
