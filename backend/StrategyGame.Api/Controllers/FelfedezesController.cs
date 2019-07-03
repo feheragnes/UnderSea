@@ -64,7 +64,7 @@ namespace StrategyGame.Api.Controllers
             try
             {
                 //TODO MakeFelfedezes
-                return _mapper.Map<FelfedezesEredmenyViewModel>(_felfedezesService.MakeFelfedezes(_mapper.Map<BejovoFelfedezesDTO>(felfedezesInditasViewModel),UserId));
+                return _mapper.Map<FelfedezesEredmenyViewModel>(await _felfedezesService.MakeFelfedezes(_mapper.Map<BejovoFelfedezesDTO>(felfedezesInditasViewModel),UserId));
             }
             catch (Exception e)
             {
