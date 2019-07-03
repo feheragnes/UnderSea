@@ -33,8 +33,9 @@ namespace StrategyGame.Bll.Services
             _commonService = commonService;
             _mapper = mapper;
         }
-        public async Task<SeregInfoDTO> GetOtthoniFelfedezokFromOneUserAsync(Orszag currentOrszag)
+        public async Task<SeregInfoDTO> GetOtthoniFelfedezokFromOneUserAsync(Guid userId)
         {
+            Orszag currentOrszag = await _commonService.GetCurrentOrszag(userId);
             var otthoniFelfedezok = currentOrszag.OtthoniCsapats?.SingleOrDefault(T => T.Celpont == null)?.Egysegs.FindAll(x => x.Discriminator.Equals("Felfedezo")).ToList();
 
             SeregInfoDTO seregInfo = new SeregInfoDTO()
