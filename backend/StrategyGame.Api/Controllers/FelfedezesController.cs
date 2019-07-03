@@ -50,7 +50,7 @@ namespace StrategyGame.Api.Controllers
         {
             try
             {
-                return _mapper.Map<FelfedezesViewModel>(await _orszagService.GetTamadasDTO(UserId));
+                return _mapper.Map<FelfedezesViewModel>(await _felfedezesService.GetFelfedezes(UserId));
             }
             catch (Exception e)
             {
