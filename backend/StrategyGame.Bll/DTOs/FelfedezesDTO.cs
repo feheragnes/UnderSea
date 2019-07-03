@@ -9,7 +9,7 @@ namespace StrategyGame.Bll.DTOs
     public class FelfedezesDTO
     {
          public OrszagDTO TamadoOrszag { get; set; }
-        public OrszagDTO VedekezoOrszag { get; set; }
+        public string VedekezoOrszag { get; set; }
         public List<SeregInfoDTO> Felfedezos { get; set; }
         public long VedekezoEro { get; set; }
         public FelfedezesEredmenyTipus FelfedezesEredmeny { get; set; }
