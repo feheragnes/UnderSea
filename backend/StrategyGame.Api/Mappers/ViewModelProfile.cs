@@ -86,8 +86,12 @@ namespace StrategyGame.Api.Mappers
                 .ForMember(x => x.CelpontNev, opt => opt.MapFrom(y => y.Orszag))
                 .ForMember(x => x.TamadoFelfedezok, opt => opt.MapFrom(y => y.TamadoFelfedezok));
 
+            CreateMap<TamadasDTO, FelfedezesViewModel>()
+                .ForMember(x => x.Orszag, opt => opt.MapFrom(y => y.EllensegesOrszagok))
+                .ForMember(x => x.Felfedezok, opt => opt.MapFrom(y => y.OtthoniEgysegek));
 
-                
+
+
 
         }
     }

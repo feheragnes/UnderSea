@@ -5,6 +5,7 @@ using StrategyGame.Dal.Context;
 using StrategyGame.Model.Entities.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,9 +30,21 @@ namespace StrategyGame.Bll.Services
             _commonService = commonService;
             _mapper = mapper;
         }
-        public Task<SeregInfoDTO> GetOtthoniFelfedezokFromOneUserAsync(Orszag currentOrszag)
+        public async Task<SeregInfoDTO> GetOtthoniFelfedezokFromOneUserAsync(Orszag currentOrszag)
         {
-            throw new NotImplementedException();
+            var otthoniFelfedezok = currentOrszag.OtthoniCsapats?.SingleOrDefault(T => T.Celpont == null)?.Egysegs.FindAll(x => x.Discriminator.Equals("Felfedezo")).ToList();
+
+            SeregInfoDTO seregInfo = new SeregInfoDTO
+            {
+                Tipus= Model.Enums.EgysegTipus.Felfedezo,
+                Ar = 50,
+                Mennyiseg = otthoniFelfedezok.Count(),
+                Tamadas = 0,
+                Vedekezes = 0,
+                Szint = 1
+            };
+
+            return seregInfo;
         }
     }
 }
