@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using StrategyGame.Api.ViewModels.EgysegViewModels;
 using StrategyGame.Api.ViewModels.Felfedezes;
 using StrategyGame.Bll.DTOs;
 using StrategyGame.Bll.ServiceInterfaces;
@@ -39,10 +40,9 @@ namespace StrategyGame.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetUserFelfedezos()
+        public async Task<ActionResult<SeregInfoViewModel>> GetUserFelfedezos()
         {
-            Orszag userOrszag = await _commonService.GetCurrentOrszag(UserId);
-            return Ok(await _felfedezesService.GetOtthoniFelfedezokFromOneUserAsync(userOrszag));
+            return _mapper.Map<SeregInfoViewModel>( _felfedezesService.GetOtthoniFelfedezokFromOneUserAsync(UserId));
         }
 
         [HttpGet]
