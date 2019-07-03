@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StrategyGame.Api.ViewModels.Felfedezes;
+using StrategyGame.Bll.DTOs;
 using StrategyGame.Bll.ServiceInterfaces;
 using StrategyGame.Model.Entities.Identity;
 using StrategyGame.Model.Entities.Models;
@@ -63,7 +64,7 @@ namespace StrategyGame.Api.Controllers
             try
             {
                 //TODO MakeFelfedezes
-                return Ok("Not even close to be implemented");
+                return _mapper.Map<FelfedezesEredmenyViewModel>(_felfedezesService.MakeFelfedezes(_mapper.Map<BejovoFelfedezesDTO>(felfedezesInditasViewModel),UserId));
             }
             catch (Exception e)
             {

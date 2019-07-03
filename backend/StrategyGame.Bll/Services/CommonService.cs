@@ -34,6 +34,8 @@ namespace StrategyGame.Bll.Services
                                   .Include(x => x.Orszag)
                                   .ThenInclude(x => x.TamadoCsapats)
                                   .ThenInclude(x => x.Egysegs)
+                                  .Include(x=>x.Orszag)
+                                  .ThenInclude(x=>x.Felfedezeses)
                                   .FirstOrDefaultAsync(x => x.Id == userId))
                                   .Orszag;
 

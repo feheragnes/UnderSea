@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using StrategyGame.Bll.DTOs;
 using StrategyGame.Bll.ServiceInterfaces;
 using StrategyGame.Dal.Context;
 using StrategyGame.Model.Entities.Models;
+using StrategyGame.Model.Entities.Models.Egysegek;
+using StrategyGame.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,6 +48,45 @@ namespace StrategyGame.Bll.Services
             };
 
             return seregInfo;
+        }
+        public async Task<FelfedezesDTO> MakeFelfedezes(BejovoFelfedezesDTO bejovoFelfedezes, Guid userId)
+        {
+            var celpontOrszag = _context.Orszags.Include(x => x.OtthoniCsapats).ThenInclude(x => x.Egysegs).SingleOrDefault(x => x.Nev == bejovoFelfedezes.CelpontNev);
+            var tulajdonosOrszag = await _commonService.GetCurrentOrszag(userId);
+            if ((celpontOrszag.OtthoniCsapats.SingleOrDefault(x => x.Kimenetel == HarcEredmenyTipus.Otthon)
+                .Egysegs.Where(x => x.Discriminator == EgysegTipus.Felfedezo.ToString()) as List<Felfedezo>).Sum(x => x.KemkedesiKepesseg)
+                <
+                (tulajdonosOrszag.OtthoniCsapats.SingleOrDefault(x => x.Kimenetel == HarcEredmenyTipus.Otthon)
+                .Egysegs.Where(x => x.Discriminator == EgysegTipus.Felfedezo.ToString() && !(x as Felfedezo).Felfedezett) as List<Felfedezo>).Sum(x => x.KemkedesiKepesseg))
+            {
+                var felfedezesDTO = new FelfedezesDTO
+                {
+                    FelfedezesEredmeny = FelfedezesEredmenyTipus.Sikeres,
+                    TamadoOrszag = new OrszagDTO { Nev = tulajdonosOrszag.Nev },
+                    VedekezoOrszag = new OrszagDTO { Nev = celpontOrszag.Nev },
+                    VedekezoEro = celpontOrszag.OtthoniCsapats.SingleOrDefault(x => x.Kimenetel == HarcEredmenyTipus.Otthon).Egysegs.Sum(x => x.Vedekezes),
+                    VedekezoGyongy = celpontOrszag.Gyongy,
+                    VedekezoKorall = celpontOrszag.Korall,
+                    Felfedezos = bejovoFelfedezes.TamadoFelfedezok
+
+                };
+                tulajdonosOrszag.Felfedezeses.Add(_mapper.Map<Felfedezes>(felfedezesDTO));
+                await _context.SaveChangesAsync();
+                return felfedezesDTO;
+            }
+            else
+            {
+                var felfedezesDTO = new FelfedezesDTO
+                {
+                    FelfedezesEredmeny = FelfedezesEredmenyTipus.Sikertelen,
+                    TamadoOrszag = new OrszagDTO { Nev = tulajdonosOrszag.Nev },
+                    VedekezoOrszag = new OrszagDTO { Nev = celpontOrszag.Nev },
+                    Felfedezos = bejovoFelfedezes.TamadoFelfedezok           
+                };
+                tulajdonosOrszag.Felfedezeses.Add(_mapper.Map<Felfedezes>(felfedezesDTO));
+                await _context.SaveChangesAsync();
+                return felfedezesDTO;
+            }
         }
     }
 }

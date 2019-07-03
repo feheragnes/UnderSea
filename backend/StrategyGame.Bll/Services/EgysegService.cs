@@ -56,6 +56,7 @@ namespace StrategyGame.Bll.Services
             var rohamFokaInfos = await _context.EgysegInfos.SingleOrDefaultAsync(x => x.Tipus == EgysegTipus.RohamFoka && x.Szint == 1);
             var csataCsikoInfos = await _context.EgysegInfos.SingleOrDefaultAsync(x => x.Tipus == EgysegTipus.CsataCsiko && x.Szint == 1);
             var lezerCapaInfos = await _context.EgysegInfos.SingleOrDefaultAsync(x => x.Tipus == EgysegTipus.LezerCapa && x.Szint == 1);
+            var felfedezoInfos = await _context.EgysegInfos.SingleOrDefaultAsync(x => x.Tipus == EgysegTipus.Felfedezo);
             egysegek.ForEach(async x =>
             {
                 if (x.Tipus == EgysegTipus.RohamFoka)
@@ -110,7 +111,26 @@ namespace StrategyGame.Bll.Services
                     }
 
                 }
+                if (x.Tipus == EgysegTipus.Felfedezo)
+                {
+                    for (int i = 0; i < x.Mennyiseg; i++)
+                    {
+                        otthoniEgysegek.Egysegs.Add(new Felfedezo()
+                        {
+                            Ar = felfedezoInfos.Ar,
+                            Tamadas = felfedezoInfos.Tamadas,
+                            Vedekezes = felfedezoInfos.Vedekezes,
+                            Ellatas = felfedezoInfos.Ellatas,
+                            Zsold = felfedezoInfos.Zsold,
+                            CsatakSzama = felfedezoInfos.CsatakSzama,
+                            Szint = felfedezoInfos.Szint
+
+                        });
+                    }
+
+                }
             });
+
             currentOrszag.Gyongy -= osszKoltseg;
 
             _context.SaveChanges();
