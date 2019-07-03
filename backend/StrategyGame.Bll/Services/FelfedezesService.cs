@@ -97,6 +97,10 @@ namespace StrategyGame.Bll.Services
 
                 };
                 tulajdonosOrszag.Felfedezeses.Add(_mapper.Map<Felfedezes>(felfedezesDTO));
+                foreach (var felfedezo in tamadoFelfedezok)
+                {
+                    (felfedezo as Felfedezo).Felfedezett = true;
+                }
                 await _context.SaveChangesAsync();
                 return felfedezesDTO;
             }
@@ -111,14 +115,8 @@ namespace StrategyGame.Bll.Services
                     Idopont = DateTime.Now
                 };
                 tulajdonosOrszag.Felfedezeses.Add(_mapper.Map<Felfedezes>(felfedezesDTO));
-                tamadoFelfedezok.ToList().ForEach(y =>
-                    {
-                        tulajdonosOrszag.OtthoniCsapats
-                            .SingleOrDefault(x => x.Kimenetel == HarcEredmenyTipus.Otthon).Egysegs
-                            .Where(x => x.Discriminator == EgysegTipus.Felfedezo.ToString())
-                            .ToList().RemoveAll(x=>x.Id == y.Id);
-                    });
 
+                _context.Egysegs.RemoveRange(tamadoFelfedezok);
                 await _context.SaveChangesAsync();
                 return felfedezesDTO;
             }
