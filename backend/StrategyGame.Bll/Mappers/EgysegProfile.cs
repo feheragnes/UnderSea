@@ -35,6 +35,12 @@ namespace StrategyGame.Bll.Mappers
                 .IncludeBase<Egyseg, EgysegDTO>()
                 .ReverseMap();
 
+            CreateMap<Felfedezo, RohamFokaDTO>()
+    .IncludeBase<Egyseg, EgysegDTO>()
+    .ReverseMap();
+
+
+
             CreateMap<Egyseg, EgysegInfoDTO>()
                 .ForMember(x => x.Tipus, opt => opt.MapFrom(y => Enum.Parse<EgysegTipus>(y.GetType().Name)))
                 .ForMember(x => x.Mennyiseg, opt => opt.MapFrom(y => 0));

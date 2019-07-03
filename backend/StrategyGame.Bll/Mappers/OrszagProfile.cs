@@ -18,7 +18,6 @@ namespace StrategyGame.Bll.Mappers
                   //.ForMember(e => e.Fejleszteses, opt => opt.MapFrom(e => e.Fejleszteses))
                   .ReverseMap();
 
-
         }
 
     }

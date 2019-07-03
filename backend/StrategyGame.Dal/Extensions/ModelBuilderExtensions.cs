@@ -27,44 +27,44 @@ namespace StrategyGame.Dal.Extensons
                     new
                     {
                         Id = Guid.NewGuid(),
-                        Ar = long.Parse("50"),
-                        Tamadas = long.Parse("6"),
-                        Vedekezes = long.Parse("2"),
-                        Ellatas = long.Parse("1"),
-                        Zsold = long.Parse("1"),
-                        CsatakSzama = long.Parse("0"),
-                        Szint = long.Parse("1"),
+                        Ar = 50L,
+                        Tamadas = 6L,
+                        Vedekezes = 2L,
+                        Ellatas = 1L,
+                        Zsold = 1L,
+                        CsatakSzama = 0L,
+                        Szint = 1L,
                         
                         CsapatId = new Guid($"00000000-0000-0000-0000-00000000000{i + 5}"),
                     }
                     );
 
-                    modelBuilder.Entity<RohamFoka>().HasData(
+                    modelBuilder.Entity<CsataCsiko>().HasData(
                     new
                     {
                         Id = Guid.NewGuid(),
-                        Ar = long.Parse("50"),
-                        Tamadas = long.Parse("2"),
-                        Vedekezes = long.Parse("6"),
-                        Ellatas = long.Parse("1"),
-                        Zsold = long.Parse("1"),
-                        CsatakSzama = long.Parse("0"),
-                        Szint = long.Parse("1"),
+                        Ar = 50L,
+                        Tamadas = 2L,
+                        Vedekezes = 6L,
+                        Ellatas = 1L,
+                        Zsold = 1L,
+                        CsatakSzama = 0L,
+                        Szint = 1L,
                         CsapatId = new Guid($"00000000-0000-0000-0000-00000000000{i + 5}"),
                     }
                     );
 
-                    modelBuilder.Entity<RohamFoka>().HasData(
+                    modelBuilder.Entity<LezerCapa>().HasData(
                     new
                     {
                         Id = Guid.NewGuid(),
-                        Ar = long.Parse("100"),
-                        Tamadas = long.Parse("5"),
-                        Vedekezes = long.Parse("5"),
-                        Ellatas = long.Parse("2"),
-                        Zsold = long.Parse("3"),
-                        CsatakSzama = long.Parse("0"),
-                        Szint = long.Parse("1"),
+                        Ar = 100L,
+                        Tamadas = 5L,
+                        Vedekezes = 5L,
+                        Ellatas = 2L,
+                        Zsold = 3L,
+                        CsatakSzama = 0L,
+                        Szint = 1L,
                         CsapatId = new Guid($"00000000-0000-0000-0000-00000000000{i + 5}"),
                     }
                     );
