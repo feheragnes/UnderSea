@@ -9,7 +9,7 @@ namespace StrategyGame.Model.Entities.Models
     {
         public Guid Id { get; set; }
         public Orszag Celpont { get; set; }
-        public List<Egyseg> Egysegs {get; set; }
+        public long VedekezoEro {get; set; }
         public long Gyongy { get; set; }
         public long Korall { get; set; }
         public DateTime Idopont { get; set; }
