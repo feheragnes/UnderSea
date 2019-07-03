@@ -12,7 +12,7 @@ namespace StrategyGame.Api.ViewModels.Felfedezes
         public string Orszag { get; set; }
         public long Korall { get; set; }
         public long Gyongy { get; set; }
-        public List<SeregInfoViewModel> VedekezoSereg { get; set; }
+        public long VedekezoEro { get; set; }
 
         public FelfedezesEredmenyTipus Eredmeny { get; set; }
     }

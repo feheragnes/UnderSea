@@ -79,7 +79,7 @@ namespace StrategyGame.Api.Mappers
                 .ForMember(x => x.VedekezoOrszag, opt => opt.MapFrom(y => y.Orszag))
                 .ForMember(x => x.VedekezoGyongy, opt => opt.MapFrom(y => y.Gyongy))
                 .ForMember(x => x.VedekezoKorall, opt => opt.MapFrom(y => y.Korall))
-                .ForMember(x => x.VedekezoCsapat, opt => opt.MapFrom(y => y.VedekezoSereg))
+                .ForMember(x => x.VedekezoEro, opt => opt.MapFrom(y => y.VedekezoEro))
                 .ForMember(x => x.FelfedezesEredmeny, opt => opt.MapFrom(y => y.Eredmeny));
 
             CreateMap<FelfedezesInditasViewModel, BejovoFelfedezesDTO>()
