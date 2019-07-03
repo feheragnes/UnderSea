@@ -11,7 +11,6 @@ namespace StrategyGame.Model.Entities.Models.Egysegek
 
         public Felfedezo() : base()
         {
-
         }
     }
 }
