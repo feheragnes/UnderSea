@@ -120,6 +120,7 @@ namespace StrategyGame.Api
             services.AddScoped<IRegistrationService, RegistrationService>();
             services.AddScoped<IEndTurnService, EndTurnService>();
             services.AddScoped<IInitService, InitService>();
+            services.AddScoped<IFelfedezesService, FelfedezesService>();
 
             services.AddHangfireServer();
             services.AddSwaggerGen(c =>
