@@ -33,6 +33,16 @@ namespace StrategyGame.Bll.Services
             _commonService = commonService;
             _mapper = mapper;
         }
+
+        public async Task<TamadasDTO> GetFelfedezes(Guid userId)
+        {
+            var allEgysegs = await _orszagService.GetTamadasDTO(userId);
+
+            allEgysegs.OtthoniEgysegek = allEgysegs.OtthoniEgysegek.Where(x => x.Tipus == EgysegTipus.Felfedezo).ToList();
+
+            return allEgysegs;
+        }
+
         public async Task<SeregInfoDTO> GetOtthoniFelfedezokFromOneUserAsync(Guid userId)
         {
             Orszag currentOrszag = await _commonService.GetCurrentOrszag(userId);
