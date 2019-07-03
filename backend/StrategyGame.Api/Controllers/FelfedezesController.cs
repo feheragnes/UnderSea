@@ -13,7 +13,7 @@ using StrategyGame.Model.Entities.Models;
 
 namespace StrategyGame.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]/[action]")]
     [ApiController]
     public class FelfedezesController : StrategyController
     {
