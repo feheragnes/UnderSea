@@ -59,7 +59,7 @@ namespace StrategyGame.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostFelfedezes([FromBody]FelfedezesInditasViewModel felfedezesInditasViewModel)
+        public async Task<ActionResult<FelfedezesEredmenyViewModel>> PostFelfedezes([FromBody]FelfedezesInditasViewModel felfedezesInditasViewModel)
         {
             try
             {
