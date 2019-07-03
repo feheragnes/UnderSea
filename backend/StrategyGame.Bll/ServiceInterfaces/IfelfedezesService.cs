@@ -10,6 +10,7 @@ namespace StrategyGame.Bll.ServiceInterfaces
     public interface IFelfedezesService
     {
         Task<SeregInfoDTO> GetOtthoniFelfedezokFromOneUserAsync(Guid userId);
+        Task<SeregInfoDTO> GetElerhetoFelfedezokFromOneUserAsync(Guid userId);
         Task<FelfedezesDTO> MakeFelfedezes(BejovoFelfedezesDTO bejovoFelfedezes, Guid userId);
         Task<List<FelfedezesDTO>> GetFinishedFelfedezeses(Guid userId);
         Task<TamadasDTO> GetFelfedezes(Guid userId);
