@@ -135,6 +135,18 @@ namespace StrategyGame.Dal.Extensons
                         RaboltGyongy = 0L,
                         RaboltKorall = 0L
                     });
+
+                modelBuilder.Entity<Felfedezes>().HasData(
+                   new
+                   {
+                       Id = new Guid($"00000000-0000-0000-0000-00300000000{i + 5}"),
+                       OrszagId = new Guid($"00000000-0000-0000-0000-00000000000{i + 1}"),
+                       Celpont = "asd",
+                       VedekezoEro = 666L,
+                       Gyongy = 1000L,
+                       Korall= 999L,
+                       Idopont= DateTime.Now
+                   });
             }
         }
     }

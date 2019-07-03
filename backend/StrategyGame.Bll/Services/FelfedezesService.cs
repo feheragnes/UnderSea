@@ -43,16 +43,23 @@ namespace StrategyGame.Bll.Services
             return allEgysegs;
         }
 
+        public async Task<List<FelfedezesDTO>> GetFinishedFelfedezeses(Guid userId)
+        {
+            var currentOrszag = await _commonService.GetCurrentOrszag(userId);
+            var debug = _mapper.Map<List<FelfedezesDTO>>(currentOrszag.Fejleszteses.ToList());
+            return debug;
+        }
+
         public async Task<SeregInfoDTO> GetOtthoniFelfedezokFromOneUserAsync(Guid userId)
         {
             Orszag currentOrszag = await _commonService.GetCurrentOrszag(userId);
-            var otthoniFelfedezok = currentOrszag.OtthoniCsapats?.SingleOrDefault(T => T.Celpont == null)?.Egysegs.FindAll(x => x.Discriminator.Equals("Felfedezo")).ToList();
+            long otthoniFelfedezokSzama = currentOrszag.OtthoniCsapats.SingleOrDefault(T => T.Celpont == null).Egysegs.FindAll(x => x.Discriminator.Equals("Felfedezo")).Count();
 
             SeregInfoDTO seregInfo = new SeregInfoDTO()
             {
                 Tipus= Model.Enums.EgysegTipus.Felfedezo,
                 Ar = 50,
-                Mennyiseg = otthoniFelfedezok.Count(),
+                Mennyiseg = otthoniFelfedezokSzama,
                 Tamadas = 0,
                 Vedekezes = 0,
                 Szint = 1

@@ -58,6 +58,12 @@ namespace StrategyGame.Api.Controllers
             }
         }
 
+
+        [HttpGet]
+        public async Task<ActionResult<List<FelfedezesViewModel>>> GetUsersFinishedFejleszteses()
+        {
+            return _mapper.Map<List<FelfedezesViewModel>>(await _felfedezesService.GetFinishedFelfedezeses(UserId));
+        }
         [HttpPost]
         public async Task<ActionResult<FelfedezesEredmenyViewModel>> PostFelfedezes([FromBody]FelfedezesInditasViewModel felfedezesInditasViewModel)
         {

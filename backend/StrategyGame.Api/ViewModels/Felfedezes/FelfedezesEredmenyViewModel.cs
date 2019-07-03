@@ -15,5 +15,6 @@ namespace StrategyGame.Api.ViewModels.Felfedezes
         public long VedekezoEro { get; set; }
 
         public string Eredmeny { get; set; }
+        public DateTime Idopont { get; set; }
     }
 }

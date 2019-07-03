@@ -15,5 +15,6 @@ namespace StrategyGame.Bll.DTOs
         public FelfedezesEredmenyTipus FelfedezesEredmeny { get; set; }
         public long VedekezoGyongy { get; set; }
         public long VedekezoKorall { get; set; }
+        public DateTime Idopont { get; set; }
     }
 }

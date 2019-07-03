@@ -16,6 +16,7 @@ namespace StrategyGame.Bll.Mappers
                  .ForMember(e => e.VedekezoEro, opt => opt.MapFrom(e => e.VedekezoEro))
                  .ForMember(e => e.Gyongy, opt => opt.MapFrom(e => e.VedekezoGyongy))
                  .ForMember(e => e.Korall, opt => opt.MapFrom(e => e.VedekezoKorall))
+                 .ForMember(e => e.Idopont, opt => opt.MapFrom(e => e.Idopont))
                 .ReverseMap();
         }
     }

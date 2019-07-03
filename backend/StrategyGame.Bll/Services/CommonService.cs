@@ -26,6 +26,8 @@ namespace StrategyGame.Bll.Services
                                   .ThenInclude(x => x.OtthoniCsapats)
                                   .ThenInclude(x => x.Egysegs)
                                   .Include(x => x.Orszag)
+                                  .ThenInclude(x => x.Felfedezeses)
+                                  .Include(x => x.Orszag)
                                   .ThenInclude(x => x.OtthoniCsapats)
                                   .ThenInclude(x => x.Celpont)
                                   .Include(x => x.Orszag)

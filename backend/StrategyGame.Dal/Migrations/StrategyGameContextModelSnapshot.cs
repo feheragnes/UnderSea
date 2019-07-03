@@ -318,7 +318,7 @@ namespace StrategyGame.Dal.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b7b98b7f-ef48-4171-8e86-6ccda9507fac"),
+                            Id = new Guid("c26b4bd6-3e7d-4306-9045-f74886939e61"),
                             Ar = 50L,
                             CsatakSzama = 0L,
                             Ellatas = 1L,
@@ -331,7 +331,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("bfcb3217-95e7-4f5c-8fb7-2c5f586c90c8"),
+                            Id = new Guid("77e2fbbb-7038-4bac-b13d-92768b3961fb"),
                             Ar = 50L,
                             CsatakSzama = 0L,
                             Ellatas = 1L,
@@ -344,7 +344,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("98b9d96c-793f-4820-b5d9-b4ca6d452acc"),
+                            Id = new Guid("576c33e6-7821-42cb-a836-6cdee025da8a"),
                             Ar = 100L,
                             CsatakSzama = 0L,
                             Ellatas = 2L,
@@ -357,7 +357,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c8439d72-8a56-4823-8755-7934bef162be"),
+                            Id = new Guid("6c6ab4e0-0a5c-4b06-b75a-41925bca227a"),
                             Ar = 50L,
                             CsatakSzama = 3L,
                             Ellatas = 1L,
@@ -370,7 +370,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5c1b6b62-f5c8-4676-94d9-80e5a54adc80"),
+                            Id = new Guid("3d0b0d1b-d094-4dfa-8afa-72f610c1a866"),
                             Ar = 50L,
                             CsatakSzama = 3L,
                             Ellatas = 1L,
@@ -383,7 +383,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7c1d91ea-e6bb-49de-8631-ea6fd5331195"),
+                            Id = new Guid("5343e754-7d40-4f14-902c-90d26b63a64d"),
                             Ar = 100L,
                             CsatakSzama = 3L,
                             Ellatas = 2L,
@@ -396,7 +396,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("770aa161-5f42-43b2-bff2-86aff95494dc"),
+                            Id = new Guid("94033370-5593-482e-9f9c-2933b9f15da2"),
                             Ar = 50L,
                             CsatakSzama = 8L,
                             Ellatas = 1L,
@@ -409,7 +409,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("82a509b0-3ade-41a6-9e80-15684413c28d"),
+                            Id = new Guid("44d91cfe-5ccd-4f4f-9cfc-f0f4c205b911"),
                             Ar = 50L,
                             CsatakSzama = 8L,
                             Ellatas = 1L,
@@ -422,7 +422,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("67d8c498-89dd-438e-b18e-833bbf605e7f"),
+                            Id = new Guid("cf16cdd0-43f4-45ff-8033-339143b466d1"),
                             Ar = 100L,
                             CsatakSzama = 8L,
                             Ellatas = 2L,
@@ -435,7 +435,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b2745f91-8167-4564-9e2f-a846cbb48e68"),
+                            Id = new Guid("681cd29d-8da1-4afa-a2b6-1c3d2aeb77c8"),
                             Ar = 50L,
                             CsatakSzama = 0L,
                             Ellatas = 1L,
@@ -505,7 +505,7 @@ namespace StrategyGame.Dal.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid?>("CelpontId");
+                    b.Property<string>("Celpont");
 
                     b.Property<long>("Gyongy");
 
@@ -513,13 +513,57 @@ namespace StrategyGame.Dal.Migrations
 
                     b.Property<long>("Korall");
 
+                    b.Property<Guid?>("OrszagId");
+
                     b.Property<long>("VedekezoEro");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CelpontId");
+                    b.HasIndex("OrszagId");
 
-                    b.ToTable("Felfedezes");
+                    b.ToTable("Felfedezeses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-003000000005"),
+                            Celpont = "asd",
+                            Gyongy = 1000L,
+                            Idopont = new DateTime(2019, 7, 3, 15, 6, 52, 285, DateTimeKind.Local).AddTicks(2125),
+                            Korall = 999L,
+                            OrszagId = new Guid("00000000-0000-0000-0000-000000000001"),
+                            VedekezoEro = 666L
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-003000000006"),
+                            Celpont = "asd",
+                            Gyongy = 1000L,
+                            Idopont = new DateTime(2019, 7, 3, 15, 6, 52, 287, DateTimeKind.Local).AddTicks(6805),
+                            Korall = 999L,
+                            OrszagId = new Guid("00000000-0000-0000-0000-000000000002"),
+                            VedekezoEro = 666L
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-003000000007"),
+                            Celpont = "asd",
+                            Gyongy = 1000L,
+                            Idopont = new DateTime(2019, 7, 3, 15, 6, 52, 287, DateTimeKind.Local).AddTicks(7730),
+                            Korall = 999L,
+                            OrszagId = new Guid("00000000-0000-0000-0000-000000000003"),
+                            VedekezoEro = 666L
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-003000000008"),
+                            Celpont = "asd",
+                            Gyongy = 1000L,
+                            Idopont = new DateTime(2019, 7, 3, 15, 6, 52, 287, DateTimeKind.Local).AddTicks(8301),
+                            Korall = 999L,
+                            OrszagId = new Guid("00000000-0000-0000-0000-000000000004"),
+                            VedekezoEro = 666L
+                        });
                 });
 
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Jatek", b =>
@@ -536,7 +580,7 @@ namespace StrategyGame.Dal.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a333eb0a-0089-4258-ae7e-09fb99dd0031"),
+                            Id = new Guid("9c7ec3a6-febe-4a87-97a6-ed22c014bfa8"),
                             Korok = 0L
                         });
                 });
@@ -597,32 +641,32 @@ namespace StrategyGame.Dal.Migrations
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
-                            Gyongy = 4899L,
-                            Korall = 622L,
+                            Gyongy = 3761L,
+                            Korall = 302L,
                             Nev = "Tesztorszag0",
                             Pont = 0L
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000002"),
-                            Gyongy = 2443L,
-                            Korall = 1353L,
+                            Gyongy = 3031L,
+                            Korall = 1547L,
                             Nev = "Tesztorszag1",
                             Pont = 0L
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000003"),
-                            Gyongy = 4733L,
-                            Korall = 1050L,
+                            Gyongy = 3061L,
+                            Korall = 546L,
                             Nev = "Tesztorszag2",
                             Pont = 0L
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000004"),
-                            Gyongy = 4656L,
-                            Korall = 1048L,
+                            Gyongy = 4639L,
+                            Korall = 1179L,
                             Nev = "Tesztorszag3",
                             Pont = 0L
                         });
@@ -688,7 +732,7 @@ namespace StrategyGame.Dal.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("1e11a1c8-ab8f-442a-a48e-f35ecac25cd5"),
+                            Id = new Guid("40e42469-626b-46e3-8a0f-693dbc3c11f2"),
                             Ar = 50L,
                             CsapatId = new Guid("00000000-0000-0000-0000-000000000005"),
                             CsatakSzama = 0L,
@@ -700,7 +744,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("cfb362df-a1fa-4035-b15b-1ce39d5a31ab"),
+                            Id = new Guid("fe4740ac-8ccf-409f-8e8f-abc92aac7f61"),
                             Ar = 50L,
                             CsapatId = new Guid("00000000-0000-0000-0000-000000000005"),
                             CsatakSzama = 0L,
@@ -712,7 +756,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("fc1eff95-2aa1-4f1a-98b7-d93708f67b11"),
+                            Id = new Guid("2c18cf3a-7f84-49c3-b7d2-1c87c4de0574"),
                             Ar = 50L,
                             CsapatId = new Guid("00000000-0000-0000-0000-000000000005"),
                             CsatakSzama = 0L,
@@ -724,7 +768,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("cbd75c27-a469-4d90-a1ca-03e1a15cc025"),
+                            Id = new Guid("2559bffb-b251-42f0-b0d7-e67d02cae590"),
                             Ar = 50L,
                             CsapatId = new Guid("00000000-0000-0000-0000-000000000005"),
                             CsatakSzama = 0L,
@@ -736,7 +780,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ab19f1d5-8a16-45bc-b090-180955c681de"),
+                            Id = new Guid("94243680-8666-456e-8dcb-1f8a3ca4aaa5"),
                             Ar = 50L,
                             CsapatId = new Guid("00000000-0000-0000-0000-000000000006"),
                             CsatakSzama = 0L,
@@ -748,7 +792,19 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a5b99891-194e-4fbd-ae29-931940157855"),
+                            Id = new Guid("b4027aef-b7ab-4314-9cad-382951251782"),
+                            Ar = 50L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000006"),
+                            CsatakSzama = 0L,
+                            Ellatas = 1L,
+                            Szint = 1L,
+                            Tamadas = 2L,
+                            Vedekezes = 6L,
+                            Zsold = 1L
+                        },
+                        new
+                        {
+                            Id = new Guid("3e67bac4-e962-418d-8b89-9ec607c08180"),
                             Ar = 50L,
                             CsapatId = new Guid("00000000-0000-0000-0000-000000000007"),
                             CsatakSzama = 0L,
@@ -760,7 +816,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4c47488b-a303-4c17-8ce1-b5c564949227"),
+                            Id = new Guid("78451024-f982-4fbc-afa1-94d8b4685a41"),
                             Ar = 50L,
                             CsapatId = new Guid("00000000-0000-0000-0000-000000000007"),
                             CsatakSzama = 0L,
@@ -772,9 +828,9 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1d781824-39ad-48c4-a71b-9ffba0803095"),
+                            Id = new Guid("52800a62-9682-407a-8791-30b0bfa1b29d"),
                             Ar = 50L,
-                            CsapatId = new Guid("00000000-0000-0000-0000-000000000008"),
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000007"),
                             CsatakSzama = 0L,
                             Ellatas = 1L,
                             Szint = 1L,
@@ -784,9 +840,9 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e800914b-ed5a-4860-ab86-c34424b94099"),
+                            Id = new Guid("2a67078e-1299-4f89-a754-0f85fe2b7784"),
                             Ar = 50L,
-                            CsapatId = new Guid("00000000-0000-0000-0000-000000000008"),
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000007"),
                             CsatakSzama = 0L,
                             Ellatas = 1L,
                             Szint = 1L,
@@ -796,43 +852,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3c757de7-6735-4f2e-ae61-8de494783921"),
-                            Ar = 50L,
-                            CsapatId = new Guid("00000000-0000-0000-0000-000000000008"),
-                            CsatakSzama = 0L,
-                            Ellatas = 1L,
-                            Szint = 1L,
-                            Tamadas = 2L,
-                            Vedekezes = 6L,
-                            Zsold = 1L
-                        },
-                        new
-                        {
-                            Id = new Guid("26d001b9-f982-4279-85fb-9a410a7a2030"),
-                            Ar = 50L,
-                            CsapatId = new Guid("00000000-0000-0000-0000-000000000008"),
-                            CsatakSzama = 0L,
-                            Ellatas = 1L,
-                            Szint = 1L,
-                            Tamadas = 2L,
-                            Vedekezes = 6L,
-                            Zsold = 1L
-                        },
-                        new
-                        {
-                            Id = new Guid("fbb2fd96-fd62-4b81-9662-8881a24373c7"),
-                            Ar = 50L,
-                            CsapatId = new Guid("00000000-0000-0000-0000-000000000008"),
-                            CsatakSzama = 0L,
-                            Ellatas = 1L,
-                            Szint = 1L,
-                            Tamadas = 2L,
-                            Vedekezes = 6L,
-                            Zsold = 1L
-                        },
-                        new
-                        {
-                            Id = new Guid("f2dd9141-3c4e-4029-84bf-a46c94fa5f02"),
+                            Id = new Guid("582c2c47-f58e-4306-93e2-5476340c5a23"),
                             Ar = 50L,
                             CsapatId = new Guid("00000000-0000-0000-0000-000000000008"),
                             CsatakSzama = 0L,
@@ -857,7 +877,7 @@ namespace StrategyGame.Dal.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c6f015fb-fe38-4cf1-b19c-f1ae71064a61"),
+                            Id = new Guid("ebf42111-8958-4517-92c7-8c86b8c6854d"),
                             Ar = 50L,
                             CsapatId = new Guid("00000000-0000-0000-0000-000000000005"),
                             CsatakSzama = 0L,
@@ -871,7 +891,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ed7298b3-52ef-41b2-b0f2-a06184531546"),
+                            Id = new Guid("be6d6822-1846-4558-aaa8-eccdead8d6ae"),
                             Ar = 50L,
                             CsapatId = new Guid("00000000-0000-0000-0000-000000000005"),
                             CsatakSzama = 0L,
@@ -885,7 +905,49 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2a619cb5-b27e-4647-a6b6-bcad7a3105e3"),
+                            Id = new Guid("ab6e2290-b69f-4e90-a166-cbaaaad7f3b4"),
+                            Ar = 50L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000005"),
+                            CsatakSzama = 0L,
+                            Ellatas = 1L,
+                            Szint = 1L,
+                            Tamadas = 0L,
+                            Vedekezes = 0L,
+                            Zsold = 1L,
+                            Felfedezett = false,
+                            KemkedesiKepesseg = 5L
+                        },
+                        new
+                        {
+                            Id = new Guid("d5bf3629-c61f-4037-814d-d6c42a2ee551"),
+                            Ar = 50L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000005"),
+                            CsatakSzama = 0L,
+                            Ellatas = 1L,
+                            Szint = 1L,
+                            Tamadas = 0L,
+                            Vedekezes = 0L,
+                            Zsold = 1L,
+                            Felfedezett = false,
+                            KemkedesiKepesseg = 5L
+                        },
+                        new
+                        {
+                            Id = new Guid("f3bdc671-b030-4d00-aa4b-852568978cf8"),
+                            Ar = 50L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000005"),
+                            CsatakSzama = 0L,
+                            Ellatas = 1L,
+                            Szint = 1L,
+                            Tamadas = 0L,
+                            Vedekezes = 0L,
+                            Zsold = 1L,
+                            Felfedezett = false,
+                            KemkedesiKepesseg = 5L
+                        },
+                        new
+                        {
+                            Id = new Guid("eed78d13-94d5-4b6c-86ca-b0b0d6569581"),
                             Ar = 50L,
                             CsapatId = new Guid("00000000-0000-0000-0000-000000000006"),
                             CsatakSzama = 0L,
@@ -899,7 +961,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b72887d6-252f-48fd-8b89-4d575043a86e"),
+                            Id = new Guid("4b7c08c8-23d5-46e0-9184-9525fb4a176b"),
                             Ar = 50L,
                             CsapatId = new Guid("00000000-0000-0000-0000-000000000006"),
                             CsatakSzama = 0L,
@@ -913,7 +975,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("30435906-fc05-4015-b1ad-42c8eed4edcb"),
+                            Id = new Guid("7d5632ac-85f0-495e-abfd-3ad531628851"),
                             Ar = 50L,
                             CsapatId = new Guid("00000000-0000-0000-0000-000000000006"),
                             CsatakSzama = 0L,
@@ -927,7 +989,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5ee7fb57-681c-4a09-accb-5cc0c583f89c"),
+                            Id = new Guid("94f59b81-6147-4bb3-b3a2-bc86ca0fbfc7"),
                             Ar = 50L,
                             CsapatId = new Guid("00000000-0000-0000-0000-000000000006"),
                             CsatakSzama = 0L,
@@ -941,35 +1003,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4ce3dc1d-f3af-43fd-aad9-5d742b5dfe31"),
-                            Ar = 50L,
-                            CsapatId = new Guid("00000000-0000-0000-0000-000000000006"),
-                            CsatakSzama = 0L,
-                            Ellatas = 1L,
-                            Szint = 1L,
-                            Tamadas = 0L,
-                            Vedekezes = 0L,
-                            Zsold = 1L,
-                            Felfedezett = false,
-                            KemkedesiKepesseg = 5L
-                        },
-                        new
-                        {
-                            Id = new Guid("6e567eab-0e9e-4feb-838c-cac6298d02c4"),
-                            Ar = 50L,
-                            CsapatId = new Guid("00000000-0000-0000-0000-000000000006"),
-                            CsatakSzama = 0L,
-                            Ellatas = 1L,
-                            Szint = 1L,
-                            Tamadas = 0L,
-                            Vedekezes = 0L,
-                            Zsold = 1L,
-                            Felfedezett = false,
-                            KemkedesiKepesseg = 5L
-                        },
-                        new
-                        {
-                            Id = new Guid("1342ecd1-d554-434d-834a-bc2d20eb38c1"),
+                            Id = new Guid("7adf5812-e5d8-4c83-a867-f81739930a48"),
                             Ar = 50L,
                             CsapatId = new Guid("00000000-0000-0000-0000-000000000007"),
                             CsatakSzama = 0L,
@@ -983,7 +1017,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("907a0584-c191-4fc3-b0c6-fddc2273655d"),
+                            Id = new Guid("80878a32-0cb8-4fb4-bb87-302fb18d5ee4"),
                             Ar = 50L,
                             CsapatId = new Guid("00000000-0000-0000-0000-000000000007"),
                             CsatakSzama = 0L,
@@ -997,7 +1031,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3611873e-3186-454d-8872-c2bb9d2310cf"),
+                            Id = new Guid("91a3dacb-39b0-412d-ba0c-ba8526f95c49"),
                             Ar = 50L,
                             CsapatId = new Guid("00000000-0000-0000-0000-000000000007"),
                             CsatakSzama = 0L,
@@ -1011,7 +1045,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7f47c31c-7b97-4c1c-98fb-379be36bc24f"),
+                            Id = new Guid("919ca1f9-6316-4f25-b085-c8d010baa800"),
                             Ar = 50L,
                             CsapatId = new Guid("00000000-0000-0000-0000-000000000007"),
                             CsatakSzama = 0L,
@@ -1025,9 +1059,9 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5f7d3c73-b993-4abe-9686-6d4440e636e5"),
+                            Id = new Guid("15e4d149-b5f1-4d91-9b6e-9acf5fe63183"),
                             Ar = 50L,
-                            CsapatId = new Guid("00000000-0000-0000-0000-000000000008"),
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000007"),
                             CsatakSzama = 0L,
                             Ellatas = 1L,
                             Szint = 1L,
@@ -1039,7 +1073,35 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("42b4554b-f6f1-44d3-9d2c-4786f5159f7e"),
+                            Id = new Guid("0efe3a67-d3b5-41fd-8255-0afa7b386871"),
+                            Ar = 50L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000007"),
+                            CsatakSzama = 0L,
+                            Ellatas = 1L,
+                            Szint = 1L,
+                            Tamadas = 0L,
+                            Vedekezes = 0L,
+                            Zsold = 1L,
+                            Felfedezett = false,
+                            KemkedesiKepesseg = 5L
+                        },
+                        new
+                        {
+                            Id = new Guid("11ff139e-290d-40dd-a612-690c49b77827"),
+                            Ar = 50L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000007"),
+                            CsatakSzama = 0L,
+                            Ellatas = 1L,
+                            Szint = 1L,
+                            Tamadas = 0L,
+                            Vedekezes = 0L,
+                            Zsold = 1L,
+                            Felfedezett = false,
+                            KemkedesiKepesseg = 5L
+                        },
+                        new
+                        {
+                            Id = new Guid("3522b21a-6615-4773-8043-5fc37848add2"),
                             Ar = 50L,
                             CsapatId = new Guid("00000000-0000-0000-0000-000000000008"),
                             CsatakSzama = 0L,
@@ -1062,7 +1124,7 @@ namespace StrategyGame.Dal.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5c18d849-07a5-4c35-9b99-5845e66c6244"),
+                            Id = new Guid("d9f7016d-bbe5-4771-900d-b875d5b00909"),
                             Ar = 100L,
                             CsapatId = new Guid("00000000-0000-0000-0000-000000000005"),
                             CsatakSzama = 0L,
@@ -1074,7 +1136,43 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6a49089b-1ea4-4a6e-a0f9-dad53a8f9330"),
+                            Id = new Guid("6659ae2f-1fb2-4860-bc02-0a02517b43ed"),
+                            Ar = 100L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000005"),
+                            CsatakSzama = 0L,
+                            Ellatas = 2L,
+                            Szint = 1L,
+                            Tamadas = 5L,
+                            Vedekezes = 5L,
+                            Zsold = 3L
+                        },
+                        new
+                        {
+                            Id = new Guid("099c8e55-14f3-4df8-94fd-f2f9df1472b3"),
+                            Ar = 100L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000005"),
+                            CsatakSzama = 0L,
+                            Ellatas = 2L,
+                            Szint = 1L,
+                            Tamadas = 5L,
+                            Vedekezes = 5L,
+                            Zsold = 3L
+                        },
+                        new
+                        {
+                            Id = new Guid("23d9e4b2-5958-4b2b-8f29-10950edefafe"),
+                            Ar = 100L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000005"),
+                            CsatakSzama = 0L,
+                            Ellatas = 2L,
+                            Szint = 1L,
+                            Tamadas = 5L,
+                            Vedekezes = 5L,
+                            Zsold = 3L
+                        },
+                        new
+                        {
+                            Id = new Guid("ad530606-d084-415f-8964-cd01a9e82bb4"),
                             Ar = 100L,
                             CsapatId = new Guid("00000000-0000-0000-0000-000000000006"),
                             CsatakSzama = 0L,
@@ -1086,7 +1184,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2344f069-e7c3-48da-8276-890bd66aa0ab"),
+                            Id = new Guid("7a9573af-7ec4-4661-9bac-ecc66020aec4"),
                             Ar = 100L,
                             CsapatId = new Guid("00000000-0000-0000-0000-000000000006"),
                             CsatakSzama = 0L,
@@ -1098,7 +1196,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c212356e-bc7c-4f8a-af60-87df7db0788b"),
+                            Id = new Guid("d2e26ab2-90eb-4f7f-ba49-e3f06dc504db"),
                             Ar = 100L,
                             CsapatId = new Guid("00000000-0000-0000-0000-000000000007"),
                             CsatakSzama = 0L,
@@ -1110,7 +1208,43 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("efa5543c-16c1-4571-9f72-4c75b3a86700"),
+                            Id = new Guid("c05cb042-76ee-45ff-b2d0-c710215c2750"),
+                            Ar = 100L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000007"),
+                            CsatakSzama = 0L,
+                            Ellatas = 2L,
+                            Szint = 1L,
+                            Tamadas = 5L,
+                            Vedekezes = 5L,
+                            Zsold = 3L
+                        },
+                        new
+                        {
+                            Id = new Guid("4f77f959-6c5e-4600-be19-bb78142a9c6b"),
+                            Ar = 100L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000007"),
+                            CsatakSzama = 0L,
+                            Ellatas = 2L,
+                            Szint = 1L,
+                            Tamadas = 5L,
+                            Vedekezes = 5L,
+                            Zsold = 3L
+                        },
+                        new
+                        {
+                            Id = new Guid("9fe0c8c9-516e-4bc6-ac57-82a2c3027d08"),
+                            Ar = 100L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000007"),
+                            CsatakSzama = 0L,
+                            Ellatas = 2L,
+                            Szint = 1L,
+                            Tamadas = 5L,
+                            Vedekezes = 5L,
+                            Zsold = 3L
+                        },
+                        new
+                        {
+                            Id = new Guid("580627e5-ed9a-4c0c-b27d-c8d4ea70387d"),
                             Ar = 100L,
                             CsapatId = new Guid("00000000-0000-0000-0000-000000000008"),
                             CsatakSzama = 0L,
@@ -1122,7 +1256,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("babda302-aab3-4d02-8d09-d8b7b47132a8"),
+                            Id = new Guid("0e446e1f-c903-4db6-8437-1b24d1f0a462"),
                             Ar = 100L,
                             CsapatId = new Guid("00000000-0000-0000-0000-000000000008"),
                             CsatakSzama = 0L,
@@ -1134,7 +1268,31 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3fe5e630-a010-4704-8d13-153f6660185f"),
+                            Id = new Guid("625fe334-14e6-48c4-918f-22962673f846"),
+                            Ar = 100L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000008"),
+                            CsatakSzama = 0L,
+                            Ellatas = 2L,
+                            Szint = 1L,
+                            Tamadas = 5L,
+                            Vedekezes = 5L,
+                            Zsold = 3L
+                        },
+                        new
+                        {
+                            Id = new Guid("8d59efc3-a38e-476d-b079-18a6d7719f5e"),
+                            Ar = 100L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000008"),
+                            CsatakSzama = 0L,
+                            Ellatas = 2L,
+                            Szint = 1L,
+                            Tamadas = 5L,
+                            Vedekezes = 5L,
+                            Zsold = 3L
+                        },
+                        new
+                        {
+                            Id = new Guid("5c125cf8-b6fb-4c60-95ff-a509a6f633b7"),
                             Ar = 100L,
                             CsapatId = new Guid("00000000-0000-0000-0000-000000000008"),
                             CsatakSzama = 0L,
@@ -1155,7 +1313,7 @@ namespace StrategyGame.Dal.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b2fc0f22-b668-4f8d-8464-b2be5407325d"),
+                            Id = new Guid("78223d0c-b996-48b8-ad3d-65cb0048be29"),
                             Ar = 50L,
                             CsapatId = new Guid("00000000-0000-0000-0000-000000000005"),
                             CsatakSzama = 0L,
@@ -1167,31 +1325,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("51dbd971-dd0f-4ece-a9e5-89617fb108eb"),
-                            Ar = 50L,
-                            CsapatId = new Guid("00000000-0000-0000-0000-000000000005"),
-                            CsatakSzama = 0L,
-                            Ellatas = 1L,
-                            Szint = 1L,
-                            Tamadas = 6L,
-                            Vedekezes = 2L,
-                            Zsold = 1L
-                        },
-                        new
-                        {
-                            Id = new Guid("6621a89d-bf6d-4c1c-a41a-ff4bf069a42e"),
-                            Ar = 50L,
-                            CsapatId = new Guid("00000000-0000-0000-0000-000000000005"),
-                            CsatakSzama = 0L,
-                            Ellatas = 1L,
-                            Szint = 1L,
-                            Tamadas = 6L,
-                            Vedekezes = 2L,
-                            Zsold = 1L
-                        },
-                        new
-                        {
-                            Id = new Guid("9ebaa5c8-f52b-4ad4-8812-66f95c1a83c8"),
+                            Id = new Guid("ef45b9ff-fd8b-4c34-bb05-4634eab9e69f"),
                             Ar = 50L,
                             CsapatId = new Guid("00000000-0000-0000-0000-000000000006"),
                             CsatakSzama = 0L,
@@ -1203,7 +1337,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("218a28f2-05d7-409f-8708-1dc47d580091"),
+                            Id = new Guid("2a1f6c62-00b2-4469-b4de-18f46803efd4"),
                             Ar = 50L,
                             CsapatId = new Guid("00000000-0000-0000-0000-000000000006"),
                             CsatakSzama = 0L,
@@ -1215,7 +1349,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6778d089-64e7-4510-a086-39ebbc6fa169"),
+                            Id = new Guid("42b1259d-41d4-4783-9066-845c806041f7"),
                             Ar = 50L,
                             CsapatId = new Guid("00000000-0000-0000-0000-000000000006"),
                             CsatakSzama = 0L,
@@ -1227,7 +1361,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f45af62f-b71c-45ca-8ebd-4c78a2238e6c"),
+                            Id = new Guid("df672751-8a74-4def-9f21-8d3ef1d411b7"),
                             Ar = 50L,
                             CsapatId = new Guid("00000000-0000-0000-0000-000000000006"),
                             CsatakSzama = 0L,
@@ -1239,7 +1373,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("fd813384-2b7d-4cd0-8d8f-08e5bdf71814"),
+                            Id = new Guid("1f2d41e1-4ba2-4b4c-9dbc-402d3f42fbd3"),
                             Ar = 50L,
                             CsapatId = new Guid("00000000-0000-0000-0000-000000000006"),
                             CsatakSzama = 0L,
@@ -1251,7 +1385,31 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5f500d25-2a29-4c93-bf96-e35259380105"),
+                            Id = new Guid("0d147d80-c7fd-45be-af7b-af039b6a3c44"),
+                            Ar = 50L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000006"),
+                            CsatakSzama = 0L,
+                            Ellatas = 1L,
+                            Szint = 1L,
+                            Tamadas = 6L,
+                            Vedekezes = 2L,
+                            Zsold = 1L
+                        },
+                        new
+                        {
+                            Id = new Guid("2754b197-b1e8-4030-8a7e-aa328b9a7e85"),
+                            Ar = 50L,
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000006"),
+                            CsatakSzama = 0L,
+                            Ellatas = 1L,
+                            Szint = 1L,
+                            Tamadas = 6L,
+                            Vedekezes = 2L,
+                            Zsold = 1L
+                        },
+                        new
+                        {
+                            Id = new Guid("876873df-d81b-4ec6-9ab5-e22c4fecf60f"),
                             Ar = 50L,
                             CsapatId = new Guid("00000000-0000-0000-0000-000000000007"),
                             CsatakSzama = 0L,
@@ -1263,7 +1421,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("82f90532-da92-4146-9638-8b4072e693d7"),
+                            Id = new Guid("b274e128-fef4-41cb-8cc1-7add11e993c4"),
                             Ar = 50L,
                             CsapatId = new Guid("00000000-0000-0000-0000-000000000007"),
                             CsatakSzama = 0L,
@@ -1275,21 +1433,9 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d3ff7261-b7f1-40ac-8cb4-dc37e5b09201"),
+                            Id = new Guid("b490bbad-d3d1-4c67-9d65-377b431a849b"),
                             Ar = 50L,
-                            CsapatId = new Guid("00000000-0000-0000-0000-000000000008"),
-                            CsatakSzama = 0L,
-                            Ellatas = 1L,
-                            Szint = 1L,
-                            Tamadas = 6L,
-                            Vedekezes = 2L,
-                            Zsold = 1L
-                        },
-                        new
-                        {
-                            Id = new Guid("c72f7127-0570-4f6a-b57c-fea2207cb20e"),
-                            Ar = 50L,
-                            CsapatId = new Guid("00000000-0000-0000-0000-000000000008"),
+                            CsapatId = new Guid("00000000-0000-0000-0000-000000000007"),
                             CsatakSzama = 0L,
                             Ellatas = 1L,
                             Szint = 1L,
@@ -1308,7 +1454,7 @@ namespace StrategyGame.Dal.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5d3051f7-07da-4471-95a9-3b2ddb510d7d"),
+                            Id = new Guid("44dd03e4-c1ae-4362-a80d-fe230a6a5602"),
                             AktualisKor = 15L,
                             Ar = 1000L,
                             Felepult = true,
@@ -1317,7 +1463,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("74480f5f-73e2-4508-a64c-25480e0c4604"),
+                            Id = new Guid("622901b8-3cdb-4d16-9c04-7fa43ec2ffd7"),
                             AktualisKor = 15L,
                             Ar = 1000L,
                             Felepult = true,
@@ -1326,7 +1472,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7d6f9f07-d6de-4f2a-903d-4d59e32dc926"),
+                            Id = new Guid("9d41ccbc-af96-4b57-9744-6d106c3120da"),
                             AktualisKor = 15L,
                             Ar = 1000L,
                             Felepult = true,
@@ -1335,7 +1481,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d60d4966-c574-4f4a-9df8-2eb845b7ea62"),
+                            Id = new Guid("e92c0174-286e-433d-bec1-39fa5195a16b"),
                             AktualisKor = 15L,
                             Ar = 1000L,
                             Felepult = true,
@@ -1353,7 +1499,7 @@ namespace StrategyGame.Dal.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a4397181-2551-45fe-be70-a63514434de7"),
+                            Id = new Guid("b0ae0c9a-4d28-4d1e-b45f-d62188a9df87"),
                             AktualisKor = 15L,
                             Ar = 1000L,
                             Felepult = true,
@@ -1362,7 +1508,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c5780241-2631-4d4b-826c-0d326709bdd4"),
+                            Id = new Guid("eb9404f6-2595-461c-8fbc-ab0ca45ad387"),
                             AktualisKor = 15L,
                             Ar = 1000L,
                             Felepult = true,
@@ -1371,7 +1517,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7cc580ed-1257-4b9d-9140-51f2b5e49050"),
+                            Id = new Guid("3ab05dcb-f759-4a73-9a34-97c2096c20fd"),
                             AktualisKor = 15L,
                             Ar = 1000L,
                             Felepult = true,
@@ -1380,7 +1526,7 @@ namespace StrategyGame.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("749459f7-2cfa-435c-89f7-b046a2e630ab"),
+                            Id = new Guid("824a8b6b-8fa8-48a6-95eb-132aad0fec65"),
                             AktualisKor = 15L,
                             Ar = 1000L,
                             Felepult = true,
@@ -1549,9 +1695,9 @@ namespace StrategyGame.Dal.Migrations
 
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Felfedezes", b =>
                 {
-                    b.HasOne("StrategyGame.Model.Entities.Models.Orszag", "Celpont")
+                    b.HasOne("StrategyGame.Model.Entities.Models.Orszag", "Orszag")
                         .WithMany("Felfedezeses")
-                        .HasForeignKey("CelpontId");
+                        .HasForeignKey("OrszagId");
                 });
 
             modelBuilder.Entity("StrategyGame.Model.Entities.Models.Novelok.AbstractNovelo", b =>

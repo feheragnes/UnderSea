@@ -42,6 +42,7 @@ namespace StrategyGame.Dal.Context
         public DbSet<VedekezesNovelo> VedekezesNovelos { get; set; }
         public DbSet<EgysegInfo> EgysegInfos { get; set; }
         public DbSet<NoveloInfo> NoveloInfos { get; set; }
+        public DbSet<Felfedezes> Felfedezeses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -58,6 +59,7 @@ namespace StrategyGame.Dal.Context
             builder.Entity<RohamFoka>().HasBaseType<Egyseg>();
             builder.Entity<CsataCsiko>().HasBaseType<Egyseg>();
             builder.Entity<LezerCapa>().HasBaseType<Egyseg>();
+            builder.Entity<Felfedezo>().HasBaseType<Egyseg>();
 
             builder.Entity<NepessegTermelo>().HasOne(x => x.Epulet as AramlasIranyito).WithOne(x => x.Nepesseg);
             builder.Entity<KorallTermelo>().HasOne(x => x.Epulet as AramlasIranyito).WithOne(x => x.Korall);

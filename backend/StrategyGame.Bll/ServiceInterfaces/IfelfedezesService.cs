@@ -11,6 +11,7 @@ namespace StrategyGame.Bll.ServiceInterfaces
     {
         Task<SeregInfoDTO> GetOtthoniFelfedezokFromOneUserAsync(Guid userId);
         Task<FelfedezesDTO> MakeFelfedezes(BejovoFelfedezesDTO bejovoFelfedezes, Guid userId);
+        Task<List<FelfedezesDTO>> GetFinishedFelfedezeses(Guid userId);
         Task<TamadasDTO> GetFelfedezes(Guid userId);
     }
 }
