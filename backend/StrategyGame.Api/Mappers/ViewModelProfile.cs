@@ -76,11 +76,18 @@ namespace StrategyGame.Api.Mappers
 
 
             CreateMap<FelfedezesEredmenyViewModel, FelfedezesDTO>()
-                .ForMember(x => x.VedekezoOrszag, opt => opt.MapFrom(y => y.Orszag))
+                .ForMember(x => x.VedekezoOrszag, opt => opt.MapFrom(y => new OrszagDTO { Nev = y.Orszag }))
                 .ForMember(x => x.VedekezoGyongy, opt => opt.MapFrom(y => y.Gyongy))
                 .ForMember(x => x.VedekezoKorall, opt => opt.MapFrom(y => y.Korall))
                 .ForMember(x => x.VedekezoEro, opt => opt.MapFrom(y => y.VedekezoEro))
-                .ForMember(x => x.FelfedezesEredmeny, opt => opt.MapFrom(y => y.Eredmeny));
+                .ForMember(x => x.FelfedezesEredmeny, opt => opt.MapFrom(y => Enum.Parse<FelfedezesEredmenyTipus>(y.Eredmeny)));
+            CreateMap<FelfedezesDTO, FelfedezesEredmenyViewModel>()
+                .ForMember(x => x.Orszag, opt => opt.MapFrom(y => y.VedekezoOrszag.Nev))
+                .ForMember(x => x.VedekezoEro, opt => opt.MapFrom(y => y.VedekezoEro))
+                .ForMember(x => x.Gyongy, opt => opt.MapFrom(y => y.VedekezoGyongy))
+                .ForMember(x => x.Korall, opt => opt.MapFrom(y => y.VedekezoKorall))
+                .ForMember(x => x.Eredmeny, opt => opt.MapFrom(y => y.FelfedezesEredmeny.ToString()));
+
 
             CreateMap<FelfedezesInditasViewModel, BejovoFelfedezesDTO>()
                 .ForMember(x => x.CelpontNev, opt => opt.MapFrom(y => y.Orszag))

@@ -151,6 +151,7 @@ namespace StrategyGame.Api
                 mc.AddProfile(new OrszagProfile());
                 mc.AddProfile(new UserProfile());
                 mc.AddProfile(new ViewModelProfile());
+                mc.AddProfile(new FelfedezesProfile());
             });
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);

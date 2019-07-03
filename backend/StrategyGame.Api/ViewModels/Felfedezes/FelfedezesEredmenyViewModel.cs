@@ -14,6 +14,6 @@ namespace StrategyGame.Api.ViewModels.Felfedezes
         public long Gyongy { get; set; }
         public long VedekezoEro { get; set; }
 
-        public FelfedezesEredmenyTipus Eredmeny { get; set; }
+        public string Eredmeny { get; set; }
     }
 }

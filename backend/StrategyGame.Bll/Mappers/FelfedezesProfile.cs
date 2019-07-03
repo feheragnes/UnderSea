@@ -7,7 +7,7 @@ using System.Text;
 
 namespace StrategyGame.Bll.Mappers
 {
-    class FelfedezesProfile : Profile
+    public class FelfedezesProfile : Profile
     {
         public FelfedezesProfile()
         {
