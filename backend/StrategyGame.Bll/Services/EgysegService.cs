@@ -123,9 +123,11 @@ namespace StrategyGame.Bll.Services
                             Ellatas = felfedezoInfos.Ellatas,
                             Zsold = felfedezoInfos.Zsold,
                             CsatakSzama = felfedezoInfos.CsatakSzama,
-                            Szint = felfedezoInfos.Szint
+                            Szint = felfedezoInfos.Szint,
+                            KemkedesiKepesseg = felfedezoInfos.KemkedesiKepesseg,
+                            Felfedezett = false
 
-                        });
+                        }) ;
                     }
 
                 }

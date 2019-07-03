@@ -90,6 +90,7 @@ namespace StrategyGame.Dal.Extensons
                                CsatakSzama = 0L,
                                Szint = 1L,
                                KemkedesiKepesseg = 5L,
+                               Felfedezett = false,
                                CsapatId = new Guid($"00000000-0000-0000-0000-00000000000{i + 5}"),
                            }
                            );
