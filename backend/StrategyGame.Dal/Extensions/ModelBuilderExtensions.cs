@@ -86,9 +86,9 @@ namespace StrategyGame.Dal.Extensons
                         Id = Guid.NewGuid(),
                         Felepult = true,
                         OrszagId = new Guid($"00000000-0000-0000-0000-00000000000{i + 1}"),
-                        Ar = long.Parse("1000"),
-                        AktualisKor = long.Parse("15"),
-                        SzuksegesKorok = long.Parse("15"),
+                        Ar = 1000L,
+                        AktualisKor = 15L,
+                        SzuksegesKorok = 15L
                     });
 
 
@@ -99,9 +99,9 @@ namespace StrategyGame.Dal.Extensons
                         Id = Guid.NewGuid(),
                         Felepult = true,
                         OrszagId = new Guid($"00000000-0000-0000-0000-00000000000{i + 1}"),
-                        Ar = long.Parse("1000"),
-                        AktualisKor = long.Parse("15"),
-                        SzuksegesKorok = long.Parse("15"),
+                        Ar = 1000L,
+                        AktualisKor = 15L,
+                        SzuksegesKorok = 15L
                     });
 
                 modelBuilder.Entity<Csapat>().HasData(
@@ -110,8 +110,8 @@ namespace StrategyGame.Dal.Extensons
                         Id = new Guid($"00000000-0000-0000-0000-00000000000{i + 5}"),
                         Kimenetel = HarcEredmenyTipus.Otthon,
                         TulajdonosId = new Guid($"00000000-0000-0000-0000-00000000000{i + 1}"),
-                        RaboltGyongy = long.Parse("0"),
-                        RaboltKorall = long.Parse("0")
+                        RaboltGyongy = 0L,
+                        RaboltKorall = 0L
                     });
 
             }

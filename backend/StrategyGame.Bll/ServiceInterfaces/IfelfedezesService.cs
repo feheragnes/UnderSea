@@ -6,5 +6,6 @@ namespace StrategyGame.Bll.ServiceInterfaces
 {
     public interface IFelfedezesService
     {
+  
     }
 }

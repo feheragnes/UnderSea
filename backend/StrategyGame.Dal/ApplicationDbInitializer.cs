@@ -18,12 +18,12 @@ namespace StrategyGame.Dal
                 {
                     var user = new StrategyGameUser
                     {
-                        UserName = ($"TesztUser{i}@asd.com"),
-                        Email = ($"TesztUser{i}@asd.com"),
+                        UserName = ($"asd{i}@asd.com"),
+                        Email = ($"asd{i}@asd.com"),
                         Orszag = context.Orszags.Find(new Guid($"00000000-0000-0000-0000-00000000000{i + 1}"))
                     };
 
-                    IdentityResult result = userManager.CreateAsync(user, "Abc123").Result;
+                    IdentityResult result = userManager.CreateAsync(user, "Asd123").Result;
 
                 }
             }
