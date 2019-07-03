@@ -54,11 +54,12 @@ namespace StrategyGame.Bll.Services
         {
             var celpontOrszag = _context.Orszags.Include(x => x.OtthoniCsapats).ThenInclude(x => x.Egysegs).SingleOrDefault(x => x.Nev == bejovoFelfedezes.CelpontNev);
             var tulajdonosOrszag = await _commonService.GetCurrentOrszag(userId);
-            if ((celpontOrszag.OtthoniCsapats.SingleOrDefault(x => x.Kimenetel == HarcEredmenyTipus.Otthon)
-                .Egysegs.Where(x => x.Discriminator == EgysegTipus.Felfedezo.ToString()) as List<Felfedezo>).Sum(x => x.KemkedesiKepesseg)
+            if (((celpontOrszag.OtthoniCsapats.SingleOrDefault(x => x.Kimenetel == HarcEredmenyTipus.Otthon)
+                .Egysegs.Where(x => x.Discriminator == EgysegTipus.Felfedezo.ToString()) as List<Felfedezo>)?.Sum(x => x.KemkedesiKepesseg) ?? 0)
                 <
-                (tulajdonosOrszag.OtthoniCsapats.SingleOrDefault(x => x.Kimenetel == HarcEredmenyTipus.Otthon)
-                .Egysegs.Where(x => x.Discriminator == EgysegTipus.Felfedezo.ToString() && !(x as Felfedezo).Felfedezett) as List<Felfedezo>).Sum(x => x.KemkedesiKepesseg))
+                ((tulajdonosOrszag.OtthoniCsapats.SingleOrDefault(x => x.Kimenetel == HarcEredmenyTipus.Otthon)
+                .Egysegs.Where(x => x.Discriminator == EgysegTipus.Felfedezo.ToString() && !(x as Felfedezo).Felfedezett) as List<Felfedezo>)
+                ?.Sum(x => x.KemkedesiKepesseg) ?? 0))
             {
                 var felfedezesDTO = new FelfedezesDTO
                 {
