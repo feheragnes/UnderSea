@@ -101,6 +101,51 @@ namespace StrategyGame.Bll.Services
                 }
             });
         }
+
+        public async Task DoRandomEsemeny()
+        {
+            await _context.Orszags.ForEachAsync(x =>
+            {
+                var rng = new Random();
+                if (rng.Next(0, 100) < 10)
+                {
+                    switch (rng.Next(0, 9))
+                    {
+                        case 0:
+                            x.Esemeny = EsemenyTipus.Pestis;
+                            break;
+                        case 1:
+                            x.Esemeny = EsemenyTipus.VizAlattiTuz;
+                            break;
+                        case 2:
+                            x.Esemeny = EsemenyTipus.AranyBanya;
+                            break;
+                        case 3:
+                            x.Esemeny = EsemenyTipus.JoTermes;
+                            break;
+                        case 4:
+                            x.Esemeny = EsemenyTipus.RosszTermes;
+                            break;
+                        case 5:
+                            x.Esemeny = EsemenyTipus.ElegedettKatonak;
+                            break;
+                        case 6:
+                            x.Esemeny = EsemenyTipus.ElegedetlenKatonak;
+                            break;
+                        case 7:
+                            x.Esemeny = EsemenyTipus.ElegedettEmberek;
+                            break;
+                        case 8:
+                            x.Esemeny = EsemenyTipus.ElegedetlenEmbeek;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else x.Esemeny = EsemenyTipus.Semmi;
+            });
+
+        }
         private double GetRandom()
         {
             var rand = new Random();
