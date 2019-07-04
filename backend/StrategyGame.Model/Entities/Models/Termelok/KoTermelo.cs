@@ -4,7 +4,7 @@ using System.Text;
 
 namespace StrategyGame.Model.Entities.Models.Termelok
 {
-    public class KoTermelo
+    public class KoTermelo :AbstractTermelo
     {
         public long Ertek { get; set; }
     }

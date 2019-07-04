@@ -165,4 +165,7 @@
   <data name="NotAttachedCommander" xml:space="preserve">
     <value>Nincs a sereghez Hadvezér rendelve!</value>
   </data>
+  <data name="NotEnoughKo" xml:space="preserve">
+    <value>Nincs elég köved!</value>
+  </data>
 </root>

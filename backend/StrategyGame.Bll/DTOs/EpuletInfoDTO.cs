@@ -16,6 +16,7 @@ namespace StrategyGame.Bll.DTOs
 
         public EpuletTipus Tipus { get; set; }
         public long Ar { get; set; }
+        public long Epitoanyag { get; set; }
         public long Mennyiseg { get; set; }
     }
 }
