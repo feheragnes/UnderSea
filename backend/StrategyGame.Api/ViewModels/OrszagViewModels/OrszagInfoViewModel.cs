@@ -1,5 +1,6 @@
 ﻿using StrategyGame.Api.ViewModels.EgysegViewModels;
 using StrategyGame.Api.ViewModels.EpuletViewModels;
+using StrategyGame.Model.Enums;
 using System;
 using System.Collections.Generic;
 
@@ -12,6 +13,7 @@ namespace StrategyGame.Api.ViewModels.OrszagViewModels
         public long Gyongy { get; set; }
         public long Korall { get; set; }
         public long Ko { get; set; }
+        public string Esemeny { get; set; }
         public long Helyezes { get; set; }
         public long KorallTermeles { get; set; }
         public long GyongyTermeles { get; set; }

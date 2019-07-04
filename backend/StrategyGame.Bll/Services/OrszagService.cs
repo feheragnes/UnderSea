@@ -81,6 +81,7 @@ namespace StrategyGame.Bll.Services
                 Nev = orszag.Nev,
                 Korall = orszag.Korall,
                 Ko = orszag.Ko,
+                Esemeny = orszag.Esemeny,
                 Helyezes = await GetHelyezes(orszag),
                 GyongyTermeles = await GetGyongyTermeles(orszag),
                 KorallTermeles = await GetKorallTermeles(orszag),
