@@ -53,7 +53,8 @@ namespace StrategyGame.Bll.Services
             List<Epulet> felepultEpulets = currentOrszag.Epulets.Where(x => x.Felepult == true).ToList();
 
             long aramlasIranyitoMennyiseg = 0;
-            long zatonyvarMennyiseg = 0;
+            long zatonyVarMennyiseg = 0;
+            long koBanyaMennyiseg = 0;
 
             felepultEpulets.ForEach(x =>
             {
@@ -64,14 +65,19 @@ namespace StrategyGame.Bll.Services
 
                 if (x is ZatonyVar)
                 {
-                    zatonyvarMennyiseg++;
+                    zatonyVarMennyiseg++;
+                }
+                if(x is KoBanya)
+                {
+                    koBanyaMennyiseg++;
                 }
             });
 
             List<EpuletInfoDTO> felepultDtoList = new List<EpuletInfoDTO>();
 
             felepultDtoList.Add(new EpuletInfoDTO(EpuletTipus.AramlasIranyito, 1000, aramlasIranyitoMennyiseg));
-            felepultDtoList.Add(new EpuletInfoDTO(EpuletTipus.ZatonyVar, 1000, zatonyvarMennyiseg));
+            felepultDtoList.Add(new EpuletInfoDTO(EpuletTipus.ZatonyVar, 1000, zatonyVarMennyiseg));
+            felepultDtoList.Add(new EpuletInfoDTO(EpuletTipus.KobBanya, 1000, koBanyaMennyiseg));
 
             return felepultDtoList;
         }
