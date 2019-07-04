@@ -145,10 +145,8 @@ namespace StrategyGame.Bll.Services
                             Zsold = hadvezerInfos.Zsold,
                             CsatakSzama = hadvezerInfos.CsatakSzama,
                             Szint = hadvezerInfos.Szint
-
                         });
                     }
-
                 }
             });
 
@@ -210,7 +208,6 @@ namespace StrategyGame.Bll.Services
             {
                 throw e;
             }
-
         }
 
         public async Task<List<EgysegInfoDTO>> GetEgysegInfoDTOs(Guid userId)
