@@ -167,6 +167,8 @@ namespace StrategyGame.Bll.Services
                 else x.Esemeny = EsemenyTipus.Semmi;
             });
 
+           await _context.SaveChangesAsync();
+
         }
         private double GetRandom()
         {
@@ -294,6 +296,7 @@ namespace StrategyGame.Bll.Services
         }
         public async Task NextTurn()
         {
+            await DoRandomEsemeny();
             await DoAdo();
             await DoKorall();
             await DoKo();

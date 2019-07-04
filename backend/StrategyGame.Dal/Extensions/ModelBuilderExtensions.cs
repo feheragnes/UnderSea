@@ -35,7 +35,8 @@ namespace StrategyGame.Dal.Extensons
                          Korall = rnd.Next(100, 2000),
                          Gyongy = rnd.Next(1000, 5000),
                          Ko = rnd.Next(50, 350),
-                     });
+                         Esemeny = EsemenyTipus.Semmi
+                     }); ;
 
                 modelBuilder.Entity<Csapat>().HasData(
                    new
