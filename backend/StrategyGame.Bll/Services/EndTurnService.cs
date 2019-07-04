@@ -215,9 +215,15 @@ namespace StrategyGame.Bll.Services
         {
             await _context.Egysegs.Where(x => x.Discriminator == EgysegTipus.Felfedezo.ToString()).Cast<Felfedezo>().ForEachAsync(x => x.Felfedezett = false);
         }
+        public async Task DoKo()
+        {
+            await _context.Orszags.ForEachAsync(x => x.Ko += _orszagService.GetKoTermeles(x).Result);
+            await _context.SaveChangesAsync();
+        }
         public async Task NextTurn()
         {
             await DoAdo();
+            await DoKorall();
             await DoKorall();
             await DoZsold();
             await DoEtetes();

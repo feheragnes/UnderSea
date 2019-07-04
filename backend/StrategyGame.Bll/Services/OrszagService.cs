@@ -56,7 +56,7 @@ namespace StrategyGame.Bll.Services
         }
         public async Task<Orszag> InitOrszag(string orszagNev)
         {
-            var orszag = new Orszag { Nev = orszagNev, Korall = 0, Gyongy = 1000 };
+            var orszag = new Orszag { Nev = orszagNev, Korall = 0, Gyongy = 1000 , Ko =0};
             orszag.Epulets.Add(new AramlasIranyito() { Felepult = true });
             orszag.OtthoniCsapats.Add(new Csapat() { Kimenetel = HarcEredmenyTipus.Otthon });
             if (_context.Orszags.FirstOrDefault(x => x.Nev.ToUpper() == orszagNev.ToUpper()) == null)
@@ -80,9 +80,11 @@ namespace StrategyGame.Bll.Services
                 Gyongy = orszag.Gyongy,
                 Nev = orszag.Nev,
                 Korall = orszag.Korall,
+                Ko = orszag.Ko,
                 Helyezes = await GetHelyezes(orszag),
                 GyongyTermeles = await GetGyongyTermeles(orszag),
                 KorallTermeles = await GetKorallTermeles(orszag),
+                KoTermeles = await GetKorallTermeles(orszag),
                 EpuloAramlasIranyito = await _epuletService.GetEpuloAramlasiranyitoCout(orszag),
                 EpuloZatonyVar = await _epuletService.GetEpuloZatonyvarCount(orszag),
                 SeregInfoDTOs = await GetSeregInfoDTOs(orszag),
@@ -120,6 +122,13 @@ namespace StrategyGame.Bll.Services
                 .Where(x => x.Fejlesztes.Orszag.Id == orszag.Id)
                 .Where(x => x.Fejlesztes.Kifejlesztve == true)
                 .SumAsync(x => x.Ertek) / 100.0) + 1));
+        }
+        public async Task<long> GetKoTermeles(Orszag orszag)
+        {
+            return await _context.KoTermelos
+                .Include(x => x.Epulet).ThenInclude(x => x.Orszag)
+                .Where(x => x.Epulet.Orszag.Id == orszag.Id && x.Epulet.Felepult)
+                .SumAsync(x => x.Ertek);
         }
         public async Task<long> GetTamadasBonusz(Orszag orszag)
         {

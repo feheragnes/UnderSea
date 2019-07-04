@@ -97,10 +97,11 @@ namespace StrategyGame.Bll.Services
             });
 
             long osszKoltseg = 0;
-
+            long osszEpitoanyag = 0;
 
             var aramlasIranyitos = epulets.FindAll(e => e.Tipus == EpuletTipus.AramlasIranyito);
             var zatonyVars = epulets.FindAll(e => e.Tipus == EpuletTipus.ZatonyVar);
+            var koBanyas = epulets.FindAll(e => e.Tipus == EpuletTipus.KobBanya);
             var epuletsToBuy = new List<Epulet>();
 
             aramlasIranyitos.ForEach(x =>
@@ -111,17 +112,28 @@ namespace StrategyGame.Bll.Services
             {
                 epuletsToBuy.Add(new ZatonyVar());
             });
+            koBanyas.ForEach(x =>
+            {
+                epuletsToBuy.Add(new KoBanya());
+            });
 
             epuletsToBuy.ForEach(x =>
             {
                 osszKoltseg += x.Ar;
+                osszEpitoanyag += x.Epitoanyag;
             });
 
             if (osszKoltseg > currentOrszag.Gyongy)
             {
                 throw new ArgumentException(Resources.ErrorMessage.NotEnoughPearl);
-            } (currentOrszag.Epulets as List<Epulet>).AddRange(epuletsToBuy);
+            }
+            if(osszEpitoanyag > currentOrszag.Ko)
+            {
+                throw new ArgumentException(Resources.ErrorMessage.NotEnoughKo);
+            }
+            (currentOrszag.Epulets as List<Epulet>).AddRange(epuletsToBuy);
             currentOrszag.Gyongy -= osszKoltseg;
+            currentOrszag.Ko -= osszEpitoanyag;
 
             _context.SaveChanges();
         }

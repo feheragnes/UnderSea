@@ -36,6 +36,7 @@ namespace StrategyGame.Dal.Context
         public DbSet<KorallTermelo> KorallTermelos { get; set; }
         public DbSet<NepessegTermelo> NepessegTermelos { get; set; }
         public DbSet<EgysegTermelo> EgysegTermelos { get; set; }
+        public DbSet<KoTermelo> KoTermelos { get; set; }
         public DbSet<KorallNovelo> KorallNovelos { get; set; }
         public DbSet<AdoNovelo> AdoNovelos { get; set; }
         public DbSet<TamadasNovelo> TamadasNovelos { get; set; }
