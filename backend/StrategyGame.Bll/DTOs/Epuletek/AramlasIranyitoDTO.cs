@@ -14,11 +14,6 @@ namespace StrategyGame.Bll.DTOs.Epuletek
             return Nepesseg;
         }
 
-        public Task NextTurn()
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<OrszagDTO> SetTermeles(OrszagDTO orszag)
         {
             orszag.KorallTermeles += Korall;

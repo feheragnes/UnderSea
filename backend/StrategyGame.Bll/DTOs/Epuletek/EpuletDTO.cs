@@ -14,11 +14,5 @@ namespace StrategyGame.Bll.DTOs.Epuletek
         public long AktualisKor { get; set; }
 
         public bool Felepult { get; set; }
-
-        public Task NextTurn()
-        {
-            throw new NotImplementedException();
-        }
-
     }
 }

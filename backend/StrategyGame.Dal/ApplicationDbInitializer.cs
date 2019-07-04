@@ -14,7 +14,7 @@ namespace StrategyGame.Dal
         {
             for (int i = 0; i < 4; i++)
             {
-                if (userManager.FindByEmailAsync($"TesztUser{i}@asd.com").Result == null)
+                if (userManager.FindByEmailAsync($"asd{i}@asd.com").Result == null)
                 {
                     var user = new StrategyGameUser
                     {
