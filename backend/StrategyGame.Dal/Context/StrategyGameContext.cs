@@ -87,7 +87,8 @@ namespace StrategyGame.Dal.Context
                 new EgysegInfo { Id = Guid.NewGuid(), Tipus = EgysegTipus.RohamFoka, Ar = 50, Ellatas = 1, Zsold = 1, Tamadas = 10, Vedekezes = 5, CsatakSzama = 8, Szint = 3 },
                 new EgysegInfo { Id = Guid.NewGuid(), Tipus = EgysegTipus.CsataCsiko, Ar = 50, Ellatas = 1, Zsold = 1, Tamadas = 5, Vedekezes = 10, CsatakSzama = 8, Szint = 3 },
                 new EgysegInfo { Id = Guid.NewGuid(), Tipus = EgysegTipus.LezerCapa, Ar = 100, Ellatas = 2, Zsold = 3, Tamadas = 10, Vedekezes = 10, CsatakSzama = 8, Szint = 3 },
-                new EgysegInfo { Id = Guid.NewGuid(), Tipus = EgysegTipus.Felfedezo, Ar = 50, Ellatas = 1, Zsold = 1, Tamadas = 0, Vedekezes = 0, CsatakSzama = 0, Szint = 1, KemkedesiKepesseg = 5}
+                new EgysegInfo { Id = Guid.NewGuid(), Tipus = EgysegTipus.Felfedezo, Ar = 50, Ellatas = 1, Zsold = 1, Tamadas = 0, Vedekezes = 0, CsatakSzama = 0, Szint = 1, KemkedesiKepesseg = 5},
+                new EgysegInfo { Id = Guid.NewGuid(), Tipus = EgysegTipus.Hadvezer, Ar = 200, Ellatas = 2, Zsold = 4, Tamadas = 0, Vedekezes = 0, CsatakSzama = 0, Szint = 1 }
 
                 );
             builder.Entity<Jatek>().HasData

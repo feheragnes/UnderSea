@@ -5,6 +5,7 @@
         RohamFoka,
         CsataCsiko,
         LezerCapa,
-        Felfedezo
+        Felfedezo,
+        Hadvezer
     }
 }

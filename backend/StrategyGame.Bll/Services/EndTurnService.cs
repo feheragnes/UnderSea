@@ -211,6 +211,10 @@ namespace StrategyGame.Bll.Services
             });
             await _context.SaveChangesAsync();
         }
+        public async Task ResetFelfedezok()
+        {
+            await _context.Egysegs.Where(x => x.Discriminator == EgysegTipus.Felfedezo.ToString()).Cast<Felfedezo>().ForEachAsync(x => x.Felfedezett = false);
+        }
         public async Task NextTurn()
         {
             await DoAdo();
@@ -221,6 +225,7 @@ namespace StrategyGame.Bll.Services
             await DoEpulets();
             await DoHarc();
             await DoLevelUp();
+            await ResetFelfedezok();
             await SetOrszagScores();
             (await _context.Jateks.FirstOrDefaultAsync()).Korok++;
             await _context.SaveChangesAsync();

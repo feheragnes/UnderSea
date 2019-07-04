@@ -57,6 +57,7 @@ namespace StrategyGame.Bll.Services
             var csataCsikoInfos = await _context.EgysegInfos.SingleOrDefaultAsync(x => x.Tipus == EgysegTipus.CsataCsiko && x.Szint == 1);
             var lezerCapaInfos = await _context.EgysegInfos.SingleOrDefaultAsync(x => x.Tipus == EgysegTipus.LezerCapa && x.Szint == 1);
             var felfedezoInfos = await _context.EgysegInfos.SingleOrDefaultAsync(x => x.Tipus == EgysegTipus.Felfedezo);
+            var hadvezerInfos = await _context.EgysegInfos.SingleOrDefaultAsync(x => x.Tipus == EgysegTipus.Hadvezer);
             egysegek.ForEach(async x =>
             {
                 if (x.Tipus == EgysegTipus.RohamFoka)
@@ -128,6 +129,24 @@ namespace StrategyGame.Bll.Services
                             Felfedezett = false
 
                         }) ;
+                    }
+
+                }
+                if (x.Tipus == EgysegTipus.Hadvezer)
+                {
+                    for (int i = 0; i < x.Mennyiseg; i++)
+                    {
+                        otthoniEgysegek.Egysegs.Add(new Hadvezer()
+                        {
+                            Ar = hadvezerInfos.Ar,
+                            Tamadas = hadvezerInfos.Tamadas,
+                            Vedekezes = hadvezerInfos.Vedekezes,
+                            Ellatas = hadvezerInfos.Ellatas,
+                            Zsold = hadvezerInfos.Zsold,
+                            CsatakSzama = hadvezerInfos.CsatakSzama,
+                            Szint = hadvezerInfos.Szint
+
+                        });
                     }
 
                 }
