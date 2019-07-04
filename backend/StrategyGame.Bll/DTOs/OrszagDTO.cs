@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StrategyGame.Model.Enums;
+using System;
 using System.Collections.Generic;
 
 namespace StrategyGame.Bll.DTOs
@@ -21,6 +22,8 @@ namespace StrategyGame.Bll.DTOs
         public long EpuloZatonyVar { get; set; }
         public long VedekezoBonusz { get; set; }
         public long TamadoBonusz { get; set; }
+
+        public EsemenyTipus Esemeny { get; set; }
         public IList<SeregInfoDTO> SeregInfoDTOs { get; set; }
         public IList<EpuletInfoDTO> EpuletInfoDTOs { get; set; }
 

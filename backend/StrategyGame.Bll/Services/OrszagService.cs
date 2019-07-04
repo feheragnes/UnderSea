@@ -81,6 +81,7 @@ namespace StrategyGame.Bll.Services
                 Nev = orszag.Nev,
                 Korall = orszag.Korall,
                 Ko = orszag.Ko,
+                Esemeny = orszag.Esemeny,
                 Helyezes = await GetHelyezes(orszag),
                 GyongyTermeles = await GetGyongyTermeles(orszag),
                 KorallTermeles = await GetKorallTermeles(orszag),
@@ -101,10 +102,16 @@ namespace StrategyGame.Bll.Services
         }
         public async Task<long> GetKorallTermeles(Orszag orszag)
         {
+            double termesSzorzo = 1;
+            if (orszag.Esemeny == EsemenyTipus.JoTermes)
+                termesSzorzo = 1.25;
+            else if (orszag.Esemeny == EsemenyTipus.RosszTermes)
+                termesSzorzo = 0.75;
+
             return Convert.ToInt64(Convert.ToDouble(await _context.KorallTermelos
                 .Include(x => x.Epulet).ThenInclude(x => x.Orszag)
                 .Where(x => x.Epulet.Orszag.Id == orszag.Id && x.Epulet.Felepult)
-                .SumAsync(x => x.Ertek))
+                .SumAsync(x => x.Ertek * termesSzorzo))
                 * (Convert.ToDouble(await _context.KorallNovelos
                 .Include(x => x.Fejlesztes).ThenInclude(x => x.Orszag)
                 .Where(x => x.Fejlesztes.Orszag.Id == orszag.Id && x.Fejlesztes.Kifejlesztve)

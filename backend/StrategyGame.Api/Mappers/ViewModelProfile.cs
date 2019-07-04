@@ -32,6 +32,7 @@ namespace StrategyGame.Api.Mappers
             CreateMap<OrszagDTO, OrszagInfoViewModel>()
                 .ForMember(x => x.SeregInfo, opt => opt.MapFrom(y => y.SeregInfoDTOs))
                 .ForMember(x => x.EpuletInfo, opt => opt.MapFrom(y => y.EpuletInfoDTOs))
+                .ForMember(x => x.Esemeny, opt => opt.MapFrom(y => y.Esemeny.ToString()))
                 .ReverseMap();
             CreateMap<HarcDTO, HarcViewModel>()
                 .ForMember(x => x.TamadoCsapat, opt => opt.MapFrom(y => y.TamadoCsapat))
