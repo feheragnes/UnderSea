@@ -3,6 +3,7 @@
     public enum EpuletTipus
     {
         AramlasIranyito,
-        ZatonyVar
+        ZatonyVar,
+        KobBanya
     }
 }
