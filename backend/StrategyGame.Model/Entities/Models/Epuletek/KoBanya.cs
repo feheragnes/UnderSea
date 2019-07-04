@@ -7,7 +7,7 @@ namespace StrategyGame.Model.Entities.Models.Epuletek
 {
     public class KoBanya : Epulet
     { 
-        public KoBanya()
+        public KoBanya() :base()
         {
             Ar = 1000;
             KoTermeles = new KoTermelo();

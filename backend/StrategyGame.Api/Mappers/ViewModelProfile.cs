@@ -28,7 +28,7 @@ namespace StrategyGame.Api.Mappers
             CreateMap<EpuletInfoDTO, EpuletInfoViewModel>()
                 .ForMember(x => x.Tipus, opt => opt.MapFrom(y => Enum.GetName(typeof(EpuletTipus), y.Tipus)));
             CreateMap<EpuletInfoViewModel, EpuletInfoDTO>()
-                .ForMember(x => x.Tipus, opt => opt.MapFrom(y => Enum.Parse(typeof(EpuletTipus), y.Tipus)));
+                .ForMember(x => x.Tipus, opt => opt.MapFrom(y => Enum.Parse<EpuletTipus>(y.Tipus)));
             CreateMap<OrszagDTO, OrszagInfoViewModel>()
                 .ForMember(x => x.SeregInfo, opt => opt.MapFrom(y => y.SeregInfoDTOs))
                 .ForMember(x => x.EpuletInfo, opt => opt.MapFrom(y => y.EpuletInfoDTOs))

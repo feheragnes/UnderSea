@@ -24,6 +24,10 @@ namespace StrategyGame.Bll.Mappers
                .IncludeBase<Epulet, EpuletDTO>()
                .ReverseMap();
 
+            CreateMap<KoBanya, KoBanyaDTO>()
+               .IncludeBase<Epulet, EpuletDTO>()
+               .ReverseMap();
+
         }
     }
 }

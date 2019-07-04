@@ -25,7 +25,7 @@ namespace StrategyGame.Dal.Extensons
                 var aramlasId = Guid.NewGuid();
                 var zatonyId = Guid.NewGuid();
                 var koBanyaId = Guid.NewGuid();
-                var orszagId = Guid.NewGuid();
+                var orszagId = new Guid($"00000000-0000-0000-0000-00000000000{i + 1}");
 
                 modelBuilder.Entity<Orszag>().HasData(
                      new Orszag

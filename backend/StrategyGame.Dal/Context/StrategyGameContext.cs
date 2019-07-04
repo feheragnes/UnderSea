@@ -51,6 +51,7 @@ namespace StrategyGame.Dal.Context
             base.OnModelCreating(builder);
             builder.Entity<AramlasIranyito>().HasBaseType<Epulet>();
             builder.Entity<ZatonyVar>().HasBaseType<Epulet>();
+            builder.Entity<KoBanya>().HasBaseType<Epulet>();
             builder.Entity<IszapTraktor>().HasBaseType<Fejlesztes>();
             builder.Entity<IszapKombajn>().HasBaseType<Fejlesztes>();
             builder.Entity<KorallFal>().HasBaseType<Fejlesztes>();
@@ -65,6 +66,7 @@ namespace StrategyGame.Dal.Context
             builder.Entity<NepessegTermelo>().HasOne(x => x.Epulet as AramlasIranyito).WithOne(x => x.Nepesseg);
             builder.Entity<KorallTermelo>().HasOne(x => x.Epulet as AramlasIranyito).WithOne(x => x.Korall);
             builder.Entity<EgysegTermelo>().HasOne(x => x.Epulet as ZatonyVar).WithOne(x => x.Szallas);
+            builder.Entity<KoTermelo>().HasOne(x => x.Epulet as KoBanya).WithOne(x => x.KoTermeles);
 
 
             /*builder.Entity<AdoNovelo>().HasOne(x => x.Fejlesztes as Alkimia).WithOne(x => x.Gyöngy);
