@@ -62,7 +62,7 @@ namespace StrategyGame.Dal.Extensons
                                 CsatakSzama = 0L,
                                 Szint = 1L
                             });
-                        }
+                }
 
                 for (int j = 0; j < rnd.Next(0, 15); j++)
                 {
@@ -208,10 +208,10 @@ namespace StrategyGame.Dal.Extensons
                    {
                        Id = Guid.NewGuid(),
                        OrszagId = orszagId,
-                       Celpont = "asd",
+                       Celpont = "Nincsisilyenorszag",
                        VedekezoEro = 666L,
                        Gyongy = 1000L,
-                       Korall = 999L,
+                       Korall = 9999999999L,
                        Idopont = DateTime.Now
                    });
             }

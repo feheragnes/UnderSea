@@ -1,5 +1,6 @@
 ﻿using StrategyGame.Model.Entities.Models.Epuletek;
 using StrategyGame.Model.Entities.Models.Fejlesztesek;
+using StrategyGame.Model.Enums;
 using System;
 using System.Collections.Generic;
 
@@ -9,6 +10,7 @@ namespace StrategyGame.Model.Entities.Models
     {
         public Guid Id { get; set; }
 
+        public EsemenyTipus Esemeny { get; set; }
         public string Nev { get; set; }
         public long Pont { get; set; }
 
