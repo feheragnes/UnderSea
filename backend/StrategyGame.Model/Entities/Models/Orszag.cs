@@ -15,6 +15,7 @@ namespace StrategyGame.Model.Entities.Models
         public long Gyongy { get; set; }
 
         public long Korall { get; set; }
+        public long Ko { get; set; }
         public IList<Epulet> Epulets { get; set; } = new List<Epulet>();
 
         public IList<Csapat> OtthoniCsapats { get; set; } = new List<Csapat>();
