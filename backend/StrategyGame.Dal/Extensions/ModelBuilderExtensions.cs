@@ -5,6 +5,7 @@ using StrategyGame.Model.Entities.Identity;
 using StrategyGame.Model.Entities.Models;
 using StrategyGame.Model.Entities.Models.Egysegek;
 using StrategyGame.Model.Entities.Models.Epuletek;
+using StrategyGame.Model.Entities.Models.Termelok;
 using StrategyGame.Model.Enums;
 using System;
 using System.Collections.Generic;
@@ -118,30 +119,81 @@ namespace StrategyGame.Dal.Extensons
                          Id = new Guid($"00000000-0000-0000-0000-00000000000{i + 1}"),
                          Korall = rnd.Next(100, 2000),
                          Gyongy = rnd.Next(1000, 5000),
+                         Ko = rnd.Next(50, 350),
                      }
                      );
+
+                var aramlasId = Guid.NewGuid();
+                var zatonyId = Guid.NewGuid();
+                var koBanyaId = Guid.NewGuid();
 
                 modelBuilder.Entity<AramlasIranyito>().HasData(
                     new
                     {
-                        Id = Guid.NewGuid(),
+                        Id = aramlasId,
                         Felepult = true,
                         OrszagId = new Guid($"00000000-0000-0000-0000-00000000000{i + 1}"),
+                        EpitoAnyag = 50L,
                         Ar = 1000L,
                         AktualisKor = 15L,
-                        SzuksegesKorok = 15L
+                        SzuksegesKorok = 5L
                     });
 
 
                 modelBuilder.Entity<ZatonyVar>().HasData(
                     new
                     {
-                        Id = Guid.NewGuid(),
+                        Id = zatonyId,
                         Felepult = true,
                         OrszagId = new Guid($"00000000-0000-0000-0000-00000000000{i + 1}"),
+                        EpitoAnyag = 50L,
                         Ar = 1000L,
                         AktualisKor = 15L,
-                        SzuksegesKorok = 15L
+                        SzuksegesKorok = 5L
+                    });
+
+                modelBuilder.Entity<KoBanya>().HasData(
+                    new
+                    {
+                        Id = koBanyaId,
+                        Felepult = true,
+                        OrszagId = new Guid($"00000000-0000-0000-0000-00000000000{i + 1}"),
+                        EpitoAnyag = 0L,
+                        Ar = 1000L,
+                        AktualisKor = 15L,
+                        SzuksegesKorok = 5L
+                    });
+
+                modelBuilder.Entity<NepessegTermelo>().HasData(
+                    new
+                    {
+                        Id = Guid.NewGuid(),
+                        EpuletId = aramlasId,
+                        Ertek = 50
+                    });
+
+                modelBuilder.Entity<KorallTermelo>().HasData(
+                    new
+                    {
+                        Id = Guid.NewGuid(),
+                        EpuletId = aramlasId,
+                        Ertek = 50
+                    });
+
+                modelBuilder.Entity<EgysegTermelo>().HasData(
+                    new
+                    {
+                        Id = Guid.NewGuid(),
+                        EpuletId = zatonyId,
+                        Ertek = 50
+                    });
+
+                modelBuilder.Entity<KoTermelo>().HasData(
+                    new
+                    {
+                        Id = Guid.NewGuid(),
+                        EpuletId = koBanyaId,
+                        Ertek = 50
                     });
 
                 modelBuilder.Entity<Csapat>().HasData(
