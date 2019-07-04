@@ -92,7 +92,25 @@ namespace StrategyGame.Dal.Extensons
                            }
                            );
                 }
-            
+
+                for (int j = 0; j < rnd.Next(1, 4); j++)
+                {
+                    modelBuilder.Entity<Hadvezer>().HasData(
+                            new
+                            {
+                                Id = Guid.NewGuid(),
+                                Ar = 200L,
+                                Tamadas = 0L,
+                                Vedekezes = 0L,
+                                Ellatas = 2L,
+                                Zsold = 4L,
+                                CsatakSzama = 0L,
+                                Szint = 1L,
+                                CsapatId = new Guid($"00000000-0000-0000-0000-00000000000{i + 5}"),
+                            }
+                            );
+                }
+
                 modelBuilder.Entity<Orszag>().HasData(
                      new Orszag
                      {
