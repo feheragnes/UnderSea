@@ -12,6 +12,7 @@ namespace StrategyGame.Model.Entities.Models.Epuletek
         public Guid Id { get; set; }
 
         public long Ar { get; set; }
+        public long Epitoanyag { get; set; }
 
         public long SzuksegesKorok { get; set; }
 
