@@ -15,6 +15,6 @@ namespace StrategyGame.Model.Enums
         ElegedettKatonak,
         ElegedetlenKatonak,
         ElegedettEmberek,
-        ElegedetlenEmbeek
+        ElegedetlenEmberek
     }
 }

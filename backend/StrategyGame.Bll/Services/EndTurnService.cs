@@ -6,6 +6,7 @@ using StrategyGame.Bll.ServiceInterfaces;
 using StrategyGame.Dal.Context;
 using StrategyGame.Model.Entities.Models;
 using StrategyGame.Model.Entities.Models.Egysegek;
+using StrategyGame.Model.Entities.Models.Epuletek;
 using StrategyGame.Model.Enums;
 using System;
 using System.Collections.Generic;
@@ -51,6 +52,9 @@ namespace StrategyGame.Bll.Services
                   else if (x.Esemeny == EsemenyTipus.VizAlattiTuz)
                   {
                       x.Epulets.Remove(x.Epulets.FirstOrDefault(y => y.Discriminator == EpuletTipus.ZatonyVar.ToString() && y.Felepult));
+                  }else if(x.Esemeny == EsemenyTipus.ElegedettEmberek)
+                  {
+                      x.Epulets.Add(new AramlasIranyito { Felepult = true });
                   }
               });
             await _context.Epulets.ForEachAsync(x =>
@@ -154,7 +158,7 @@ namespace StrategyGame.Bll.Services
                             x.Esemeny = EsemenyTipus.ElegedettEmberek;
                             break;
                         case 8:
-                            x.Esemeny = EsemenyTipus.ElegedetlenEmbeek;
+                            x.Esemeny = EsemenyTipus.ElegedetlenEmberek;
                             break;
                         default:
                             break;
@@ -171,7 +175,12 @@ namespace StrategyGame.Bll.Services
         }
         private void DoHarcEredmeny(Csapat csapat)
         {
-            var tamadas = csapat.Egysegs.Sum(x => x.Tamadas) * GetRandom() + _orszagService.GetTamadasBonusz(csapat.Tulajdonos).Result;
+            var elegedettBonusz = 
+                csapat.Tulajdonos.Esemeny == EsemenyTipus.ElegedettKatonak
+                ? csapat.Egysegs.Count : csapat.Tulajdonos.Esemeny == EsemenyTipus.ElegedetlenKatonak
+                ? -csapat.Egysegs.Count : 0;
+
+            var tamadas = csapat.Egysegs.Sum(x => x.Tamadas) * GetRandom() + _orszagService.GetTamadasBonusz(csapat.Tulajdonos).Result+elegedettBonusz;
             var vedekezes = (csapat.Celpont.OtthoniCsapats
                 .FirstOrDefault(y => y.Kimenetel == HarcEredmenyTipus.Otthon)
                 .Egysegs?.Sum(y => y.Vedekezes) ?? 0) * GetRandom() + _orszagService.GetVedekezesBonusz(csapat.Celpont).Result;
