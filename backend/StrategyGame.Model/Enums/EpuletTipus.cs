@@ -4,6 +4,6 @@
     {
         AramlasIranyito,
         ZatonyVar,
-        KobBanya
+        KoBanya
     }
 }

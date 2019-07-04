@@ -75,9 +75,9 @@ namespace StrategyGame.Bll.Services
 
             List<EpuletInfoDTO> felepultDtoList = new List<EpuletInfoDTO>();
 
-            felepultDtoList.Add(new EpuletInfoDTO(EpuletTipus.AramlasIranyito, 1000, aramlasIranyitoMennyiseg));
-            felepultDtoList.Add(new EpuletInfoDTO(EpuletTipus.ZatonyVar, 1000, zatonyVarMennyiseg));
-            felepultDtoList.Add(new EpuletInfoDTO(EpuletTipus.KobBanya, 1000, koBanyaMennyiseg));
+            felepultDtoList.Add(new EpuletInfoDTO { Tipus = EpuletTipus.AramlasIranyito, Ar= 1000, Epitoanyag = 50, Mennyiseg = aramlasIranyitoMennyiseg});
+            felepultDtoList.Add(new EpuletInfoDTO { Tipus = EpuletTipus.ZatonyVar, Ar= 1000,Epitoanyag = 50, Mennyiseg= zatonyVarMennyiseg });
+            felepultDtoList.Add(new EpuletInfoDTO { Tipus = EpuletTipus.KoBanya, Ar = 1000, Epitoanyag = 0, Mennyiseg= koBanyaMennyiseg });
 
             return felepultDtoList;
         }
@@ -107,7 +107,7 @@ namespace StrategyGame.Bll.Services
 
             var aramlasIranyitos = epulets.FindAll(e => e.Tipus == EpuletTipus.AramlasIranyito);
             var zatonyVars = epulets.FindAll(e => e.Tipus == EpuletTipus.ZatonyVar);
-            var koBanyas = epulets.FindAll(e => e.Tipus == EpuletTipus.KobBanya);
+            var koBanyas = epulets.FindAll(e => e.Tipus == EpuletTipus.KoBanya);
             var epuletsToBuy = new List<Epulet>();
 
             aramlasIranyitos.ForEach(x =>
