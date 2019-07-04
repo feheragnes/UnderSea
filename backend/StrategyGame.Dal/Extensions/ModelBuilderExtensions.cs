@@ -21,39 +21,64 @@ namespace StrategyGame.Dal.Extensons
 
             for (int i = 0; i < 4; i++)
             {
+                var csapatId = Guid.NewGuid();
+                var aramlasId = Guid.NewGuid();
+                var zatonyId = Guid.NewGuid();
+                var koBanyaId = Guid.NewGuid();
+                var orszagId = Guid.NewGuid();
+
+                modelBuilder.Entity<Orszag>().HasData(
+                     new Orszag
+                     {
+                         Nev = $"Tesztorszag{i}",
+                         Id = orszagId,
+                         Korall = rnd.Next(100, 2000),
+                         Gyongy = rnd.Next(1000, 5000),
+                         Ko = rnd.Next(50, 350),
+                     });
+
+                modelBuilder.Entity<Csapat>().HasData(
+                   new
+                   {
+                       Id = csapatId,
+                       Kimenetel = HarcEredmenyTipus.Otthon,
+                       TulajdonosId = orszagId,
+                       RaboltGyongy = 0L,
+                       RaboltKorall = 0L
+                   });
+
                 for (int j = 0; j < rnd.Next(0, 15); j++)
                 {
                     modelBuilder.Entity<RohamFoka>().HasData(
-                    new
-                    {
-                        Id = Guid.NewGuid(),
-                        Ar = 50L,
-                        Tamadas = 6L,
-                        Vedekezes = 2L,
-                        Ellatas = 1L,
-                        Zsold = 1L,
-                        CsatakSzama = 0L,
-                        Szint = 1L,
-                        CsapatId = new Guid($"00000000-0000-0000-0000-00000000000{i + 5}"),
-                    }
-                    );
-                }
+                            new
+                            {
+                                Id = Guid.NewGuid(),
+                                BirtokosCsapatId = csapatId,
+                                Ar = 50L,
+                                Tamadas = 6L,
+                                Vedekezes = 2L,
+                                Ellatas = 1L,
+                                Zsold = 1L,
+                                CsatakSzama = 0L,
+                                Szint = 1L
+                            });
+                        }
+
                 for (int j = 0; j < rnd.Next(0, 15); j++)
                 {
                     modelBuilder.Entity<CsataCsiko>().HasData(
                             new
                             {
                                 Id = Guid.NewGuid(),
+                                BirtokosCsapatId = csapatId,
                                 Ar = 50L,
                                 Tamadas = 2L,
                                 Vedekezes = 6L,
                                 Ellatas = 1L,
                                 Zsold = 1L,
                                 CsatakSzama = 0L,
-                                Szint = 1L,
-                                CsapatId = new Guid($"00000000-0000-0000-0000-00000000000{i + 5}"),
-                            }
-                            );
+                                Szint = 1L
+                            });
                 }
 
                 for (int j = 0; j < rnd.Next(0, 15); j++)
@@ -62,16 +87,15 @@ namespace StrategyGame.Dal.Extensons
                             new
                             {
                                 Id = Guid.NewGuid(),
+                                BirtokosCsapatId = csapatId,
                                 Ar = 100L,
                                 Tamadas = 5L,
                                 Vedekezes = 5L,
                                 Ellatas = 2L,
                                 Zsold = 3L,
                                 CsatakSzama = 0L,
-                                Szint = 1L,
-                                CsapatId = new Guid($"00000000-0000-0000-0000-00000000000{i + 5}"),
-                            }
-                            );
+                                Szint = 1L
+                            });
                 }
 
                 for (int j = 0; j < rnd.Next(0, 15); j++)
@@ -80,6 +104,7 @@ namespace StrategyGame.Dal.Extensons
                            new
                            {
                                Id = Guid.NewGuid(),
+                               BirtokosCsapatId = csapatId,
                                Ar = 50L,
                                Tamadas = 0L,
                                Vedekezes = 0L,
@@ -88,10 +113,8 @@ namespace StrategyGame.Dal.Extensons
                                CsatakSzama = 0L,
                                Szint = 1L,
                                KemkedesiKepesseg = 5L,
-                               Felfedezett = false,
-                               CsapatId = new Guid($"00000000-0000-0000-0000-00000000000{i + 5}"),
-                           }
-                           );
+                               Felfedezett = false
+                           });
                 }
 
                 for (int j = 0; j < rnd.Next(1, 4); j++)
@@ -100,53 +123,37 @@ namespace StrategyGame.Dal.Extensons
                             new
                             {
                                 Id = Guid.NewGuid(),
+                                BirtokosCsapatId = csapatId,
                                 Ar = 200L,
                                 Tamadas = 0L,
                                 Vedekezes = 0L,
                                 Ellatas = 2L,
                                 Zsold = 4L,
                                 CsatakSzama = 0L,
-                                Szint = 1L,
-                                CsapatId = new Guid($"00000000-0000-0000-0000-00000000000{i + 5}"),
-                            }
-                            );
+                                Szint = 1L
+                            });
+
                 }
-
-                modelBuilder.Entity<Orszag>().HasData(
-                     new Orszag
-                     {
-                         Nev = $"Tesztorszag{i}",
-                         Id = new Guid($"00000000-0000-0000-0000-00000000000{i + 1}"),
-                         Korall = rnd.Next(100, 2000),
-                         Gyongy = rnd.Next(1000, 5000),
-                         Ko = rnd.Next(50, 350),
-                     }
-                     );
-
-                var aramlasId = Guid.NewGuid();
-                var zatonyId = Guid.NewGuid();
-                var koBanyaId = Guid.NewGuid();
 
                 modelBuilder.Entity<AramlasIranyito>().HasData(
                     new
                     {
                         Id = aramlasId,
                         Felepult = true,
-                        OrszagId = new Guid($"00000000-0000-0000-0000-00000000000{i + 1}"),
-                        EpitoAnyag = 50L,
+                        OrszagId = orszagId,
+                        Epitoanyag = 50L,
                         Ar = 1000L,
                         AktualisKor = 15L,
                         SzuksegesKorok = 5L
                     });
-
 
                 modelBuilder.Entity<ZatonyVar>().HasData(
                     new
                     {
                         Id = zatonyId,
                         Felepult = true,
-                        OrszagId = new Guid($"00000000-0000-0000-0000-00000000000{i + 1}"),
-                        EpitoAnyag = 50L,
+                        OrszagId = orszagId,
+                        Epitoanyag = 50L,
                         Ar = 1000L,
                         AktualisKor = 15L,
                         SzuksegesKorok = 5L
@@ -157,8 +164,8 @@ namespace StrategyGame.Dal.Extensons
                     {
                         Id = koBanyaId,
                         Felepult = true,
-                        OrszagId = new Guid($"00000000-0000-0000-0000-00000000000{i + 1}"),
-                        EpitoAnyag = 0L,
+                        OrszagId = orszagId,
+                        Epitoanyag = 0L,
                         Ar = 1000L,
                         AktualisKor = 15L,
                         SzuksegesKorok = 5L
@@ -169,7 +176,7 @@ namespace StrategyGame.Dal.Extensons
                     {
                         Id = Guid.NewGuid(),
                         EpuletId = aramlasId,
-                        Ertek = 50
+                        Ertek = 50L
                     });
 
                 modelBuilder.Entity<KorallTermelo>().HasData(
@@ -177,7 +184,7 @@ namespace StrategyGame.Dal.Extensons
                     {
                         Id = Guid.NewGuid(),
                         EpuletId = aramlasId,
-                        Ertek = 50
+                        Ertek = 50L
                     });
 
                 modelBuilder.Entity<EgysegTermelo>().HasData(
@@ -185,7 +192,7 @@ namespace StrategyGame.Dal.Extensons
                     {
                         Id = Guid.NewGuid(),
                         EpuletId = zatonyId,
-                        Ertek = 50
+                        Ertek = 50L
                     });
 
                 modelBuilder.Entity<KoTermelo>().HasData(
@@ -193,29 +200,19 @@ namespace StrategyGame.Dal.Extensons
                     {
                         Id = Guid.NewGuid(),
                         EpuletId = koBanyaId,
-                        Ertek = 50
-                    });
-
-                modelBuilder.Entity<Csapat>().HasData(
-                    new
-                    {
-                        Id = new Guid($"00000000-0000-0000-0000-00000000000{i + 5}"),
-                        Kimenetel = HarcEredmenyTipus.Otthon,
-                        TulajdonosId = new Guid($"00000000-0000-0000-0000-00000000000{i + 1}"),
-                        RaboltGyongy = 0L,
-                        RaboltKorall = 0L
+                        Ertek = 50L
                     });
 
                 modelBuilder.Entity<Felfedezes>().HasData(
                    new
                    {
-                       Id = new Guid($"00000000-0000-0000-0000-00300000000{i + 5}"),
-                       OrszagId = new Guid($"00000000-0000-0000-0000-00000000000{i + 1}"),
+                       Id = Guid.NewGuid(),
+                       OrszagId = orszagId,
                        Celpont = "asd",
                        VedekezoEro = 666L,
                        Gyongy = 1000L,
-                       Korall= 999L,
-                       Idopont= DateTime.Now
+                       Korall = 999L,
+                       Idopont = DateTime.Now
                    });
             }
         }
