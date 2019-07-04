@@ -77,6 +77,7 @@ namespace StrategyGame.Dal.Context
 
             // builder.ApplyConfiguration(new OrszagUserConfiguration());
             builder.ApplyConfiguration(new CsapatConfiguration());
+            builder.ApplyConfiguration(new EgysegConfiguration());
             builder.Entity<EgysegInfo>().HasData
                 (
                 new EgysegInfo { Id = Guid.NewGuid(), Tipus = EgysegTipus.RohamFoka, Ar = 50, Ellatas = 1, Zsold = 1, Tamadas = 6, Vedekezes = 2, CsatakSzama = 0, Szint= 1 },

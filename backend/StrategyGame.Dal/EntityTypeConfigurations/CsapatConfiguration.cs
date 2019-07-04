@@ -10,6 +10,7 @@ namespace StrategyGame.Dal.EntityTypeConfigurations
         {
             builder.HasOne(c => c.Celpont).WithMany(o => o.TamadoCsapats);
             builder.HasOne(c => c.Tulajdonos).WithMany(o => o.OtthoniCsapats);
+
         }
     }
 }

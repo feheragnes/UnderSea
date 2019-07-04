@@ -9,6 +9,8 @@ namespace StrategyGame.Model.Entities.Models.Egysegek
 
         }
         public Guid Id { get; set; }
+        public Csapat BirtokosCsapat { get; set; }
+        public Csapat TamadottCsapat { get; set; }
         public long Tamadas { get; set; }
         public long Vedekezes { get; set; }
         public long Ar { get; set; }
