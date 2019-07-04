@@ -34,6 +34,24 @@ namespace StrategyGame.Bll.Services
             _mapper = mapper;
         }
 
+        public async Task<SeregInfoDTO> GetElerhetoFelfedezokFromOneUserAsync(Guid userId)
+        {
+            Orszag currentOrszag = await _commonService.GetCurrentOrszag(userId);
+            long elerhetoFelfedezokSzama = currentOrszag.OtthoniCsapats.SingleOrDefault(T => T.Celpont == null).Egysegs.Where(x => x.Discriminator == EgysegTipus.Felfedezo.ToString()).Cast<Felfedezo>().Where(x => !x.Felfedezett).Count();
+
+            SeregInfoDTO seregInfo = new SeregInfoDTO()
+            {
+                Tipus = Model.Enums.EgysegTipus.Felfedezo,
+                Ar = 50,
+                Mennyiseg = elerhetoFelfedezokSzama,
+                Tamadas = 0,
+                Vedekezes = 0,
+                Szint = 1
+            };
+
+            return seregInfo;
+        }
+
         public async Task<TamadasDTO> GetFelfedezes(Guid userId)
         {
             var allEgysegs = await _orszagService.GetTamadasDTO(userId);

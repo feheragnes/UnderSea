@@ -46,6 +46,12 @@ namespace StrategyGame.Api.Controllers
         }
 
         [HttpGet]
+        public async Task<ActionResult<SeregInfoViewModel>> GetUserElerhetoFelfedezos()
+        {
+            return _mapper.Map<SeregInfoViewModel>(await _felfedezesService.GetElerhetoFelfedezokFromOneUserAsync(UserId));
+        }
+
+        [HttpGet]
         public async Task<ActionResult<FelfedezesViewModel>> GetFelfedezesInfos()
         {
             try
