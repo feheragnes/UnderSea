@@ -42,17 +42,6 @@ namespace StrategyGame.Bll.Services
         }
         public async Task DoEpulets()
         {
-            await _context.Orszags.Include(x => x.Epulets).ForEachAsync(x =>
-              {
-                  if (x.Esemeny == EsemenyTipus.Pestis || x.Esemeny == EsemenyTipus.ElegedetlenEmberek)
-                  {
-                      x.Epulets.Remove(x.Epulets.FirstOrDefault(y => y.Discriminator == EpuletTipus.AramlasIranyito.ToString() && y.Felepult));
-                  }
-                  else if (x.Esemeny == EsemenyTipus.VizAlattiTuz)
-                  {
-                      x.Epulets.Remove(x.Epulets.FirstOrDefault(y => y.Discriminator == EpuletTipus.ZatonyVar.ToString() && y.Felepult));
-                  }
-              });
             await _context.Epulets.ForEachAsync(x =>
             {
                 if (++x.AktualisKor == x.SzuksegesKorok)
@@ -64,14 +53,7 @@ namespace StrategyGame.Bll.Services
         }
         public async Task DoAdo()
         {
-            await _context.Orszags.ForEachAsync(x =>
-            {
-                x.Gyongy += _orszagService.GetGyongyTermeles(x).Result;
-                if(x.Esemeny == EsemenyTipus.AranyBanya)
-                {
-                    x.Gyongy += 1000;
-                }
-            });
+            await _context.Orszags.ForEachAsync(x => x.Gyongy += _orszagService.GetGyongyTermeles(x).Result);
             await _context.SaveChangesAsync();
         }
         public async Task DoKorall()
@@ -154,7 +136,7 @@ namespace StrategyGame.Bll.Services
                             x.Esemeny = EsemenyTipus.ElegedettEmberek;
                             break;
                         case 8:
-                            x.Esemeny = EsemenyTipus.ElegedetlenEmbeek;
+                            x.Esemeny = EsemenyTipus.ElegedetlenEmberek;
                             break;
                         default:
                             break;
@@ -187,15 +169,15 @@ namespace StrategyGame.Bll.Services
 
             });
             var vedekezoEgysegs = new List<Egyseg>();
-            csapat.Celpont.OtthoniCsapats.FirstOrDefault(x => x.Kimenetel == HarcEredmenyTipus.Otthon).Egysegs.ToList().ForEach(x =>
-              {
-                  var egyseg = (Egyseg)Activator.CreateInstance(x.GetType());
-                  egyseg.Szint = x.Szint;
-                  egyseg.CsatakSzama = x.CsatakSzama;
-                  vedekezoEgysegs.Add(egyseg);
-                  x.CsatakSzama++;
+            csapat.Celpont.OtthoniCsapats.FirstOrDefault(x=>x.Kimenetel == HarcEredmenyTipus.Otthon).Egysegs.ToList().ForEach(x =>
+            {
+                var egyseg = (Egyseg)Activator.CreateInstance(x.GetType());
+                egyseg.Szint = x.Szint;
+                egyseg.CsatakSzama = x.CsatakSzama;
+                vedekezoEgysegs.Add(egyseg);
+                x.CsatakSzama++;
 
-              });
+            });
 
             if (tamadas > vedekezes)
             {
@@ -208,7 +190,7 @@ namespace StrategyGame.Bll.Services
                 csapat.RaboltKorall = csapat.Celpont.Korall / 2;
                 var ellenseg = csapat.Celpont.OtthoniCsapats.FirstOrDefault(x => x.Kimenetel == HarcEredmenyTipus.Otthon);
                 var ellensegCount = Math.Ceiling(ellenseg.Egysegs.Count / 10.0);
-                for (int i = 0; i < Convert.ToInt64(ellensegCount); i++)
+                for (int i = 0; i < Convert.ToInt64(ellensegCount) ; i++)
                 {
                     ellenseg.Egysegs.Remove(ellenseg.Egysegs.ElementAt(new Random().Next(ellenseg.Egysegs.Count)));
                 }
@@ -217,7 +199,7 @@ namespace StrategyGame.Bll.Services
             {
                 csapat.Kimenetel = HarcEredmenyTipus.Vereseg;
                 var csapatCount = Math.Ceiling(csapat.Egysegs.Count / 10.0);
-                for (int i = 0; i < Convert.ToInt64(csapatCount); i++)
+                for (int i = 0; i < Convert.ToInt64(csapatCount) ; i++)
                 {
                     csapat.Egysegs.Remove(csapat.Egysegs.ElementAt(new Random().Next(csapat.Egysegs.Count)));
                 }
@@ -287,7 +269,7 @@ namespace StrategyGame.Bll.Services
         {
             await DoAdo();
             await DoKorall();
-            await DoKo();
+            await DoKorall();
             await DoZsold();
             await DoEtetes();
             await DoFejleszteses();
