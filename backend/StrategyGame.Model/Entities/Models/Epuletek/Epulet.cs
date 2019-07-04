@@ -17,6 +17,7 @@ namespace StrategyGame.Model.Entities.Models.Epuletek
         public long SzuksegesKorok { get; set; }
 
         public long AktualisKor { get; set; }
+        public string Discriminator { get; set; }
 
         public bool Felepult { get; set; }
         public Orszag Orszag { get; set; }
