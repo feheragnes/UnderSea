@@ -162,4 +162,7 @@
   <data name="NotEnoughFelfedezo" xml:space="preserve">
     <value>Nincs elég felfedeződ!</value>
   </data>
+  <data name="NotAttachedCommander" xml:space="preserve">
+    <value>Nincs a sereghez Hadvezér rendelve!</value>
+  </data>
 </root>

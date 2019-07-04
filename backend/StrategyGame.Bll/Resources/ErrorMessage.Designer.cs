@@ -124,6 +124,15 @@ namespace StrategyGame.Bll.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nincs a sereghez Hadvezér rendelve!.
+        /// </summary>
+        internal static string NotAttachedCommander {
+            get {
+                return ResourceManager.GetString("NotAttachedCommander", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nincs elég Csata Csikód!.
         /// </summary>
         internal static string NotEnougCsataCsiko {

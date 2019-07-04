@@ -90,6 +90,10 @@ namespace StrategyGame.Bll.Services
         {
             var tamadoorszag = await _commonService.GetCurrentOrszag(userId);
             bejovoTamadasDTO.TamadoNev = tamadoorszag.Nev;
+            if(bejovoTamadasDTO.TamadoEgysegek.Where(x=>x.Tipus == EgysegTipus.Hadvezer).Count() < 1)
+            {
+                throw new ArgumentException(Resources.ErrorMessage.NotAttachedCommander);
+            }
             if (tamadoorszag.OtthoniCsapats.Where(x => x.Celpont?.Nev == bejovoTamadasDTO.CelpontNev && x.Kimenetel == HarcEredmenyTipus.Folyamatban).Count() > 0)
             {
                 throw new ArgumentException(Resources.ErrorMessage.AlreadyAttackedCountry);
